@@ -7,23 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B5BFA8FF1D95210500496D13 /* TabViewControllerTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BFA8FE1D95210500496D13 /* TabViewControllerTemplate.swift */; };
+		B5BFA9011D9521FC00496D13 /* LeftMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BFA9001D9521FC00496D13 /* LeftMenuTableViewController.swift */; };
+		B5BFA9031D95222600496D13 /* SendAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BFA9021D95222600496D13 /* SendAlertViewController.swift */; };
+		B5BFA9051D95223C00496D13 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BFA9041D95223C00496D13 /* ContactsViewController.swift */; };
 		B5C874591D93D73C00D192D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C874581D93D73C00D192D9 /* AppDelegate.swift */; };
-		B5C8745B1D93D73C00D192D9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8745A1D93D73C00D192D9 /* ViewController.swift */; };
 		B5C8745E1D93D73C00D192D9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5C8745C1D93D73C00D192D9 /* Main.storyboard */; };
 		B5C874611D93D73C00D192D9 /* Lookout.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B5C8745F1D93D73C00D192D9 /* Lookout.xcdatamodeld */; };
 		B5C874631D93D73C00D192D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5C874621D93D73C00D192D9 /* Assets.xcassets */; };
 		B5C874661D93D73C00D192D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5C874641D93D73C00D192D9 /* LaunchScreen.storyboard */; };
+		B5C874701D94093500D192D9 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8746F1D94093500D192D9 /* ContainerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B5BFA8FE1D95210500496D13 /* TabViewControllerTemplate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabViewControllerTemplate.swift; sourceTree = "<group>"; };
+		B5BFA9001D9521FC00496D13 /* LeftMenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuTableViewController.swift; sourceTree = "<group>"; };
+		B5BFA9021D95222600496D13 /* SendAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendAlertViewController.swift; sourceTree = "<group>"; };
+		B5BFA9041D95223C00496D13 /* ContactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		B5C874551D93D73C00D192D9 /* Lookout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lookout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5C874581D93D73C00D192D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B5C8745A1D93D73C00D192D9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B5C8745D1D93D73C00D192D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B5C874601D93D73C00D192D9 /* Lookout.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Lookout.xcdatamodel; sourceTree = "<group>"; };
 		B5C874621D93D73C00D192D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B5C874651D93D73C00D192D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B5C874671D93D73C00D192D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B5C8746F1D94093500D192D9 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,8 +65,12 @@
 			isa = PBXGroup;
 			children = (
 				B5C874581D93D73C00D192D9 /* AppDelegate.swift */,
-				B5C8745A1D93D73C00D192D9 /* ViewController.swift */,
 				B5C8745C1D93D73C00D192D9 /* Main.storyboard */,
+				B5BFA9001D9521FC00496D13 /* LeftMenuTableViewController.swift */,
+				B5BFA9021D95222600496D13 /* SendAlertViewController.swift */,
+				B5BFA9041D95223C00496D13 /* ContactsViewController.swift */,
+				B5C8746F1D94093500D192D9 /* ContainerViewController.swift */,
+				B5BFA8FE1D95210500496D13 /* TabViewControllerTemplate.swift */,
 				B5C874621D93D73C00D192D9 /* Assets.xcassets */,
 				B5C874641D93D73C00D192D9 /* LaunchScreen.storyboard */,
 				B5C874671D93D73C00D192D9 /* Info.plist */,
@@ -138,8 +150,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5C8745B1D93D73C00D192D9 /* ViewController.swift in Sources */,
+				B5BFA8FF1D95210500496D13 /* TabViewControllerTemplate.swift in Sources */,
+				B5BFA9051D95223C00496D13 /* ContactsViewController.swift in Sources */,
+				B5BFA9031D95222600496D13 /* SendAlertViewController.swift in Sources */,
+				B5BFA9011D9521FC00496D13 /* LeftMenuTableViewController.swift in Sources */,
 				B5C874611D93D73C00D192D9 /* Lookout.xcdatamodeld in Sources */,
+				B5C874701D94093500D192D9 /* ContainerViewController.swift in Sources */,
 				B5C874591D93D73C00D192D9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -292,6 +308,7 @@
 				B5C8746C1D93D73C00D192D9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
