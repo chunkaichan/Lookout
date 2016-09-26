@@ -51,21 +51,21 @@
         <!--Contacts View Controller-->
         <scene sceneID="BaD-UB-wVl">
             <objects>
-                <viewController id="0vE-iv-NEc" customClass="ContactsViewController" customModule="Lookout" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="0vE-iv-NEc" customClass="ContactsViewController" customModule="Lookout" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3hg-DB-zbP"/>
                         <viewControllerLayoutGuide type="bottom" id="dNd-lb-dMs"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="LLz-Zb-Lb7">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="44" width="600" height="556"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="140" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XhM-qj-F18">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="507"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ContactTableViewCell" rowHeight="140" id="prc-fz-ret" customClass="ContactTableViewCell" customModule="Lookout" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72" width="600" height="140"/>
+                                        <rect key="frame" x="0.0" y="28" width="600" height="140"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="prc-fz-ret" id="fEr-Mv-UJv">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="139"/>
@@ -79,10 +79,11 @@
                         <constraints>
                             <constraint firstItem="dNd-lb-dMs" firstAttribute="top" secondItem="XhM-qj-F18" secondAttribute="bottom" id="2RS-lk-YNQ"/>
                             <constraint firstItem="XhM-qj-F18" firstAttribute="leading" secondItem="LLz-Zb-Lb7" secondAttribute="leadingMargin" constant="-20" id="d1i-KD-WTv"/>
-                            <constraint firstItem="XhM-qj-F18" firstAttribute="top" secondItem="3hg-DB-zbP" secondAttribute="bottom" constant="-44" id="nI9-5e-UaS"/>
+                            <constraint firstItem="XhM-qj-F18" firstAttribute="top" secondItem="3hg-DB-zbP" secondAttribute="bottom" id="nI9-5e-UaS"/>
                             <constraint firstAttribute="trailingMargin" secondItem="XhM-qj-F18" secondAttribute="trailing" constant="-20" id="pI6-w0-qv0"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="FC1-Wk-gT8">
                         <barButtonItem key="leftBarButtonItem" id="K7h-jB-Rhh">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pGC-tp-71c">
@@ -97,11 +98,46 @@
                     </navigationItem>
                     <connections>
                         <outlet property="contactsTable" destination="XhM-qj-F18" id="LRh-hu-nVe"/>
+                        <segue destination="Oc4-u1-ACb" kind="show" identifier="SegueContactMap" id="vKw-co-SU8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IwK-Ae-LpR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1999" y="2742"/>
+        </scene>
+        <!--Contacts Map View Controller-->
+        <scene sceneID="lw6-SN-MnG">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Oc4-u1-ACb" customClass="ContactsMapViewController" customModule="Lookout" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6T4-Ie-jbG"/>
+                        <viewControllerLayoutGuide type="bottom" id="Sdh-tr-8I4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dCn-J7-g7b">
+                        <rect key="frame" x="0.0" y="44" width="600" height="556"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="NQA-Nb-uUQ">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="507"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="NQA-Nb-uUQ" firstAttribute="top" secondItem="6T4-Ie-jbG" secondAttribute="bottom" id="Qxo-mz-YRz"/>
+                            <constraint firstItem="NQA-Nb-uUQ" firstAttribute="bottom" secondItem="Sdh-tr-8I4" secondAttribute="top" id="WC2-Ge-4zu"/>
+                            <constraint firstAttribute="trailing" secondItem="NQA-Nb-uUQ" secondAttribute="trailing" id="WwB-kk-FV0"/>
+                            <constraint firstItem="NQA-Nb-uUQ" firstAttribute="leading" secondItem="dCn-J7-g7b" secondAttribute="leading" id="xdh-OS-gNa"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <navigationItem key="navigationItem" id="RYa-bf-MQI"/>
+                    <connections>
+                        <outlet property="contactMap" destination="NQA-Nb-uUQ" id="pYJ-Qt-aiq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MG4-ob-iQ9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2757" y="2742"/>
         </scene>
         <!--Container View Controller-->
         <scene sceneID="C1h-cz-SpG">
@@ -132,11 +168,6 @@
                                         <constraints>
                                             <constraint firstAttribute="width" constant="406" id="vZe-w8-4bp"/>
                                         </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.shadowOpacity">
-                                                <real key="value" value="0.80000000000000004"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
                                         <variation key="default">
                                             <mask key="constraints">
                                                 <exclude reference="vZe-w8-4bp"/>
@@ -225,11 +256,11 @@
             </objects>
             <point key="canvasLocation" x="139" y="2335"/>
         </scene>
-        <!--Item-->
+        <!--Alert-->
         <scene sceneID="USn-Sw-uqR">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gnI-Va-1Rr" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="F4f-eA-pnp"/>
+                    <tabBarItem key="tabBarItem" title="Alert" id="F4f-eA-pnp"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="18c-5f-a4M">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -244,12 +275,12 @@
             </objects>
             <point key="canvasLocation" x="1187" y="1997"/>
         </scene>
-        <!--Item-->
+        <!--Contacts-->
         <scene sceneID="A1w-bY-Mkc">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2Sb-4O-uZI" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <tabBarItem key="tabBarItem" title="Item" id="hNW-jl-vJx"/>
+                    <tabBarItem key="tabBarItem" title="Contacts" id="hNW-jl-vJx"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="DfW-AC-k2F">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

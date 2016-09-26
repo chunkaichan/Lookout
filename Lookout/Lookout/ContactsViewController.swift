@@ -58,5 +58,9 @@ class ContactsViewController: TabViewControllerTemplate, UITableViewDataSource, 
         cell.contactNumber.text = contact.phoneNumber
         return cell
     }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        performSegueWithIdentifier("SegueContactMap", sender: [])
+    }
 
 }
