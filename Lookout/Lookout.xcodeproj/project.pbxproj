@@ -17,6 +17,7 @@
 		B5C874631D93D73C00D192D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5C874621D93D73C00D192D9 /* Assets.xcassets */; };
 		B5C874661D93D73C00D192D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5C874641D93D73C00D192D9 /* LaunchScreen.storyboard */; };
 		B5C874701D94093500D192D9 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8746F1D94093500D192D9 /* ContainerViewController.swift */; };
+		B5F916571D98F01200CD01EB /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F916561D98F01200CD01EB /* Person.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		B5C874651D93D73C00D192D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B5C874671D93D73C00D192D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5C8746F1D94093500D192D9 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
+		B5F916561D98F01200CD01EB /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 				B5C874641D93D73C00D192D9 /* LaunchScreen.storyboard */,
 				B5C874671D93D73C00D192D9 /* Info.plist */,
 				B5C8745F1D93D73C00D192D9 /* Lookout.xcdatamodeld */,
+				B5F916561D98F01200CD01EB /* Person.swift */,
 			);
 			path = Lookout;
 			sourceTree = "<group>";
@@ -156,6 +159,7 @@
 				B5BFA9011D9521FC00496D13 /* LeftMenuTableViewController.swift in Sources */,
 				B5C874611D93D73C00D192D9 /* Lookout.xcdatamodeld in Sources */,
 				B5C874701D94093500D192D9 /* ContainerViewController.swift in Sources */,
+				B5F916571D98F01200CD01EB /* Person.swift in Sources */,
 				B5C874591D93D73C00D192D9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

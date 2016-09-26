@@ -13,4 +13,20 @@ class ContactsViewController: TabViewControllerTemplate {
     @IBAction func toggleSetting(sender: AnyObject) {
         NSNotificationCenter.defaultCenter().postNotificationName("toggleMenu", object: nil)
     }
+    
+    enum ContactRow: Int {
+        case name, phoneNumber, address
+    }
+    
+    var rows: [ContactRow] = [
+        ContactRow.name,
+        ContactRow.phoneNumber,
+        ContactRow.address
+    ]
+    
+    typealias Contact = Person
+    var contacts: [Contact] = [] // [Section]
+    
+    
+    
 }
