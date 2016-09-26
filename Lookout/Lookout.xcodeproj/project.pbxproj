@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C5BF48C5B9A12D22FE10AB6 /* Pods_Lookout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9203B3DC0F7852FEE61941CB /* Pods_Lookout.framework */; };
 		B5BFA8FF1D95210500496D13 /* TabViewControllerTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BFA8FE1D95210500496D13 /* TabViewControllerTemplate.swift */; };
 		B5BFA9011D9521FC00496D13 /* LeftMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BFA9001D9521FC00496D13 /* LeftMenuTableViewController.swift */; };
 		B5BFA9031D95222600496D13 /* SendAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BFA9021D95222600496D13 /* SendAlertViewController.swift */; };
@@ -20,9 +21,13 @@
 		B5F916571D98F01200CD01EB /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F916561D98F01200CD01EB /* Person.swift */; };
 		B5F9165C1D98F29C00CD01EB /* ContactTableViewXib.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5F9165B1D98F29C00CD01EB /* ContactTableViewXib.xib */; };
 		B5F9165E1D98F4B400CD01EB /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F9165D1D98F4B400CD01EB /* ContactTableViewCell.swift */; };
+		B5F916601D99043400CD01EB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5F9165F1D99043400CD01EB /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6D0D8A8FB8E79E681346CB3A /* Pods-Lookout.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lookout.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lookout/Pods-Lookout.release.xcconfig"; sourceTree = "<group>"; };
+		8B78175BA6B2CC03E1FB14C1 /* Pods-Lookout.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lookout.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Lookout/Pods-Lookout.debug.xcconfig"; sourceTree = "<group>"; };
+		9203B3DC0F7852FEE61941CB /* Pods_Lookout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lookout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5BFA8FE1D95210500496D13 /* TabViewControllerTemplate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabViewControllerTemplate.swift; sourceTree = "<group>"; };
 		B5BFA9001D9521FC00496D13 /* LeftMenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuTableViewController.swift; sourceTree = "<group>"; };
 		B5BFA9021D95222600496D13 /* SendAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendAlertViewController.swift; sourceTree = "<group>"; };
@@ -38,6 +43,7 @@
 		B5F916561D98F01200CD01EB /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		B5F9165B1D98F29C00CD01EB /* ContactTableViewXib.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ContactTableViewXib.xib; path = ../ContactTableViewXib.xib; sourceTree = "<group>"; };
 		B5F9165D1D98F4B400CD01EB /* ContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContactTableViewCell.swift; path = ../ContactTableViewCell.swift; sourceTree = "<group>"; };
+		B5F9165F1D99043400CD01EB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,17 +51,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C5BF48C5B9A12D22FE10AB6 /* Pods_Lookout.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1DE3C6ADBF80358539E595EE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8B78175BA6B2CC03E1FB14C1 /* Pods-Lookout.debug.xcconfig */,
+				6D0D8A8FB8E79E681346CB3A /* Pods-Lookout.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		6D98EEB4F6E999360F743E78 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9203B3DC0F7852FEE61941CB /* Pods_Lookout.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		B5C8744C1D93D73C00D192D9 = {
 			isa = PBXGroup;
 			children = (
 				B5C874571D93D73C00D192D9 /* Lookout */,
 				B5C874561D93D73C00D192D9 /* Products */,
+				1DE3C6ADBF80358539E595EE /* Pods */,
+				6D98EEB4F6E999360F743E78 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -84,6 +110,7 @@
 				B5F916561D98F01200CD01EB /* Person.swift */,
 				B5F9165D1D98F4B400CD01EB /* ContactTableViewCell.swift */,
 				B5F9165B1D98F29C00CD01EB /* ContactTableViewXib.xib */,
+				B5F9165F1D99043400CD01EB /* GoogleService-Info.plist */,
 			);
 			path = Lookout;
 			sourceTree = "<group>";
@@ -95,9 +122,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B5C8746A1D93D73C00D192D9 /* Build configuration list for PBXNativeTarget "Lookout" */;
 			buildPhases = (
+				B19480516A3CA6F2D6ECD114 /* [CP] Check Pods Manifest.lock */,
 				B5C874511D93D73C00D192D9 /* Sources */,
 				B5C874521D93D73C00D192D9 /* Frameworks */,
 				B5C874531D93D73C00D192D9 /* Resources */,
+				83F6C131CBB5B28CDDCCF957 /* [CP] Embed Pods Frameworks */,
+				7C180E33E1C16818E8C7D5A1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -148,12 +178,61 @@
 			files = (
 				B5C874661D93D73C00D192D9 /* LaunchScreen.storyboard in Resources */,
 				B5F9165C1D98F29C00CD01EB /* ContactTableViewXib.xib in Resources */,
+				B5F916601D99043400CD01EB /* GoogleService-Info.plist in Resources */,
 				B5C874631D93D73C00D192D9 /* Assets.xcassets in Resources */,
 				B5C8745E1D93D73C00D192D9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7C180E33E1C16818E8C7D5A1 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Lookout/Pods-Lookout-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		83F6C131CBB5B28CDDCCF957 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Lookout/Pods-Lookout-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B19480516A3CA6F2D6ECD114 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B5C874511D93D73C00D192D9 /* Sources */ = {
@@ -281,22 +360,24 @@
 		};
 		B5C8746B1D93D73C00D192D9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8B78175BA6B2CC03E1FB14C1 /* Pods-Lookout.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Lookout/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "ntu-chunkai.Lookout";
+				PRODUCT_BUNDLE_IDENTIFIER = com.lookout.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
 		B5C8746C1D93D73C00D192D9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6D0D8A8FB8E79E681346CB3A /* Pods-Lookout.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Lookout/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "ntu-chunkai.Lookout";
+				PRODUCT_BUNDLE_IDENTIFIER = com.lookout.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
