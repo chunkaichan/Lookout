@@ -7,10 +7,22 @@
 //
 
 import UIKit
+import Firebase
 
 class ContactsViewController: TabViewControllerTemplate, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var contactsTable: UITableView!
+    
+    @IBAction func signOut(sender: AnyObject) {
+        let firebaseAuth = FIRAuth.auth()
+        do {
+            try firebaseAuth?.signOut()
+            AppState.sharedInstance.signedIn = false
+            dismissViewControllerAnimated(true, completion: nil)
+        } catch let signOutError as NSError {
+            print ("Error signing out: \(signOutError)")
+        }
+    }
     
     @IBAction func toggleSetting(sender: AnyObject) {
         NSNotificationCenter.defaultCenter().postNotificationName("toggleMenu", object: nil)
