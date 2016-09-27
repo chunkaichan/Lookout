@@ -13,6 +13,8 @@
 		B5BFA9031D95222600496D13 /* SendAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BFA9021D95222600496D13 /* SendAlertViewController.swift */; };
 		B5BFA9051D95223C00496D13 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BFA9041D95223C00496D13 /* ContactsViewController.swift */; };
 		B5C8264D1D9A7241000E9514 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8264C1D9A7241000E9514 /* SignInViewController.swift */; };
+		B5C8264F1D9A7415000E9514 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8264E1D9A7415000E9514 /* AppState.swift */; };
+		B5C826511D9A746F000E9514 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C826501D9A746F000E9514 /* Constants.swift */; };
 		B5C874591D93D73C00D192D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C874581D93D73C00D192D9 /* AppDelegate.swift */; };
 		B5C8745E1D93D73C00D192D9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5C8745C1D93D73C00D192D9 /* Main.storyboard */; };
 		B5C874611D93D73C00D192D9 /* Lookout.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B5C8745F1D93D73C00D192D9 /* Lookout.xcdatamodeld */; };
@@ -35,6 +37,8 @@
 		B5BFA9021D95222600496D13 /* SendAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendAlertViewController.swift; sourceTree = "<group>"; };
 		B5BFA9041D95223C00496D13 /* ContactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		B5C8264C1D9A7241000E9514 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		B5C8264E1D9A7415000E9514 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		B5C826501D9A746F000E9514 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B5C874551D93D73C00D192D9 /* Lookout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lookout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5C874581D93D73C00D192D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5C8745D1D93D73C00D192D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -103,6 +107,8 @@
 				B5C874581D93D73C00D192D9 /* AppDelegate.swift */,
 				B5C8745C1D93D73C00D192D9 /* Main.storyboard */,
 				B5C8264C1D9A7241000E9514 /* SignInViewController.swift */,
+				B5C8264E1D9A7415000E9514 /* AppState.swift */,
+				B5C826501D9A746F000E9514 /* Constants.swift */,
 				B5BFA9001D9521FC00496D13 /* LeftMenuTableViewController.swift */,
 				B5BFA9021D95222600496D13 /* SendAlertViewController.swift */,
 				B5BFA9041D95223C00496D13 /* ContactsViewController.swift */,
@@ -249,9 +255,11 @@
 				B5C8264D1D9A7241000E9514 /* SignInViewController.swift in Sources */,
 				B5BFA8FF1D95210500496D13 /* TabViewControllerTemplate.swift in Sources */,
 				B5BFA9051D95223C00496D13 /* ContactsViewController.swift in Sources */,
+				B5C8264F1D9A7415000E9514 /* AppState.swift in Sources */,
 				B5BFA9031D95222600496D13 /* SendAlertViewController.swift in Sources */,
 				B5BFA9011D9521FC00496D13 /* LeftMenuTableViewController.swift in Sources */,
 				B5C874611D93D73C00D192D9 /* Lookout.xcdatamodeld in Sources */,
+				B5C826511D9A746F000E9514 /* Constants.swift in Sources */,
 				B5C874701D94093500D192D9 /* ContainerViewController.swift in Sources */,
 				B5F9165E1D98F4B400CD01EB /* ContactTableViewCell.swift in Sources */,
 				B5F916571D98F01200CD01EB /* Person.swift in Sources */,

@@ -8,5 +8,6 @@ target 'Lookout' do
   # Pods for Lookout
 
   pod 'Firebase'
+  pod 'Firebase/Auth'
 
 end

@@ -184,6 +184,9 @@
                                 <state key="normal" title="Sign In">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="didTapSignIn:" destination="WHM-2U-sJ5" eventType="touchUpInside" id="RtU-yQ-jdp"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TkS-Eh-bcv">
                                 <rect key="frame" x="200" y="347" width="200" height="25"/>
@@ -196,6 +199,9 @@
                                 <state key="normal" title="Create Account">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="didTapSignUp:" destination="WHM-2U-sJ5" eventType="touchUpInside" id="ftL-i5-KbP"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -213,7 +219,9 @@
                         </constraints>
                     </view>
                     <connections>
-                        <segue destination="m3X-Xh-b7M" kind="show" id="KHq-ez-Omw"/>
+                        <outlet property="emailField" destination="LiP-8f-5Pm" id="yVU-L3-b31"/>
+                        <outlet property="passwordField" destination="zMB-0Y-O1R" id="JKJ-1q-aeg"/>
+                        <segue destination="m3X-Xh-b7M" kind="show" identifier="SignInToFP" id="KHq-ez-Omw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1tK-7J-AXy" userLabel="First Responder" sceneMemberID="firstResponder"/>

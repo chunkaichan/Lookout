@@ -14,6 +14,12 @@ class ContainerViewController: UIViewController {
     // This value matches the left menu's width in the Storyboard
     let leftMenuWidth:CGFloat = 200
     
+    override func viewWillAppear(animated: Bool) {
+        dispatch_async(dispatch_get_main_queue()) {
+            self.closeMenu(false)
+        }
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
