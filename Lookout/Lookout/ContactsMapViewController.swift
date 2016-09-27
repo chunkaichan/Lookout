@@ -58,7 +58,7 @@ class ContactsMapViewController: UIViewController, MKMapViewDelegate, CLLocation
     func sendLocation() {
         var data = [Constants.Location.latitude: self.latitude! as String]
         data[Constants.Location.longitude] = self.longitude! as String
-        self.ref.child("location").childByAutoId().setValue(data)
+        self.ref.child("location").childByAutoId().updateChildValues(data)
     }
     
     func setLocationManager() {
