@@ -12,6 +12,7 @@
 		B5BFA9011D9521FC00496D13 /* LeftMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BFA9001D9521FC00496D13 /* LeftMenuTableViewController.swift */; };
 		B5BFA9031D95222600496D13 /* SendAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BFA9021D95222600496D13 /* SendAlertViewController.swift */; };
 		B5BFA9051D95223C00496D13 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BFA9041D95223C00496D13 /* ContactsViewController.swift */; };
+		B5C8264D1D9A7241000E9514 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8264C1D9A7241000E9514 /* SignInViewController.swift */; };
 		B5C874591D93D73C00D192D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C874581D93D73C00D192D9 /* AppDelegate.swift */; };
 		B5C8745E1D93D73C00D192D9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5C8745C1D93D73C00D192D9 /* Main.storyboard */; };
 		B5C874611D93D73C00D192D9 /* Lookout.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B5C8745F1D93D73C00D192D9 /* Lookout.xcdatamodeld */; };
@@ -33,6 +34,7 @@
 		B5BFA9001D9521FC00496D13 /* LeftMenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuTableViewController.swift; sourceTree = "<group>"; };
 		B5BFA9021D95222600496D13 /* SendAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendAlertViewController.swift; sourceTree = "<group>"; };
 		B5BFA9041D95223C00496D13 /* ContactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
+		B5C8264C1D9A7241000E9514 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		B5C874551D93D73C00D192D9 /* Lookout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lookout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5C874581D93D73C00D192D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5C8745D1D93D73C00D192D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 			children = (
 				B5C874581D93D73C00D192D9 /* AppDelegate.swift */,
 				B5C8745C1D93D73C00D192D9 /* Main.storyboard */,
+				B5C8264C1D9A7241000E9514 /* SignInViewController.swift */,
 				B5BFA9001D9521FC00496D13 /* LeftMenuTableViewController.swift */,
 				B5BFA9021D95222600496D13 /* SendAlertViewController.swift */,
 				B5BFA9041D95223C00496D13 /* ContactsViewController.swift */,
@@ -153,6 +156,7 @@
 				TargetAttributes = {
 					B5C874541D93D73C00D192D9 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 8BA3875ZYA;
 					};
 				};
 			};
@@ -242,6 +246,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5C8264D1D9A7241000E9514 /* SignInViewController.swift in Sources */,
 				B5BFA8FF1D95210500496D13 /* TabViewControllerTemplate.swift in Sources */,
 				B5BFA9051D95223C00496D13 /* ContactsViewController.swift in Sources */,
 				B5BFA9031D95222600496D13 /* SendAlertViewController.swift in Sources */,
@@ -367,10 +372,13 @@
 			baseConfigurationReference = 8B78175BA6B2CC03E1FB14C1 /* Pods-Lookout.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Lookout/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lookout.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -379,10 +387,13 @@
 			baseConfigurationReference = 6D0D8A8FB8E79E681346CB3A /* Pods-Lookout.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Lookout/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lookout.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

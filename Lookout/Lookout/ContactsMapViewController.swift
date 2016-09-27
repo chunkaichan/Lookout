@@ -15,13 +15,12 @@ class ContactsMapViewController: UIViewController, MKMapViewDelegate, CLLocation
     @IBOutlet weak var contactMap: MKMapView!
 
     var locationManager: CLLocationManager!
+    var center = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setLocationManager()
     }
-    
-    
     
     func setLocationManager() {
         
@@ -35,4 +34,12 @@ class ContactsMapViewController: UIViewController, MKMapViewDelegate, CLLocation
         
     }
     
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let userLocation = self.locationManager.location?.coordinate ?? center
+        
+        let region = MKCoordinateRegion(center: userLocation, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+        self.contactMap.setRegion(region, animated: false)
+        
+        locationManager.stopUpdatingLocation()
+    }
 }
