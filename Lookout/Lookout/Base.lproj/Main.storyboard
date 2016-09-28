@@ -20,7 +20,21 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wfe-qw-dU7">
                                 <rect key="frame" x="0.0" y="44" width="600" height="507"/>
-                                <color key="backgroundColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cEs-2L-twd">
+                                        <rect key="frame" x="176" y="78" width="248" height="248"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="248" id="2VL-8X-Wkb"/>
+                                            <constraint firstAttribute="width" constant="248" id="Gxu-MA-PAv"/>
+                                        </constraints>
+                                        <state key="normal" image="alert"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="cEs-2L-twd" firstAttribute="top" secondItem="Wfe-qw-dU7" secondAttribute="top" constant="78" id="IKn-XB-XtA"/>
+                                    <constraint firstItem="cEs-2L-twd" firstAttribute="centerX" secondItem="Wfe-qw-dU7" secondAttribute="centerX" id="iTD-MM-p3h"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -33,10 +47,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="OXm-cJ-NfJ">
                         <barButtonItem key="leftBarButtonItem" id="PRX-IF-Lf2">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7qr-pC-Y4Q">
-                                <rect key="frame" x="20" y="7" width="50" height="30"/>
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7qr-pC-Y4Q">
+                                <rect key="frame" x="20" y="12" width="25" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Setting"/>
+                                <state key="normal" image="bar-menu"/>
                                 <connections>
                                     <action selector="toggleSetting:" destination="BYZ-38-t0r" eventType="touchUpInside" id="i0c-Yt-l7A"/>
                                 </connections>
@@ -96,10 +110,10 @@
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="FC1-Wk-gT8">
                         <barButtonItem key="leftBarButtonItem" id="K7h-jB-Rhh">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pGC-tp-71c">
-                                <rect key="frame" x="20" y="7" width="50" height="30"/>
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="pGC-tp-71c">
+                                <rect key="frame" x="20" y="12" width="25" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Setting"/>
+                                <state key="normal" image="bar-menu"/>
                                 <connections>
                                     <action selector="toggleSetting:" destination="0vE-iv-NEc" eventType="touchUpInside" id="BI2-Id-tQv"/>
                                 </connections>
@@ -380,7 +394,7 @@
         <scene sceneID="USn-Sw-uqR">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gnI-Va-1Rr" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Alert" id="F4f-eA-pnp"/>
+                    <tabBarItem key="tabBarItem" title="Alert" image="send-alert" id="F4f-eA-pnp"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="18c-5f-a4M">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -400,7 +414,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2Sb-4O-uZI" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <tabBarItem key="tabBarItem" title="Contacts" id="hNW-jl-vJx"/>
+                    <tabBarItem key="tabBarItem" title="Contacts" image="contacts" id="hNW-jl-vJx"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="DfW-AC-k2F">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -434,4 +448,10 @@
             <point key="canvasLocation" x="-61" y="1560"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="alert" width="256" height="256"/>
+        <image name="bar-menu" width="64" height="64"/>
+        <image name="contacts" width="24" height="24"/>
+        <image name="send-alert" width="24" height="24"/>
+    </resources>
 </document>

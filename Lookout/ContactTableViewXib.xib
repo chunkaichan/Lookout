@@ -15,8 +15,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="419" height="139"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oRw-FZ-DWh">
-                        <rect key="frame" x="139" y="28" width="252" height="25"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oRw-FZ-DWh">
+                        <rect key="frame" x="128" y="28" width="263" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="tRK-bX-BCr"/>
                         </constraints>
@@ -24,15 +24,15 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A0R-pv-8OO">
-                        <rect key="frame" x="19" y="19" width="100" height="100"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="head-template" translatesAutoresizingMaskIntoConstraints="NO" id="A0R-pv-8OO">
+                        <rect key="frame" x="28" y="18" width="80" height="80"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="100" id="GU0-c5-r9o"/>
-                            <constraint firstAttribute="height" constant="100" id="y1U-Ru-jsG"/>
+                            <constraint firstAttribute="width" constant="80" id="GU0-c5-r9o"/>
+                            <constraint firstAttribute="height" constant="80" id="y1U-Ru-jsG"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qKG-mW-GM6">
-                        <rect key="frame" x="139" y="70" width="252" height="25"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qKG-mW-GM6">
+                        <rect key="frame" x="128" y="73" width="263" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="GCC-jA-QdO"/>
                         </constraints>
@@ -43,7 +43,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailingMargin" secondItem="oRw-FZ-DWh" secondAttribute="trailing" constant="20" id="C7B-Jj-jiv"/>
-                    <constraint firstItem="A0R-pv-8OO" firstAttribute="leading" secondItem="G4v-IE-XWU" secondAttribute="leadingMargin" constant="10" id="NOb-9g-8yd"/>
+                    <constraint firstItem="A0R-pv-8OO" firstAttribute="leading" secondItem="G4v-IE-XWU" secondAttribute="leadingMargin" constant="20" id="NOb-9g-8yd"/>
                     <constraint firstItem="oRw-FZ-DWh" firstAttribute="top" secondItem="G4v-IE-XWU" secondAttribute="topMargin" constant="20" id="O63-Ay-3Qc"/>
                     <constraint firstItem="A0R-pv-8OO" firstAttribute="top" secondItem="G4v-IE-XWU" secondAttribute="topMargin" constant="10" id="dB4-3A-VUM"/>
                     <constraint firstItem="oRw-FZ-DWh" firstAttribute="leading" secondItem="A0R-pv-8OO" secondAttribute="trailing" constant="20" id="eXe-fE-bQJ"/>
@@ -60,4 +60,7 @@
             <point key="canvasLocation" x="660.5" y="448"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="head-template" width="64" height="64"/>
+    </resources>
 </document>
