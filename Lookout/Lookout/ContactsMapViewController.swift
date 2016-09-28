@@ -98,7 +98,7 @@ class ContactsMapViewController: UIViewController, MKMapViewDelegate, CLLocation
         let region = MKCoordinateRegion(center: userLocation, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
         self.contactMap.setRegion(region, animated: false)
         
-//        locationManager.stopUpdatingLocation()
+        locationManager.stopUpdatingLocation()
     }
     
     func setAnnotation(latitudeDegree latitudeDegree: Double, longitudeDegree: Double) {

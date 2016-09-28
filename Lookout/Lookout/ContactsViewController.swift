@@ -50,8 +50,7 @@ class ContactsViewController: TabViewControllerTemplate, UITableViewDataSource, 
     
     // [Section]
     var contacts: [Contact] = [
-        Contact(name: "Kyle", phoneNumber: "0987654321", address: "Taipei"),
-        Contact(name: "Hi", phoneNumber: "1234567890", address: "Taipei"),
+        Contact(name: "Kyle", phoneNumber: "0987654321", address: "Taipei")
     ]
     
     
