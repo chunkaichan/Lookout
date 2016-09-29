@@ -215,7 +215,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lookout" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g6U-CM-PcF">
                                 <rect key="frame" x="224" y="120" width="153" height="52"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="43"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bjz-Tq-Z9B">
@@ -311,20 +311,31 @@
                                             <segue destination="2TU-xn-Zid" kind="embed" id="cwm-Cn-qjQ"/>
                                         </connections>
                                     </containerView>
+                                    <view alpha="0.5" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qid-vy-CZs">
+                                        <rect key="frame" x="200" y="0.0" width="400" height="600"/>
+                                    </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="AoA-Au-FgG" firstAttribute="leading" secondItem="vDM-fh-eHg" secondAttribute="leading" id="DY7-Wm-IDf"/>
+                                    <constraint firstAttribute="bottom" secondItem="qid-vy-CZs" secondAttribute="bottom" id="F4Y-jq-sT2"/>
                                     <constraint firstItem="Ug0-5o-GeM" firstAttribute="leading" secondItem="AoA-Au-FgG" secondAttribute="trailing" id="Ibr-TH-aRg"/>
                                     <constraint firstItem="Ug0-5o-GeM" firstAttribute="top" secondItem="vDM-fh-eHg" secondAttribute="top" id="MsR-w5-cbE"/>
+                                    <constraint firstAttribute="trailing" secondItem="qid-vy-CZs" secondAttribute="trailing" id="QbZ-oJ-aLT"/>
                                     <constraint firstAttribute="trailing" secondItem="Ug0-5o-GeM" secondAttribute="trailing" id="YdM-tb-2Ir"/>
                                     <constraint firstAttribute="bottom" secondItem="AoA-Au-FgG" secondAttribute="bottom" id="adL-C7-xim"/>
+                                    <constraint firstItem="qid-vy-CZs" firstAttribute="top" secondItem="vDM-fh-eHg" secondAttribute="top" id="hss-bq-qNI"/>
                                     <constraint firstAttribute="bottom" secondItem="Ug0-5o-GeM" secondAttribute="bottom" id="iIB-Q8-Z3n"/>
+                                    <constraint firstItem="qid-vy-CZs" firstAttribute="leading" secondItem="AoA-Au-FgG" secondAttribute="trailing" id="kQf-g8-Kwa"/>
                                     <constraint firstItem="AoA-Au-FgG" firstAttribute="top" secondItem="vDM-fh-eHg" secondAttribute="top" id="nhn-L0-KWB"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="m3X-Xh-b7M" id="Sen-M6-Vgq"/>
+                                </connections>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="qid-vy-CZs" firstAttribute="height" secondItem="vux-mk-PLM" secondAttribute="height" id="49U-Pt-tH3"/>
                             <constraint firstItem="Ug0-5o-GeM" firstAttribute="width" secondItem="vux-mk-PLM" secondAttribute="width" id="Ged-4s-Ijk"/>
                             <constraint firstItem="Ug0-5o-GeM" firstAttribute="height" secondItem="vux-mk-PLM" secondAttribute="height" id="HzJ-sL-GGD"/>
                             <constraint firstItem="vDM-fh-eHg" firstAttribute="leading" secondItem="vux-mk-PLM" secondAttribute="leading" id="WSa-mG-Yrb"/>
@@ -332,11 +343,13 @@
                             <constraint firstItem="vDM-fh-eHg" firstAttribute="top" secondItem="vux-mk-PLM" secondAttribute="top" id="eHr-sw-myM"/>
                             <constraint firstAttribute="trailing" secondItem="vDM-fh-eHg" secondAttribute="trailing" id="gyT-X6-5dJ"/>
                             <constraint firstItem="vDM-fh-eHg" firstAttribute="bottom" secondItem="E29-jt-wQO" secondAttribute="top" id="i4b-uN-KGG"/>
+                            <constraint firstItem="qid-vy-CZs" firstAttribute="width" secondItem="vux-mk-PLM" secondAttribute="width" id="kam-XY-z16"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="k7A-mw-gWH"/>
                     <connections>
                         <outlet property="scrollableSideMenu" destination="vDM-fh-eHg" id="fNS-QP-PD8"/>
+                        <outlet property="transparentView" destination="qid-vy-CZs" id="RjR-o7-gyw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jDj-2q-3zd" userLabel="First Responder" sceneMemberID="firstResponder"/>

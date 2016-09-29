@@ -26,6 +26,10 @@ class ContactsViewController: TabViewControllerTemplate, UITableViewDataSource, 
     
     @IBAction func toggleSetting(sender: AnyObject) {
         NSNotificationCenter.defaultCenter().postNotificationName("toggleMenu", object: nil)
+        if (AppState.sharedInstance.userID == nil) {
+            AppState.sharedInstance.userID = NSUUID.init().UUIDString
+        }
+        print(AppState.sharedInstance.userID)
     }
     
     override func viewDidLoad() {
