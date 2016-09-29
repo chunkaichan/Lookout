@@ -13,23 +13,9 @@ class ContactsViewController: TabViewControllerTemplate, UITableViewDataSource, 
 
     @IBOutlet weak var contactsTable: UITableView!
     
-    @IBAction func signOut(sender: AnyObject) {
-        let firebaseAuth = FIRAuth.auth()
-        do {
-            try firebaseAuth?.signOut()
-            AppState.sharedInstance.signedIn = false
-            dismissViewControllerAnimated(true, completion: nil)
-        } catch let signOutError as NSError {
-            print ("Error signing out: \(signOutError)")
-        }
-    }
-    
     @IBAction func toggleSetting(sender: AnyObject) {
         NSNotificationCenter.defaultCenter().postNotificationName("toggleMenu", object: nil)
-        if (AppState.sharedInstance.userID == nil) {
-            AppState.sharedInstance.userID = NSUUID.init().UUIDString
-        }
-        print(AppState.sharedInstance.userID)
+        
     }
     
     override func viewDidLoad() {

@@ -11,15 +11,27 @@ import Firebase
 
 class SendAlertViewController: TabViewControllerTemplate {
 
-    @IBAction func signOut(sender: AnyObject) {
-        let firebaseAuth = FIRAuth.auth()
-        do {
-            try firebaseAuth?.signOut()
-            AppState.sharedInstance.signedIn = false
-            dismissViewControllerAnimated(true, completion: nil)
-        } catch let signOutError as NSError {
-            print ("Error signing out: \(signOutError)")
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        checkUUID()
+
+    }
+    
+    var userDefault = NSUserDefaults.standardUserDefaults()
+    
+    func checkUUID() {
+        if (userDefault.objectForKey("UUID") == nil) {
+            AppState.sharedInstance.userID = NSUUID.init().UUIDString
+            print("Generate new UUID: \(AppState.sharedInstance.userID)")
+            userDefault.setObject(AppState.sharedInstance.userID, forKey: "UUID")
+            userDefault.synchronize()
+        } else {
+            AppState.sharedInstance.userID = userDefault.objectForKey("UUID") as? String
+            print(AppState.sharedInstance.userID)
         }
+        
+        
     }
     
     @IBAction func toggleSetting(sender: AnyObject) {

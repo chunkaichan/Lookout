@@ -30,7 +30,7 @@
                                         <state key="normal" image="alert"/>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="cEs-2L-twd" firstAttribute="top" secondItem="Wfe-qw-dU7" secondAttribute="top" constant="78" id="IKn-XB-XtA"/>
                                     <constraint firstItem="cEs-2L-twd" firstAttribute="centerX" secondItem="Wfe-qw-dU7" secondAttribute="centerX" id="iTD-MM-p3h"/>
@@ -53,16 +53,6 @@
                                 <state key="normal" image="bar-menu"/>
                                 <connections>
                                     <action selector="toggleSetting:" destination="BYZ-38-t0r" eventType="touchUpInside" id="i0c-Yt-l7A"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="VTp-Ma-9ZV">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="bU3-gc-CS7">
-                                <rect key="frame" x="520" y="7" width="60" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Sign out"/>
-                                <connections>
-                                    <action selector="signOut:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dLi-kF-eb3"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -116,16 +106,6 @@
                                 <state key="normal" image="bar-menu"/>
                                 <connections>
                                     <action selector="toggleSetting:" destination="0vE-iv-NEc" eventType="touchUpInside" id="BI2-Id-tQv"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="hgq-u3-JAn">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="fwp-Tl-hPp">
-                                <rect key="frame" x="520" y="7" width="60" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Sign out"/>
-                                <connections>
-                                    <action selector="signOut:" destination="0vE-iv-NEc" eventType="touchUpInside" id="3Ay-hO-x8F"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -210,7 +190,7 @@
                                     <constraint firstAttribute="width" constant="200" id="ORx-gH-re8"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lookout" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g6U-CM-PcF">
                                 <rect key="frame" x="224" y="120" width="153" height="52"/>
@@ -365,7 +345,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Iyw-tV-EFT">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="leftMenuCell" id="Iyw-tV-EFT">
                                 <rect key="frame" x="0.0" y="72" width="200" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Iyw-tV-EFT" id="K6k-ZB-vbb">
@@ -380,6 +360,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="KfT-nG-tzU"/>
+                    <connections>
+                        <outlet property="leftMenu" destination="aHG-44-Kbi" id="xml-Ty-De9"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HQz-Ei-ZRf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
