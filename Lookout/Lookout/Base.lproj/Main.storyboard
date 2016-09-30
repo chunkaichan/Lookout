@@ -110,10 +110,10 @@
                             </button>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" id="ey2-bv-tZb">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1GG-kN-UqL">
-                                <rect key="frame" x="550" y="7" width="30" height="30"/>
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1GG-kN-UqL">
+                                <rect key="frame" x="555" y="9" width="25" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="+"/>
+                                <state key="normal" image="add-contact"/>
                                 <connections>
                                     <segue destination="LQQ-cH-uHf" kind="push" id="XEU-Fv-iFV"/>
                                 </connections>
@@ -237,12 +237,38 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="NQA-Nb-uUQ">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="507"/>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="axQ-w1-BcV">
+                                <rect key="frame" x="520" y="447" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="2vd-6h-UuN"/>
+                                    <constraint firstAttribute="height" constant="40" id="8mp-OD-Hzg"/>
+                                </constraints>
+                                <state key="normal" image="navigation"/>
+                                <connections>
+                                    <action selector="tapNavigation:" destination="Oc4-u1-ACb" eventType="touchUpInside" id="1Ub-OI-q3J"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u9k-RU-ZGY">
+                                <rect key="frame" x="460" y="447" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="3Kb-qd-T2E"/>
+                                    <constraint firstAttribute="height" constant="40" id="feR-0i-1MK"/>
+                                </constraints>
+                                <state key="normal" image="refresh"/>
+                                <connections>
+                                    <action selector="tapRefresh:" destination="Oc4-u1-ACb" eventType="touchUpInside" id="7bS-I4-r8z"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="axQ-w1-BcV" secondAttribute="trailing" constant="20" id="FL8-lY-p2u"/>
                             <constraint firstItem="NQA-Nb-uUQ" firstAttribute="top" secondItem="6T4-Ie-jbG" secondAttribute="bottom" id="Qxo-mz-YRz"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="u9k-RU-ZGY" secondAttribute="trailing" constant="80" id="S4r-HX-mss"/>
                             <constraint firstItem="NQA-Nb-uUQ" firstAttribute="bottom" secondItem="Sdh-tr-8I4" secondAttribute="top" id="WC2-Ge-4zu"/>
                             <constraint firstAttribute="trailing" secondItem="NQA-Nb-uUQ" secondAttribute="trailing" id="WwB-kk-FV0"/>
+                            <constraint firstItem="Sdh-tr-8I4" firstAttribute="top" secondItem="u9k-RU-ZGY" secondAttribute="bottom" constant="20" id="fSp-JW-8zU"/>
+                            <constraint firstItem="Sdh-tr-8I4" firstAttribute="top" secondItem="axQ-w1-BcV" secondAttribute="bottom" constant="20" id="pVD-Bk-KoC"/>
                             <constraint firstItem="NQA-Nb-uUQ" firstAttribute="leading" secondItem="dCn-J7-g7b" secondAttribute="leading" id="xdh-OS-gNa"/>
                         </constraints>
                     </view>
@@ -548,9 +574,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="add-contact" width="64" height="64"/>
         <image name="alert" width="256" height="256"/>
         <image name="bar-menu" width="64" height="64"/>
         <image name="contacts" width="24" height="24"/>
+        <image name="navigation" width="64" height="64"/>
+        <image name="refresh" width="64" height="64"/>
         <image name="send-alert" width="24" height="24"/>
     </resources>
 </document>

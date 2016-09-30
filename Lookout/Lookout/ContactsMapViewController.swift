@@ -16,6 +16,18 @@ class ContactsMapViewController: UIViewController, MKMapViewDelegate, CLLocation
 
     @IBOutlet weak var contactMap: MKMapView!
 
+    
+    @IBAction func tapNavigation(sender: AnyObject) {
+        let region = MKCoordinateRegion(center: CLLocationCoordinate2DMake(self.userLatitude, self.userLongitude), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+        self.contactMap.setRegion(region, animated: true)
+    }
+
+    @IBAction func tapRefresh(sender: AnyObject) {
+        let region = MKCoordinateRegion(center: CLLocationCoordinate2DMake(self.latitude, self.longitude), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+        self.contactMap.setRegion(region, animated: true)
+    }
+    
+    
     @IBAction func didTapSendLocation(sender: AnyObject) {
         sendLocation()
     }
@@ -51,6 +63,7 @@ class ContactsMapViewController: UIViewController, MKMapViewDelegate, CLLocation
 
     var longitude = 0.0
     var latitude = 0.0
+    var timestamp = 0.0
     var remoteLocation: [String:Double] = [
         Constants.Location.longitude : 0.0,
         Constants.Location.latitude : 0.0,
@@ -83,13 +96,13 @@ class ContactsMapViewController: UIViewController, MKMapViewDelegate, CLLocation
 //        })
 
         _refHandle = self.ref.child("user_locations/\(trackID)").observeEventType(.Value, withBlock: { (snapshot) -> Void in
-            print(123)
             self.location.append(snapshot)
             let locationSnapshot: FIRDataSnapshot! = self.location.last
             self.remoteLocation = locationSnapshot.value as! [String:Double]
             
             self.longitude = self.remoteLocation[Constants.Location.longitude]!
             self.latitude = self.remoteLocation[Constants.Location.latitude]!
+            self.timestamp = self.remoteLocation[Constants.Location.timestamp]!// as NSTimeInterval
             self.setAnnotation(latitudeDegree: self.latitude, longitudeDegree: self.longitude)
             
         })
@@ -147,6 +160,7 @@ class ContactsMapViewController: UIViewController, MKMapViewDelegate, CLLocation
     func setAnnotation(latitudeDegree latitudeDegree: Double, longitudeDegree: Double) {
         
         myAnnotation.coordinate = CLLocationCoordinate2DMake(latitudeDegree, longitudeDegree)
+        myAnnotation.title = "\(NSDate(timeIntervalSince1970: self.timestamp))"
         if (contactMap.annotations.isEmpty) {
             contactMap.addAnnotation(myAnnotation)
         }

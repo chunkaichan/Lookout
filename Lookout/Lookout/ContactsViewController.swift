@@ -29,7 +29,7 @@ class ContactsViewController: TabViewControllerTemplate, UITableViewDataSource, 
         contactsTable.delegate = self
         
         coreDataManager.delegate = self
-        coreDataManager.clearCoreData()
+//        coreDataManager.clearCoreData()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -51,6 +51,7 @@ class ContactsViewController: TabViewControllerTemplate, UITableViewDataSource, 
     
     
     var trackID: String = ""
+    var name: String = ""
     // [Section]
     var contacts: [ContactForTable] = []
     
@@ -70,6 +71,7 @@ class ContactsViewController: TabViewControllerTemplate, UITableViewDataSource, 
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.trackID = contacts[indexPath.row].trackID
+        self.name = contacts[indexPath.row].name
         performSegueWithIdentifier("SegueContactMap", sender: [])
     }
     
@@ -79,6 +81,7 @@ class ContactsViewController: TabViewControllerTemplate, UITableViewDataSource, 
         if segue.identifier == "SegueContactMap" {
             let destination: ContactsMapViewController = segue.destinationViewController as! ContactsMapViewController
             destination.trackID = self.trackID
+            destination.navigationItem.title = self.name
             print(self.trackID)
         }
     }
