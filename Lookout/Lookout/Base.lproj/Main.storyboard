@@ -577,9 +577,9 @@
         <image name="add-contact" width="64" height="64"/>
         <image name="alert" width="256" height="256"/>
         <image name="bar-menu" width="64" height="64"/>
-        <image name="contacts" width="24" height="24"/>
+        <image name="contacts" width="32" height="32"/>
         <image name="navigation" width="64" height="64"/>
         <image name="refresh" width="64" height="64"/>
-        <image name="send-alert" width="24" height="24"/>
+        <image name="send-alert" width="128" height="128"/>
     </resources>
 </document>
