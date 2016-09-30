@@ -69,19 +69,31 @@ class ContactsMapViewController: UIViewController, MKMapViewDelegate, CLLocation
 //            self.setAnnotation(latitudeDegree: (self.latitude! as NSString).doubleValue, longitudeDegree: (self.longitude! as NSString).doubleValue )
 //        })
 //        
-        _refHandle = self.ref.child("user_locations/\(trackID)").observeEventType(.ChildChanged, withBlock: { (snapshot) -> Void in
-            
+//        _refHandle = self.ref.child("user_locations/\(trackID)").observeEventType(.ChildChanged, withBlock: { (snapshot) -> Void in
+//            
+//            self.location.append(snapshot)
+//            let locationSnapshot: FIRDataSnapshot! = self.location.last
+//            self.remoteLocation[locationSnapshot.key] = locationSnapshot.value as? Double
+//            self.longitude = self.remoteLocation[Constants.Location.longitude]!
+//            self.latitude = self.remoteLocation[Constants.Location.latitude]!
+////            print("Location changed!")
+////            print(self.longitude)
+////            print(self.latitude)
+//            self.setAnnotation(latitudeDegree: self.latitude, longitudeDegree: self.longitude)
+//        })
+
+        _refHandle = self.ref.child("user_locations/\(trackID)").observeEventType(.Value, withBlock: { (snapshot) -> Void in
+            print(123)
             self.location.append(snapshot)
             let locationSnapshot: FIRDataSnapshot! = self.location.last
-            self.remoteLocation[locationSnapshot.key] = locationSnapshot.value as? Double
+            self.remoteLocation = locationSnapshot.value as! [String:Double]
+            
             self.longitude = self.remoteLocation[Constants.Location.longitude]!
             self.latitude = self.remoteLocation[Constants.Location.latitude]!
-//            print("Location changed!")
-//            print(self.longitude)
-//            print(self.latitude)
             self.setAnnotation(latitudeDegree: self.latitude, longitudeDegree: self.longitude)
+            
         })
-        
+
 
     }
     
@@ -110,31 +122,36 @@ class ContactsMapViewController: UIViewController, MKMapViewDelegate, CLLocation
     var userLongitude: Double = 0.0
     var userLatitude: Double = 0.0
     
+    
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let userLocation = self.locationManager.location?.coordinate ?? center
         
         self.userLongitude = userLocation.longitude
         self.userLatitude = userLocation.latitude
         
-        let region = MKCoordinateRegion(center: userLocation, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-        self.contactMap.setRegion(region, animated: false)
-        locationManager.startUpdatingLocation()
-        sendLocation()
-//        print("updating....")
         
+//        let region = MKCoordinateRegion(center: locations.last!.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+        if (self.latitude == 0.0) {
+            let region = MKCoordinateRegion(center: userLocation, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+            self.contactMap.setRegion(region, animated: false)
+        }
+        
+        locationManager.startUpdatingLocation()
+        locationManager.stopUpdatingLocation()
+        sendLocation()
+    
     }
     
-//    var myAnnotation: MKPointAnnotation = MKPointAnnotation()
     var myAnnotation: MKPointAnnotation = MKPointAnnotation()
     
     func setAnnotation(latitudeDegree latitudeDegree: Double, longitudeDegree: Double) {
         
-        myAnnotation.coordinate = CLLocationCoordinate2DMake(latitudeDegree, longitudeDegree);
+        myAnnotation.coordinate = CLLocationCoordinate2DMake(latitudeDegree, longitudeDegree)
         if (contactMap.annotations.isEmpty) {
             contactMap.addAnnotation(myAnnotation)
         }
-        
-        
+        let region = MKCoordinateRegion(center: CLLocationCoordinate2DMake(self.latitude, self.longitude), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+        self.contactMap.setRegion(region, animated: false)
         
     }
 

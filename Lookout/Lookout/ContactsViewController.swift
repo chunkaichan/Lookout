@@ -33,6 +33,7 @@ class ContactsViewController: TabViewControllerTemplate, UITableViewDataSource, 
     }
     
     override func viewWillAppear(animated: Bool) {
+        contacts = [ContactForTable(name: "Kyle", phoneNumber: "0987654321", trackID: "GLDkDlzgYJSxc7MVIyNfnL5TdXc2")]
         coreDataManager.fetchCoreData()
     }
     
@@ -51,11 +52,7 @@ class ContactsViewController: TabViewControllerTemplate, UITableViewDataSource, 
     
     var trackID: String = ""
     // [Section]
-    var contacts: [ContactForTable] = [
-        ContactForTable(name: "Kyle", phoneNumber: "0987654321", trackID: "GLDkDlzgYJSxc7MVIyNfnL5TdXc2")
-    ]
-    
-    
+    var contacts: [ContactForTable] = []
     
     // Mark: UITableViewDataSource
     

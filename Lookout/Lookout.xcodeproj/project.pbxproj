@@ -9,9 +9,9 @@
 /* Begin PBXBuildFile section */
 		4C5BF48C5B9A12D22FE10AB6 /* Pods_Lookout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9203B3DC0F7852FEE61941CB /* Pods_Lookout.framework */; };
 		B578DF531D9E34D9002E5439 /* NewContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B578DF521D9E34D9002E5439 /* NewContactViewController.swift */; };
-		B578DF5A1D9E374E002E5439 /* Contact+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B578DF581D9E374E002E5439 /* Contact+CoreDataProperties.swift */; };
-		B578DF5B1D9E374E002E5439 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = B578DF591D9E374E002E5439 /* Contact.swift */; };
 		B578DF5D1D9E3C36002E5439 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B578DF5C1D9E3C36002E5439 /* CoreDataManager.swift */; };
+		B578DF601D9E4630002E5439 /* Contact+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B578DF5E1D9E4630002E5439 /* Contact+CoreDataProperties.swift */; };
+		B578DF611D9E4630002E5439 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = B578DF5F1D9E4630002E5439 /* Contact.swift */; };
 		B5BFA8FF1D95210500496D13 /* TabViewControllerTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BFA8FE1D95210500496D13 /* TabViewControllerTemplate.swift */; };
 		B5BFA9011D9521FC00496D13 /* LeftMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BFA9001D9521FC00496D13 /* LeftMenuTableViewController.swift */; };
 		B5BFA9031D95222600496D13 /* SendAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BFA9021D95222600496D13 /* SendAlertViewController.swift */; };
@@ -37,9 +37,9 @@
 		8B78175BA6B2CC03E1FB14C1 /* Pods-Lookout.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lookout.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Lookout/Pods-Lookout.debug.xcconfig"; sourceTree = "<group>"; };
 		9203B3DC0F7852FEE61941CB /* Pods_Lookout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lookout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B578DF521D9E34D9002E5439 /* NewContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewContactViewController.swift; sourceTree = "<group>"; };
-		B578DF581D9E374E002E5439 /* Contact+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Contact+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		B578DF591D9E374E002E5439 /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		B578DF5C1D9E3C36002E5439 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		B578DF5E1D9E4630002E5439 /* Contact+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Contact+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B578DF5F1D9E4630002E5439 /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		B5BFA8FE1D95210500496D13 /* TabViewControllerTemplate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabViewControllerTemplate.swift; sourceTree = "<group>"; };
 		B5BFA9001D9521FC00496D13 /* LeftMenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuTableViewController.swift; sourceTree = "<group>"; };
 		B5BFA9021D95222600496D13 /* SendAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendAlertViewController.swift; sourceTree = "<group>"; };
@@ -94,8 +94,8 @@
 		B5C8744C1D93D73C00D192D9 = {
 			isa = PBXGroup;
 			children = (
-				B578DF581D9E374E002E5439 /* Contact+CoreDataProperties.swift */,
-				B578DF591D9E374E002E5439 /* Contact.swift */,
+				B578DF5E1D9E4630002E5439 /* Contact+CoreDataProperties.swift */,
+				B578DF5F1D9E4630002E5439 /* Contact.swift */,
 				B5C874571D93D73C00D192D9 /* Lookout */,
 				B5C874561D93D73C00D192D9 /* Products */,
 				1DE3C6ADBF80358539E595EE /* Pods */,
@@ -266,10 +266,10 @@
 			files = (
 				B5C8264D1D9A7241000E9514 /* SignInViewController.swift in Sources */,
 				B5BFA8FF1D95210500496D13 /* TabViewControllerTemplate.swift in Sources */,
+				B578DF611D9E4630002E5439 /* Contact.swift in Sources */,
 				B5BFA9051D95223C00496D13 /* ContactsViewController.swift in Sources */,
-				B578DF5A1D9E374E002E5439 /* Contact+CoreDataProperties.swift in Sources */,
 				B578DF5D1D9E3C36002E5439 /* CoreDataManager.swift in Sources */,
-				B578DF5B1D9E374E002E5439 /* Contact.swift in Sources */,
+				B578DF601D9E4630002E5439 /* Contact+CoreDataProperties.swift in Sources */,
 				B5C8264F1D9A7415000E9514 /* AppState.swift in Sources */,
 				B5BFA9031D95222600496D13 /* SendAlertViewController.swift in Sources */,
 				B5BFA9011D9521FC00496D13 /* LeftMenuTableViewController.swift in Sources */,

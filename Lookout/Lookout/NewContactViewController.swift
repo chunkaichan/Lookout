@@ -26,8 +26,6 @@ class NewContactViewController: UIViewController {
     @IBOutlet weak var newEmail: UITextField!
     @IBOutlet weak var newTrackID: UITextField!
     
-    let moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-    let entityName = "Contact"
     
     
 }

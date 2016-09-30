@@ -29,12 +29,14 @@ class CoreDataManager {
         
     }
     
+    private let entityName = "Contacts"
+    
     private var moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     weak var delegate: CoreDataManagerDelegate?
     
     func saveCoreData(name name: String, number: String, email: String, trackID: String) {
-        let contact = NSEntityDescription.insertNewObjectForEntityForName("Contact", inManagedObjectContext: moc) as! Contact
+        let contact = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: moc) as! Contact
         contact.name = name
         contact.number = number
         contact.email = email
@@ -48,7 +50,7 @@ class CoreDataManager {
     }
     
     func fetchCoreData() {
-        let request = NSFetchRequest(entityName: "Contact")
+        let request = NSFetchRequest(entityName: entityName)
         do {
             guard let results = try moc.executeFetchRequest(request) as? [Contact] else {fatalError()}
             delegate?.manager(self, didFetchContactData: results)
@@ -60,7 +62,7 @@ class CoreDataManager {
     func clearCoreData() {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
-        let fetchRequest = NSFetchRequest(entityName: "Contact")
+        let fetchRequest = NSFetchRequest(entityName: entityName)
         fetchRequest.returnsObjectsAsFaults = false
         do
         {

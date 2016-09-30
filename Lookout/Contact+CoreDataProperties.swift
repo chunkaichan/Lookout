@@ -18,5 +18,6 @@ extension Contact {
     @NSManaged var number: String?
     @NSManaged var email: String?
     @NSManaged var trackID: String?
+    @NSManaged var photo: NSData?
 
 }
