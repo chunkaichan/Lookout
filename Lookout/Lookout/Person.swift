@@ -12,13 +12,13 @@ class Person {
     
     let name: String
     let phoneNumber: String
-    let address: String
+    let trackID: String
     
-    init(name: String, phoneNumber: String, address: String) {
+    init(name: String, phoneNumber: String, trackID: String) {
         
         self.name = name
         self.phoneNumber = phoneNumber
-        self.address = address
+        self.trackID = trackID
         
     }
     

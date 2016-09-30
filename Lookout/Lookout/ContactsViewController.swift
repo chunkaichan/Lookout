@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import CoreData
 import Firebase
 
-class ContactsViewController: TabViewControllerTemplate, UITableViewDataSource, UITableViewDelegate {
+class ContactsViewController: TabViewControllerTemplate, UITableViewDataSource, UITableViewDelegate, CoreDataManagerDelegate {
 
     @IBOutlet weak var contactsTable: UITableView!
     
@@ -18,6 +19,8 @@ class ContactsViewController: TabViewControllerTemplate, UITableViewDataSource, 
         
     }
     
+    let coreDataManager = CoreDataManager.shared
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let nib = UINib(nibName: "ContactTableViewXib", bundle: nil)
@@ -25,7 +28,14 @@ class ContactsViewController: TabViewControllerTemplate, UITableViewDataSource, 
         contactsTable.dataSource = self
         contactsTable.delegate = self
         
+        coreDataManager.delegate = self
+        coreDataManager.clearCoreData()
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        coreDataManager.fetchCoreData()
+    }
+    
     enum ContactRow: Int {
         case name, phoneNumber, address
     }
@@ -36,13 +46,14 @@ class ContactsViewController: TabViewControllerTemplate, UITableViewDataSource, 
         ContactRow.address
     ]
     
-    typealias Contact = Person
+    typealias ContactForTable = Person
     
+    
+    var trackID: String = ""
     // [Section]
-    var contacts: [Contact] = [
-        Contact(name: "Kyle", phoneNumber: "0987654321", address: "Taipei")
+    var contacts: [ContactForTable] = [
+        ContactForTable(name: "Kyle", phoneNumber: "0987654321", trackID: "GLDkDlzgYJSxc7MVIyNfnL5TdXc2")
     ]
-    
     
     
     
@@ -61,7 +72,30 @@ class ContactsViewController: TabViewControllerTemplate, UITableViewDataSource, 
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.trackID = contacts[indexPath.row].trackID
         performSegueWithIdentifier("SegueContactMap", sender: [])
+    }
+    
+    // Mark: Prepare segue for adding contact
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "SegueContactMap" {
+            let destination: ContactsMapViewController = segue.destinationViewController as! ContactsMapViewController
+            destination.trackID = self.trackID
+            print(self.trackID)
+        }
+    }
+    
+    // Mark: CoreDataManager delegate
+    func manager(manager: CoreDataManager, didFetchContactData: AnyObject) {
+        print(didFetchContactData)
+        guard let results = didFetchContactData as? [Contact] else { fatalError() }
+        if (results.count > 0) {
+            for result in results {
+                contacts.append(ContactForTable(name: result.name!, phoneNumber: result.number!, trackID: result.trackID!))
+            }
+        }
+        self.contactsTable.reloadData()
     }
 
 }

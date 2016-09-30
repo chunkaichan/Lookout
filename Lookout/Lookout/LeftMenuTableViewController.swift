@@ -17,7 +17,7 @@ class LeftMenuTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = leftMenu.dequeueReusableCellWithIdentifier("leftMenuCell", forIndexPath:  indexPath) as! UITableViewCell
+        let cell = leftMenu.dequeueReusableCellWithIdentifier("leftMenuCell", forIndexPath:  indexPath) as UITableViewCell
         cell.textLabel?.text = "Sign out"
         return cell
     }

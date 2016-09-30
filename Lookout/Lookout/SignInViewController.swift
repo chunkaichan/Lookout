@@ -17,6 +17,7 @@ class SignInViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         if let user = FIRAuth.auth()?.currentUser {
             self.signedIn(user)
+            AppState.sharedInstance.UUID = user.uid
         }
     }
     
@@ -30,6 +31,7 @@ class SignInViewController: UIViewController {
                 return
             }
             self.signedIn(user!)
+            AppState.sharedInstance.UUID = user!.uid
         }
     }
     
@@ -37,11 +39,13 @@ class SignInViewController: UIViewController {
         let email = emailField.text
         let password = passwordField.text
         FIRAuth.auth()?.createUserWithEmail(email!, password: password!) { (user, error) in
+            
             if let error = error {
                 print(error.localizedDescription)
                 return
             }
             self.setDisplayName(user!)
+            AppState.sharedInstance.UUID = user!.uid
         }
     }
     

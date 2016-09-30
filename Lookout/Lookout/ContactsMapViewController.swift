@@ -17,10 +17,10 @@ class ContactsMapViewController: UIViewController, MKMapViewDelegate, CLLocation
     @IBOutlet weak var contactMap: MKMapView!
 
     @IBAction func didTapSendLocation(sender: AnyObject) {
-        print("Send location:\(self.longitude), \(self.latitude)")
         sendLocation()
     }
     
+    var trackID: String = ""
     var ref: FIRDatabaseReference!
     var location: [FIRDataSnapshot]! = []
     private var _refHandle: FIRDatabaseHandle!
@@ -30,48 +30,69 @@ class ContactsMapViewController: UIViewController, MKMapViewDelegate, CLLocation
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.ref = FIRDatabase.database().reference()
+        if let user = FIRAuth.auth()?.currentUser {
+            AppState.sharedInstance.UUID = user.uid
+        }
         setLocationManager()
         configureDatabase()
+        
+//        var _ = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(setLocationManager), userInfo: nil, repeats: true)
+//        var _ = NSTimer.scheduledTimerWithTimeInterval(1.001, target: self, selector: #selector(stopUpdate), userInfo: nil, repeats: true)
+    }
+    
+    func stopUpdate() {
+        self.locationManager.delegate = nil
     }
     
     deinit {
-        self.ref.child("location").removeObserverWithHandle(_refHandle)
+        self.ref.child("user_locations").removeObserverWithHandle(_refHandle)
     }
 
-    var longitude: String?
-    var latitude: String?
+    var longitude = 0.0
+    var latitude = 0.0
+    var remoteLocation: [String:Double] = [
+        Constants.Location.longitude : 0.0,
+        Constants.Location.latitude : 0.0,
+        Constants.Location.timestamp : 0.0
+        ]
     
     func configureDatabase() {
-        ref = FIRDatabase.database().reference()
         // Listen for new messages in the Firebase database
-        _refHandle = self.ref.child("location").observeEventType(.ChildAdded, withBlock: { (snapshot) -> Void in
-            self.location.append(snapshot)
-            let locationSnapshot: FIRDataSnapshot! = self.location[0]
-
-            let remoteLocation = locationSnapshot.value as! [String: String]
-            self.longitude = remoteLocation[Constants.Location.longitude] as String!
-            self.latitude = remoteLocation[Constants.Location.latitude] as String!
-            self.setAnnotation(latitudeDegree: (self.latitude! as NSString).doubleValue, longitudeDegree: (self.longitude! as NSString).doubleValue )
-        })
-        
-        _refHandle = self.ref.child("location").observeEventType(.ChildChanged, withBlock: { (snapshot) -> Void in
+//        _refHandle = self.ref.child("user_locations").observeEventType(.ChildAdded, withBlock: { (snapshot) -> Void in
+//            self.location.append(snapshot)
+//            let locationSnapshot: FIRDataSnapshot! = self.location[0]
+//
+//            let remoteLocation = locationSnapshot.value as! [String: String]
+//            self.longitude = remoteLocation[Constants.Location.longitude] as String!
+//            self.latitude = remoteLocation[Constants.Location.latitude] as String!
+//            self.setAnnotation(latitudeDegree: (self.latitude! as NSString).doubleValue, longitudeDegree: (self.longitude! as NSString).doubleValue )
+//        })
+//        
+        _refHandle = self.ref.child("user_locations/\(trackID)").observeEventType(.ChildChanged, withBlock: { (snapshot) -> Void in
+            
             self.location.append(snapshot)
             let locationSnapshot: FIRDataSnapshot! = self.location.last
-            
-            let remoteLocation = locationSnapshot.value as! [String: String]
-            self.longitude = remoteLocation[Constants.Location.longitude] as String!
-            self.latitude = remoteLocation[Constants.Location.latitude] as String!
-            print("Location changed!")
-            print(self.longitude)
-            print(self.latitude)
-            self.setAnnotation(latitudeDegree: (self.latitude! as NSString).doubleValue, longitudeDegree: (self.longitude! as NSString).doubleValue )
+            self.remoteLocation[locationSnapshot.key] = locationSnapshot.value as? Double
+            self.longitude = self.remoteLocation[Constants.Location.longitude]!
+            self.latitude = self.remoteLocation[Constants.Location.latitude]!
+//            print("Location changed!")
+//            print(self.longitude)
+//            print(self.latitude)
+            self.setAnnotation(latitudeDegree: self.latitude, longitudeDegree: self.longitude)
         })
+        
+
     }
     
     func sendLocation() {
-        var data = [Constants.Location.latitude: String(self.userLatitude)]
-        data[Constants.Location.longitude] = String(self.userLongitude)
-        self.ref.child("location/-K2ib4H77rj0LYewF7dP").setValue(data)
+        
+        var data = [Constants.Location.latitude: self.userLatitude]
+        data[Constants.Location.longitude] = self.userLongitude
+        data[Constants.Location.timestamp] = NSDate().timeIntervalSince1970
+        self.ref.child("user_locations/\(AppState.sharedInstance.UUID)").setValue(data)
+//        print("Send location:\(self.userLongitude), \(self.userLatitude)")
+        
     }
     
     func setLocationManager() {
@@ -97,18 +118,23 @@ class ContactsMapViewController: UIViewController, MKMapViewDelegate, CLLocation
         
         let region = MKCoordinateRegion(center: userLocation, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
         self.contactMap.setRegion(region, animated: false)
+        locationManager.startUpdatingLocation()
+        sendLocation()
+//        print("updating....")
         
-        locationManager.stopUpdatingLocation()
     }
+    
+//    var myAnnotation: MKPointAnnotation = MKPointAnnotation()
+    var myAnnotation: MKPointAnnotation = MKPointAnnotation()
     
     func setAnnotation(latitudeDegree latitudeDegree: Double, longitudeDegree: Double) {
         
-        
-        let myAnnotation: MKPointAnnotation = MKPointAnnotation()
         myAnnotation.coordinate = CLLocationCoordinate2DMake(latitudeDegree, longitudeDegree);
-        let allAnnotations = self.contactMap.annotations
-        contactMap.removeAnnotations(allAnnotations)
-        contactMap.addAnnotation(myAnnotation)
+        if (contactMap.annotations.isEmpty) {
+            contactMap.addAnnotation(myAnnotation)
+        }
+        
+        
         
     }
 
