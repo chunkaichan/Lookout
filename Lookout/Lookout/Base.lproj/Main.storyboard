@@ -220,7 +220,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sIQ-To-WWn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1999" y="3476"/>
+            <point key="canvasLocation" x="3487" y="3536"/>
         </scene>
         <!--Contacts Map View Controller-->
         <scene sceneID="lw6-SN-MnG">
@@ -509,6 +509,7 @@
                     <connections>
                         <segue destination="gnI-Va-1Rr" kind="relationship" relationship="viewControllers" id="sEF-mC-rwq"/>
                         <segue destination="2Sb-4O-uZI" kind="relationship" relationship="viewControllers" id="SPt-hV-fDi"/>
+                        <segue destination="Nku-AS-ddQ" kind="relationship" relationship="viewControllers" id="PN9-ju-aRa"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SmU-gT-oOp" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -554,6 +555,36 @@
             </objects>
             <point key="canvasLocation" x="1187" y="2742"/>
         </scene>
+        <!--Core Motion View Controller-->
+        <scene sceneID="NDA-bc-NWo">
+            <objects>
+                <viewController id="dKi-xL-hda" customClass="CoreMotionViewController" customModule="Lookout" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xx3-Of-EFk"/>
+                        <viewControllerLayoutGuide type="bottom" id="GIv-uM-3Q9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gek-BT-Kg0">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="kaG-vv-wQY">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="dIT-Oi-E4L">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="WRa-X1-znn">
+                                <rect key="frame" x="20" y="12" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="bar-menu"/>
+                                <connections>
+                                    <action selector="toggleSetting:" destination="dKi-xL-hda" eventType="touchUpInside" id="nH8-0a-2Bk"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="P26-vm-VMr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1999" y="3627"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="lSc-xh-72h">
             <objects>
@@ -572,12 +603,32 @@
             </objects>
             <point key="canvasLocation" x="-61" y="1560"/>
         </scene>
+        <!--Detection-->
+        <scene sceneID="BjR-r0-dK5">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Nku-AS-ddQ" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Detection" image="device-detection" selectedImage="device-detection" id="VTB-JQ-qnL"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="dSU-xN-j17">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="dKi-xL-hda" kind="relationship" relationship="rootViewController" id="1eD-Xb-APz"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KPB-ef-11e" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1187" y="3627"/>
+        </scene>
     </scenes>
     <resources>
         <image name="add-contact" width="64" height="64"/>
         <image name="alert" width="256" height="256"/>
         <image name="bar-menu" width="64" height="64"/>
         <image name="contacts" width="32" height="32"/>
+        <image name="device-detection" width="32" height="32"/>
         <image name="navigation" width="64" height="64"/>
         <image name="refresh" width="64" height="64"/>
         <image name="send-alert" width="32" height="32"/>

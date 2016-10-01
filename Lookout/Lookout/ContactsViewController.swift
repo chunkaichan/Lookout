@@ -16,7 +16,6 @@ class ContactsViewController: TabViewControllerTemplate, UITableViewDataSource, 
     
     @IBAction func toggleSetting(sender: AnyObject) {
         NSNotificationCenter.defaultCenter().postNotificationName("toggleMenu", object: nil)
-        
     }
     
     let coreDataManager = CoreDataManager.shared
