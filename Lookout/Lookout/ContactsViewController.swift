@@ -29,11 +29,12 @@ class ContactsViewController: TabViewControllerTemplate, UITableViewDataSource, 
         contactsTable.delegate = self
         
         coreDataManager.delegate = self
-//        coreDataManager.clearCoreData()
+        
     }
     
     override func viewWillAppear(animated: Bool) {
-        contacts = [ContactForTable(name: "Kyle", phoneNumber: "0987654321", trackID: "GLDkDlzgYJSxc7MVIyNfnL5TdXc2")]
+        contacts = [ContactForTable(name: "Kyle", phoneNumber: "0987654321", trackID: "GLDkDlzgYJSxc7MVIyNfnL5TdXc2", email: "email@com.tw")]
+        
         coreDataManager.fetchCoreData()
     }
     
@@ -75,6 +76,20 @@ class ContactsViewController: TabViewControllerTemplate, UITableViewDataSource, 
         performSegueWithIdentifier("SegueContactMap", sender: [])
     }
     
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            
+            contacts.removeAtIndex(indexPath.row)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+            coreDataManager.clearCoreData()
+            for contact in contacts {
+                coreDataManager.saveCoreData(name: contact.name, number: contact.phoneNumber, email: contact.email, trackID: contact.trackID)
+            }
+            
+        }
+    }
+    
     // Mark: Prepare segue for adding contact
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -92,7 +107,7 @@ class ContactsViewController: TabViewControllerTemplate, UITableViewDataSource, 
         guard let results = didFetchContactData as? [Contact] else { fatalError() }
         if (results.count > 0) {
             for result in results {
-                contacts.append(ContactForTable(name: result.name!, phoneNumber: result.number!, trackID: result.trackID!))
+                contacts.append(ContactForTable(name: result.name!, phoneNumber: result.number!, trackID: result.trackID!, email: result.email!))
             }
         }
         self.contactsTable.reloadData()

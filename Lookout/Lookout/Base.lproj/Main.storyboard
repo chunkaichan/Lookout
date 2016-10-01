@@ -75,14 +75,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="140" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XhM-qj-F18">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="507"/>
+                                <rect key="frame" x="20" y="0.0" width="560" height="507"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ContactTableViewCell" rowHeight="140" id="prc-fz-ret" customClass="ContactTableViewCell" customModule="Lookout" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="140"/>
+                                        <rect key="frame" x="0.0" y="28" width="560" height="140"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="prc-fz-ret" id="fEr-Mv-UJv">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="139"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="560" height="139"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -92,9 +92,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="dNd-lb-dMs" firstAttribute="top" secondItem="XhM-qj-F18" secondAttribute="bottom" id="2RS-lk-YNQ"/>
-                            <constraint firstItem="XhM-qj-F18" firstAttribute="leading" secondItem="LLz-Zb-Lb7" secondAttribute="leadingMargin" constant="-20" id="d1i-KD-WTv"/>
+                            <constraint firstItem="XhM-qj-F18" firstAttribute="leading" secondItem="LLz-Zb-Lb7" secondAttribute="leadingMargin" id="d1i-KD-WTv"/>
                             <constraint firstItem="XhM-qj-F18" firstAttribute="top" secondItem="3hg-DB-zbP" secondAttribute="bottom" id="nI9-5e-UaS"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="XhM-qj-F18" secondAttribute="trailing" constant="-20" id="pI6-w0-qv0"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="XhM-qj-F18" secondAttribute="trailing" id="pI6-w0-qv0"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
@@ -394,7 +394,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vDM-fh-eHg">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vDM-fh-eHg">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AoA-Au-FgG" userLabel="Left Container View">
@@ -580,6 +580,6 @@
         <image name="contacts" width="32" height="32"/>
         <image name="navigation" width="64" height="64"/>
         <image name="refresh" width="64" height="64"/>
-        <image name="send-alert" width="128" height="128"/>
+        <image name="send-alert" width="32" height="32"/>
     </resources>
 </document>
