@@ -16,7 +16,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oRw-FZ-DWh">
-                        <rect key="frame" x="128" y="28" width="263" height="25"/>
+                        <rect key="frame" x="153" y="28" width="238" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="tRK-bX-BCr"/>
                         </constraints>
@@ -25,14 +25,14 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="head-template" translatesAutoresizingMaskIntoConstraints="NO" id="A0R-pv-8OO">
-                        <rect key="frame" x="8" y="20" width="100" height="100"/>
+                        <rect key="frame" x="8" y="7" width="125" height="125"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="100" id="GU0-c5-r9o"/>
-                            <constraint firstAttribute="height" constant="100" id="y1U-Ru-jsG"/>
+                            <constraint firstAttribute="width" constant="125" id="GU0-c5-r9o"/>
+                            <constraint firstAttribute="height" constant="125" id="y1U-Ru-jsG"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qKG-mW-GM6">
-                        <rect key="frame" x="128" y="73" width="263" height="25"/>
+                        <rect key="frame" x="153" y="73" width="238" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="GCC-jA-QdO"/>
                         </constraints>

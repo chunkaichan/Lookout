@@ -14,14 +14,16 @@ class Person {
     let phoneNumber: String
     let trackID: String
     let email: String
+    let photo: NSData?
 //    let photo: NSdata
     
-    init(name: String, phoneNumber: String, trackID: String, email: String) {
+    init(name: String, phoneNumber: String, trackID: String, email: String, photo: NSData) {
         
         self.name = name
         self.phoneNumber = phoneNumber
         self.trackID = trackID
         self.email = email
+        self.photo = photo
         
     }
     

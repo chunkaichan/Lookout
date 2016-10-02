@@ -35,12 +35,13 @@ class CoreDataManager {
     
     weak var delegate: CoreDataManagerDelegate?
     
-    func saveCoreData(name name: String, number: String, email: String, trackID: String) {
+    func saveCoreData(name name: String, number: String, email: String, trackID: String, photo: NSData) {
         let contact = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: moc) as! Contact
         contact.name = name
         contact.number = number
         contact.email = email
         contact.trackID = trackID
+        contact.photo = photo
         do {
             try self.moc.save()
             print("Save new contact info to core data")

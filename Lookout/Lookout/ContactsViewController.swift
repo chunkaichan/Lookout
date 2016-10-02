@@ -32,8 +32,8 @@ class ContactsViewController: TabViewControllerTemplate, UITableViewDataSource, 
     }
     
     override func viewWillAppear(animated: Bool) {
-        contacts = [ContactForTable(name: "Kyle", phoneNumber: "0987654321", trackID: "GLDkDlzgYJSxc7MVIyNfnL5TdXc2", email: "email@com.tw")]
-        
+//        contacts = [ContactForTable(name: "Kyle", phoneNumber: "0987654321", trackID: "GLDkDlzgYJSxc7MVIyNfnL5TdXc2", email: "email@com.tw")]
+        contacts = []
         coreDataManager.fetchCoreData()
     }
     
@@ -66,6 +66,7 @@ class ContactsViewController: TabViewControllerTemplate, UITableViewDataSource, 
         let cell = contactsTable.dequeueReusableCellWithIdentifier("ContactTableViewCell", forIndexPath:indexPath) as! ContactTableViewCell
         cell.contactName.text = contact.name
         cell.contactNumber.text = contact.phoneNumber
+        cell.contactPhoto.image = UIImage(data: contact.photo!)
         return cell
     }
     
@@ -83,7 +84,7 @@ class ContactsViewController: TabViewControllerTemplate, UITableViewDataSource, 
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
             coreDataManager.clearCoreData()
             for contact in contacts {
-                coreDataManager.saveCoreData(name: contact.name, number: contact.phoneNumber, email: contact.email, trackID: contact.trackID)
+                coreDataManager.saveCoreData(name: contact.name, number: contact.phoneNumber, email: contact.email, trackID: contact.trackID, photo: contact.photo!)
             }
             
         }
@@ -96,17 +97,18 @@ class ContactsViewController: TabViewControllerTemplate, UITableViewDataSource, 
             let destination: ContactsMapViewController = segue.destinationViewController as! ContactsMapViewController
             destination.trackID = self.trackID
             destination.navigationItem.title = self.name
-            print(self.trackID)
         }
     }
     
     // Mark: CoreDataManager delegate
     func manager(manager: CoreDataManager, didFetchContactData: AnyObject) {
-        print(didFetchContactData)
         guard let results = didFetchContactData as? [Contact] else { fatalError() }
         if (results.count > 0) {
             for result in results {
-                contacts.append(ContactForTable(name: result.name!, phoneNumber: result.number!, trackID: result.trackID!, email: result.email!))
+                if let temp = result.photo {
+                        contacts.append(ContactForTable(name: result.name!, phoneNumber: result.number!, trackID: result.trackID!, email: result.email!, photo: temp))
+                }
+
             }
         }
         self.contactsTable.reloadData()
