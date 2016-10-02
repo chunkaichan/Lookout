@@ -109,7 +109,7 @@
                                 </connections>
                             </button>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="ey2-bv-tZb">
+                        <barButtonItem key="rightBarButtonItem" id="ey2-bv-tZb">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1GG-kN-UqL">
                                 <rect key="frame" x="555" y="9" width="25" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -574,7 +574,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="kaG-vv-wQY">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="dIT-Oi-E4L">
+                        <barButtonItem key="leftBarButtonItem" id="dIT-Oi-E4L">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="WRa-X1-znn">
                                 <rect key="frame" x="20" y="12" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -593,6 +593,7 @@
         <!--Navigation Controller-->
         <scene sceneID="lSc-xh-72h">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NJI-X3-oys" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="alE-a1-8vQ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="G8P-gU-MzZ">
@@ -604,7 +605,6 @@
                         <segue destination="Xbk-dH-wlH" kind="relationship" relationship="rootViewController" id="M0d-lB-HFT"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="NJI-X3-oys" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-61" y="1560"/>
         </scene>

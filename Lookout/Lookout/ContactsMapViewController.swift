@@ -22,9 +22,20 @@ class ContactsMapViewController: UIViewController, MKMapViewDelegate, CLLocation
         self.contactMap.setRegion(region, animated: true)
     }
 
+    let alert = UIAlertController(title: nil, message: "Ineffective track ID", preferredStyle: .Alert)
+    
     @IBAction func tapRefresh(sender: AnyObject) {
-        let region = MKCoordinateRegion(center: CLLocationCoordinate2DMake(self.latitude, self.longitude), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-        self.contactMap.setRegion(region, animated: true)
+        if (self.latitude != 0.0) {
+            let region = MKCoordinateRegion(center: CLLocationCoordinate2DMake(self.latitude, self.longitude), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+            self.contactMap.setRegion(region, animated: true)
+        } else {
+            if (alert.actions.count == 0) {
+                let alertAction = UIAlertAction(title: "Close", style: .Default, handler: nil)
+                alert.addAction(alertAction)
+                self.presentViewController(self.alert, animated: true, completion: nil)
+            }
+        }
+        
     }
     
     
@@ -96,14 +107,17 @@ class ContactsMapViewController: UIViewController, MKMapViewDelegate, CLLocation
 //        })
 
         _refHandle = self.ref.child("user_locations/\(trackID)").observeEventType(.Value, withBlock: { (snapshot) -> Void in
-            self.location.append(snapshot)
-            let locationSnapshot: FIRDataSnapshot! = self.location.last
-            self.remoteLocation = locationSnapshot.value as! [String:Double]
-            
-            self.longitude = self.remoteLocation[Constants.Location.longitude]!
-            self.latitude = self.remoteLocation[Constants.Location.latitude]!
-            self.timestamp = self.remoteLocation[Constants.Location.timestamp]!// as NSTimeInterval
-            self.setAnnotation(latitudeDegree: self.latitude, longitudeDegree: self.longitude)
+            if (snapshot.childrenCount != 0) {
+                self.location.append(snapshot)
+                let locationSnapshot: FIRDataSnapshot! = self.location.last
+                self.remoteLocation = locationSnapshot.value as! [String:Double]
+                
+                self.longitude = self.remoteLocation[Constants.Location.longitude]!
+                self.latitude = self.remoteLocation[Constants.Location.latitude]!
+                self.timestamp = self.remoteLocation[Constants.Location.timestamp]!// as NSTimeInterval
+                self.setAnnotation(latitudeDegree: self.latitude, longitudeDegree: self.longitude)
+                
+            }
             
         })
 
@@ -116,8 +130,6 @@ class ContactsMapViewController: UIViewController, MKMapViewDelegate, CLLocation
         data[Constants.Location.longitude] = self.userLongitude
         data[Constants.Location.timestamp] = NSDate().timeIntervalSince1970
         self.ref.child("user_locations/\(AppState.sharedInstance.UUID)").setValue(data)
-//        print("Send location:\(self.userLongitude), \(self.userLatitude)")
-        
     }
     
     func setLocationManager() {
@@ -143,7 +155,6 @@ class ContactsMapViewController: UIViewController, MKMapViewDelegate, CLLocation
         self.userLatitude = userLocation.latitude
         
         
-//        let region = MKCoordinateRegion(center: locations.last!.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
         if (self.latitude == 0.0) {
             let region = MKCoordinateRegion(center: userLocation, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
             self.contactMap.setRegion(region, animated: false)

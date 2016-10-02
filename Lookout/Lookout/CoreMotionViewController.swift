@@ -13,15 +13,28 @@ import QuartzCore
 import PNChartSwift
 
 
-class CoreMotionViewController: UIViewController {
+@objc class CoreMotionViewController: UIViewController {
 
     @IBAction func toggleSetting(sender: AnyObject) {
         NSNotificationCenter.defaultCenter().postNotificationName("toggleMenu", object: nil)
     }
     let manager = CMMotionManager()
     
+    var temp: Double = 0.0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if manager.accelerometerAvailable {
+            manager.accelerometerUpdateInterval = 0.01
+            manager.startAccelerometerUpdatesToQueue(NSOperationQueue.mainQueue()) {
+                [weak self] (data: CMAccelerometerData?, error: NSError?) in
+                if let acceleration = data?.acceleration {
+                    self!.temp = acceleration.x
+                    print(self!.temp)
+                }
+            }
+        }
         
         lineChart()
         
@@ -61,37 +74,38 @@ class CoreMotionViewController: UIViewController {
         self.view.addSubview(lineChart)
         self.view.addSubview(ChartLabel)
         self.title = "Line Chart"
-        
-        if (self.title == "Line Chart") {
-            print(123)
-            data01Array = [ CGFloat(arc4random() % 300), CGFloat(arc4random() % 300), CGFloat(arc4random() % 300), CGFloat(arc4random() % 300), CGFloat(arc4random() % 300), CGFloat(arc4random() % 300), CGFloat(arc4random() % 300) ]
-            let data01:PNLineChartData = PNLineChartData()
-            data01.color = PNGreenColor
-            data01.itemCount = data01Array.count
-            data01.inflexionPointStyle = PNLineChartData.PNLineChartPointStyle.PNLineChartPointStyleNone
-            data01.getData = ({(index: Int) -> PNLineChartDataItem in
-                let yValue:CGFloat = data01Array[index]
-                let item = PNLineChartDataItem(y: yValue)
-                return item
-            })
-            
-            
-            lineChart.xLabels = ["SEP 1","SEP 2","SEP 3","SEP 4","SEP 5","SEP 6","SEP 7"]
-            
+        dispatch_async(dispatch_get_main_queue()){
+            if (self.title == "Line Chart") {
+                print(123)
+                data01Array = [ CGFloat(arc4random() % 300), CGFloat(arc4random() % 300), CGFloat(arc4random() % 300), CGFloat(arc4random() % 300), CGFloat(arc4random() % 300), CGFloat(arc4random() % 300), CGFloat(self.temp) ]
+                let data01:PNLineChartData = PNLineChartData()
+                data01.color = PNGreenColor
+                data01.itemCount = data01Array.count
+                data01.inflexionPointStyle = PNLineChartData.PNLineChartPointStyle.PNLineChartPointStyleNone
+                data01.getData = ({(index: Int) -> PNLineChartDataItem in
+                    let yValue:CGFloat = data01Array[index]
+                    let item = PNLineChartDataItem(y: yValue)
+                    return item
+                })
+                
+                
+                lineChart.xLabels = ["SEP 1","SEP 2","SEP 3","SEP 4","SEP 5","SEP 6","SEP 7"]
+            }
         }
+        
     }
     
     func getAccelerationMotion() {
-        if manager.accelerometerAvailable {
-            manager.accelerometerUpdateInterval = 0.01
-            manager.startAccelerometerUpdatesToQueue(NSOperationQueue.mainQueue()) {
-                [weak self] (data: CMAccelerometerData?, error: NSError?) in
-                if let acceleration = data?.acceleration {
-                    print(acceleration.x)
-                    
-                }
-            }
-        }
+//        if manager.accelerometerAvailable {
+//            manager.accelerometerUpdateInterval = 0.01
+//            manager.startAccelerometerUpdatesToQueue(NSOperationQueue.mainQueue()) {
+//                [weak self] (data: CMAccelerometerData?, error: NSError?) in
+//                if let acceleration = data?.acceleration {
+//                    print(acceleration.x)
+//                    
+//                }
+//            }
+//        }
     }
     
 }

@@ -15,6 +15,10 @@ class NewContactViewController: UIViewController, UIImagePickerControllerDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tap)
+        
+        
         let tapToAdd = UITapGestureRecognizer(target: self, action: #selector(addNewPhoto))
         addPhoto.addGestureRecognizer(tapToAdd)
         addPhoto.userInteractionEnabled = true
@@ -22,6 +26,11 @@ class NewContactViewController: UIViewController, UIImagePickerControllerDelegat
         addPhoto.tintColor = UIColor.whiteColor()
         
         imagePicker.delegate = self
+    }
+    
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
