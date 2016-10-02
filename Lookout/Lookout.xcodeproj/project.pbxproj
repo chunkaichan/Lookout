@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4C5BF48C5B9A12D22FE10AB6 /* Pods_Lookout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9203B3DC0F7852FEE61941CB /* Pods_Lookout.framework */; };
+		B54E70491DA1433B007B2A04 /* LeftMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54E70481DA1433B007B2A04 /* LeftMenuTableViewCell.swift */; };
 		B578DF531D9E34D9002E5439 /* NewContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B578DF521D9E34D9002E5439 /* NewContactViewController.swift */; };
 		B578DF5D1D9E3C36002E5439 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B578DF5C1D9E3C36002E5439 /* CoreDataManager.swift */; };
 		B578DF601D9E4630002E5439 /* Contact+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B578DF5E1D9E4630002E5439 /* Contact+CoreDataProperties.swift */; };
@@ -37,6 +38,7 @@
 		6D0D8A8FB8E79E681346CB3A /* Pods-Lookout.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lookout.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lookout/Pods-Lookout.release.xcconfig"; sourceTree = "<group>"; };
 		8B78175BA6B2CC03E1FB14C1 /* Pods-Lookout.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lookout.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Lookout/Pods-Lookout.debug.xcconfig"; sourceTree = "<group>"; };
 		9203B3DC0F7852FEE61941CB /* Pods_Lookout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lookout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B54E70481DA1433B007B2A04 /* LeftMenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuTableViewCell.swift; sourceTree = "<group>"; };
 		B578DF521D9E34D9002E5439 /* NewContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewContactViewController.swift; sourceTree = "<group>"; };
 		B578DF5C1D9E3C36002E5439 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		B578DF5E1D9E4630002E5439 /* Contact+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Contact+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				B5C826501D9A746F000E9514 /* Constants.swift */,
 				B5C8264E1D9A7415000E9514 /* AppState.swift */,
 				B5F916561D98F01200CD01EB /* Person.swift */,
+				B54E70481DA1433B007B2A04 /* LeftMenuTableViewCell.swift */,
 				B5F9165D1D98F4B400CD01EB /* ContactTableViewCell.swift */,
 				B5F9165B1D98F29C00CD01EB /* ContactTableViewXib.xib */,
 				B5F9165F1D99043400CD01EB /* GoogleService-Info.plist */,
@@ -272,6 +275,7 @@
 				B578DF611D9E4630002E5439 /* Contact.swift in Sources */,
 				B5BFA9051D95223C00496D13 /* ContactsViewController.swift in Sources */,
 				B578DF5D1D9E3C36002E5439 /* CoreDataManager.swift in Sources */,
+				B54E70491DA1433B007B2A04 /* LeftMenuTableViewCell.swift in Sources */,
 				B578DF601D9E4630002E5439 /* Contact+CoreDataProperties.swift in Sources */,
 				B5C8264F1D9A7415000E9514 /* AppState.swift in Sources */,
 				B5BFA9031D95222600496D13 /* SendAlertViewController.swift in Sources */,

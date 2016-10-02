@@ -403,16 +403,16 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AoA-Au-FgG" userLabel="Left Container View">
-                                        <rect key="frame" x="0.0" y="0.0" width="200" height="600"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="600"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="200" id="wQa-Go-Xr5"/>
+                                            <constraint firstAttribute="width" constant="100" id="wQa-Go-Xr5"/>
                                         </constraints>
                                         <connections>
                                             <segue destination="alE-a1-8vQ" kind="embed" id="Puu-HT-gTQ"/>
                                         </connections>
                                     </containerView>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ug0-5o-GeM" userLabel="Right Container View">
-                                        <rect key="frame" x="200" y="0.0" width="600" height="600"/>
+                                        <rect key="frame" x="100" y="0.0" width="600" height="600"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="406" id="vZe-w8-4bp"/>
                                         </constraints>
@@ -426,7 +426,7 @@
                                         </connections>
                                     </containerView>
                                     <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qid-vy-CZs">
-                                        <rect key="frame" x="200" y="0.0" width="600" height="600"/>
+                                        <rect key="frame" x="100" y="0.0" width="600" height="600"/>
                                     </view>
                                 </subviews>
                                 <constraints>
@@ -474,18 +474,34 @@
         <scene sceneID="yAa-Yg-XMC">
             <objects>
                 <tableViewController id="Xbk-dH-wlH" customClass="LeftMenuTableViewController" customModule="Lookout" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="aHG-44-Kbi">
-                        <rect key="frame" x="0.0" y="0.0" width="200" height="600"/>
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" id="aHG-44-Kbi">
+                        <rect key="frame" x="0.0" y="0.0" width="100" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="leftMenuCell" id="Iyw-tV-EFT">
-                                <rect key="frame" x="0.0" y="72" width="200" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LeftMenuCell" rowHeight="100" id="Iyw-tV-EFT" customClass="LeftMenuTableViewCell" customModule="Lookout" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="72" width="100" height="100"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Iyw-tV-EFT" id="K6k-ZB-vbb">
-                                    <rect key="frame" x="0.0" y="0.0" width="200" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="100" height="99"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ilq-lk-u8e">
+                                            <rect key="frame" x="25" y="25" width="50" height="50"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="eEV-Fk-XyY"/>
+                                                <constraint firstAttribute="width" constant="50" id="wjT-Kk-Jcs"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Ilq-lk-u8e" firstAttribute="centerX" secondItem="K6k-ZB-vbb" secondAttribute="centerX" id="9ba-mg-MlM"/>
+                                        <constraint firstItem="Ilq-lk-u8e" firstAttribute="centerY" secondItem="K6k-ZB-vbb" secondAttribute="centerY" id="P8z-tJ-857"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="leftMenuIcon" destination="Ilq-lk-u8e" id="unz-kO-Ggu"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

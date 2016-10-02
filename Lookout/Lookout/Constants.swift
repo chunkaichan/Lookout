@@ -22,4 +22,10 @@ struct Constants {
         static let latitude = "latitude"
         static let timestamp = "timestamp"
     }
+    
+    enum LeftMenuKeys: String {
+        case profile = "menu-profile"
+        case settings = "menu-settings"
+        case logOut = "menu-logout"
+    }
 }

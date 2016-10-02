@@ -13,7 +13,7 @@ class ContainerViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var transparentView: UIView!
     // This value matches the left menu's width in the Storyboard
-    let leftMenuWidth:CGFloat = 200
+    let leftMenuWidth:CGFloat = 100
     
     override func viewWillAppear(animated: Bool) {
         dispatch_async(dispatch_get_main_queue()) {

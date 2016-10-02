@@ -13,19 +13,28 @@ class LeftMenuTableViewController: UITableViewController {
     
     @IBOutlet var leftMenu: UITableView!
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return menuIcon.count
     }
     
+    let menuIcon = ["menu-profile", "menu-settings","menu-signout"]
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = leftMenu.dequeueReusableCellWithIdentifier("leftMenuCell", forIndexPath:  indexPath) as UITableViewCell
-        cell.textLabel?.text = "Sign out"
+        let cell = leftMenu.dequeueReusableCellWithIdentifier("LeftMenuCell", forIndexPath:  indexPath) as! LeftMenuTableViewCell
+        cell.leftMenuIcon.image = UIImage(named: "\(menuIcon[indexPath.row])")
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if (indexPath.row == 0) {
+        switch menuIcon[indexPath.row] {
+        case Constants.LeftMenuKeys.logOut.rawValue:
             signOut()
+        case Constants.LeftMenuKeys.profile.rawValue:
+            print("Go to profile page")
+        case Constants.LeftMenuKeys.settings.rawValue:
+            print("Go to setting page")
+        default: print("wtf")
         }
+        
     }
     
     func signOut() {
