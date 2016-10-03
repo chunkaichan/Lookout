@@ -32,8 +32,8 @@ class ContactsMapViewController: UIViewController, MKMapViewDelegate, CLLocation
             if (alert.actions.count == 0) {
                 let alertAction = UIAlertAction(title: "Close", style: .Default, handler: nil)
                 alert.addAction(alertAction)
-                self.presentViewController(self.alert, animated: true, completion: nil)
             }
+            self.presentViewController(self.alert, animated: true, completion: nil)
         }
         
     }

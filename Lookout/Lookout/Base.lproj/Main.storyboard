@@ -588,12 +588,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="69O-8p-oJo" customClass="LineChartView" customModule="Charts">
-                                <rect key="frame" x="20" y="79" width="240" height="128"/>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="69O-8p-oJo" customClass="LineChartView" customModule="Charts">
+                                <rect key="frame" x="20" y="64" width="560" height="125"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="125" id="K7E-vi-Fzg"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="69O-8p-oJo" firstAttribute="centerX" secondItem="gek-BT-Kg0" secondAttribute="centerX" id="Cul-OU-7xr"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="69O-8p-oJo" secondAttribute="trailing" id="rBN-f8-d8B"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="69O-8p-oJo" secondAttribute="leading" id="sRA-SB-QCI"/>
+                            <constraint firstItem="69O-8p-oJo" firstAttribute="top" secondItem="xx3-Of-EFk" secondAttribute="bottom" constant="20" id="zVt-f5-zrF"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="kaG-vv-wQY">
                         <barButtonItem key="leftBarButtonItem" id="dIT-Oi-E4L">
