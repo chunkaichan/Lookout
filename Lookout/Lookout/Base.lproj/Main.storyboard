@@ -587,6 +587,12 @@
                     <view key="view" contentMode="scaleToFill" id="gek-BT-Kg0">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="69O-8p-oJo" customClass="LineChartView" customModule="Charts">
+                                <rect key="frame" x="20" y="79" width="240" height="128"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="kaG-vv-wQY">
@@ -601,6 +607,9 @@
                             </button>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="xLineChartView" destination="69O-8p-oJo" id="WDG-Ab-v6r"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P26-vm-VMr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -609,7 +618,6 @@
         <!--Navigation Controller-->
         <scene sceneID="lSc-xh-72h">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="NJI-X3-oys" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="alE-a1-8vQ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="G8P-gU-MzZ">
@@ -621,6 +629,7 @@
                         <segue destination="Xbk-dH-wlH" kind="relationship" relationship="rootViewController" id="M0d-lB-HFT"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NJI-X3-oys" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-61" y="1560"/>
         </scene>
