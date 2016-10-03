@@ -26,6 +26,6 @@ struct Constants {
     enum LeftMenuKeys: String {
         case profile = "menu-profile"
         case settings = "menu-settings"
-        case logOut = "menu-logout"
+        case logOut = "menu-signout"
     }
 }

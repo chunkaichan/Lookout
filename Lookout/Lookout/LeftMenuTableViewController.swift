@@ -18,6 +18,11 @@ class LeftMenuTableViewController: UITableViewController {
     
     let menuIcon = ["menu-profile", "menu-settings","menu-signout"]
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        leftMenu.separatorColor = UIColor.clearColor()
+    }
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = leftMenu.dequeueReusableCellWithIdentifier("LeftMenuCell", forIndexPath:  indexPath) as! LeftMenuTableViewCell
         cell.leftMenuIcon.image = UIImage(named: "\(menuIcon[indexPath.row])")
@@ -29,7 +34,9 @@ class LeftMenuTableViewController: UITableViewController {
         case Constants.LeftMenuKeys.logOut.rawValue:
             signOut()
         case Constants.LeftMenuKeys.profile.rawValue:
-            print("Go to profile page")
+            let storyboard : UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc : UINavigationController = storyboard.instantiateViewControllerWithIdentifier("profileVC") as! UINavigationController
+            self.presentViewController(vc, animated: true, completion: nil)
         case Constants.LeftMenuKeys.settings.rawValue:
             print("Go to setting page")
         default: print("wtf")

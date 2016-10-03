@@ -78,6 +78,10 @@ class ContainerViewController: UIViewController, UIGestureRecognizerDelegate {
     func tapView() {
         closeMenuViaNotification()
     }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent
+    }
 }
 
 extension ContainerViewController : UIScrollViewDelegate {

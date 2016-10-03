@@ -97,6 +97,7 @@ class ContactsViewController: TabViewControllerTemplate, UITableViewDataSource, 
             let destination: ContactsMapViewController = segue.destinationViewController as! ContactsMapViewController
             destination.trackID = self.trackID
             destination.navigationItem.title = self.name
+            
         }
     }
     

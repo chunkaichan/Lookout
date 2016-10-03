@@ -13,11 +13,16 @@ class NewContactViewController: UIViewController, UIImagePickerControllerDelegat
     @IBOutlet weak var addPhoto: UIImageView!
     let imagePicker = UIImagePickerController()
     
+    @IBOutlet weak var saveNewContact: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
         
+        self.navigationController?.navigationBar.tintColor = UIColor(red: 65/255, green: 188/255, blue: 165/255, alpha: 1)
+        
+        
+        saveNewContact.layer.cornerRadius = 8
         
         let tapToAdd = UITapGestureRecognizer(target: self, action: #selector(addNewPhoto))
         addPhoto.addGestureRecognizer(tapToAdd)
@@ -26,6 +31,27 @@ class NewContactViewController: UIViewController, UIImagePickerControllerDelegat
         addPhoto.tintColor = UIColor.whiteColor()
         
         imagePicker.delegate = self
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+            if view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= (keyboardSize.height - 40)
+            }
+        }
+        
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+            if view.frame.origin.y != 0 {
+                self.view.frame.origin.y += (keyboardSize.height - 40)
+            }
+        }
     }
     
     func dismissKeyboard() {

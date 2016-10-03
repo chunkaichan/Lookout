@@ -60,8 +60,6 @@ class ContactsMapViewController: UIViewController, MKMapViewDelegate, CLLocation
         setLocationManager()
         configureDatabase()
         
-//        var _ = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(setLocationManager), userInfo: nil, repeats: true)
-//        var _ = NSTimer.scheduledTimerWithTimeInterval(1.001, target: self, selector: #selector(stopUpdate), userInfo: nil, repeats: true)
     }
     
     func stopUpdate() {
@@ -160,8 +158,8 @@ class ContactsMapViewController: UIViewController, MKMapViewDelegate, CLLocation
             self.contactMap.setRegion(region, animated: false)
         }
         
-        locationManager.startUpdatingLocation()
-        locationManager.stopUpdatingLocation()
+        locationManager.startMonitoringSignificantLocationChanges()
+//        locationManager.stopUpdatingLocation()
         sendLocation()
     
     }
@@ -172,12 +170,18 @@ class ContactsMapViewController: UIViewController, MKMapViewDelegate, CLLocation
         
         myAnnotation.coordinate = CLLocationCoordinate2DMake(latitudeDegree, longitudeDegree)
         myAnnotation.title = "\(NSDate(timeIntervalSince1970: self.timestamp))"
-        if (contactMap.annotations.isEmpty) {
-            contactMap.addAnnotation(myAnnotation)
-        }
-        let region = MKCoordinateRegion(center: CLLocationCoordinate2DMake(self.latitude, self.longitude), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-        self.contactMap.setRegion(region, animated: false)
         
+        if (contactMap.annotations.isEmpty && self.latitude != 0.0) {
+            contactMap.addAnnotation(myAnnotation)
+            let region = MKCoordinateRegion(center: CLLocationCoordinate2DMake(self.latitude, self.longitude), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+            self.contactMap.setRegion(region, animated: false)
+        }
+        
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        let allAnnotations = self.contactMap.annotations
+        self.contactMap.removeAnnotations(allAnnotations)
     }
 
 }

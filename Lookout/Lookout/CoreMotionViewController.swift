@@ -79,13 +79,12 @@ class CoreMotionViewController: UIViewController {
     
     
     func getAccelerationMotion() {
-        var acc = 0.0
         if manager.accelerometerAvailable {
             manager.accelerometerUpdateInterval = 0.02
             manager.startAccelerometerUpdatesToQueue(NSOperationQueue.mainQueue()) {
                 [weak self] (data: CMAccelerometerData?, error: NSError?) in
                 if let acceleration = data?.acceleration {
-                    var overallAcceleration = sqrt(acceleration.x*acceleration.x + acceleration.y*acceleration.y + acceleration.z*acceleration.z)
+                    let overallAcceleration = sqrt(acceleration.x*acceleration.x + acceleration.y*acceleration.y + acceleration.z*acceleration.z)
                     self!.unitsSold.removeAtIndex(0)
                     self!.unitsSold.append(overallAcceleration)
                     self!.setChart(self!.months, values: self!.unitsSold)
