@@ -16,20 +16,27 @@ class ProfileViewController: UIViewController {
     
     @IBOutlet weak var connectedStatus: UILabel!
     @IBAction func connectGmail(sender: AnyObject) {
-        if let authorizer = service.authorizer,
-            canAuth = authorizer.canAuthorize where canAuth {
-            fetchLabels()
-        } else {
+        
+        
+        if (self.connectGmail.titleLabel?.text == "Connect") {
             self.navigationController?.pushViewController(createAuthController(), animated: true)
+        } else {
+            GTMOAuth2ViewControllerTouch.removeAuthFromKeychainForName("Gmail API")
+            self.connectGmail.setTitle("Connect", forState: .Normal)
+            self.connectedStatus.text = "Not connected"
+            
+            print("remove auth")
         }
         
+        
     }
+    
     private let kKeychainItemName = "Gmail API"
     private let kClientID = "556205392726-s6pohtn44l7eqpgmf0qtjq8mp0crt1nd.apps.googleusercontent.com"
     
     // If modifying these scopes, delete your previously saved credentials by
     // resetting the iOS simulator or uninstall the app.
-    private let scopes = [kGTLRAuthScopeGmailReadonly]
+    private let scopes = [kGTLRAuthScopeGmailSend]
     
     private let service = GTLRGmailService()
     let output = UITextView()
@@ -51,19 +58,24 @@ class ProfileViewController: UIViewController {
             clientID: kClientID,
             clientSecret: nil) {
             service.authorizer = auth
+            let appd = UIApplication.sharedApplication().delegate as! AppDelegate
+            appd.service = service
+            
         }
         
-        if let authorizer = service.authorizer,
-            canAuth = authorizer.canAuthorize where canAuth {
-            connectedStatus.text = "Connected!"
-        }
+        
         
     }
     
     // When the view appears, ensure that the Gmail API service is authorized
     // and perform API calls
     override func viewDidAppear(animated: Bool) {
-        
+        if let authorizer = service.authorizer,
+            canAuth = authorizer.canAuthorize where canAuth {
+            print(canAuth)
+            connectedStatus.text = "Connected!"
+            connectGmail.setTitle("Disconnect", forState: .Normal)
+        }
     }
     
     // Construct a query and get a list of upcoming labels from the gmail API
@@ -119,8 +131,8 @@ class ProfileViewController: UIViewController {
         }
         
         service.authorizer = authResult
-        dismissViewControllerAnimated(true, completion: nil)
-        connectedStatus.text = "Connected!"
+//        dismissViewControllerAnimated(true, completion: nil)
+        
     }
     
     // Helper for showing an alert

@@ -582,8 +582,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wXo-Gm-Knq">
-                                <rect key="frame" x="241" y="285" width="119" height="30"/>
-                                <state key="normal" title="Connect to Gmail"/>
+                                <rect key="frame" x="271" y="285" width="59" height="30"/>
+                                <state key="normal" title="Connect"/>
                                 <connections>
                                     <action selector="connectGmail:" destination="W0f-mr-W1w" eventType="touchUpInside" id="4ZC-8p-7vq"/>
                                 </connections>
