@@ -11,7 +11,12 @@ import Firebase
 
 class SendAlertViewController: TabViewControllerTemplate {
     
+    
+    @IBAction func tapSendEmail(sender: AnyObject) {
+    }
     @IBAction func toggleSetting(sender: AnyObject) {
         NSNotificationCenter.defaultCenter().postNotificationName("toggleMenu", object: nil)
     }
+    
+    
 }

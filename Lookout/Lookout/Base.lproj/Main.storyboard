@@ -55,6 +55,9 @@
                                             <constraint firstAttribute="width" constant="64" id="dxC-xM-nC0"/>
                                         </constraints>
                                         <state key="normal" image="send-email"/>
+                                        <connections>
+                                            <action selector="tapSendEmail:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dpK-Jl-W8L"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -577,7 +580,28 @@
                     <view key="view" contentMode="scaleToFill" id="YCR-cB-csP">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wXo-Gm-Knq">
+                                <rect key="frame" x="241" y="285" width="119" height="30"/>
+                                <state key="normal" title="Connect to Gmail"/>
+                                <connections>
+                                    <action selector="connectGmail:" destination="W0f-mr-W1w" eventType="touchUpInside" id="4ZC-8p-7vq"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not connected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EVo-uR-bII">
+                                <rect key="frame" x="243" y="244" width="114" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="EVo-uR-bII" firstAttribute="centerX" secondItem="YCR-cB-csP" secondAttribute="centerX" id="6SX-ge-4af"/>
+                            <constraint firstItem="wXo-Gm-Knq" firstAttribute="centerX" secondItem="YCR-cB-csP" secondAttribute="centerX" id="art-SU-SmF"/>
+                            <constraint firstItem="wXo-Gm-Knq" firstAttribute="centerY" secondItem="YCR-cB-csP" secondAttribute="centerY" id="c53-j8-IZO"/>
+                            <constraint firstItem="wXo-Gm-Knq" firstAttribute="top" secondItem="EVo-uR-bII" secondAttribute="bottom" constant="20" id="uPO-lT-Ag1"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="hOH-9X-gnf">
                         <barButtonItem key="rightBarButtonItem" id="o6m-d7-ba9">
@@ -593,6 +617,10 @@
                             </button>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="connectGmail" destination="wXo-Gm-Knq" id="HZY-xR-adP"/>
+                        <outlet property="connectedStatus" destination="EVo-uR-bII" id="Wah-bu-Ir9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ec7-b1-1d9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
