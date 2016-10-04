@@ -11,5 +11,7 @@ target 'Lookout' do
   pod 'Firebase/Auth'
   pod 'Firebase/Database'
   pod 'Charts/Realm'
+  pod 'GoogleAPIClientForREST/Gmail', '~> 1.0.3'
+  pod 'GTMOAuth2', '~> 1.1.2'
 
 end
