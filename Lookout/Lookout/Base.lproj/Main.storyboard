@@ -22,10 +22,10 @@
                                 <rect key="frame" x="0.0" y="44" width="600" height="507"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cEs-2L-twd">
-                                        <rect key="frame" x="176" y="100" width="248" height="248"/>
+                                        <rect key="frame" x="185" y="100" width="230" height="230"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="248" id="2VL-8X-Wkb"/>
-                                            <constraint firstAttribute="width" constant="248" id="Gxu-MA-PAv"/>
+                                            <constraint firstAttribute="height" constant="230" id="2VL-8X-Wkb"/>
+                                            <constraint firstAttribute="width" constant="230" id="Gxu-MA-PAv"/>
                                         </constraints>
                                         <state key="normal" image="alert"/>
                                     </button>
@@ -33,7 +33,7 @@
                                         <rect key="frame" x="511" y="40" width="51" height="31"/>
                                     </switch>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ls1-EQ-x9C">
-                                        <rect key="frame" x="30" y="388" width="64" height="64"/>
+                                        <rect key="frame" x="30" y="403" width="64" height="64"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="64" id="MZV-Ts-hVF"/>
                                             <constraint firstAttribute="width" constant="64" id="QZk-gm-oAG"/>
@@ -41,7 +41,7 @@
                                         <state key="normal" image="phone-call"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rdV-nj-6Tq">
-                                        <rect key="frame" x="268" y="388" width="64" height="64"/>
+                                        <rect key="frame" x="268" y="403" width="64" height="64"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="64" id="Qx9-qw-5Cc"/>
                                             <constraint firstAttribute="width" constant="64" id="upk-7n-cjg"/>
@@ -49,7 +49,7 @@
                                         <state key="normal" image="send-message"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O6Z-4F-uc2">
-                                        <rect key="frame" x="506" y="388" width="64" height="64"/>
+                                        <rect key="frame" x="506" y="403" width="64" height="64"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="64" id="1ZW-ZJ-PYp"/>
                                             <constraint firstAttribute="width" constant="64" id="dxC-xM-nC0"/>
@@ -60,13 +60,13 @@
                                 <constraints>
                                     <constraint firstItem="cEs-2L-twd" firstAttribute="top" secondItem="Wfe-qw-dU7" secondAttribute="top" constant="100" id="05S-Zj-6bf"/>
                                     <constraint firstAttribute="trailing" secondItem="O6Z-4F-uc2" secondAttribute="trailing" constant="30" id="7Di-gB-bwd"/>
-                                    <constraint firstItem="rdV-nj-6Tq" firstAttribute="top" secondItem="cEs-2L-twd" secondAttribute="bottom" constant="40" id="VMO-RA-S3L"/>
+                                    <constraint firstAttribute="bottom" secondItem="O6Z-4F-uc2" secondAttribute="bottom" constant="40" id="9Wy-M9-dVB"/>
                                     <constraint firstItem="rdV-nj-6Tq" firstAttribute="centerX" secondItem="Wfe-qw-dU7" secondAttribute="centerX" id="VtK-wd-EGc"/>
+                                    <constraint firstAttribute="bottom" secondItem="rdV-nj-6Tq" secondAttribute="bottom" constant="40" id="a7g-Xl-7iM"/>
                                     <constraint firstItem="grU-mk-wr8" firstAttribute="top" secondItem="Wfe-qw-dU7" secondAttribute="top" constant="40" id="cDU-uQ-xD6"/>
                                     <constraint firstItem="Ls1-EQ-x9C" firstAttribute="leading" secondItem="Wfe-qw-dU7" secondAttribute="leading" constant="30" id="cHA-ct-ekv"/>
-                                    <constraint firstItem="O6Z-4F-uc2" firstAttribute="top" secondItem="cEs-2L-twd" secondAttribute="bottom" constant="40" id="cRX-bu-Goj"/>
+                                    <constraint firstAttribute="bottom" secondItem="Ls1-EQ-x9C" secondAttribute="bottom" constant="40" id="e5u-8U-d1E"/>
                                     <constraint firstItem="cEs-2L-twd" firstAttribute="centerX" secondItem="Wfe-qw-dU7" secondAttribute="centerX" id="iTD-MM-p3h"/>
-                                    <constraint firstItem="Ls1-EQ-x9C" firstAttribute="top" secondItem="cEs-2L-twd" secondAttribute="bottom" constant="40" id="oD2-NM-5uW"/>
                                     <constraint firstAttribute="trailing" secondItem="grU-mk-wr8" secondAttribute="trailing" constant="40" id="xHl-wK-W3u"/>
                                 </constraints>
                             </view>
