@@ -23,8 +23,11 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
     private let kClientID = "556205392726-s6pohtn44l7eqpgmf0qtjq8mp0crt1nd.apps.googleusercontent.com"
     private let service = GTLRGmailService()
     
+    var ref: FIRDatabaseReference!
     
     override func viewDidLoad() {
+        self.ref = FIRDatabase.database().reference()
+        
         
         messageButton.layer.cornerRadius = messageButton.layer.frame.width/2
         messageButton.layer.borderWidth = 2
@@ -53,7 +56,17 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
             AppState.sharedInstance.userLongitude = userLongitude
             print("***\(userLatitude),\(userLongitude)")
         }
-        print("in locationM")
+        sendLocation()
+        
+    }
+    
+    func sendLocation() {
+        
+        var data = [Constants.Location.latitude: AppState.sharedInstance.userLatitude]
+        data[Constants.Location.longitude] = AppState.sharedInstance.userLongitude
+        data[Constants.Location.timestamp] = NSDate().timeIntervalSince1970
+        self.ref.child("user_locations/\(AppState.sharedInstance.UUID)").setValue(data)
+        print("Location sent to DB")
     }
     
     override func viewDidAppear(animated: Bool) {

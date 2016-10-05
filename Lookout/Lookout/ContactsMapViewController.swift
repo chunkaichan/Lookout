@@ -18,7 +18,7 @@ class ContactsMapViewController: UIViewController, MKMapViewDelegate, CLLocation
 
     
     @IBAction func tapNavigation(sender: AnyObject) {
-        let region = MKCoordinateRegion(center: CLLocationCoordinate2DMake(self.userLatitude, self.userLongitude), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+        let region = MKCoordinateRegion(center: CLLocationCoordinate2DMake(AppState.sharedInstance.userLatitude, AppState.sharedInstance.userLongitude), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
         self.contactMap.setRegion(region, animated: true)
     }
 
@@ -53,7 +53,10 @@ class ContactsMapViewController: UIViewController, MKMapViewDelegate, CLLocation
         if let user = FIRAuth.auth()?.currentUser {
             AppState.sharedInstance.UUID = user.uid
         }
-        setLocationManager()
+        
+        contactMap.showsUserLocation = true
+        contactMap.delegate = self
+
         configureDatabase()
         
     }
@@ -116,47 +119,6 @@ class ContactsMapViewController: UIViewController, MKMapViewDelegate, CLLocation
         })
 
 
-    }
-    
-    func sendLocation() {
-        
-        var data = [Constants.Location.latitude: self.userLatitude]
-        data[Constants.Location.longitude] = self.userLongitude
-        data[Constants.Location.timestamp] = NSDate().timeIntervalSince1970
-        self.ref.child("user_locations/\(AppState.sharedInstance.UUID)").setValue(data)
-    }
-    
-    func setLocationManager() {
-        
-        self.locationManager = CLLocationManager()
-        self.locationManager.requestWhenInUseAuthorization()
-        self.locationManager.startUpdatingLocation()
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-        self.locationManager.delegate = self
-        contactMap.showsUserLocation = true
-        contactMap.delegate = self
-        
-    }
-    
-    var userLongitude: Double = 0.0
-    var userLatitude: Double = 0.0
-    
-    
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let userLocation = self.locationManager.location?.coordinate ?? center
-        
-        self.userLongitude = userLocation.longitude
-        self.userLatitude = userLocation.latitude
-        
-        
-        if (self.latitude == 0.0) {
-            let region = MKCoordinateRegion(center: userLocation, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-            self.contactMap.setRegion(region, animated: false)
-        }
-        
-        locationManager.startMonitoringSignificantLocationChanges()
-//        locationManager.stopUpdatingLocation()
-        sendLocation()
     }
     
     var myAnnotation: MKPointAnnotation = MKPointAnnotation()
