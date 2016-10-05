@@ -67,6 +67,9 @@ class ContactsViewController: TabViewControllerTemplate, UITableViewDataSource, 
         cell.contactName.text = contact.name
         cell.contactNumber.text = contact.phoneNumber
         cell.contactPhoto.image = UIImage(data: contact.photo!)
+        cell.contactPhoto.layer.cornerRadius = cell.contactPhoto.frame.size.width/2
+        cell.contactPhoto.clipsToBounds = true
+        cell.contactMail.text = contact.email
         return cell
     }
     

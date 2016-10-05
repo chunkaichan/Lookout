@@ -18,6 +18,7 @@ class SignInViewController: UIViewController {
         if let user = FIRAuth.auth()?.currentUser {
             self.signedIn(user)
             AppState.sharedInstance.UUID = user.uid
+            AppState.sharedInstance.email = user.email!
         }
     }
     
@@ -30,6 +31,7 @@ class SignInViewController: UIViewController {
                 print(error.localizedDescription)
                 return
             }
+            
             self.signedIn(user!)
             AppState.sharedInstance.UUID = user!.uid
         }

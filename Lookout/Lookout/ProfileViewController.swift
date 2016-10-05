@@ -9,6 +9,7 @@
 import UIKit
 import GoogleAPIClientForREST
 import GTMOAuth2
+import Firebase
 
 class ProfileViewController: UIViewController {
     
@@ -17,7 +18,6 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var connectedStatus: UILabel!
     
     @IBAction func connectGmail(sender: AnyObject) {
-        
         
         if (self.connectGmail.titleLabel?.text == "Connect") {
             // Connect with Gmail
@@ -66,7 +66,6 @@ class ProfileViewController: UIViewController {
             service.authorizer = auth
             let appd = UIApplication.sharedApplication().delegate as! AppDelegate
             appd.service = service
-            
         }
         
         

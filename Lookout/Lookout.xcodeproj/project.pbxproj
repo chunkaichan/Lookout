@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4C5BF48C5B9A12D22FE10AB6 /* Pods_Lookout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9203B3DC0F7852FEE61941CB /* Pods_Lookout.framework */; };
 		B52C04181DA232E900A5CC06 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52C04171DA232E900A5CC06 /* ProfileViewController.swift */; };
+		B5327F6C1DA4A87B0046E2CE /* GmailAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5327F6B1DA4A87B0046E2CE /* GmailAuthManager.swift */; };
 		B54E70491DA1433B007B2A04 /* LeftMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54E70481DA1433B007B2A04 /* LeftMenuTableViewCell.swift */; };
 		B578DF531D9E34D9002E5439 /* NewContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B578DF521D9E34D9002E5439 /* NewContactViewController.swift */; };
 		B578DF5D1D9E3C36002E5439 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B578DF5C1D9E3C36002E5439 /* CoreDataManager.swift */; };
@@ -40,6 +41,7 @@
 		8B78175BA6B2CC03E1FB14C1 /* Pods-Lookout.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lookout.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Lookout/Pods-Lookout.debug.xcconfig"; sourceTree = "<group>"; };
 		9203B3DC0F7852FEE61941CB /* Pods_Lookout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lookout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B52C04171DA232E900A5CC06 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		B5327F6B1DA4A87B0046E2CE /* GmailAuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GmailAuthManager.swift; sourceTree = "<group>"; };
 		B54E70481DA1433B007B2A04 /* LeftMenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuTableViewCell.swift; sourceTree = "<group>"; };
 		B578DF521D9E34D9002E5439 /* NewContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewContactViewController.swift; sourceTree = "<group>"; };
 		B578DF5C1D9E3C36002E5439 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				B578DF521D9E34D9002E5439 /* NewContactViewController.swift */,
 				B5BFA9001D9521FC00496D13 /* LeftMenuTableViewController.swift */,
 				B5BFA9021D95222600496D13 /* SendAlertViewController.swift */,
+				B5327F6B1DA4A87B0046E2CE /* GmailAuthManager.swift */,
 				B5BFA9041D95223C00496D13 /* ContactsViewController.swift */,
 				B578DF5C1D9E3C36002E5439 /* CoreDataManager.swift */,
 				B52C04171DA232E900A5CC06 /* ProfileViewController.swift */,
@@ -286,6 +289,7 @@
 				B5C8264F1D9A7415000E9514 /* AppState.swift in Sources */,
 				B5BFA9031D95222600496D13 /* SendAlertViewController.swift in Sources */,
 				B5BFA9011D9521FC00496D13 /* LeftMenuTableViewController.swift in Sources */,
+				B5327F6C1DA4A87B0046E2CE /* GmailAuthManager.swift in Sources */,
 				B5C874611D93D73C00D192D9 /* Lookout.xcdatamodeld in Sources */,
 				B5C826511D9A746F000E9514 /* Constants.swift in Sources */,
 				B5F1E4B41D9FF84C0007F663 /* CoreMotionViewController.swift in Sources */,

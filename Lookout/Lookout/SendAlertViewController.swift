@@ -13,6 +13,10 @@ import GTMOAuth2
 
 class SendAlertViewController: TabViewControllerTemplate {
     
+    override func viewDidLoad() {
+        <#code#>
+    }
+    
     
     @IBAction func tapSendEmail(sender: AnyObject) {
         let gtlMessage = GTLRGmail_Message()
@@ -35,18 +39,20 @@ class SendAlertViewController: TabViewControllerTemplate {
     
     
     func generateRawString() -> String {
+//    func generateRawString(toMailName toMailName: String, toMailAddress: String, mailSubject: String, fromLocation: String) -> String {
         
-        let dateFormatter:NSDateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss Z"; //RFC2822-Format
-        let todayString:String = dateFormatter.stringFromDate(NSDate())
+//        let dateFormatter:NSDateFormatter = NSDateFormatter()
+//        dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss Z"; //RFC2822-Format
+//        let todayString:String = dateFormatter.stringFromDate(NSDate())
         let fromLocationURL = "http://maps.google.com/maps?q=loc:36.26577,-92.54324"
         
         let builder = MCOMessageBuilder()
         builder.header.to = [MCOAddress(displayName: "Emergency contact", mailbox: "kyle791121@gmail.com")]
         builder.header.from = MCOAddress(displayName: "From Lookout: Emergency Notification", mailbox: "kyle791121@gmail.com")
         builder.header.subject = "Subject"
-        builder.htmlBody = "This is a test msg" + "\r\n" +
-                           "From location:http://maps.google.com/maps?q=loc:36.26577,-92.54324"
+        builder.htmlBody = "This is a test msg" + "<br><br>" +
+                           "\(fromLocationURL)"
+        
         builder.header.date = NSDate()
         
         //

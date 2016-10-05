@@ -16,13 +16,18 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oRw-FZ-DWh">
-                        <rect key="frame" x="153" y="28" width="238" height="25"/>
+                        <rect key="frame" x="153" y="18" width="238" height="38"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="tRK-bX-BCr"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="27"/>
+                        <color key="textColor" red="0.36470588240000001" green="0.36470588240000001" blue="0.36470588240000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="tRK-bX-BCr"/>
+                            </mask>
+                        </variation>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="head-template" translatesAutoresizingMaskIntoConstraints="NO" id="A0R-pv-8OO">
                         <rect key="frame" x="8" y="7" width="125" height="125"/>
@@ -32,27 +37,40 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qKG-mW-GM6">
-                        <rect key="frame" x="153" y="73" width="238" height="25"/>
+                        <rect key="frame" x="153" y="66" width="238" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="GCC-jA-QdO"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.36470588240000001" green="0.36470588240000001" blue="0.36470588240000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fcc-CQ-EEY">
+                        <rect key="frame" x="153" y="101" width="238" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="g8Z-MH-84l"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.36470588240000001" green="0.36470588240000001" blue="0.36470588240000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="fcc-CQ-EEY" firstAttribute="top" secondItem="qKG-mW-GM6" secondAttribute="bottom" constant="10" id="4BO-0H-aa2"/>
+                    <constraint firstItem="fcc-CQ-EEY" firstAttribute="leading" secondItem="A0R-pv-8OO" secondAttribute="trailing" constant="20" id="4Z0-xd-axE"/>
                     <constraint firstItem="A0R-pv-8OO" firstAttribute="centerY" secondItem="G4v-IE-XWU" secondAttribute="centerY" id="8SF-vo-M5c"/>
                     <constraint firstAttribute="trailingMargin" secondItem="oRw-FZ-DWh" secondAttribute="trailing" constant="20" id="C7B-Jj-jiv"/>
                     <constraint firstItem="A0R-pv-8OO" firstAttribute="leading" secondItem="G4v-IE-XWU" secondAttribute="leadingMargin" id="NOb-9g-8yd"/>
-                    <constraint firstItem="oRw-FZ-DWh" firstAttribute="top" secondItem="G4v-IE-XWU" secondAttribute="topMargin" constant="20" id="O63-Ay-3Qc"/>
+                    <constraint firstItem="oRw-FZ-DWh" firstAttribute="top" secondItem="G4v-IE-XWU" secondAttribute="topMargin" constant="10" id="O63-Ay-3Qc"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="fcc-CQ-EEY" secondAttribute="trailing" constant="20" id="dHc-xR-4kg"/>
                     <constraint firstItem="oRw-FZ-DWh" firstAttribute="leading" secondItem="A0R-pv-8OO" secondAttribute="trailing" constant="20" id="eXe-fE-bQJ"/>
                     <constraint firstAttribute="trailingMargin" secondItem="qKG-mW-GM6" secondAttribute="trailing" constant="20" id="gRe-oZ-VPe"/>
-                    <constraint firstItem="qKG-mW-GM6" firstAttribute="top" secondItem="oRw-FZ-DWh" secondAttribute="bottom" constant="20" id="jfc-LZ-P7L"/>
+                    <constraint firstItem="qKG-mW-GM6" firstAttribute="top" secondItem="oRw-FZ-DWh" secondAttribute="bottom" constant="10" id="jfc-LZ-P7L"/>
                     <constraint firstItem="qKG-mW-GM6" firstAttribute="leading" secondItem="A0R-pv-8OO" secondAttribute="trailing" constant="20" id="ysu-qP-pSz"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="contactMail" destination="fcc-CQ-EEY" id="1oT-NU-Pbe"/>
                 <outlet property="contactName" destination="oRw-FZ-DWh" id="eFd-cj-3n8"/>
                 <outlet property="contactNumber" destination="qKG-mW-GM6" id="uBT-eZ-1GE"/>
                 <outlet property="contactPhoto" destination="A0R-pv-8OO" id="bLS-DQ-ePB"/>
