@@ -13,6 +13,7 @@ import Firebase
 
 class ProfileViewController: UIViewController {
     
+    @IBOutlet weak var profilePhoto: UIImageView!
     @IBOutlet weak var connectGmail: UIButton!
     
     @IBOutlet weak var connectedStatus: UILabel!
@@ -51,6 +52,8 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        profilePhoto.layer.cornerRadius = profilePhoto.layer.frame.width/2
+        profilePhoto.clipsToBounds = true
         if let auth = GTMOAuth2ViewControllerTouch.authForGoogleFromKeychainForName(
             kKeychainItemName,
             clientID: kClientID,

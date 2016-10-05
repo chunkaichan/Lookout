@@ -23,17 +23,20 @@ class SendAlertViewController: TabViewControllerTemplate {
     private let service = GTLRGmailService()
     
     override func viewDidLoad() {
+        
+        
+        messageButton.layer.cornerRadius = messageButton.layer.frame.width/2
+        messageButton.layer.borderWidth = 2
+        messageButton.layer.borderColor = UIColor.whiteColor().CGColor
+    }
+    
+    override func viewDidAppear(animated: Bool) {
         if let auth = GTMOAuth2ViewControllerTouch.authForGoogleFromKeychainForName(
             kKeychainItemName,
             clientID: kClientID,
             clientSecret: nil) {
             service.authorizer = auth
-            print(123)
         }
-        
-        messageButton.layer.cornerRadius = messageButton.layer.frame.width/2
-        messageButton.layer.borderWidth = 2
-        messageButton.layer.borderColor = UIColor.whiteColor().CGColor
     }
     
     @IBAction func tapSendEmail(sender: AnyObject) {
@@ -47,6 +50,11 @@ class SendAlertViewController: TabViewControllerTemplate {
             print("response \(response)")
             print("error \(error)")
             
+            if let error = error {
+                self.showAlert(message: "Failed to send your message", actionTitle: "Close")
+            } else {
+                self.showAlert(message: "Message sent!", actionTitle: "Close")
+            }
         })
         
     }
@@ -75,9 +83,16 @@ class SendAlertViewController: TabViewControllerTemplate {
         //
         let rfc822Data = builder.data()
         
-        
-        
         return GTLREncodeWebSafeBase64(rfc822Data)!
+    }
+    
+    func showAlert(message message: String, actionTitle: String) {
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .Alert)
+        if (alert.actions.count == 0) {
+            let alertAction = UIAlertAction(title: actionTitle, style: .Default, handler: nil)
+            alert.addAction(alertAction)
+        }
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
 }

@@ -39,10 +39,6 @@ class ContactsMapViewController: UIViewController, MKMapViewDelegate, CLLocation
     }
     
     
-    @IBAction func didTapSendLocation(sender: AnyObject) {
-        sendLocation()
-    }
-    
     var trackID: String = ""
     var ref: FIRDatabaseReference!
     var location: [FIRDataSnapshot]! = []

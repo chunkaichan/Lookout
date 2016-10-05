@@ -331,19 +331,7 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" id="RYa-bf-MQI">
-                        <barButtonItem key="rightBarButtonItem" id="lwA-c5-9b1">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pnU-1q-CBU">
-                                <rect key="frame" x="480" y="7" width="100" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Send Location"/>
-                                <connections>
-                                    <action selector="didTapSendLocation:" destination="Oc4-u1-ACb" eventType="touchUpInside" id="WHp-LW-Gtj"/>
-                                </connections>
-                            </button>
-                            <color key="tintColor" red="0.25490196079999999" green="0.73725490199999999" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="RYa-bf-MQI"/>
                     <connections>
                         <outlet property="contactMap" destination="NQA-Nb-uUQ" id="pYJ-Qt-aiq"/>
                     </connections>
@@ -594,6 +582,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="ilt-C9-qey">
+                                <rect key="frame" x="0.0" y="64" width="600" height="190"/>
+                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add-photo" translatesAutoresizingMaskIntoConstraints="NO" id="XHM-NP-4XW">
                                 <rect key="frame" x="225" y="84" width="150" height="150"/>
                                 <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="0.3997575431034483" colorSpace="calibratedRGB"/>
@@ -758,21 +749,27 @@
                                 </variation>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="ilt-C9-qey" secondAttribute="trailing" constant="-20" id="0p2-Aw-dGP"/>
                             <constraint firstItem="Si0-O0-jEg" firstAttribute="top" secondItem="i2w-a6-Xns" secondAttribute="bottom" constant="15" id="3P8-Gt-rDB"/>
                             <constraint firstItem="XHM-NP-4XW" firstAttribute="centerX" secondItem="YCR-cB-csP" secondAttribute="centerX" id="5ZU-1Q-IYr"/>
                             <constraint firstItem="i2w-a6-Xns" firstAttribute="centerX" secondItem="YCR-cB-csP" secondAttribute="centerX" id="865-1H-F5E"/>
                             <constraint firstItem="XHM-NP-4XW" firstAttribute="leading" secondItem="i2w-a6-Xns" secondAttribute="trailing" constant="-75" id="E66-lc-seN"/>
+                            <constraint firstItem="Yti-g2-v02" firstAttribute="top" secondItem="ilt-C9-qey" secondAttribute="bottom" id="Fcx-4W-TDi"/>
                             <constraint firstItem="i2w-a6-Xns" firstAttribute="top" secondItem="XHM-NP-4XW" secondAttribute="bottom" constant="20" id="J58-O7-bcX"/>
                             <constraint firstItem="i2w-a6-Xns" firstAttribute="centerX" secondItem="YCR-cB-csP" secondAttribute="centerX" id="JgH-YM-D3A"/>
+                            <constraint firstItem="ilt-C9-qey" firstAttribute="top" secondItem="bDc-y6-yri" secondAttribute="bottom" id="TDC-WD-RKW"/>
                             <constraint firstItem="XHM-NP-4XW" firstAttribute="top" secondItem="bDc-y6-yri" secondAttribute="bottom" constant="20" id="UBe-Ch-C1T"/>
+                            <constraint firstItem="ilt-C9-qey" firstAttribute="leading" secondItem="YCR-cB-csP" secondAttribute="leadingMargin" constant="-20" id="eRA-hp-mPG"/>
+                            <constraint firstItem="XHM-NP-4XW" firstAttribute="top" secondItem="ilt-C9-qey" secondAttribute="bottom" constant="-170" id="qwc-Ma-54d"/>
                             <constraint firstItem="Si0-O0-jEg" firstAttribute="centerX" secondItem="YCR-cB-csP" secondAttribute="centerX" id="zg3-it-DpE"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="E66-lc-seN"/>
                                 <exclude reference="865-1H-F5E"/>
+                                <exclude reference="Fcx-4W-TDi"/>
                             </mask>
                         </variation>
                     </view>
@@ -793,6 +790,7 @@
                     <connections>
                         <outlet property="connectGmail" destination="wXo-Gm-Knq" id="HZY-xR-adP"/>
                         <outlet property="connectedStatus" destination="EVo-uR-bII" id="Wah-bu-Ir9"/>
+                        <outlet property="profilePhoto" destination="XHM-NP-4XW" id="WLM-EA-vDY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ec7-b1-1d9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -807,7 +805,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <color key="barTintColor" red="0.25882352939999997" green="0.25882352939999997" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
                                 <color key="value" red="0.25490196078431371" green="0.73725490196078436" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
@@ -833,7 +831,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="18c-5f-a4M">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.25882352939999997" green="0.25882352939999997" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" red="0.25490196079999999" green="0.73725490199999999" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
                         </textAttributes>
@@ -857,7 +855,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="DfW-AC-k2F">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.25882352939999997" green="0.25882352939999997" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" red="0.25490196078431371" green="0.73725490196078436" blue="0.6470588235294118" alpha="1" colorSpace="calibratedRGB"/>
                         </textAttributes>
@@ -942,7 +940,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="G8P-gU-MzZ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.25882352941176467" green="0.25882352941176467" blue="0.25882352941176467" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" red="0.25490196078431371" green="0.73725490196078436" blue="0.6470588235294118" alpha="1" colorSpace="calibratedRGB"/>
                         </textAttributes>
@@ -965,7 +963,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="dSU-xN-j17">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.25882352939999997" green="0.25882352939999997" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -984,7 +982,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="4Q0-Cx-RsN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.25882352939999997" green="0.25882352939999997" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" red="0.25490196079999999" green="0.73725490199999999" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
                         </textAttributes>
