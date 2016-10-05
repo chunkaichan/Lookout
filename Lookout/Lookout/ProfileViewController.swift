@@ -28,7 +28,7 @@ class ProfileViewController: UIViewController {
         } else {
             // Disconnect
             GTMOAuth2ViewControllerTouch.removeAuthFromKeychainForName("Gmail API")
-            self.connectGmail.setTitle("Connect", forState: .Normal)
+            self.connectGmail.setTitle(" Connect ", forState: .Normal)
             self.connectedStatus.text = "Not connected"
             print("Auth removed")
         }
@@ -60,6 +60,8 @@ class ProfileViewController: UIViewController {
         }
         
         
+        connectGmail.layer.cornerRadius = 5
+        
         
     }
     
@@ -70,7 +72,7 @@ class ProfileViewController: UIViewController {
         if let authorizer = service.authorizer,
             canAuth = authorizer.canAuthorize where canAuth {
             connectedStatus.text = "Connected!"
-            connectGmail.setTitle("Disconnect", forState: .Normal)
+            connectGmail.setTitle(" Disconnect ", forState: .Normal)
         }
     }
     
