@@ -52,20 +52,11 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        output.frame = view.bounds
-        output.editable = false
-        output.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
-        output.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
-        
-//        view.addSubview(output);
-        
         if let auth = GTMOAuth2ViewControllerTouch.authForGoogleFromKeychainForName(
             kKeychainItemName,
             clientID: kClientID,
             clientSecret: nil) {
             service.authorizer = auth
-            let appd = UIApplication.sharedApplication().delegate as! AppDelegate
-            appd.service = service
         }
         
         
@@ -81,35 +72,6 @@ class ProfileViewController: UIViewController {
             connectedStatus.text = "Connected!"
             connectGmail.setTitle("Disconnect", forState: .Normal)
         }
-    }
-    
-    // Construct a query and get a list of upcoming labels from the gmail API
-    func fetchLabels() {
-        output.text = "Getting labels..."
-        
-        let query = GTLRGmailQuery_UsersLabelsList.queryWithUserId("me")
-        service.executeQuery(query, delegate: self, didFinishSelector: #selector(ProfileViewController.displayResultWithTicket(_:finishedWithObject:error:)))
-    }
-    
-    // Display the labels in the UITextView
-    func displayResultWithTicket(ticket : GTLRServiceTicket, finishedWithObject labelsResponse : GTLRGmail_ListLabelsResponse, error : NSError?) {
-        
-        if let error = error {
-            showAlert("Error", message: error.localizedDescription)
-            return
-        }
-        
-        var labelString = ""
-        
-        if labelsResponse.labels?.count > 0 {
-            labelString += "Labels:\n"
-            for label in labelsResponse.labels! {
-                labelString += "\(label.name!)\n"
-            }
-        } else {
-            labelString = "No labels found."
-        }
-        output.text = labelString
     }
     
     // Creates the auth controller for authorizing access to Gmail API
@@ -162,18 +124,6 @@ class ProfileViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     @IBAction func closeButton(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)

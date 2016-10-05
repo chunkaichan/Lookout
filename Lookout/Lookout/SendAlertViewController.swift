@@ -13,19 +13,35 @@ import GTMOAuth2
 
 class SendAlertViewController: TabViewControllerTemplate {
     
-    override func viewDidLoad() {
-        <#code#>
-    }
+    @IBOutlet weak var messageButton: UIButton!
+    @IBOutlet weak var phoncallButton: UIButton!
+    @IBOutlet weak var alertButton: UIButton!
+    @IBOutlet weak var emailButton: UIButton!
     
+    private let kKeychainItemName = "Gmail API"
+    private let kClientID = "556205392726-s6pohtn44l7eqpgmf0qtjq8mp0crt1nd.apps.googleusercontent.com"
+    private let service = GTLRGmailService()
+    
+    override func viewDidLoad() {
+        if let auth = GTMOAuth2ViewControllerTouch.authForGoogleFromKeychainForName(
+            kKeychainItemName,
+            clientID: kClientID,
+            clientSecret: nil) {
+            service.authorizer = auth
+        }
+        
+        messageButton.layer.cornerRadius = messageButton.layer.frame.width/2
+        messageButton.layer.borderWidth = 2
+        messageButton.layer.borderColor = UIColor.whiteColor().CGColor
+    }
     
     @IBAction func tapSendEmail(sender: AnyObject) {
         let gtlMessage = GTLRGmail_Message()
         gtlMessage.raw = self.generateRawString()
         
-        let appd = UIApplication.sharedApplication().delegate as! AppDelegate
         let query = GTLRGmailQuery_UsersMessagesSend.queryWithObject(gtlMessage, userId: "me", uploadParameters: nil)
         
-        appd.service.executeQuery(query, completionHandler: {(ticket, response, error) -> Void in
+        service.executeQuery(query, completionHandler: {(ticket, response, error) -> Void in
             print("ticket \(ticket)")
             print("response \(response)")
             print("error \(error)")
