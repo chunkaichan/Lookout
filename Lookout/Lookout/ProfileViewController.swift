@@ -28,7 +28,7 @@ class ProfileViewController: UIViewController {
             // Disconnect
             GTMOAuth2ViewControllerTouch.removeAuthFromKeychainForName("Gmail API")
             self.connectGmail.setTitle(" Connect ", forState: .Normal)
-            self.connectedStatus.text = "Not connected"
+            self.connectedStatus.text = " Not connected "
             print("Auth removed")
         }
         
