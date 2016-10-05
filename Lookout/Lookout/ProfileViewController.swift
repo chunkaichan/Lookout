@@ -19,9 +19,8 @@ class ProfileViewController: UIViewController {
     
     @IBAction func connectGmail(sender: AnyObject) {
         
-        if (self.connectGmail.titleLabel?.text == "Connect") {
+        if (self.connectGmail.titleLabel?.text == " Connect ") {
             // Connect with Gmail
-            
             self.navigationController?.pushViewController(createAuthController(), animated: true)
             print(self.navigationController?.navigationItem.rightBarButtonItem?.title)
             print("pushed")

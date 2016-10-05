@@ -594,24 +594,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Taipei" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7r5-Qb-MkP">
-                                <rect key="frame" x="265" y="384" width="46" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="cLF-OD-EeI"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not connected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EVo-uR-bII">
-                                <rect key="frame" x="265" y="339" width="114" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="xKB-f6-wk1"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add-photo" translatesAutoresizingMaskIntoConstraints="NO" id="XHM-NP-4XW">
                                 <rect key="frame" x="225" y="84" width="150" height="150"/>
                                 <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="0.3997575431034483" colorSpace="calibratedRGB"/>
@@ -620,108 +602,118 @@
                                     <constraint firstAttribute="height" constant="150" id="NMQ-bI-oKr"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile-phone" translatesAutoresizingMaskIntoConstraints="NO" id="SKi-LY-3cn">
-                                <rect key="frame" x="215" y="294" width="30" height="30"/>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i2w-a6-Xns">
+                                <rect key="frame" x="-71" y="197" width="446" height="257"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="pFx-ic-Stl" userLabel="Mail Stack View">
+                                        <rect key="frame" x="131" y="95" width="159" height="30"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="profile-mail" translatesAutoresizingMaskIntoConstraints="NO" id="iU2-Up-3Qj">
+                                                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Not connected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EVo-uR-bII">
+                                                <rect key="frame" x="45" y="0.0" width="114" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="19x-pl-HKy" userLabel="Blood Stack View">
+                                        <rect key="frame" x="152" y="185" width="67" height="30"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="profile-blood" translatesAutoresizingMaskIntoConstraints="NO" id="SDc-Pk-8Zt">
+                                                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="B+" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qmj-c9-Mme">
+                                                <rect key="frame" x="45" y="0.0" width="22" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="0hH-fU-kNz" userLabel="Address Stack View">
+                                        <rect key="frame" x="152" y="140" width="91" height="30"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="profile-address" translatesAutoresizingMaskIntoConstraints="NO" id="GTx-fU-OCV">
+                                                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Taipei" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7r5-Qb-MkP">
+                                                <rect key="frame" x="45" y="0.0" width="46" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="NLD-j6-dOf" userLabel="Name Stack View">
+                                        <rect key="frame" x="0.0" y="0.0" width="116" height="30"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="profile-name" translatesAutoresizingMaskIntoConstraints="NO" id="MJd-1Q-0wa">
+                                                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="First Last" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="huK-14-rIr">
+                                                <rect key="frame" x="45" y="0.0" width="71" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="chZ-oS-ich"/>
+                                        </constraints>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wXo-Gm-Knq">
+                                        <rect key="frame" x="342" y="95" width="93" height="30"/>
+                                        <color key="backgroundColor" red="0.25490196079999999" green="0.73725490199999999" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="Connect" image="google-icon">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="connectGmail:" destination="W0f-mr-W1w" eventType="touchUpInside" id="4ZC-8p-7vq"/>
+                                        </connections>
+                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="R2q-ll-DC6" userLabel="Birth Stack View">
+                                        <rect key="frame" x="25" y="46" width="138" height="30"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="profile-birth" translatesAutoresizingMaskIntoConstraints="NO" id="MdN-va-t7a">
+                                                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="yyyy.mm.dd" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RkY-6o-P5R">
+                                                <rect key="frame" x="45" y="5" width="93" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="IPV-4F-5JB" userLabel="Phone Stack View">
+                                        <rect key="frame" x="301" y="0.0" width="145" height="30"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="profile-phone" translatesAutoresizingMaskIntoConstraints="NO" id="SKi-LY-3cn">
+                                                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="0987654321" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eQO-K6-5Ni">
+                                                <rect key="frame" x="45" y="0.0" width="100" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="0.5" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="9c5-B6-8Vx"/>
-                                    <constraint firstAttribute="height" constant="30" id="u9M-uz-fAH"/>
+                                    <constraint firstItem="NLD-j6-dOf" firstAttribute="leading" secondItem="i2w-a6-Xns" secondAttribute="leading" id="mL6-1r-K95"/>
+                                    <constraint firstItem="NLD-j6-dOf" firstAttribute="top" secondItem="i2w-a6-Xns" secondAttribute="top" id="wuo-lk-d2s"/>
                                 </constraints>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile-name" translatesAutoresizingMaskIntoConstraints="NO" id="MJd-1Q-0wa">
-                                <rect key="frame" x="215" y="249" width="30" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="FWL-aC-8nz"/>
-                                    <constraint firstAttribute="height" constant="30" id="JKR-dq-EmT"/>
-                                </constraints>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile-mail" translatesAutoresizingMaskIntoConstraints="NO" id="iU2-Up-3Qj">
-                                <rect key="frame" x="215" y="339" width="30" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="cwC-ve-6uY"/>
-                                    <constraint firstAttribute="width" constant="30" id="ghF-fV-nI9"/>
-                                </constraints>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile-blood" translatesAutoresizingMaskIntoConstraints="NO" id="SDc-Pk-8Zt">
-                                <rect key="frame" x="215" y="429" width="30" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="lUi-bi-e6C"/>
-                                    <constraint firstAttribute="width" constant="30" id="u0v-jv-p6y"/>
-                                </constraints>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile-address" translatesAutoresizingMaskIntoConstraints="NO" id="GTx-fU-OCV">
-                                <rect key="frame" x="215" y="384" width="30" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="Sls-vJ-L4a"/>
-                                    <constraint firstAttribute="width" constant="30" id="jYy-Nn-DAa"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0987654321" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eQO-K6-5Ni">
-                                <rect key="frame" x="265" y="294" width="100" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="lNf-vu-2Xs"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Last" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="huK-14-rIr">
-                                <rect key="frame" x="265" y="249" width="71" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="Rha-Jk-vyv"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="B+" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qmj-c9-Mme">
-                                <rect key="frame" x="265" y="429" width="22" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="X1g-B6-wb3"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wXo-Gm-Knq">
-                                <rect key="frame" x="391" y="339" width="100" height="30"/>
-                                <color key="backgroundColor" red="0.25490196079999999" green="0.73725490199999999" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="VUd-7z-CgR"/>
-                                </constraints>
-                                <state key="normal" title=" connect " image="google-icon">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="connectGmail:" destination="W0f-mr-W1w" eventType="touchUpInside" id="4ZC-8p-7vq"/>
-                                </connections>
-                            </button>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="SDc-Pk-8Zt" firstAttribute="top" secondItem="GTx-fU-OCV" secondAttribute="bottom" constant="15" id="2hk-sp-lMm"/>
-                            <constraint firstItem="SKi-LY-3cn" firstAttribute="top" secondItem="MJd-1Q-0wa" secondAttribute="bottom" constant="15" id="2kO-b3-F6S"/>
                             <constraint firstItem="XHM-NP-4XW" firstAttribute="centerX" secondItem="YCR-cB-csP" secondAttribute="centerX" id="5ZU-1Q-IYr"/>
-                            <constraint firstItem="MJd-1Q-0wa" firstAttribute="top" secondItem="XHM-NP-4XW" secondAttribute="bottom" constant="15" id="6yq-Yj-rxU"/>
-                            <constraint firstItem="qmj-c9-Mme" firstAttribute="top" secondItem="7r5-Qb-MkP" secondAttribute="bottom" constant="15" id="8YO-27-fYv"/>
-                            <constraint firstItem="qmj-c9-Mme" firstAttribute="leading" secondItem="SDc-Pk-8Zt" secondAttribute="trailing" constant="20" id="AAS-OB-Lbd"/>
-                            <constraint firstItem="GTx-fU-OCV" firstAttribute="leading" secondItem="SDc-Pk-8Zt" secondAttribute="trailing" constant="-30" id="BVx-fa-d6b"/>
-                            <constraint firstItem="huK-14-rIr" firstAttribute="leading" secondItem="MJd-1Q-0wa" secondAttribute="trailing" constant="20" id="CWc-57-UfK"/>
-                            <constraint firstItem="eQO-K6-5Ni" firstAttribute="top" secondItem="huK-14-rIr" secondAttribute="bottom" constant="15" id="DHK-R0-uTc"/>
-                            <constraint firstItem="MJd-1Q-0wa" firstAttribute="leading" secondItem="SKi-LY-3cn" secondAttribute="trailing" constant="-30" id="E1I-9o-By3"/>
-                            <constraint firstItem="wXo-Gm-Knq" firstAttribute="top" secondItem="eQO-K6-5Ni" secondAttribute="bottom" constant="15" id="HeD-4a-Wqf"/>
-                            <constraint firstItem="iU2-Up-3Qj" firstAttribute="leading" secondItem="GTx-fU-OCV" secondAttribute="trailing" constant="-30" id="Hjr-3a-YRA"/>
-                            <constraint firstItem="huK-14-rIr" firstAttribute="top" secondItem="XHM-NP-4XW" secondAttribute="bottom" constant="15" id="SBr-u8-bqv"/>
                             <constraint firstItem="XHM-NP-4XW" firstAttribute="top" secondItem="bDc-y6-yri" secondAttribute="bottom" constant="20" id="UBe-Ch-C1T"/>
-                            <constraint firstItem="EVo-uR-bII" firstAttribute="top" secondItem="eQO-K6-5Ni" secondAttribute="bottom" constant="15" id="atG-Ap-P9Y"/>
-                            <constraint firstItem="7r5-Qb-MkP" firstAttribute="top" secondItem="EVo-uR-bII" secondAttribute="bottom" constant="15" id="eBt-BH-RvX"/>
-                            <constraint firstItem="wXo-Gm-Knq" firstAttribute="leading" secondItem="EVo-uR-bII" secondAttribute="trailing" constant="15" id="fzI-Ow-cmo"/>
-                            <constraint firstItem="SKi-LY-3cn" firstAttribute="leading" secondItem="iU2-Up-3Qj" secondAttribute="trailing" constant="-30" id="jNT-Ap-rEu"/>
-                            <constraint firstItem="iU2-Up-3Qj" firstAttribute="top" secondItem="SKi-LY-3cn" secondAttribute="bottom" constant="15" id="lxq-aP-Ci5"/>
-                            <constraint firstItem="GTx-fU-OCV" firstAttribute="top" secondItem="iU2-Up-3Qj" secondAttribute="bottom" constant="15" id="meQ-Ya-NsL"/>
-                            <constraint firstItem="eQO-K6-5Ni" firstAttribute="leading" secondItem="SKi-LY-3cn" secondAttribute="trailing" constant="20" id="qR8-Po-WDr"/>
-                            <constraint firstItem="XHM-NP-4XW" firstAttribute="leading" secondItem="MJd-1Q-0wa" secondAttribute="trailing" constant="-20" id="rFh-Hx-rOn"/>
-                            <constraint firstItem="7r5-Qb-MkP" firstAttribute="leading" secondItem="GTx-fU-OCV" secondAttribute="trailing" constant="20" id="xgd-H1-JE9"/>
-                            <constraint firstItem="EVo-uR-bII" firstAttribute="leading" secondItem="iU2-Up-3Qj" secondAttribute="trailing" constant="20" id="zZf-1b-LWq"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="hOH-9X-gnf">
@@ -958,11 +950,12 @@
         <image name="google-icon" width="24" height="24"/>
         <image name="navigation" width="64" height="64"/>
         <image name="phone-call" width="64" height="64"/>
-        <image name="profile-address" width="64" height="64"/>
-        <image name="profile-blood" width="64" height="64"/>
-        <image name="profile-mail" width="64" height="64"/>
-        <image name="profile-name" width="64" height="64"/>
-        <image name="profile-phone" width="64" height="64"/>
+        <image name="profile-address" width="30" height="30"/>
+        <image name="profile-birth" width="30" height="30"/>
+        <image name="profile-blood" width="30" height="30"/>
+        <image name="profile-mail" width="30" height="30"/>
+        <image name="profile-name" width="30" height="30"/>
+        <image name="profile-phone" width="30" height="30"/>
         <image name="refresh" width="64" height="64"/>
         <image name="send-alert" width="20" height="20"/>
         <image name="send-email" width="64" height="64"/>

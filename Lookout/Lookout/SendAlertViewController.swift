@@ -28,6 +28,7 @@ class SendAlertViewController: TabViewControllerTemplate {
             clientID: kClientID,
             clientSecret: nil) {
             service.authorizer = auth
+            print(123)
         }
         
         messageButton.layer.cornerRadius = messageButton.layer.frame.width/2
