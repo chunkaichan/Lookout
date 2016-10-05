@@ -15,21 +15,27 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var connectGmail: UIButton!
     
     @IBOutlet weak var connectedStatus: UILabel!
+    
     @IBAction func connectGmail(sender: AnyObject) {
         
         
         if (self.connectGmail.titleLabel?.text == "Connect") {
+            // Connect with Gmail
+            
             self.navigationController?.pushViewController(createAuthController(), animated: true)
+            print(self.navigationController?.navigationItem.rightBarButtonItem?.title)
+            print("pushed")
         } else {
+            // Disconnect
             GTMOAuth2ViewControllerTouch.removeAuthFromKeychainForName("Gmail API")
             self.connectGmail.setTitle("Connect", forState: .Normal)
             self.connectedStatus.text = "Not connected"
-            
-            print("remove auth")
+            print("Auth removed")
         }
         
         
     }
+    
     
     private let kKeychainItemName = "Gmail API"
     private let kClientID = "556205392726-s6pohtn44l7eqpgmf0qtjq8mp0crt1nd.apps.googleusercontent.com"
@@ -70,9 +76,9 @@ class ProfileViewController: UIViewController {
     // When the view appears, ensure that the Gmail API service is authorized
     // and perform API calls
     override func viewDidAppear(animated: Bool) {
+        // If user alreay connected
         if let authorizer = service.authorizer,
             canAuth = authorizer.canAuthorize where canAuth {
-            print(canAuth)
             connectedStatus.text = "Connected!"
             connectGmail.setTitle("Disconnect", forState: .Normal)
         }
@@ -110,6 +116,7 @@ class ProfileViewController: UIViewController {
     // Creates the auth controller for authorizing access to Gmail API
     private func createAuthController() -> GTMOAuth2ViewControllerTouch {
         let scopeString = scopes.joinWithSeparator(" ")
+        
         return GTMOAuth2ViewControllerTouch(
             scope: scopeString,
             clientID: kClientID,
@@ -119,6 +126,7 @@ class ProfileViewController: UIViewController {
             finishedSelector: #selector(ProfileViewController.viewController(_:finishedWithAuth:error:))
         )
     }
+    
     
     // Handle completion of the authorization process, and update the Gmail API
     // with the new credentials.
