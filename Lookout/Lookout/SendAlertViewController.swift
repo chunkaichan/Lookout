@@ -15,7 +15,7 @@ class SendAlertViewController: TabViewControllerTemplate {
     
     
     @IBAction func tapSendEmail(sender: AnyObject) {
-        var gtlMessage = GTLRGmail_Message()
+        let gtlMessage = GTLRGmail_Message()
         gtlMessage.raw = self.generateRawString()
         
         let appd = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -36,19 +36,25 @@ class SendAlertViewController: TabViewControllerTemplate {
     
     func generateRawString() -> String {
         
-        var dateFormatter:NSDateFormatter = NSDateFormatter()
+        let dateFormatter:NSDateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss Z"; //RFC2822-Format
-        var todayString:String = dateFormatter.stringFromDate(NSDate())
+        let todayString:String = dateFormatter.stringFromDate(NSDate())
+        let fromLocationURL = "http://maps.google.com/maps?q=loc:36.26577,-92.54324"
         
-        var rawMessage = "" +
-            "Date: \(todayString)\r\n" +
-            "From: kyle791121@gmail.com\r\n" +
-            "To: username kyle791121@gmail.com\r\n" +
-            "Subject: Test send email\r\n\r\n" +
-        "Test body"
+        let builder = MCOMessageBuilder()
+        builder.header.to = [MCOAddress(displayName: "Emergency contact", mailbox: "kyle791121@gmail.com")]
+        builder.header.from = MCOAddress(displayName: "From Lookout: Emergency Notification", mailbox: "kyle791121@gmail.com")
+        builder.header.subject = "Subject"
+        builder.htmlBody = "This is a test msg" + "\r\n" +
+                           "From location:http://maps.google.com/maps?q=loc:36.26577,-92.54324"
+        builder.header.date = NSDate()
         
-        print("message \(rawMessage)")
-        return GTLREncodeWebSafeBase64(rawMessage.dataUsingEncoding(NSUTF8StringEncoding))!
+        //
+        let rfc822Data = builder.data()
+        
+        
+        
+        return GTLREncodeWebSafeBase64(rfc822Data)!
     }
     
 }

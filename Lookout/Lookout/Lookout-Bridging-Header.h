@@ -12,5 +12,7 @@
 #import <GTMOAuth2/GTMOAuth2ViewControllerTouch.h>
 #import <GoogleAPIClientForREST/GTLRGmail.h>
 #import <GTMOAuth2/GTMOAuth2SignIn.h>
+#import <MailCore/MailCore.h>
+#import <MailCore/MCOAbstractMessage.h>
 
 #endif /* Lookout_Bridging_Header_h */

@@ -13,5 +13,6 @@ target 'Lookout' do
   pod 'Charts/Realm'
   pod 'GoogleAPIClientForREST/Gmail', '~> 1.0.3'
   pod 'GTMOAuth2', '~> 1.1.2'
+  pod 'mailcore2-ios'
 
 end

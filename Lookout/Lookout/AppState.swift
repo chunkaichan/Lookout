@@ -16,4 +16,5 @@ class AppState: NSObject {
     var displayName: String?
     var photoUrl: NSURL?
     var UUID: String = ""
+    
 }
