@@ -17,5 +17,7 @@ class AppState: NSObject {
     var photoUrl: NSURL?
     var UUID: String = ""
     var email: String = ""
+    var userLongitude: Double = 0.0
+    var userLatitude: Double = 0.0
     
 }

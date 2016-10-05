@@ -594,7 +594,7 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i2w-a6-Xns">
-                                <rect key="frame" x="160" y="254" width="280" height="165"/>
+                                <rect key="frame" x="160" y="264" width="280" height="165"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="0hH-fU-kNz" userLabel="Address Stack View">
                                         <rect key="frame" x="0.0" y="90" width="258" height="30"/>
@@ -694,7 +694,7 @@
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Si0-O0-jEg">
-                                <rect key="frame" x="160" y="434" width="280" height="75"/>
+                                <rect key="frame" x="160" y="444" width="280" height="75"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="19x-pl-HKy" userLabel="Blood Stack View">
                                         <rect key="frame" x="0.0" y="45" width="67" height="30"/>
@@ -757,7 +757,7 @@
                             <constraint firstItem="i2w-a6-Xns" firstAttribute="centerX" secondItem="YCR-cB-csP" secondAttribute="centerX" id="865-1H-F5E"/>
                             <constraint firstItem="XHM-NP-4XW" firstAttribute="leading" secondItem="i2w-a6-Xns" secondAttribute="trailing" constant="-75" id="E66-lc-seN"/>
                             <constraint firstItem="Yti-g2-v02" firstAttribute="top" secondItem="ilt-C9-qey" secondAttribute="bottom" id="Fcx-4W-TDi"/>
-                            <constraint firstItem="i2w-a6-Xns" firstAttribute="top" secondItem="XHM-NP-4XW" secondAttribute="bottom" constant="20" id="J58-O7-bcX"/>
+                            <constraint firstItem="i2w-a6-Xns" firstAttribute="top" secondItem="XHM-NP-4XW" secondAttribute="bottom" constant="30" id="J58-O7-bcX"/>
                             <constraint firstItem="i2w-a6-Xns" firstAttribute="centerX" secondItem="YCR-cB-csP" secondAttribute="centerX" id="JgH-YM-D3A"/>
                             <constraint firstItem="ilt-C9-qey" firstAttribute="top" secondItem="bDc-y6-yri" secondAttribute="bottom" id="TDC-WD-RKW"/>
                             <constraint firstItem="XHM-NP-4XW" firstAttribute="top" secondItem="bDc-y6-yri" secondAttribute="bottom" constant="20" id="UBe-Ch-C1T"/>

@@ -157,7 +157,6 @@ class ContactsMapViewController: UIViewController, MKMapViewDelegate, CLLocation
         locationManager.startMonitoringSignificantLocationChanges()
 //        locationManager.stopUpdatingLocation()
         sendLocation()
-    
     }
     
     var myAnnotation: MKPointAnnotation = MKPointAnnotation()

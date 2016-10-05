@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class ContainerViewController: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var scrollableSideMenu: UIScrollView!
     
@@ -42,6 +43,7 @@ class ContainerViewController: UIViewController, UIGestureRecognizerDelegate {
         
         // Close the menu when the device rotates
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(rotated), name: UIDeviceOrientationDidChangeNotification, object: nil)
+        
     }
     
     

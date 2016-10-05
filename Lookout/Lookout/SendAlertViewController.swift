@@ -10,8 +10,9 @@ import UIKit
 import Firebase
 import GoogleAPIClientForREST
 import GTMOAuth2
+import CoreLocation
 
-class SendAlertViewController: TabViewControllerTemplate {
+class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDelegate {
     
     @IBOutlet weak var messageButton: UIButton!
     @IBOutlet weak var phoncallButton: UIButton!
@@ -22,12 +23,37 @@ class SendAlertViewController: TabViewControllerTemplate {
     private let kClientID = "556205392726-s6pohtn44l7eqpgmf0qtjq8mp0crt1nd.apps.googleusercontent.com"
     private let service = GTLRGmailService()
     
+    
     override func viewDidLoad() {
-        
         
         messageButton.layer.cornerRadius = messageButton.layer.frame.width/2
         messageButton.layer.borderWidth = 2
         messageButton.layer.borderColor = UIColor.whiteColor().CGColor
+        
+        setLocationManager()
+    }
+    
+    var locationManager: CLLocationManager!
+    
+    func setLocationManager() {
+        
+        self.locationManager = CLLocationManager()
+        self.locationManager.requestWhenInUseAuthorization()
+                self.locationManager.startUpdatingLocation()
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        self.locationManager.delegate = self
+        print(locationManager.location?.coordinate)
+        
+    }
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        self.locationManager.startMonitoringSignificantLocationChanges()
+        if let userLatitude = self.locationManager.location?.coordinate.latitude, userLongitude = self.locationManager.location?.coordinate.longitude {
+            AppState.sharedInstance.userLatitude = userLatitude
+            AppState.sharedInstance.userLongitude = userLongitude
+            print("***\(userLatitude),\(userLongitude)")
+        }
+        print("in locationM")
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -38,6 +64,8 @@ class SendAlertViewController: TabViewControllerTemplate {
             service.authorizer = auth
         }
     }
+    
+    
     
     @IBAction func tapSendEmail(sender: AnyObject) {
         let gtlMessage = GTLRGmail_Message()
@@ -50,7 +78,7 @@ class SendAlertViewController: TabViewControllerTemplate {
             print("response \(response)")
             print("error \(error)")
             
-            if let error = error {
+            if error != nil {
                 self.showAlert(message: "Failed to send your message", actionTitle: "Close")
             } else {
                 self.showAlert(message: "Message sent!", actionTitle: "Close")
@@ -69,13 +97,14 @@ class SendAlertViewController: TabViewControllerTemplate {
 //        let dateFormatter:NSDateFormatter = NSDateFormatter()
 //        dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss Z"; //RFC2822-Format
 //        let todayString:String = dateFormatter.stringFromDate(NSDate())
-        let fromLocationURL = "http://maps.google.com/maps?q=loc:36.26577,-92.54324"
+        let fromLocationURL = "http://maps.google.com/maps?q=loc:\(AppState.sharedInstance.userLatitude),\(AppState.sharedInstance.userLongitude)"
         
         let builder = MCOMessageBuilder()
         builder.header.to = [MCOAddress(displayName: "Emergency contact", mailbox: "kyle791121@gmail.com")]
         builder.header.from = MCOAddress(displayName: "From Lookout: Emergency Notification", mailbox: "kyle791121@gmail.com")
         builder.header.subject = "Subject"
         builder.htmlBody = "This is a test msg" + "<br><br>" +
+                           "From Location:" + "<br><br>" +
                            "\(fromLocationURL)"
         
         builder.header.date = NSDate()
