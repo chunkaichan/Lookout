@@ -42,6 +42,9 @@
                                             <constraint firstAttribute="width" constant="64" id="QZk-gm-oAG"/>
                                         </constraints>
                                         <state key="normal" image="phone-call"/>
+                                        <connections>
+                                            <action selector="tapPhoneCall:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IDZ-SP-lJ7"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rdV-nj-6Tq">
                                         <rect key="frame" x="268" y="403" width="64" height="64"/>
@@ -101,12 +104,6 @@
                             </button>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <outlet property="alertButton" destination="cEs-2L-twd" id="G8c-5t-SNN"/>
-                        <outlet property="emailButton" destination="O6Z-4F-uc2" id="hM7-tr-zNy"/>
-                        <outlet property="messageButton" destination="rdV-nj-6Tq" id="AWj-G5-8mV"/>
-                        <outlet property="phoncallButton" destination="Ls1-EQ-x9C" id="L1b-s6-jrd"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
