@@ -26,16 +26,17 @@ class ContactsMapViewController: UIViewController, MKMapViewDelegate, CLLocation
     
     @IBAction func tapRefresh(sender: AnyObject) {
         if (self.latitude != 0.0) {
+            // Set region to current location if remote location unavailable
             let region = MKCoordinateRegion(center: CLLocationCoordinate2DMake(self.latitude, self.longitude), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
             self.contactMap.setRegion(region, animated: true)
         } else {
+            // Set region to remote location if remote location available
             if (alert.actions.count == 0) {
                 let alertAction = UIAlertAction(title: "Close", style: .Default, handler: nil)
                 alert.addAction(alertAction)
             }
             self.presentViewController(self.alert, animated: true, completion: nil)
         }
-        
     }
     
     
@@ -61,12 +62,13 @@ class ContactsMapViewController: UIViewController, MKMapViewDelegate, CLLocation
         
     }
     
-    func stopUpdate() {
-        self.locationManager.delegate = nil
-    }
     
     deinit {
+        self.latitude = 0.0
+        self.longitude = 0.0
         self.ref.child("user_locations").removeObserverWithHandle(_refHandle)
+        let allAnnotations = contactMap.annotations
+        contactMap.removeAnnotations(allAnnotations)
     }
 
     var longitude = 0.0
@@ -113,10 +115,14 @@ class ContactsMapViewController: UIViewController, MKMapViewDelegate, CLLocation
                 self.latitude = self.remoteLocation[Constants.Location.latitude]!
                 self.timestamp = self.remoteLocation[Constants.Location.timestamp]!// as NSTimeInterval
                 self.setAnnotation(latitudeDegree: self.latitude, longitudeDegree: self.longitude)
-                
             }
-            
         })
+        
+        // set region to current location if remote location unavailable
+        if (self.latitude == 0.0) {
+            let region = MKCoordinateRegion(center: CLLocationCoordinate2DMake(AppState.sharedInstance.userLatitude, AppState.sharedInstance.userLongitude), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+            self.contactMap.setRegion(region, animated: false)
+        }
 
 
     }
@@ -129,6 +135,7 @@ class ContactsMapViewController: UIViewController, MKMapViewDelegate, CLLocation
         myAnnotation.title = "\(NSDate(timeIntervalSince1970: self.timestamp))"
         
         if (contactMap.annotations.isEmpty && self.latitude != 0.0) {
+            // remote location is available and annotation has not been set yet
             contactMap.addAnnotation(myAnnotation)
             let region = MKCoordinateRegion(center: CLLocationCoordinate2DMake(self.latitude, self.longitude), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
             self.contactMap.setRegion(region, animated: false)
