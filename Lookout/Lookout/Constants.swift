@@ -23,6 +23,14 @@ struct Constants {
         static let timestamp = "timestamp"
     }
     
+    struct Profile {
+        static let name = "name"
+        static let address = "address"
+        static let birth = "birth"
+        static let phone = "phone"
+        static let blood = "blood"
+    }
+    
     enum LeftMenuKeys: String {
         case profile = "menu-profile"
         case settings = "menu-settings"

@@ -14,27 +14,180 @@ import Firebase
 class ProfileViewController: UIViewController {
     
     @IBOutlet weak var profilePhoto: UIImageView!
-    @IBOutlet weak var connectGmail: UIButton!
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var birthTextField: UITextField!
+    @IBOutlet weak var addressTextField: UITextField!
+    @IBOutlet weak var phoneTextField: UITextField!
+    @IBOutlet weak var bloodTextField: UITextField!
     
+    @IBOutlet weak var connectGmail: UIButton!
     @IBOutlet weak var connectedStatus: UILabel!
     
     @IBAction func connectGmail(sender: AnyObject) {
-        
         if (self.connectGmail.titleLabel?.text == " Connect ") {
             // Connect with Gmail
             self.navigationController?.pushViewController(createAuthController(), animated: true)
             print(self.navigationController?.navigationItem.rightBarButtonItem?.title)
-            print("pushed")
         } else {
             // Disconnect
             GTMOAuth2ViewControllerTouch.removeAuthFromKeychainForName("Gmail API")
             self.connectGmail.setTitle(" Connect ", forState: .Normal)
             self.connectedStatus.text = " Not connected "
-            print("Auth removed")
         }
         
+    }
+    
+    @IBOutlet weak var closeButtonStyle: UIButton!
+    @IBOutlet weak var editButtonStyle: UIButton!
+    
+    @IBAction func editButton(sender: AnyObject) {
+        if (inEditMode) {
+            // tap to cancel
+            let alert = UIAlertController(
+                title: nil,
+                message: "Discard changes?",
+                preferredStyle: UIAlertControllerStyle.Alert
+            )
+            let ok = UIAlertAction(
+                title: "OK",
+                style: UIAlertActionStyle.Default,
+                handler: {(alert: UIAlertAction!) in
+                    self.didCancelEdit()
+                    self.changeBarButtonImage(leftButtonLink: self.editLink, rightButtonLink: self.closeLink)
+                }
+            )
+            let cancel = UIAlertAction(
+                title: "Cancel",
+                style: UIAlertActionStyle.Default,
+                handler: nil
+            )
+            alert.addAction(cancel)
+            alert.addAction(ok)
+            presentViewController(alert, animated: true, completion: nil)
+        } else {
+            // tap to edit
+            userProfileBeforeEdit = Profile(name: nameTextField.text ?? "Empty" ,
+                                  birth: birthTextField.text ?? "Empty" ,
+                                  address: addressTextField.text ?? "Empty" ,
+                                  phone: phoneTextField.text ?? "Empty" ,
+                                  blood: bloodTextField.text ?? "Empty")
+            didTapEdit()
+            changeBarButtonImage(leftButtonLink: cancelLink, rightButtonLink: saveLink)
+            inEditMode = true
+        }
+    }
+    
+    @IBAction func closeButton(sender: AnyObject) {
+        if (inEditMode) {
+            // tap to save
+            let alert = UIAlertController(
+                title: nil,
+                message: "Save changes?",
+                preferredStyle: UIAlertControllerStyle.Alert
+            )
+            let ok = UIAlertAction(
+                title: "OK",
+                style: UIAlertActionStyle.Default,
+                handler: {(alert: UIAlertAction!) in
+                    self.didSaveEdit()
+                    self.changeBarButtonImage(leftButtonLink: self.editLink, rightButtonLink: self.closeLink)
+                    self.sendProfileToDB()
+                }
+            )
+            let cancel = UIAlertAction(
+                title: "Cancel",
+                style: UIAlertActionStyle.Default,
+                handler: nil
+            )
+            alert.addAction(cancel)
+            alert.addAction(ok)
+            presentViewController(alert, animated: true, completion: nil)
+        } else {
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
         
     }
+    
+    struct Profile {
+        var name: String
+        var birth: String
+        var address: String
+        var phone: String
+        var blood: String
+    }
+    
+    var userProfileBeforeEdit: Profile?
+    
+    var inEditMode = false
+    let saveLink = "profile-save-edit"
+    let cancelLink = "profile-cancel-edit"
+    let closeLink = "close"
+    let editLink = "profile-edit"
+    
+    
+    
+    
+    
+    
+    
+    func changeBarButtonImage(leftButtonLink leftButtonLink: String, rightButtonLink: String) {
+        editButtonStyle.setImage(UIImage(named: leftButtonLink), forState: .Normal)
+        closeButtonStyle.setImage(UIImage(named: rightButtonLink), forState: .Normal)
+    }
+    
+    
+    
+    func didTapEdit() {
+        setTextFieldGray()
+    }
+    
+    func didCancelEdit() {
+        nameTextField.text = userProfileBeforeEdit?.name
+        birthTextField.text = userProfileBeforeEdit?.birth
+        addressTextField.text = userProfileBeforeEdit?.address
+        phoneTextField.text = userProfileBeforeEdit?.phone
+        bloodTextField.text = userProfileBeforeEdit?.blood
+        setTextFieldTransparent()
+        inEditMode = false
+    }
+    
+    func didSaveEdit() {
+        setTextFieldTransparent()
+        inEditMode = false
+    }
+    
+    func setTextFieldGray() {
+        nameTextField.layer.backgroundColor = UIColor.grayColor().CGColor
+        nameTextField.layer.cornerRadius = 5
+        birthTextField.layer.backgroundColor = UIColor.grayColor().CGColor
+        birthTextField.layer.cornerRadius = 5
+        addressTextField.layer.backgroundColor = UIColor.grayColor().CGColor
+        addressTextField.layer.cornerRadius = 5
+        bloodTextField.layer.backgroundColor = UIColor.grayColor().CGColor
+        bloodTextField.layer.cornerRadius = 5
+        phoneTextField.layer.backgroundColor = UIColor.grayColor().CGColor
+        phoneTextField.layer.cornerRadius = 5
+        setTextFieldEditable(isEditable: true)
+    }
+    
+    func setTextFieldTransparent() {
+        nameTextField.layer.backgroundColor = UIColor.clearColor().CGColor
+        birthTextField.layer.backgroundColor = UIColor.clearColor().CGColor
+        addressTextField.layer.backgroundColor = UIColor.clearColor().CGColor
+        bloodTextField.layer.backgroundColor = UIColor.clearColor().CGColor
+        phoneTextField.layer.backgroundColor = UIColor.clearColor().CGColor
+        setTextFieldEditable(isEditable: false)
+    }
+    
+    func setTextFieldEditable(isEditable isEditable: Bool) {
+        nameTextField.userInteractionEnabled = isEditable
+        birthTextField.userInteractionEnabled = isEditable
+        addressTextField.userInteractionEnabled = isEditable
+        phoneTextField.userInteractionEnabled = isEditable
+        phoneTextField.userInteractionEnabled = isEditable
+    }
+    
+    
     
     
     private let kKeychainItemName = "Gmail API"
@@ -45,12 +198,15 @@ class ProfileViewController: UIViewController {
     private let scopes = [kGTLRAuthScopeGmailSend]
     
     private let service = GTLRGmailService()
-    let output = UITextView()
+    
+    // Firebase
+    var ref: FIRDatabaseReference!
     
     // When the view loads, create necessary subviews
     // and initialize the Gmail API service
     override func viewDidLoad() {
         super.viewDidLoad()
+        setTextFieldEditable(isEditable: false)
         
         profilePhoto.layer.cornerRadius = profilePhoto.layer.frame.width/2
         profilePhoto.clipsToBounds = true
@@ -61,10 +217,12 @@ class ProfileViewController: UIViewController {
             service.authorizer = auth
         }
         
-        
         connectGmail.layer.cornerRadius = 5
         
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tap)
         
+        self.ref = FIRDatabase.database().reference()
     }
     
     // When the view appears, ensure that the Gmail API service is authorized
@@ -76,6 +234,16 @@ class ProfileViewController: UIViewController {
             connectedStatus.text = "Connected!"
             connectGmail.setTitle(" Disconnect ", forState: .Normal)
         }
+    }
+    
+    func sendProfileToDB() {
+        var data = [Constants.Profile.name : nameTextField.text!]
+        data[Constants.Profile.birth] = birthTextField.text!
+        data[Constants.Profile.address] = addressTextField.text!
+        data[Constants.Profile.blood] = bloodTextField.text!
+        data[Constants.Profile.phone] = phoneTextField.text!
+        self.ref.child("user_profiles/\(AppState.sharedInstance.UUID)").setValue(data)
+        print("Profile sent to DB")
     }
     
     // Creates the auth controller for authorizing access to Gmail API
@@ -92,7 +260,6 @@ class ProfileViewController: UIViewController {
         )
     }
     
-    
     // Handle completion of the authorization process, and update the Gmail API
     // with the new credentials.
     func viewController(vc : UIViewController, finishedWithAuth authResult : GTMOAuth2Authentication, error : NSError?) {
@@ -102,10 +269,7 @@ class ProfileViewController: UIViewController {
             showAlert("Authentication Error", message: error.localizedDescription)
             return
         }
-        
         service.authorizer = authResult
-//        dismissViewControllerAnimated(true, completion: nil)
-        
     }
     
     // Helper for showing an alert
@@ -124,12 +288,8 @@ class ProfileViewController: UIViewController {
         presentViewController(alert, animated: true, completion: nil)
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    @IBAction func closeButton(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
     }
 }

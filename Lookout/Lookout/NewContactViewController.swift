@@ -37,13 +37,11 @@ class NewContactViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     func keyboardWillShow(notification: NSNotification) {
-        
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
             if view.frame.origin.y == 0 {
                 self.view.frame.origin.y -= (keyboardSize.height - 40)
             }
         }
-        
     }
     
     func keyboardWillHide(notification: NSNotification) {

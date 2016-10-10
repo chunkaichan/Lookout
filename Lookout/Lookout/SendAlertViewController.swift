@@ -23,7 +23,6 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
     // Firebase
     var ref: FIRDatabaseReference!
     
-    
     override func viewDidLoad() {
         self.ref = FIRDatabase.database().reference()
         setLocationManager()
@@ -49,11 +48,11 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
             AppState.sharedInstance.userLatitude = userLatitude
             AppState.sharedInstance.userLongitude = userLongitude
         }
-        sendLocation()
+        sendLocationToDB()
         
     }
     
-    func sendLocation() {
+    func sendLocationToDB() {
         
         var data = [Constants.Location.latitude: AppState.sharedInstance.userLatitude]
         data[Constants.Location.longitude] = AppState.sharedInstance.userLongitude
@@ -101,11 +100,13 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
         NSNotificationCenter.defaultCenter().postNotificationName("toggleMenu", object: nil)
     }
     
+    var fromLocationURL = "<User location unavailable>"
     
     func generateRawString() -> String {
 //    func generateRawString(toMailName toMailName: String, toMailAddress: String, mailSubject: String, fromLocation: String) -> String {
-        
-        let fromLocationURL = "http://maps.google.com/maps?q=loc:\(AppState.sharedInstance.userLatitude),\(AppState.sharedInstance.userLongitude)"
+        if (AppState.sharedInstance.userLatitude != 0.0) {
+            fromLocationURL = "http://maps.google.com/maps?q=loc:\(AppState.sharedInstance.userLatitude),\(AppState.sharedInstance.userLongitude)"
+        }
         
         let builder = MCOMessageBuilder()
         builder.header.to = [MCOAddress(displayName: "Emergency contact", mailbox: "kyle791121@gmail.com")]
