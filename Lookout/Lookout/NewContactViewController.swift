@@ -59,9 +59,10 @@ class NewContactViewController: UIViewController, UIImagePickerControllerDelegat
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            addPhoto.contentMode = .ScaleToFill
+            addPhoto.contentMode = .ScaleAspectFill
             addPhoto.image = pickedImage
             dismissViewControllerAnimated(true, completion: nil)
+            addPhoto.clipsToBounds = true
         }
         
     }

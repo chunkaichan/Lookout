@@ -11,7 +11,9 @@ import GoogleAPIClientForREST
 import GTMOAuth2
 import Firebase
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
+    
+    let imagePicker = UIImagePickerController()
     
     @IBOutlet weak var profilePhoto: UIImageView!
     @IBOutlet weak var nameTextField: UITextField!
@@ -135,7 +137,31 @@ class ProfileViewController: UIViewController {
         closeButtonStyle.setImage(UIImage(named: rightButtonLink), forState: .Normal)
     }
     
+    func setPhotoPicker() {
+        let tapToAdd = UITapGestureRecognizer(target: self, action: #selector(addNewPhoto))
+        profilePhoto.addGestureRecognizer(tapToAdd)
+        profilePhoto.userInteractionEnabled = true
+        profilePhoto.image = profilePhoto.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        profilePhoto.tintColor = UIColor.whiteColor()
+        
+        imagePicker.delegate = self
+    }
     
+    func addNewPhoto() {
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = .PhotoLibrary
+        presentViewController(imagePicker, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            profilePhoto.contentMode = .ScaleAspectFill
+            profilePhoto.image = pickedImage
+            dismissViewControllerAnimated(true, completion: nil)
+        }
+        
+    }
+
     
     func didTapEdit() {
         setTextFieldGray()
@@ -223,6 +249,8 @@ class ProfileViewController: UIViewController {
         view.addGestureRecognizer(tap)
         
         self.ref = FIRDatabase.database().reference()
+        
+        setPhotoPicker()
     }
     
     // When the view appears, ensure that the Gmail API service is authorized
