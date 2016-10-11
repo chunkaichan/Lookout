@@ -81,30 +81,6 @@ class ContactsMapViewController: UIViewController, MKMapViewDelegate, CLLocation
         ]
     
     func configureDatabase() {
-        // Listen for new messages in the Firebase database
-//        _refHandle = self.ref.child("user_locations").observeEventType(.ChildAdded, withBlock: { (snapshot) -> Void in
-//            self.location.append(snapshot)
-//            let locationSnapshot: FIRDataSnapshot! = self.location[0]
-//
-//            let remoteLocation = locationSnapshot.value as! [String: String]
-//            self.longitude = remoteLocation[Constants.Location.longitude] as String!
-//            self.latitude = remoteLocation[Constants.Location.latitude] as String!
-//            self.setAnnotation(latitudeDegree: (self.latitude! as NSString).doubleValue, longitudeDegree: (self.longitude! as NSString).doubleValue )
-//        })
-//        
-//        _refHandle = self.ref.child("user_locations/\(trackID)").observeEventType(.ChildChanged, withBlock: { (snapshot) -> Void in
-//            
-//            self.location.append(snapshot)
-//            let locationSnapshot: FIRDataSnapshot! = self.location.last
-//            self.remoteLocation[locationSnapshot.key] = locationSnapshot.value as? Double
-//            self.longitude = self.remoteLocation[Constants.Location.longitude]!
-//            self.latitude = self.remoteLocation[Constants.Location.latitude]!
-////            print("Location changed!")
-////            print(self.longitude)
-////            print(self.latitude)
-//            self.setAnnotation(latitudeDegree: self.latitude, longitudeDegree: self.longitude)
-//        })
-
         _refHandle = self.ref.child("user_locations/\(trackID)").observeEventType(.Value, withBlock: { (snapshot) -> Void in
             if (snapshot.childrenCount != 0) {
                 self.location.append(snapshot)

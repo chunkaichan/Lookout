@@ -29,7 +29,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         if (self.connectGmail.titleLabel?.text == " Connect ") {
             // Connect with Gmail
             self.navigationController?.pushViewController(createAuthController(), animated: true)
-            print(self.navigationController?.navigationItem.rightBarButtonItem?.title)
         } else {
             // Disconnect
             GTMOAuth2ViewControllerTouch.removeAuthFromKeychainForName("Gmail API")
@@ -158,10 +157,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             profilePhoto.contentMode = .ScaleAspectFill
             profilePhoto.image = pickedImage
             dismissViewControllerAnimated(true, completion: nil)
+            saveToStorage()
         }
-        
     }
-
     
     func didTapEdit() {
         setTextFieldGray()
@@ -227,6 +225,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     // Firebase
     var ref: FIRDatabaseReference!
+    private var _refHandle: FIRDatabaseHandle!
+    
     
     // When the view loads, create necessary subviews
     // and initialize the Gmail API service
@@ -248,9 +248,14 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
         
-        self.ref = FIRDatabase.database().reference()
+        ref = FIRDatabase.database().reference()
         
         setPhotoPicker()
+        
+        queryProfileFromDB()
+        
+        downloadFromStorage()
+        
     }
     
     // When the view appears, ensure that the Gmail API service is authorized
@@ -264,14 +269,73 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
     }
     
+    let databaseChildPath = "user_profiles/\(AppState.sharedInstance.UUID)"
+    
     func sendProfileToDB() {
         var data = [Constants.Profile.name : nameTextField.text!]
         data[Constants.Profile.birth] = birthTextField.text!
         data[Constants.Profile.address] = addressTextField.text!
         data[Constants.Profile.blood] = bloodTextField.text!
         data[Constants.Profile.phone] = phoneTextField.text!
-        self.ref.child("user_profiles/\(AppState.sharedInstance.UUID)").setValue(data)
+        self.ref.child(databaseChildPath).setValue(data)
         print("Profile sent to DB")
+    }
+    
+    func queryProfileFromDB() {
+        _refHandle = self.ref.child(databaseChildPath).observeEventType(.Value, withBlock: { (snapshot) -> Void in
+            if (snapshot.childrenCount != 0) {
+                print("Load profile from DB")
+                if let profile = snapshot.value as? [String:String] {
+                    self.nameTextField.text = profile[Constants.Profile.name]
+                    self.birthTextField.text = profile[Constants.Profile.birth]
+                    self.addressTextField.text = profile[Constants.Profile.address]
+                    self.bloodTextField.text = profile[Constants.Profile.blood]
+                    self.phoneTextField.text = profile[Constants.Profile.phone]
+                }
+            }
+        })
+    }
+    
+    func saveToStorage() {
+        // Points to the root reference
+        let storageRef = FIRStorage.storage().referenceForURL("gs://lookout-ea551.appspot.com")
+        
+        // Points to "images"
+        let imagesRef = storageRef.child("profilePhotos")
+        
+        // Points to "images/space.jpg"
+        // Note that you can use variables to create child values
+        let fileName = "\(AppState.sharedInstance.UUID)"
+        let spaceRef = imagesRef.child(fileName)
+        
+        guard let imageData = UIImageJPEGRepresentation(profilePhoto.image!, 0.5) else { fatalError() }
+        
+        let _ = spaceRef.putData(imageData, metadata: nil) { metadata, error in
+            if (error != nil) {
+                print("Uh-oh, an error occurred!")
+            } else {
+                print("Image upload to storage")
+                let _ = metadata!.downloadURL
+            }
+        }
+    }
+    
+    func downloadFromStorage() {
+        let storageRef = FIRStorage.storage().referenceForURL("gs://lookout-ea551.appspot.com")
+        
+        // Create a reference to the file you want to download
+        let profileImageRef = storageRef.child("profilePhotos/\(AppState.sharedInstance.UUID)")
+        profileImageRef.dataWithMaxSize(1 * 1024 * 1024) { (data, error) -> Void in
+            if (error != nil) {
+                print(error)
+            } else {
+                if let data = data {
+                    print("Load profile photo from storage")
+                    self.profilePhoto.image = UIImage(data: data)
+                    self.profilePhoto.contentMode = .ScaleAspectFill
+                }
+            }
+        }
     }
     
     // Creates the auth controller for authorizing access to Gmail API
