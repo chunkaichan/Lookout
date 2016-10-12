@@ -21,6 +21,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var addressTextField: UITextField!
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var bloodTextField: UITextField!
+    @IBOutlet weak var trackID: UILabel!
     
     @IBOutlet weak var connectGmail: UIButton!
     @IBOutlet weak var connectedStatus: UILabel!
@@ -125,12 +126,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     let closeLink = "close"
     let editLink = "profile-edit"
     
-    
-    
-    
-    
-    
-    
     func changeBarButtonImage(leftButtonLink leftButtonLink: String, rightButtonLink: String) {
         editButtonStyle.setImage(UIImage(named: leftButtonLink), forState: .Normal)
         closeButtonStyle.setImage(UIImage(named: rightButtonLink), forState: .Normal)
@@ -233,7 +228,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         setTextFieldEditable(isEditable: false)
-        
+        trackID.text = AppState.sharedInstance.UUID
         profilePhoto.layer.cornerRadius = profilePhoto.layer.frame.width/2
         profilePhoto.clipsToBounds = true
         if let auth = GTMOAuth2ViewControllerTouch.authForGoogleFromKeychainForName(

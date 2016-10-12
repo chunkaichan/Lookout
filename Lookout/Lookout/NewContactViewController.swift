@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class NewContactViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -14,6 +15,8 @@ class NewContactViewController: UIViewController, UIImagePickerControllerDelegat
     let imagePicker = UIImagePickerController()
     
     @IBOutlet weak var saveNewContact: UIButton!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
@@ -34,6 +37,7 @@ class NewContactViewController: UIViewController, UIImagePickerControllerDelegat
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
+        
     }
     
     func keyboardWillShow(notification: NSNotification) {
@@ -101,7 +105,6 @@ class NewContactViewController: UIViewController, UIImagePickerControllerDelegat
     let alert = UIAlertController(title: nil, message: "Please fill in all fields.", preferredStyle: .Alert)
     
     override func viewDidAppear(animated: Bool) {
-        
         if (alert.actions.count == 0) {
             let alertAction = UIAlertAction(title: "Close", style: .Default, handler: nil)
             alert.addAction(alertAction)
