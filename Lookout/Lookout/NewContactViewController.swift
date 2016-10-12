@@ -16,6 +16,9 @@ class NewContactViewController: UIViewController, UIImagePickerControllerDelegat
     
     @IBOutlet weak var saveNewContact: UIButton!
     
+    // Firebase
+    var ref: FIRDatabaseReference!
+    private var _refHandle: FIRDatabaseHandle!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,9 +38,10 @@ class NewContactViewController: UIViewController, UIImagePickerControllerDelegat
         
         imagePicker.delegate = self
         
+        ref = FIRDatabase.database().reference()
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
-        
     }
     
     func keyboardWillShow(notification: NSNotification) {
@@ -93,6 +97,7 @@ class NewContactViewController: UIViewController, UIImagePickerControllerDelegat
                 email: self.newEmail.text!,
                 trackID: self.newTrackID.text!,
                 photo: imageData)
+            sendProfileToDB(trackID: self.newTrackID.text!)
             self.navigationController?.popToRootViewControllerAnimated(true)
         }
     }
@@ -109,5 +114,12 @@ class NewContactViewController: UIViewController, UIImagePickerControllerDelegat
             let alertAction = UIAlertAction(title: "Close", style: .Default, handler: nil)
             alert.addAction(alertAction)
         }
+    }
+    
+    func sendProfileToDB(trackID trackID: String) {
+        let databaseChildPath = "user_contacts/\(AppState.sharedInstance.UUID)"
+        let data = [trackID : true]
+        self.ref.child(databaseChildPath).updateChildValues(data)
+        print("Profile sent to DB")
     }
 }
