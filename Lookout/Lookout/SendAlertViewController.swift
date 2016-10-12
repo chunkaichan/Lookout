@@ -12,7 +12,7 @@ import GoogleAPIClientForREST
 import GTMOAuth2
 import CoreLocation
 
-class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDelegate {
+class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDelegate, CoreDataManagerDelegate {
     
     
     // Google Auth
@@ -23,8 +23,10 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
     // Firebase
     var ref: FIRDatabaseReference!
     
+    let coreDataManager = CoreDataManager.shared
+    
     override func viewDidLoad() {
-        self.ref = FIRDatabase.database().reference()
+        ref = FIRDatabase.database().reference()
         setLocationManager()
     }
     
@@ -68,27 +70,34 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
             clientSecret: nil) {
             service.authorizer = auth
         }
+        
+        coreDataManager.delegate = self
+        coreDataManager.fetchCoreData()
     }
     
     
     
     @IBAction func tapSendEmail(sender: AnyObject) {
         let gtlMessage = GTLRGmail_Message()
-        gtlMessage.raw = self.generateRawString()
-        
-        let query = GTLRGmailQuery_UsersMessagesSend.queryWithObject(gtlMessage, userId: "me", uploadParameters: nil)
-        
-        service.executeQuery(query, completionHandler: {(ticket, response, error) -> Void in
-            print("ticket \(ticket)")
-            print("response \(response)")
-            print("error \(error)")
+        for contact in contacts {
+            print(contact.email)
+            gtlMessage.raw = self.generateRawString(toMail: contact.email)
             
-            if error != nil {
-                self.showAlert(message: "Failed to send your message", actionTitle: "Close")
-            } else {
-                self.showAlert(message: "Message sent!", actionTitle: "Close")
-            }
-        })
+            let query = GTLRGmailQuery_UsersMessagesSend.queryWithObject(gtlMessage, userId: "me", uploadParameters: nil)
+            
+            service.executeQuery(query, completionHandler: {(ticket, response, error) -> Void in
+                print("ticket \(ticket)")
+                print("response \(response)")
+                print("error \(error)")
+                
+                if error != nil {
+                    self.showAlert(message: "Failed to send your message", actionTitle: "Close")
+                } else {
+                    self.showAlert(message: "Message sent!", actionTitle: "Close")
+                }
+            })
+        }
+        
     }
     
     
@@ -102,14 +111,14 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
     
     var fromLocationURL = "<User location unavailable>"
     
-    func generateRawString() -> String {
+    func generateRawString(toMail toMail: String) -> String {
 //    func generateRawString(toMailName toMailName: String, toMailAddress: String, mailSubject: String, fromLocation: String) -> String {
         if (AppState.sharedInstance.userLatitude != 0.0) {
             fromLocationURL = "http://maps.google.com/maps?q=loc:\(AppState.sharedInstance.userLatitude),\(AppState.sharedInstance.userLongitude)"
         }
         
         let builder = MCOMessageBuilder()
-        builder.header.to = [MCOAddress(displayName: "Emergency contact", mailbox: "kyle791121@gmail.com")]
+        builder.header.to = [MCOAddress(displayName: "Emergency contact", mailbox: toMail)]
         builder.header.from = MCOAddress(displayName: "From Lookout: Emergency Notification", mailbox: "kyle791121@gmail.com")
         builder.header.subject = "Subject"
         builder.htmlBody = "This is a test msg" + "<br><br>" +
@@ -142,4 +151,19 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
         }
     }
     
+    var contacts: [Person] = []
+    
+    func manager(manager: CoreDataManager, didFetchContactData: AnyObject) {
+        guard let results = didFetchContactData as? [Contact] else { fatalError() }
+        if (results.count > 0) {
+            for result in results {
+                contacts.append(Person(
+                    name: result.name!,
+                    phoneNumber: result.number!,
+                    trackID: result.trackID!,
+                    email: result.email!,
+                    photo: result.photo!))
+            }
+        }
+    }
 }

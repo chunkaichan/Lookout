@@ -712,7 +712,6 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="28"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="30" id="D2J-CI-ksq"/>
-                                                    <constraint firstAttribute="height" constant="30" id="eAh-9A-itc"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Track" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="igm-A1-jFH">

@@ -11,7 +11,7 @@ import GoogleAPIClientForREST
 import GTMOAuth2
 import Firebase
 
-class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
+class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     let imagePicker = UIImagePickerController()
     
@@ -222,7 +222,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     var ref: FIRDatabaseReference!
     private var _refHandle: FIRDatabaseHandle!
     
-    
     // When the view loads, create necessary subviews
     // and initialize the Gmail API service
     override func viewDidLoad() {
@@ -250,6 +249,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         queryProfileFromDB()
         
         downloadFromStorage()
+        
         
     }
     

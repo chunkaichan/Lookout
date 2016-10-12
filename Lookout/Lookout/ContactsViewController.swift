@@ -31,7 +31,6 @@ class ContactsViewController: TabViewControllerTemplate, UITableViewDataSource, 
         contactsTable.dataSource = self
         contactsTable.delegate = self
         
-        coreDataManager.delegate = self
         
         ref = FIRDatabase.database().reference()
         queryContactsFromDB()
@@ -40,6 +39,8 @@ class ContactsViewController: TabViewControllerTemplate, UITableViewDataSource, 
     override func viewWillAppear(animated: Bool) {
 //        contacts = [ContactForTable(name: "Kyle", phoneNumber: "0987654321", trackID: "GLDkDlzgYJSxc7MVIyNfnL5TdXc2", email: "email@com.tw")]
         contacts = []
+        
+        coreDataManager.delegate = self
         coreDataManager.fetchCoreData()
     }
     
@@ -157,7 +158,7 @@ class ContactsViewController: TabViewControllerTemplate, UITableViewDataSource, 
     func showAlert(remoteUID remoteUID: String) {
         let alert = UIAlertController(
             title: nil,
-            message: "<\(remoteUID)> wants to set you as his/her contact",
+            message: "<\(remoteUID)> wants to set you as a contact",
             preferredStyle: UIAlertControllerStyle.Alert
         )
         let ok = UIAlertAction(
