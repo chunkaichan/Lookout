@@ -15,5 +15,7 @@ target 'Lookout' do
   pod 'GTMOAuth2', '~> 1.1.2'
   pod 'mailcore2-ios'
   pod 'Firebase/Storage'
+  pod 'Fabric'
+  pod 'Crashlytics'
 
 end
