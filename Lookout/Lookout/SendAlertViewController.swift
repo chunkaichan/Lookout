@@ -70,6 +70,7 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
             clientSecret: nil) {
             service.authorizer = auth
         }
+        contacts = []
         
         coreDataManager.delegate = self
         coreDataManager.fetchCoreData()
@@ -102,27 +103,31 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
     
     
     @IBAction func tapPhoneCall(sender: AnyObject) {
-        callNumber("+886987108876")
+        print(contacts.count)
+        let randomNumber = Int(arc4random_uniform(UInt32(contacts.count)))
+        callNumber(contacts[randomNumber].phoneNumber)
     }
     
     @IBAction func toggleSetting(sender: AnyObject) {
         NSNotificationCenter.defaultCenter().postNotificationName("toggleMenu", object: nil)
     }
     
-    var fromLocationURL = "<User location unavailable>"
+    var fromLocationURL = "- User location unavailable -"
     
     func generateRawString(toMail toMail: String) -> String {
-//    func generateRawString(toMailName toMailName: String, toMailAddress: String, mailSubject: String, fromLocation: String) -> String {
+        
         if (AppState.sharedInstance.userLatitude != 0.0) {
             fromLocationURL = "http://maps.google.com/maps?q=loc:\(AppState.sharedInstance.userLatitude),\(AppState.sharedInstance.userLongitude)"
         }
         
         let builder = MCOMessageBuilder()
         builder.header.to = [MCOAddress(displayName: "Emergency contact", mailbox: toMail)]
-        builder.header.from = MCOAddress(displayName: "From Lookout: Emergency Notification", mailbox: "kyle791121@gmail.com")
-        builder.header.subject = "Subject"
-        builder.htmlBody = "This is a test msg" + "<br><br>" +
-                           "From Location:" + "<br><br>" +
+//        builder.header.from = MCOAddress(displayName: "From Lookout: Emergency Notification", mailbox: "kyle791121@hotmail.com")
+        builder.header.subject = "From Lookout"
+        builder.htmlBody = "This is a emergency notification from Lookout." +
+                           "<br><br>" +
+                           "Sent from location:" +
+                           "<br>" +
                            "\(fromLocationURL)"
         
         builder.header.date = NSDate()

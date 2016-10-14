@@ -792,6 +792,7 @@
                                     <action selector="editButton:" destination="W0f-mr-W1w" eventType="touchUpInside" id="J35-xU-rcu"/>
                                 </connections>
                             </button>
+                            <color key="tintColor" red="0.25490196079999999" green="0.73725490199999999" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" id="o6m-d7-ba9">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="LET-9q-9VA">

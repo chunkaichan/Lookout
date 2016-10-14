@@ -51,9 +51,6 @@ class ContactsMapViewController: UIViewController, MKMapViewDelegate, CLLocation
     override func viewDidLoad() {
         super.viewDidLoad()
         self.ref = FIRDatabase.database().reference()
-        if let user = FIRAuth.auth()?.currentUser {
-            AppState.sharedInstance.UUID = user.uid
-        }
         
         contactMap.showsUserLocation = true
         contactMap.delegate = self

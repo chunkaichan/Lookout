@@ -36,8 +36,7 @@ class ContactsViewController: TabViewControllerTemplate, UITableViewDataSource, 
         queryContactsFromDB()
     }
     
-    override func viewWillAppear(animated: Bool) {
-//        contacts = [ContactForTable(name: "Kyle", phoneNumber: "0987654321", trackID: "GLDkDlzgYJSxc7MVIyNfnL5TdXc2", email: "email@com.tw")]
+    override func viewDidAppear(animated: Bool) {
         contacts = []
         
         coreDataManager.delegate = self

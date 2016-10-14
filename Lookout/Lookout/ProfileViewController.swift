@@ -174,7 +174,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         setTextFieldTransparent()
         inEditMode = false
     }
-    
+    // TODO: combine the functions below as 
+    // setTextFieldStatus(backgroundColor backgroundColor: CGColor,
+    // isEditable: Bool)
     func setTextFieldGray() {
         nameTextField.layer.backgroundColor = UIColor.grayColor().CGColor
         nameTextField.layer.cornerRadius = 5
@@ -230,6 +232,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         trackID.text = AppState.sharedInstance.UUID
         profilePhoto.layer.cornerRadius = profilePhoto.layer.frame.width/2
         profilePhoto.clipsToBounds = true
+        
         if let auth = GTMOAuth2ViewControllerTouch.authForGoogleFromKeychainForName(
             kKeychainItemName,
             clientID: kClientID,
