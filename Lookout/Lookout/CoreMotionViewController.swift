@@ -12,6 +12,11 @@ import Charts
 
 class CoreMotionViewController: UIViewController {
     
+    @IBAction func saveEventButton(sender: AnyObject) {
+        let time = NSDate()
+        shared.saveCoreData(time: time, data: yAxis, latitude: AppState.sharedInstance.userLatitude, longitude: AppState.sharedInstance.userLongitude, isAccident: nil)
+    }
+    
     @IBOutlet weak var xLineChartView: LineChartView!
     
     @IBAction func toggleSetting(sender: AnyObject) {
@@ -19,21 +24,20 @@ class CoreMotionViewController: UIViewController {
     }
     let manager = CMMotionManager()
     
-    var months = [""]
-    var unitsSold = [0.0]
-    
+    var xAxis = [""]
+    var yAxis = [0.0]
     
     var dataEntries: [ChartDataEntry] = []
     
+    let shared = EventCoreDataManager.shared
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        while (unitsSold.count < 200) {
-            months.append("")
-            unitsSold.append(0)
+        while (yAxis.count < 200) {
+            xAxis.append("")
+            yAxis.append(0)
         }
-        
         getAccelerationMotion()
-        
         
     }
     
@@ -85,9 +89,9 @@ class CoreMotionViewController: UIViewController {
                 [weak self] (data: CMAccelerometerData?, error: NSError?) in
                 if let acceleration = data?.acceleration {
                     let overallAcceleration = sqrt(acceleration.x*acceleration.x + acceleration.y*acceleration.y + acceleration.z*acceleration.z)
-                    self!.unitsSold.removeAtIndex(0)
-                    self!.unitsSold.append(overallAcceleration)
-                    self!.setChart(self!.months, values: self!.unitsSold)
+                    self!.yAxis.removeAtIndex(0)
+                    self!.yAxis.append(overallAcceleration)
+                    self!.setChart(self!.xAxis, values: self!.yAxis)
                 }
                 
             }

@@ -951,6 +951,16 @@
                                 </connections>
                             </button>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="8s1-fk-bIR">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="XSK-64-erR">
+                                <rect key="frame" x="560" y="12" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="event-add"/>
+                                <connections>
+                                    <action selector="saveEventButton:" destination="dKi-xL-hda" eventType="touchUpInside" id="bEW-ER-UU5"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="xLineChartView" destination="69O-8p-oJo" id="WDG-Ab-v6r"/>
@@ -1034,6 +1044,7 @@
         <image name="close" width="24" height="24"/>
         <image name="contacts" width="20" height="20"/>
         <image name="device-detection" width="20" height="20"/>
+        <image name="event-add" width="30" height="30"/>
         <image name="google-icon" width="24" height="24"/>
         <image name="navigation" width="64" height="64"/>
         <image name="phone-call" width="64" height="64"/>

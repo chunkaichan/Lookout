@@ -30,6 +30,8 @@
 		B5F1E4B41D9FF84C0007F663 /* CoreMotionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F1E4B31D9FF84C0007F663 /* CoreMotionViewController.swift */; };
 		B5F313A91DB382B7007284D4 /* Events+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F313A71DB382B7007284D4 /* Events+CoreDataProperties.swift */; };
 		B5F313AA1DB382B7007284D4 /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F313A81DB382B7007284D4 /* Events.swift */; };
+		B5F313AC1DB388CB007284D4 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F313AB1DB388CB007284D4 /* Event.swift */; };
+		B5F313AE1DB38DD7007284D4 /* EventCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F313AD1DB38DD7007284D4 /* EventCoreDataManager.swift */; };
 		B5F916571D98F01200CD01EB /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F916561D98F01200CD01EB /* Person.swift */; };
 		B5F9165C1D98F29C00CD01EB /* ContactTableViewXib.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5F9165B1D98F29C00CD01EB /* ContactTableViewXib.xib */; };
 		B5F9165E1D98F4B400CD01EB /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F9165D1D98F4B400CD01EB /* ContactTableViewCell.swift */; };
@@ -66,6 +68,8 @@
 		B5F1E4B31D9FF84C0007F663 /* CoreMotionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreMotionViewController.swift; sourceTree = "<group>"; };
 		B5F313A71DB382B7007284D4 /* Events+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Events+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B5F313A81DB382B7007284D4 /* Events.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Events.swift; sourceTree = "<group>"; };
+		B5F313AB1DB388CB007284D4 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		B5F313AD1DB38DD7007284D4 /* EventCoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCoreDataManager.swift; sourceTree = "<group>"; };
 		B5F916561D98F01200CD01EB /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		B5F9165B1D98F29C00CD01EB /* ContactTableViewXib.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ContactTableViewXib.xib; path = ../ContactTableViewXib.xib; sourceTree = "<group>"; };
 		B5F9165D1D98F4B400CD01EB /* ContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContactTableViewCell.swift; path = ../ContactTableViewCell.swift; sourceTree = "<group>"; };
@@ -136,6 +140,7 @@
 				B5BFA9021D95222600496D13 /* SendAlertViewController.swift */,
 				B5BFA9041D95223C00496D13 /* ContactsViewController.swift */,
 				B578DF5C1D9E3C36002E5439 /* CoreDataManager.swift */,
+				B5F313AD1DB38DD7007284D4 /* EventCoreDataManager.swift */,
 				B52C04171DA232E900A5CC06 /* ProfileViewController.swift */,
 				B5E776361DA3870800F0A0E1 /* Lookout-Bridging-Header.h */,
 				B5F916691D9937AE00CD01EB /* ContactsMapViewController.swift */,
@@ -148,6 +153,7 @@
 				B5C826501D9A746F000E9514 /* Constants.swift */,
 				B5C8264E1D9A7415000E9514 /* AppState.swift */,
 				B5F916561D98F01200CD01EB /* Person.swift */,
+				B5F313AB1DB388CB007284D4 /* Event.swift */,
 				B54E70481DA1433B007B2A04 /* LeftMenuTableViewCell.swift */,
 				B5F9165D1D98F4B400CD01EB /* ContactTableViewCell.swift */,
 				B5F9165B1D98F29C00CD01EB /* ContactTableViewXib.xib */,
@@ -308,9 +314,11 @@
 				B52C04181DA232E900A5CC06 /* ProfileViewController.swift in Sources */,
 				B578DF611D9E4630002E5439 /* Contact.swift in Sources */,
 				B5BFA9051D95223C00496D13 /* ContactsViewController.swift in Sources */,
+				B5F313AE1DB38DD7007284D4 /* EventCoreDataManager.swift in Sources */,
 				B578DF5D1D9E3C36002E5439 /* CoreDataManager.swift in Sources */,
 				B54E70491DA1433B007B2A04 /* LeftMenuTableViewCell.swift in Sources */,
 				B578DF601D9E4630002E5439 /* Contact+CoreDataProperties.swift in Sources */,
+				B5F313AC1DB388CB007284D4 /* Event.swift in Sources */,
 				B5C8264F1D9A7415000E9514 /* AppState.swift in Sources */,
 				B5BFA9031D95222600496D13 /* SendAlertViewController.swift in Sources */,
 				B5BFA9011D9521FC00496D13 /* LeftMenuTableViewController.swift in Sources */,

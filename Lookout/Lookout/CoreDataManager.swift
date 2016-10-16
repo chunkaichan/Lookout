@@ -6,7 +6,6 @@
 //  Copyright © 2016年 Chunkai Chan. All rights reserved.
 //
 
-import UIKit
 import Foundation
 import CoreData
 
@@ -23,6 +22,7 @@ extension CoreDataManagerDelegate {
 }
 
 class CoreDataManager {
+    
     static let shared = CoreDataManager()
     
     private init() {
