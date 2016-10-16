@@ -14,7 +14,6 @@ import CoreLocation
 
 class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDelegate, CoreDataManagerDelegate {
     
-    
     // Google Auth
     private let kKeychainItemName = "Gmail API"
     private let kClientID = "556205392726-s6pohtn44l7eqpgmf0qtjq8mp0crt1nd.apps.googleusercontent.com"
@@ -45,12 +44,18 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        self.locationManager.startMonitoringSignificantLocationChanges()
-        if let userLatitude = self.locationManager.location?.coordinate.latitude, userLongitude = self.locationManager.location?.coordinate.longitude {
+        locationManager.allowsBackgroundLocationUpdates = true
+        locationManager.startMonitoringSignificantLocationChanges()
+        if let userLatitude = locationManager.location?.coordinate.latitude, userLongitude = locationManager.location?.coordinate.longitude {
             AppState.sharedInstance.userLatitude = userLatitude
             AppState.sharedInstance.userLongitude = userLongitude
         }
+        
         sendLocationToDB()
+        
+        if UIApplication.sharedApplication().applicationState == .Background {
+            NSLog("background time: %f", UIApplication.sharedApplication().backgroundTimeRemaining)
+        }
         
     }
     
@@ -60,7 +65,8 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
         data[Constants.Location.longitude] = AppState.sharedInstance.userLongitude
         data[Constants.Location.timestamp] = NSDate().timeIntervalSince1970
         self.ref.child("user_locations/\(AppState.sharedInstance.UUID)").setValue(data)
-        print("Location sent to DB")
+        
+        print("Send current location to database.")
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -82,7 +88,7 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
         let gtlMessage = GTLRGmail_Message()
         for contact in contacts {
             print(contact.email)
-            gtlMessage.raw = self.generateRawString(toMail: contact.email)
+            gtlMessage.raw = self.generateRawString(toMail: contact.email, body: "This is a emergency notification from Lookout.")
             
             let query = GTLRGmailQuery_UsersMessagesSend.queryWithObject(gtlMessage, userId: "me", uploadParameters: nil)
             
@@ -94,13 +100,11 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
                 if error != nil {
                     self.showAlert(message: "Failed to send your message", actionTitle: "Close")
                 } else {
-                    self.showAlert(message: "Message sent!", actionTitle: "Close")
+                    self.showAlertAfterSending()
                 }
             })
         }
-        
     }
-    
     
     @IBAction func tapPhoneCall(sender: AnyObject) {
         print(contacts.count)
@@ -114,7 +118,7 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
     
     var fromLocationURL = "- User location unavailable -"
     
-    func generateRawString(toMail toMail: String) -> String {
+    func generateRawString(toMail toMail: String, body: String) -> String {
         
         if (AppState.sharedInstance.userLatitude != 0.0) {
             fromLocationURL = "http://maps.google.com/maps?q=loc:\(AppState.sharedInstance.userLatitude),\(AppState.sharedInstance.userLongitude)"
@@ -124,7 +128,7 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
         builder.header.to = [MCOAddress(displayName: "Emergency contact", mailbox: toMail)]
 //        builder.header.from = MCOAddress(displayName: "From Lookout: Emergency Notification", mailbox: "kyle791121@hotmail.com")
         builder.header.subject = "From Lookout"
-        builder.htmlBody = "This is a emergency notification from Lookout." +
+        builder.htmlBody = "\(body)" +
                            "<br><br>" +
                            "Sent from location:" +
                            "<br>" +
@@ -145,6 +149,48 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
             alert.addAction(alertAction)
         }
         self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func showAlertAfterSending() {
+        let time = NSDate()
+        let alert = UIAlertController(
+            title: nil,
+            message: "\(time)\nYou just sent an notification to your contacts.\nDo you want to send a safety message?",
+            preferredStyle: UIAlertControllerStyle.Alert
+        )
+        let ok = UIAlertAction(
+            title: "YES",
+            style: UIAlertActionStyle.Default,
+            handler: {(alert: UIAlertAction!) in
+                let gtlMessage = GTLRGmail_Message()
+                for contact in self.contacts {
+                    print(contact.email)
+                    gtlMessage.raw = self.generateRawString(toMail: contact.email, body: "I am safe right now!")
+                    
+                    let query = GTLRGmailQuery_UsersMessagesSend.queryWithObject(gtlMessage, userId: "me", uploadParameters: nil)
+                    
+                    self.service.executeQuery(query, completionHandler: {(ticket, response, error) -> Void in
+                        print("ticket \(ticket)")
+                        print("response \(response)")
+                        print("error \(error)")
+                        
+                        if error != nil {
+                            self.showAlert(message: "Failed to send your message.", actionTitle: "Close")
+                        } else {
+                            self.showAlert(message: "Safety message is successfully sent!", actionTitle: "Close")
+                        }
+                    })
+                }
+            }
+        )
+        let cancel = UIAlertAction(
+            title: "NO",
+            style: UIAlertActionStyle.Default,
+            handler: nil
+        )
+        alert.addAction(cancel)
+        alert.addAction(ok)
+        presentViewController(alert, animated: true, completion: nil)
     }
     
     private func callNumber(phoneNumber:String) {
@@ -171,4 +217,14 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
             }
         }
     }
+}
+
+protocol SendAlertViewControllerDelegate: class {
+    func manager(manager manager: SendAlertViewController, didGetCoreMotion: AnyObject)
+    func manager(manager manager: SendAlertViewController, didReachThreshold: AnyObject)
+}
+
+extension SendAlertViewController {
+    func manager(manager manager: SendAlertViewController, didGetCoreMotion: AnyObject) {}
+    func manager(manager manager: SendAlertViewController, didReachThreshold: AnyObject) {}
 }
