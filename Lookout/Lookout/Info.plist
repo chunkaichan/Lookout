@@ -52,7 +52,6 @@
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
-		<string>App registers for location updates</string>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>

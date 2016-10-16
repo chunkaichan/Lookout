@@ -28,6 +28,8 @@
 		B5C874661D93D73C00D192D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5C874641D93D73C00D192D9 /* LaunchScreen.storyboard */; };
 		B5C874701D94093500D192D9 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8746F1D94093500D192D9 /* ContainerViewController.swift */; };
 		B5F1E4B41D9FF84C0007F663 /* CoreMotionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F1E4B31D9FF84C0007F663 /* CoreMotionViewController.swift */; };
+		B5F313A91DB382B7007284D4 /* Events+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F313A71DB382B7007284D4 /* Events+CoreDataProperties.swift */; };
+		B5F313AA1DB382B7007284D4 /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F313A81DB382B7007284D4 /* Events.swift */; };
 		B5F916571D98F01200CD01EB /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F916561D98F01200CD01EB /* Person.swift */; };
 		B5F9165C1D98F29C00CD01EB /* ContactTableViewXib.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5F9165B1D98F29C00CD01EB /* ContactTableViewXib.xib */; };
 		B5F9165E1D98F4B400CD01EB /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F9165D1D98F4B400CD01EB /* ContactTableViewCell.swift */; };
@@ -62,6 +64,8 @@
 		B5C8746F1D94093500D192D9 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		B5E776361DA3870800F0A0E1 /* Lookout-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Lookout-Bridging-Header.h"; path = "Lookout/Lookout-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		B5F1E4B31D9FF84C0007F663 /* CoreMotionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreMotionViewController.swift; sourceTree = "<group>"; };
+		B5F313A71DB382B7007284D4 /* Events+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Events+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B5F313A81DB382B7007284D4 /* Events.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Events.swift; sourceTree = "<group>"; };
 		B5F916561D98F01200CD01EB /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		B5F9165B1D98F29C00CD01EB /* ContactTableViewXib.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ContactTableViewXib.xib; path = ../ContactTableViewXib.xib; sourceTree = "<group>"; };
 		B5F9165D1D98F4B400CD01EB /* ContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContactTableViewCell.swift; path = ../ContactTableViewCell.swift; sourceTree = "<group>"; };
@@ -101,6 +105,8 @@
 		B5C8744C1D93D73C00D192D9 = {
 			isa = PBXGroup;
 			children = (
+				B5F313A71DB382B7007284D4 /* Events+CoreDataProperties.swift */,
+				B5F313A81DB382B7007284D4 /* Events.swift */,
 				B578DF5E1D9E4630002E5439 /* Contact+CoreDataProperties.swift */,
 				B578DF5F1D9E4630002E5439 /* Contact.swift */,
 				B5C874571D93D73C00D192D9 /* Lookout */,
@@ -308,6 +314,8 @@
 				B5C8264F1D9A7415000E9514 /* AppState.swift in Sources */,
 				B5BFA9031D95222600496D13 /* SendAlertViewController.swift in Sources */,
 				B5BFA9011D9521FC00496D13 /* LeftMenuTableViewController.swift in Sources */,
+				B5F313A91DB382B7007284D4 /* Events+CoreDataProperties.swift in Sources */,
+				B5F313AA1DB382B7007284D4 /* Events.swift in Sources */,
 				B5C874611D93D73C00D192D9 /* Lookout.xcdatamodeld in Sources */,
 				B5C826511D9A746F000E9514 /* Constants.swift in Sources */,
 				B5F1E4B41D9FF84C0007F663 /* CoreMotionViewController.swift in Sources */,

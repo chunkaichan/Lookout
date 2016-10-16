@@ -11,6 +11,7 @@ import Firebase
 import GoogleAPIClientForREST
 import GTMOAuth2
 import CoreLocation
+import AudioToolbox
 
 class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDelegate, CoreDataManagerDelegate {
     
@@ -107,9 +108,12 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
     }
     
     @IBAction func tapPhoneCall(sender: AnyObject) {
-        print(contacts.count)
-        let randomNumber = Int(arc4random_uniform(UInt32(contacts.count)))
-        callNumber(contacts[randomNumber].phoneNumber)
+        if contacts.count==0 {
+            showAlert(message: "Please add a contact", actionTitle: "OK")
+        } else {
+            let randomNumber = Int(arc4random_uniform(UInt32(contacts.count)))
+            callNumber(contacts[randomNumber].phoneNumber)
+        }
     }
     
     @IBAction func toggleSetting(sender: AnyObject) {
@@ -143,6 +147,7 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
     }
     
     func showAlert(message message: String, actionTitle: String) {
+        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .Alert)
         if (alert.actions.count == 0) {
             let alertAction = UIAlertAction(title: actionTitle, style: .Default, handler: nil)
@@ -152,6 +157,7 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
     }
     
     func showAlertAfterSending() {
+        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
         let time = NSDate()
         let alert = UIAlertController(
             title: nil,

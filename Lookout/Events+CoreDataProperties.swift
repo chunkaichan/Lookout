@@ -1,0 +1,23 @@
+//
+//  Events+CoreDataProperties.swift
+//  Lookout
+//
+//  Created by Chunkai Chan on 2016/10/16.
+//  Copyright © 2016年 Chunkai Chan. All rights reserved.
+//
+//  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
+//  to delete and recreate this implementation file for your updated model.
+//
+
+import Foundation
+import CoreData
+
+extension Events {
+
+    @NSManaged var time: NSDate?
+    @NSManaged var latitude: NSNumber?
+    @NSManaged var longitude: NSNumber?
+    @NSManaged var isAccident: NSNumber?
+    @NSManaged var data: NSObject?
+
+}
