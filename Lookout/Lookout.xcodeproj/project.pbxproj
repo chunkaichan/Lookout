@@ -32,6 +32,7 @@
 		B5F313AA1DB382B7007284D4 /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F313A81DB382B7007284D4 /* Events.swift */; };
 		B5F313AC1DB388CB007284D4 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F313AB1DB388CB007284D4 /* Event.swift */; };
 		B5F313AE1DB38DD7007284D4 /* EventCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F313AD1DB38DD7007284D4 /* EventCoreDataManager.swift */; };
+		B5F313B01DB39344007284D4 /* EventsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F313AF1DB39344007284D4 /* EventsTableViewCell.swift */; };
 		B5F916571D98F01200CD01EB /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F916561D98F01200CD01EB /* Person.swift */; };
 		B5F9165C1D98F29C00CD01EB /* ContactTableViewXib.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5F9165B1D98F29C00CD01EB /* ContactTableViewXib.xib */; };
 		B5F9165E1D98F4B400CD01EB /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F9165D1D98F4B400CD01EB /* ContactTableViewCell.swift */; };
@@ -70,6 +71,7 @@
 		B5F313A81DB382B7007284D4 /* Events.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Events.swift; sourceTree = "<group>"; };
 		B5F313AB1DB388CB007284D4 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		B5F313AD1DB38DD7007284D4 /* EventCoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCoreDataManager.swift; sourceTree = "<group>"; };
+		B5F313AF1DB39344007284D4 /* EventsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsTableViewCell.swift; sourceTree = "<group>"; };
 		B5F916561D98F01200CD01EB /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		B5F9165B1D98F29C00CD01EB /* ContactTableViewXib.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ContactTableViewXib.xib; path = ../ContactTableViewXib.xib; sourceTree = "<group>"; };
 		B5F9165D1D98F4B400CD01EB /* ContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContactTableViewCell.swift; path = ../ContactTableViewCell.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 				B5C8264E1D9A7415000E9514 /* AppState.swift */,
 				B5F916561D98F01200CD01EB /* Person.swift */,
 				B5F313AB1DB388CB007284D4 /* Event.swift */,
+				B5F313AF1DB39344007284D4 /* EventsTableViewCell.swift */,
 				B54E70481DA1433B007B2A04 /* LeftMenuTableViewCell.swift */,
 				B5F9165D1D98F4B400CD01EB /* ContactTableViewCell.swift */,
 				B5F9165B1D98F29C00CD01EB /* ContactTableViewXib.xib */,
@@ -316,6 +319,7 @@
 				B5BFA9051D95223C00496D13 /* ContactsViewController.swift in Sources */,
 				B5F313AE1DB38DD7007284D4 /* EventCoreDataManager.swift in Sources */,
 				B578DF5D1D9E3C36002E5439 /* CoreDataManager.swift in Sources */,
+				B5F313B01DB39344007284D4 /* EventsTableViewCell.swift in Sources */,
 				B54E70491DA1433B007B2A04 /* LeftMenuTableViewCell.swift in Sources */,
 				B578DF601D9E4630002E5439 /* Contact+CoreDataProperties.swift in Sources */,
 				B5F313AC1DB388CB007284D4 /* Event.swift in Sources */,

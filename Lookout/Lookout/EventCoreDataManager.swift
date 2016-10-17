@@ -15,7 +15,7 @@ protocol EventCoreDataManagerDelegate: class {
     func manager(manager: EventCoreDataManager, didFetchEventData: AnyObject)
 }
 
-extension EventCoreDataManager {
+extension EventCoreDataManagerDelegate {
     func manager(manager: EventCoreDataManager, didSaveEventData: AnyObject) {}
     func manager(manager: EventCoreDataManager, getFetchEventError: ErrorType) {}
     func manager(manager: EventCoreDataManager, didFetchEventData: AnyObject) {}
@@ -33,7 +33,7 @@ class EventCoreDataManager {
     
     private var moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
-    weak var delegate: EventCoreDataManager?
+    weak var delegate: EventCoreDataManagerDelegate?
     
     func saveCoreData(time time: NSDate, data: [Double], latitude: Double, longitude: Double, isAccident: Bool?) {
         let event = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: moc) as! Events

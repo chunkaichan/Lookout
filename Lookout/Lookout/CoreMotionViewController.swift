@@ -10,11 +10,13 @@ import UIKit
 import CoreMotion
 import Charts
 
-class CoreMotionViewController: UIViewController {
+class CoreMotionViewController: UIViewController, EventCoreDataManagerDelegate {
+    
+    @IBOutlet weak var eventsUITableView: UITableView!
     
     @IBAction func saveEventButton(sender: AnyObject) {
         let time = NSDate()
-        shared.saveCoreData(time: time, data: yAxis, latitude: AppState.sharedInstance.userLatitude, longitude: AppState.sharedInstance.userLongitude, isAccident: nil)
+        eventCoreDataManager.saveCoreData(time: time, data: yAxis, latitude: AppState.sharedInstance.userLatitude, longitude: AppState.sharedInstance.userLongitude, isAccident: nil)
     }
     
     @IBOutlet weak var xLineChartView: LineChartView!
@@ -29,7 +31,9 @@ class CoreMotionViewController: UIViewController {
     
     var dataEntries: [ChartDataEntry] = []
     
-    let shared = EventCoreDataManager.shared
+    let eventCoreDataManager = EventCoreDataManager.shared
+    
+    var events:[Event] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,8 +42,20 @@ class CoreMotionViewController: UIViewController {
             yAxis.append(0)
         }
         getAccelerationMotion()
+        eventCoreDataManager.delegate = self
         
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        eventCoreDataManager.fetchCoreData()
+    }
+    
+//    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        
+//    }
+//    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+//        
+//    }
     
     func setChart(dataPoints: [String], values: [Double]) {
         var dataEntries: [ChartDataEntry] = []
@@ -98,4 +114,20 @@ class CoreMotionViewController: UIViewController {
         }
     }
     
+    func manager(manager: EventCoreDataManager, didSaveEventData: AnyObject) {
+        print("Save event")
+    }
+    func manager(manager: EventCoreDataManager, didFetchEventData: AnyObject) {
+        print("Fetch event")
+        guard let results = didFetchEventData as? [Events] else {fatalError()}
+        if (results.count>0) {
+            for result in results {
+                events.append(Event(time: result.time!, data: result.data! as! [Double], latitude: result.latitude! as Double, longitude: result.longitude! as Double, isAccident: result.isAccident as? Bool))
+            }
+            print(events[0].data)
+        }
+    }
+    func manager(manager: EventCoreDataManager, getFetchEventError: ErrorType) {
+        
+    }
 }

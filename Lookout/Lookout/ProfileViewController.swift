@@ -253,7 +253,25 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         downloadFromStorage()
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
         
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+            if view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= (keyboardSize.height - 65)
+            }
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+            if view.frame.origin.y != 0 {
+                self.view.frame.origin.y += (keyboardSize.height - 65)
+            }
+        }
     }
     
     // When the view appears, ensure that the Gmail API service is authorized
@@ -265,6 +283,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             connectedStatus.text = "Connected!"
             connectGmail.setTitle(" Disconnect ", forState: .Normal)
         }
+        print(nameTextField.frame.origin.y)
+        print(bloodTextField.frame.origin.y)
     }
     
     let databaseChildPath = "user_profiles/\(AppState.sharedInstance.UUID)"
