@@ -11,7 +11,7 @@ import GoogleAPIClientForREST
 import GTMOAuth2
 import Firebase
 
-class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
     let imagePicker = UIImagePickerController()
     
@@ -77,6 +77,11 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             changeBarButtonImage(leftButtonLink: cancelLink, rightButtonLink: saveLink)
             inEditMode = true
         }
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return true
     }
     
     @IBAction func closeButton(sender: AnyObject) {
