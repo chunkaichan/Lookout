@@ -24,7 +24,7 @@ class LeftMenuTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = leftMenu.dequeueReusableCellWithIdentifier("LeftMenuCell", forIndexPath:  indexPath) as! LeftMenuTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("LeftMenuCell", forIndexPath: indexPath) as! LeftMenuTableViewCell
         cell.leftMenuIcon.image = UIImage(named: "\(menuIcon[indexPath.row])")
         return cell
     }

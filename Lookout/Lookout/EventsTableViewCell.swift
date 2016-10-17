@@ -10,5 +10,6 @@ import UIKit
 
 class EventsTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var eventTime: UILabel!
     @IBOutlet weak var baseViewInCell: UIView!
 }

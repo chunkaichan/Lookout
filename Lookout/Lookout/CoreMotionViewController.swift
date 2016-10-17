@@ -10,7 +10,7 @@ import UIKit
 import CoreMotion
 import Charts
 
-class CoreMotionViewController: UIViewController, EventCoreDataManagerDelegate {
+class CoreMotionViewController: UIViewController, EventCoreDataManagerDelegate, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var eventsUITableView: UITableView!
     
@@ -37,7 +37,7 @@ class CoreMotionViewController: UIViewController, EventCoreDataManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        while (yAxis.count < 200) {
+        while (yAxis.count < 100) {
             xAxis.append("")
             yAxis.append(0)
         }
@@ -100,14 +100,17 @@ class CoreMotionViewController: UIViewController, EventCoreDataManagerDelegate {
     
     func getAccelerationMotion() {
         if manager.accelerometerAvailable {
-            manager.accelerometerUpdateInterval = 0.02
+            manager.accelerometerUpdateInterval = 0.04
             manager.startAccelerometerUpdatesToQueue(NSOperationQueue.mainQueue()) {
                 [weak self] (data: CMAccelerometerData?, error: NSError?) in
                 if let acceleration = data?.acceleration {
                     let overallAcceleration = sqrt(acceleration.x*acceleration.x + acceleration.y*acceleration.y + acceleration.z*acceleration.z)
                     self!.yAxis.removeAtIndex(0)
                     self!.yAxis.append(overallAcceleration)
-                    self!.setChart(self!.xAxis, values: self!.yAxis)
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self!.setChart(self!.xAxis, values: self!.yAxis)
+                    })
+                    
                 }
                 
             }
@@ -124,10 +127,26 @@ class CoreMotionViewController: UIViewController, EventCoreDataManagerDelegate {
             for result in results {
                 events.append(Event(time: result.time!, data: result.data! as! [Double], latitude: result.latitude! as Double, longitude: result.longitude! as Double, isAccident: result.isAccident as? Bool))
             }
-            print(events[0].data)
+            dispatch_async(dispatch_get_main_queue(), {
+                self.eventsUITableView.reloadData()
+            })
         }
     }
     func manager(manager: EventCoreDataManager, getFetchEventError: ErrorType) {
         
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(events.count)
+        return events.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("EventsTableCell", forIndexPath: indexPath) as! EventsTableViewCell
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy/MM/dd  HH:mm:ss"
+        let convertedDate = dateFormatter.stringFromDate(events[indexPath.row].time)
+        cell.eventTime.text = "\(convertedDate)"
+        return cell
     }
 }

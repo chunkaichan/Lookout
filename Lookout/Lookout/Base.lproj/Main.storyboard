@@ -990,8 +990,8 @@
                                                     <rect key="frame" x="0.0" y="8" width="550" height="51"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VfN-Sz-tjs">
-                                                            <rect key="frame" x="40" y="12" width="470" height="28"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                                            <rect key="frame" x="40" y="14" width="470" height="24"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -1013,9 +1013,14 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="baseViewInCell" destination="AY6-5T-0zV" id="60r-xT-C2g"/>
+                                            <outlet property="eventTime" destination="VfN-Sz-tjs" id="jTd-qq-5J5"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="dKi-xL-hda" id="GL6-LZ-fGH"/>
+                                    <outlet property="delegate" destination="dKi-xL-hda" id="MQl-pw-oVK"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
