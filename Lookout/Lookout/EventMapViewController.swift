@@ -23,7 +23,10 @@ class EventMapViewController: UIViewController {
         
         // Do any additional setup after loading the view.
         
+        setChart(xdata, values: (event?.data)!)
+        setAnnotation(latitudeDegree: (event?.latitude)!, longitudeDegree: (event?.longitude)!, timestamp: (event?.time)!)
     }
+    
     
     func setChart(dataPoints: [String], values: [Double]) {
         var dataEntries: [ChartDataEntry] = []
@@ -65,4 +68,24 @@ class EventMapViewController: UIViewController {
         eventChart.legend.enabled = false
     }
 
+    var myAnnotation: MKPointAnnotation = MKPointAnnotation()
+    
+    func setAnnotation(latitudeDegree latitudeDegree: Double, longitudeDegree: Double, timestamp: NSDate) {
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy/MM/dd  HH:mm:ss"
+        let convertedDate = dateFormatter.stringFromDate(timestamp)
+        
+        myAnnotation.coordinate = CLLocationCoordinate2DMake(latitudeDegree, longitudeDegree)
+        myAnnotation.title = "\(convertedDate)"
+        if (eventMap.annotations.isEmpty) {
+            // remote location is available and annotation has not been set yet
+            eventMap.addAnnotation(myAnnotation)
+            let region = MKCoordinateRegion(center: CLLocationCoordinate2DMake(latitudeDegree, longitudeDegree), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+            self.eventMap.setRegion(region, animated: false)
+        }
+        
+    }
+
+    
 }

@@ -27,29 +27,29 @@ class CoreMotionViewController: UIViewController, EventCoreDataManagerDelegate, 
     let manager = CMMotionManager()
     
     var xAxis = [""]
-    var yAxis = [0.0]
+    var yAxis = [1.0]
     
     var dataEntries: [ChartDataEntry] = []
     
     let eventCoreDataManager = EventCoreDataManager.shared
     
-    
+    var event: Event?
     var events:[Event] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         while (yAxis.count < 100) {
             xAxis.append("")
-            yAxis.append(0)
+            yAxis.append(1.0)
         }
         getAccelerationMotion()
         eventCoreDataManager.delegate = self
-        
+        events = []
+        eventCoreDataManager.fetchCoreData()
     }
     
     override func viewDidAppear(animated: Bool) {
-        events = []
-        eventCoreDataManager.fetchCoreData()
+        
     }
     
     func setChart(dataPoints: [String], values: [Double]) {
@@ -124,12 +124,16 @@ class CoreMotionViewController: UIViewController, EventCoreDataManagerDelegate, 
                 
             }
             dispatch_async(dispatch_get_main_queue(), {
-                self.eventsUITableView.reloadData()
+                UIView.transitionWithView(self.eventsUITableView, duration: 0.35, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
+                    () -> Void in
+                    self.eventsUITableView.reloadData()
+                    }, completion: nil)
             })
         }
     }
+    
     func manager(manager: EventCoreDataManager, getFetchEventError: ErrorType) {
-        
+        print("Error when fetch events from core data.")
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -140,7 +144,7 @@ class CoreMotionViewController: UIViewController, EventCoreDataManagerDelegate, 
         let index = (events.count - 1) - indexPath.row
         let cell = tableView.dequeueReusableCellWithIdentifier("EventsTableCell", forIndexPath: indexPath) as! EventsTableViewCell
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy/MM/dd  HH:mm:ss"
+        dateFormatter.dateFormat = "yyyy-MM-dd  HH:mm:ss"
         let convertedDate = dateFormatter.stringFromDate(events[index].time)
         cell.eventTime.text = "\(convertedDate)"
         return cell
@@ -155,6 +159,20 @@ class CoreMotionViewController: UIViewController, EventCoreDataManagerDelegate, 
                 eventCoreDataManager.saveCoreData(eventToSave: event)
             }
         }
-
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let index = (events.count - 1) - indexPath.row
+        event = events[index]
+        self.performSegueWithIdentifier("SegueEventDetail", sender: [])
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "SegueEventDetail" {
+            let destination: EventMapViewController = segue.destinationViewController as! EventMapViewController
+            destination.xdata = xAxis
+            destination.event = event
+        }
     }
 }

@@ -34,7 +34,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             // Disconnect
             GTMOAuth2ViewControllerTouch.removeAuthFromKeychainForName("Gmail API")
             self.connectGmail.setTitle(" Connect ", forState: .Normal)
-            self.connectedStatus.text = " Not connected "
+            self.connectedStatus.text = "Not connected"
         }
         
     }
@@ -143,8 +143,18 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     let editLink = "profile-edit"
     
     func changeBarButtonImage(leftButtonLink leftButtonLink: String, rightButtonLink: String) {
-        editButtonStyle.setImage(UIImage(named: leftButtonLink), forState: .Normal)
-        closeButtonStyle.setImage(UIImage(named: rightButtonLink), forState: .Normal)
+        dispatch_async(dispatch_get_main_queue(), {
+            UIView.transitionWithView(self.editButtonStyle, duration: 0.35, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
+                () -> Void in
+                self.editButtonStyle.setImage(UIImage(named: leftButtonLink), forState: .Normal)
+                }, completion: nil)
+            UIView.transitionWithView(self.closeButtonStyle, duration: 0.35, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
+                () -> Void in
+                self.closeButtonStyle.setImage(UIImage(named: rightButtonLink), forState: .Normal)
+                }, completion: nil)
+        })
+        
+        
     }
     
     func setPhotoPicker() {
@@ -194,25 +204,40 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     // setTextFieldStatus(backgroundColor backgroundColor: CGColor,
     // isEditable: Bool)
     func setTextFieldGray() {
-        nameTextField.layer.backgroundColor = UIColor.grayColor().CGColor
-        nameTextField.layer.cornerRadius = 5
-        birthTextField.layer.backgroundColor = UIColor.grayColor().CGColor
-        birthTextField.layer.cornerRadius = 5
-        addressTextField.layer.backgroundColor = UIColor.grayColor().CGColor
-        addressTextField.layer.cornerRadius = 5
-        bloodTextField.layer.backgroundColor = UIColor.grayColor().CGColor
-        bloodTextField.layer.cornerRadius = 5
-        phoneTextField.layer.backgroundColor = UIColor.grayColor().CGColor
-        phoneTextField.layer.cornerRadius = 5
+        dispatch_async(dispatch_get_main_queue(), {
+            UIView.animateWithDuration(0.25, delay: 0, options: .TransitionCrossDissolve, animations: {() -> Void in
+                self.nameTextField.layer.backgroundColor = UIColor.grayColor().CGColor
+                self.nameTextField.layer.cornerRadius = 5
+                self.birthTextField.layer.backgroundColor = UIColor.grayColor().CGColor
+                self.birthTextField.layer.cornerRadius = 5
+                
+                self.addressTextField.layer.backgroundColor = UIColor.grayColor().CGColor
+                self.addressTextField.layer.cornerRadius = 5
+                
+                self.bloodTextField.layer.backgroundColor = UIColor.grayColor().CGColor
+                self.bloodTextField.layer.cornerRadius = 5
+                
+                self.phoneTextField.layer.backgroundColor = UIColor.grayColor().CGColor
+                self.phoneTextField.layer.cornerRadius = 5
+                }, completion: nil)
+            
+        })
         setTextFieldEditable(isEditable: true)
     }
     
     func setTextFieldTransparent() {
-        nameTextField.layer.backgroundColor = UIColor.clearColor().CGColor
-        birthTextField.layer.backgroundColor = UIColor.clearColor().CGColor
-        addressTextField.layer.backgroundColor = UIColor.clearColor().CGColor
-        bloodTextField.layer.backgroundColor = UIColor.clearColor().CGColor
-        phoneTextField.layer.backgroundColor = UIColor.clearColor().CGColor
+        dispatch_async(dispatch_get_main_queue(), {
+            UIView.animateWithDuration(0.25, delay: 0, options: .TransitionCrossDissolve, animations: {() -> Void in
+                
+                self.nameTextField.layer.backgroundColor = UIColor.clearColor().CGColor
+                self.birthTextField.layer.backgroundColor = UIColor.clearColor().CGColor
+                self.addressTextField.layer.backgroundColor = UIColor.clearColor().CGColor
+                self.bloodTextField.layer.backgroundColor = UIColor.clearColor().CGColor
+                self.phoneTextField.layer.backgroundColor = UIColor.clearColor().CGColor
+                
+                }, completion: nil)
+            
+        })
         setTextFieldEditable(isEditable: false)
     }
     
@@ -301,9 +326,10 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
     }
     
-    let databaseChildPath = "user_profiles/\(AppState.sharedInstance.UUID)"
+    
     
     func sendProfileToDB() {
+        let databaseChildPath = "user_profiles/\(AppState.sharedInstance.UUID)"
         var data = [Constants.Profile.name : nameTextField.text!]
         data[Constants.Profile.birth] = birthTextField.text!
         data[Constants.Profile.address] = addressTextField.text!
@@ -314,6 +340,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     func queryProfileFromDB() {
+        let databaseChildPath = "user_profiles/\(AppState.sharedInstance.UUID)"
         _refHandle = self.ref.child(databaseChildPath).observeEventType(.Value, withBlock: { (snapshot) -> Void in
             if (snapshot.childrenCount != 0) {
                 print("Load profile from DB")

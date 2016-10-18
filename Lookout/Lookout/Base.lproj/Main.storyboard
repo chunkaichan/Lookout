@@ -495,11 +495,16 @@
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile-phone" translatesAutoresizingMaskIntoConstraints="NO" id="SKi-LY-3cn">
                                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                             </imageView>
-                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text=" Phone Number" textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="miD-ib-APz">
+                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone Number" textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="miD-ib-APz">
                                                                 <rect key="frame" x="45" y="0.0" width="235" height="30"/>
                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <textInputTraits key="textInputTraits"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
+                                                                        <color key="value" red="0.49803921579999999" green="0.49803921579999999" blue="0.49803921579999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
                                                                 <connections>
                                                                     <outlet property="delegate" destination="W0f-mr-W1w" id="ntP-8M-3ab"/>
                                                                 </connections>
@@ -515,11 +520,16 @@
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile-address" translatesAutoresizingMaskIntoConstraints="NO" id="GTx-fU-OCV">
                                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                             </imageView>
-                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text=" Address" textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="IhV-fJ-TRH">
+                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Address" textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="IhV-fJ-TRH">
                                                                 <rect key="frame" x="45" y="0.0" width="235" height="30"/>
                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <textInputTraits key="textInputTraits"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
+                                                                        <color key="value" red="0.49803921579999999" green="0.49803921579999999" blue="0.49803921579999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
                                                                 <connections>
                                                                     <outlet property="delegate" destination="W0f-mr-W1w" id="2Rx-Z9-Rtt"/>
                                                                 </connections>
@@ -535,11 +545,16 @@
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile-name" translatesAutoresizingMaskIntoConstraints="NO" id="MJd-1Q-0wa">
                                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                             </imageView>
-                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text=" Name" textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="uVd-Wc-Yos">
+                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="uVd-Wc-Yos">
                                                                 <rect key="frame" x="45" y="0.0" width="235" height="30"/>
                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <textInputTraits key="textInputTraits"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
+                                                                        <color key="value" red="0.49803921579999999" green="0.49803921579999999" blue="0.49803921579999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
                                                                 <connections>
                                                                     <outlet property="delegate" destination="W0f-mr-W1w" id="UVc-RC-vDZ"/>
                                                                 </connections>
@@ -555,7 +570,7 @@
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile-birth" translatesAutoresizingMaskIntoConstraints="NO" id="MdN-va-t7a">
                                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                             </imageView>
-                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text=" Birthday" textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="oYY-NK-DyL">
+                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Birthday" textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="oYY-NK-DyL">
                                                                 <rect key="frame" x="45" y="0.0" width="235" height="30"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="30" id="YTb-5e-vid"/>
@@ -563,6 +578,11 @@
                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <textInputTraits key="textInputTraits"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
+                                                                        <color key="value" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
                                                                 <connections>
                                                                     <outlet property="delegate" destination="W0f-mr-W1w" id="m13-Hm-apJ"/>
                                                                 </connections>
@@ -572,14 +592,14 @@
                                                             <constraint firstAttribute="height" constant="30" id="kj1-S6-hwh"/>
                                                         </constraints>
                                                     </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="pFx-ic-Stl" userLabel="Mail Stack View">
-                                                        <rect key="frame" x="0.0" y="240" width="168" height="30"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="pFx-ic-Stl" userLabel="Mail Stack View">
+                                                        <rect key="frame" x="0.0" y="240" width="159" height="30"/>
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile-mail" translatesAutoresizingMaskIntoConstraints="NO" id="iU2-Up-3Qj">
                                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                             </imageView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Not connected " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EVo-uR-bII">
-                                                                <rect key="frame" x="45" y="0.0" width="123" height="30"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Not connected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EVo-uR-bII">
+                                                                <rect key="frame" x="45" y="0.0" width="114" height="30"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <nil key="highlightedColor"/>
@@ -608,11 +628,16 @@
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile-blood" translatesAutoresizingMaskIntoConstraints="NO" id="SDc-Pk-8Zt">
                                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                             </imageView>
-                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text=" Blood Type" textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="2dT-NL-Fkb">
+                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Blood Type" textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="2dT-NL-Fkb">
                                                                 <rect key="frame" x="45" y="0.0" width="235" height="30"/>
                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <textInputTraits key="textInputTraits"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
+                                                                        <color key="value" red="0.49803921579999999" green="0.49803921579999999" blue="0.49803921579999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
                                                                 <connections>
                                                                     <outlet property="delegate" destination="W0f-mr-W1w" id="NRP-EF-thG"/>
                                                                 </connections>
@@ -888,7 +913,7 @@
                                                     <rect key="frame" x="0.0" y="8" width="517" height="33"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VfN-Sz-tjs">
-                                                            <rect key="frame" x="40" y="6" width="437" height="21"/>
+                                                            <rect key="frame" x="20" y="6" width="477" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -897,8 +922,8 @@
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstItem="VfN-Sz-tjs" firstAttribute="centerY" secondItem="AY6-5T-0zV" secondAttribute="centerY" id="0gy-HE-n8w"/>
-                                                        <constraint firstItem="VfN-Sz-tjs" firstAttribute="leading" secondItem="AY6-5T-0zV" secondAttribute="leading" constant="40" id="YYj-6p-1nY"/>
-                                                        <constraint firstAttribute="trailing" secondItem="VfN-Sz-tjs" secondAttribute="trailing" constant="40" id="oKf-mb-weZ"/>
+                                                        <constraint firstItem="VfN-Sz-tjs" firstAttribute="leading" secondItem="AY6-5T-0zV" secondAttribute="leading" constant="20" id="YYj-6p-1nY"/>
+                                                        <constraint firstAttribute="trailing" secondItem="VfN-Sz-tjs" secondAttribute="trailing" constant="20" id="oKf-mb-weZ"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -912,7 +937,6 @@
                                         <connections>
                                             <outlet property="baseViewInCell" destination="AY6-5T-0zV" id="60r-xT-C2g"/>
                                             <outlet property="eventTime" destination="VfN-Sz-tjs" id="jTd-qq-5J5"/>
-                                            <segue destination="ar3-9Z-hFS" kind="push" identifier="SegueEventDetail" id="enb-vo-xgZ"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -964,6 +988,7 @@
                     <connections>
                         <outlet property="eventsUITableView" destination="CUa-PY-cXN" id="i7b-Xf-wPp"/>
                         <outlet property="xLineChartView" destination="69O-8p-oJo" id="WDG-Ab-v6r"/>
+                        <segue destination="ar3-9Z-hFS" kind="push" identifier="SegueEventDetail" id="rRm-PA-SyC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P26-vm-VMr" userLabel="First Responder" sceneMemberID="firstResponder"/>
