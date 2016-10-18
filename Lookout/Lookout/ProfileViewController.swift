@@ -299,8 +299,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             connectedStatus.text = "Connected!"
             connectGmail.setTitle(" Disconnect ", forState: .Normal)
         }
-        print(nameTextField.frame.origin.y)
-        print(bloodTextField.frame.origin.y)
     }
     
     let databaseChildPath = "user_profiles/\(AppState.sharedInstance.UUID)"

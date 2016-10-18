@@ -113,10 +113,10 @@ class CoreMotionViewController: UIViewController, EventCoreDataManagerDelegate, 
     }
     
     func manager(manager: EventCoreDataManager, didSaveEventData: AnyObject) {
-        print("Save event")
+        print("Save an event to core data")
     }
     func manager(manager: EventCoreDataManager, didFetchEventData: AnyObject) {
-        print("Fetch event")
+        print("Fetch events from core data.")
         guard let results = didFetchEventData as? [Events] else {fatalError()}
         if (results.count>0) {
             for result in results {

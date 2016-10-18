@@ -9,12 +9,10 @@
 /* Begin PBXBuildFile section */
 		4C5BF48C5B9A12D22FE10AB6 /* Pods_Lookout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9203B3DC0F7852FEE61941CB /* Pods_Lookout.framework */; };
 		B52C04181DA232E900A5CC06 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52C04171DA232E900A5CC06 /* ProfileViewController.swift */; };
-		B54E70491DA1433B007B2A04 /* LeftMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B54E70481DA1433B007B2A04 /* LeftMenuTableViewCell.swift */; };
 		B578DF531D9E34D9002E5439 /* NewContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B578DF521D9E34D9002E5439 /* NewContactViewController.swift */; };
 		B578DF5D1D9E3C36002E5439 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B578DF5C1D9E3C36002E5439 /* CoreDataManager.swift */; };
 		B578DF601D9E4630002E5439 /* Contact+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B578DF5E1D9E4630002E5439 /* Contact+CoreDataProperties.swift */; };
 		B578DF611D9E4630002E5439 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = B578DF5F1D9E4630002E5439 /* Contact.swift */; };
-		B58D33421DB5FAC9007592E4 /* LeftMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58D33411DB5FAC9007592E4 /* LeftMenuTableViewController.swift */; };
 		B5BFA8FF1D95210500496D13 /* TabViewControllerTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BFA8FE1D95210500496D13 /* TabViewControllerTemplate.swift */; };
 		B5BFA9031D95222600496D13 /* SendAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BFA9021D95222600496D13 /* SendAlertViewController.swift */; };
 		B5BFA9051D95223C00496D13 /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BFA9041D95223C00496D13 /* ContactsViewController.swift */; };
@@ -26,7 +24,6 @@
 		B5C874611D93D73C00D192D9 /* Lookout.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B5C8745F1D93D73C00D192D9 /* Lookout.xcdatamodeld */; };
 		B5C874631D93D73C00D192D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5C874621D93D73C00D192D9 /* Assets.xcassets */; };
 		B5C874661D93D73C00D192D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5C874641D93D73C00D192D9 /* LaunchScreen.storyboard */; };
-		B5C874701D94093500D192D9 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8746F1D94093500D192D9 /* ContainerViewController.swift */; };
 		B5F1E4B41D9FF84C0007F663 /* CoreMotionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F1E4B31D9FF84C0007F663 /* CoreMotionViewController.swift */; };
 		B5F313A91DB382B7007284D4 /* Events+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F313A71DB382B7007284D4 /* Events+CoreDataProperties.swift */; };
 		B5F313AA1DB382B7007284D4 /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F313A81DB382B7007284D4 /* Events.swift */; };
@@ -46,12 +43,10 @@
 		8B78175BA6B2CC03E1FB14C1 /* Pods-Lookout.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lookout.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Lookout/Pods-Lookout.debug.xcconfig"; sourceTree = "<group>"; };
 		9203B3DC0F7852FEE61941CB /* Pods_Lookout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lookout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B52C04171DA232E900A5CC06 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		B54E70481DA1433B007B2A04 /* LeftMenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuTableViewCell.swift; sourceTree = "<group>"; };
 		B578DF521D9E34D9002E5439 /* NewContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewContactViewController.swift; sourceTree = "<group>"; };
 		B578DF5C1D9E3C36002E5439 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		B578DF5E1D9E4630002E5439 /* Contact+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Contact+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B578DF5F1D9E4630002E5439 /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
-		B58D33411DB5FAC9007592E4 /* LeftMenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuTableViewController.swift; sourceTree = "<group>"; };
 		B5BFA8FE1D95210500496D13 /* TabViewControllerTemplate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabViewControllerTemplate.swift; sourceTree = "<group>"; };
 		B5BFA9021D95222600496D13 /* SendAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendAlertViewController.swift; sourceTree = "<group>"; };
 		B5BFA9041D95223C00496D13 /* ContactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
@@ -65,7 +60,6 @@
 		B5C874621D93D73C00D192D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B5C874651D93D73C00D192D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B5C874671D93D73C00D192D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B5C8746F1D94093500D192D9 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		B5E776361DA3870800F0A0E1 /* Lookout-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Lookout-Bridging-Header.h"; path = "Lookout/Lookout-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		B5F1E4B31D9FF84C0007F663 /* CoreMotionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreMotionViewController.swift; sourceTree = "<group>"; };
 		B5F313A71DB382B7007284D4 /* Events+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Events+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -143,13 +137,11 @@
 				B578DF521D9E34D9002E5439 /* NewContactViewController.swift */,
 				B5BFA9021D95222600496D13 /* SendAlertViewController.swift */,
 				B5BFA9041D95223C00496D13 /* ContactsViewController.swift */,
-				B58D33411DB5FAC9007592E4 /* LeftMenuTableViewController.swift */,
 				B578DF5C1D9E3C36002E5439 /* CoreDataManager.swift */,
 				B5F313AD1DB38DD7007284D4 /* EventCoreDataManager.swift */,
 				B52C04171DA232E900A5CC06 /* ProfileViewController.swift */,
 				B5E776361DA3870800F0A0E1 /* Lookout-Bridging-Header.h */,
 				B5F916691D9937AE00CD01EB /* ContactsMapViewController.swift */,
-				B5C8746F1D94093500D192D9 /* ContainerViewController.swift */,
 				B5BFA8FE1D95210500496D13 /* TabViewControllerTemplate.swift */,
 				B5C874621D93D73C00D192D9 /* Assets.xcassets */,
 				B5C874641D93D73C00D192D9 /* LaunchScreen.storyboard */,
@@ -160,7 +152,6 @@
 				B5F916561D98F01200CD01EB /* Person.swift */,
 				B5F313AB1DB388CB007284D4 /* Event.swift */,
 				B5F313AF1DB39344007284D4 /* EventsTableViewCell.swift */,
-				B54E70481DA1433B007B2A04 /* LeftMenuTableViewCell.swift */,
 				B5F9165D1D98F4B400CD01EB /* ContactTableViewCell.swift */,
 				B5F9165B1D98F29C00CD01EB /* ContactTableViewXib.xib */,
 				B5F9165F1D99043400CD01EB /* GoogleService-Info.plist */,
@@ -323,8 +314,6 @@
 				B5F313AE1DB38DD7007284D4 /* EventCoreDataManager.swift in Sources */,
 				B578DF5D1D9E3C36002E5439 /* CoreDataManager.swift in Sources */,
 				B5F313B01DB39344007284D4 /* EventsTableViewCell.swift in Sources */,
-				B54E70491DA1433B007B2A04 /* LeftMenuTableViewCell.swift in Sources */,
-				B58D33421DB5FAC9007592E4 /* LeftMenuTableViewController.swift in Sources */,
 				B578DF601D9E4630002E5439 /* Contact+CoreDataProperties.swift in Sources */,
 				B5F313AC1DB388CB007284D4 /* Event.swift in Sources */,
 				B5C8264F1D9A7415000E9514 /* AppState.swift in Sources */,
@@ -335,7 +324,6 @@
 				B5C874611D93D73C00D192D9 /* Lookout.xcdatamodeld in Sources */,
 				B5C826511D9A746F000E9514 /* Constants.swift in Sources */,
 				B5F1E4B41D9FF84C0007F663 /* CoreMotionViewController.swift in Sources */,
-				B5C874701D94093500D192D9 /* ContainerViewController.swift in Sources */,
 				B5F9165E1D98F4B400CD01EB /* ContactTableViewCell.swift in Sources */,
 				B5F916571D98F01200CD01EB /* Person.swift in Sources */,
 				B5F9166A1D9937AE00CD01EB /* ContactsMapViewController.swift in Sources */,
