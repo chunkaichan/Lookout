@@ -329,6 +329,50 @@
             </objects>
             <point key="canvasLocation" x="2853" y="3004"/>
         </scene>
+        <!--Event Map View Controller-->
+        <scene sceneID="dFT-1a-tGu">
+            <objects>
+                <viewController id="ar3-9Z-hFS" customClass="EventMapViewController" customModule="Lookout" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="M6Q-fD-y4d"/>
+                        <viewControllerLayoutGuide type="bottom" id="qzn-FQ-1vm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vOm-dQ-O6K">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R5D-x7-TaU" customClass="LineChartView" customModule="Charts">
+                                <rect key="frame" x="25" y="84" width="550" height="150"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="44O-Hs-quD"/>
+                                </constraints>
+                            </view>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Jwm-m9-XdJ">
+                                <rect key="frame" x="25" y="244" width="550" height="297"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="qzn-FQ-1vm" firstAttribute="top" secondItem="Jwm-m9-XdJ" secondAttribute="bottom" constant="10" id="3Y6-PZ-KKP"/>
+                            <constraint firstItem="Jwm-m9-XdJ" firstAttribute="top" secondItem="R5D-x7-TaU" secondAttribute="bottom" constant="10" id="7Ii-eS-Zq9"/>
+                            <constraint firstItem="Jwm-m9-XdJ" firstAttribute="leading" secondItem="vOm-dQ-O6K" secondAttribute="leadingMargin" constant="5" id="8ns-0q-Jf1"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Jwm-m9-XdJ" secondAttribute="trailing" constant="5" id="GtQ-tK-fgQ"/>
+                            <constraint firstItem="R5D-x7-TaU" firstAttribute="top" secondItem="M6Q-fD-y4d" secondAttribute="bottom" constant="20" id="fR9-PO-3Lr"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="R5D-x7-TaU" secondAttribute="trailing" constant="5" id="mGU-4b-Eul"/>
+                            <constraint firstItem="R5D-x7-TaU" firstAttribute="leading" secondItem="vOm-dQ-O6K" secondAttribute="leadingMargin" constant="5" id="oVP-fs-fkY"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="STF-St-0YD"/>
+                    <connections>
+                        <outlet property="eventChart" destination="R5D-x7-TaU" id="iDV-kk-LA0"/>
+                        <outlet property="eventMap" destination="Jwm-m9-XdJ" id="1pP-B7-Luh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wfi-6r-GKb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2853" y="3712"/>
+        </scene>
         <!--Sign In View Controller-->
         <scene sceneID="Oqz-Yn-Xvm">
             <objects>
@@ -833,18 +877,18 @@
                                 <rect key="frame" x="25" y="244" width="550" height="297"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EventsTableCell" rowHeight="50" id="gMK-fB-tBZ" customClass="EventsTableViewCell" customModule="Lookout" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="EventsTableCell" rowHeight="50" id="gMK-fB-tBZ" customClass="EventsTableViewCell" customModule="Lookout" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="550" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gMK-fB-tBZ" id="zVv-Ig-nTN">
-                                            <rect key="frame" x="0.0" y="0.0" width="550" height="49"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="517" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AY6-5T-0zV">
-                                                    <rect key="frame" x="0.0" y="8" width="550" height="33"/>
+                                                    <rect key="frame" x="0.0" y="8" width="517" height="33"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VfN-Sz-tjs">
-                                                            <rect key="frame" x="40" y="6" width="470" height="21"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VfN-Sz-tjs">
+                                                            <rect key="frame" x="40" y="6" width="437" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -868,6 +912,7 @@
                                         <connections>
                                             <outlet property="baseViewInCell" destination="AY6-5T-0zV" id="60r-xT-C2g"/>
                                             <outlet property="eventTime" destination="VfN-Sz-tjs" id="jTd-qq-5J5"/>
+                                            <segue destination="ar3-9Z-hFS" kind="push" identifier="SegueEventDetail" id="enb-vo-xgZ"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -892,6 +937,11 @@
                             <constraint firstAttribute="leadingMargin" secondItem="69O-8p-oJo" secondAttribute="leading" constant="-5" id="sRA-SB-QCI"/>
                             <constraint firstAttribute="trailingMargin" secondItem="CUa-PY-cXN" secondAttribute="trailing" constant="5" id="vyh-Iy-M8c"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Cul-OU-7xr"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="kaG-vv-wQY">
                         <barButtonItem key="leftBarButtonItem" id="dIT-Oi-E4L">
