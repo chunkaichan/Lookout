@@ -275,7 +275,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sIQ-To-WWn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3487" y="3536"/>
+            <point key="canvasLocation" x="2757" y="3520"/>
         </scene>
         <!--Contacts Map View Controller-->
         <scene sceneID="lw6-SN-MnG">
@@ -590,7 +590,7 @@
                                     <constraint firstAttribute="height" constant="160" id="NMQ-bI-oKr"/>
                                 </constraints>
                             </imageView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4pQ-BQ-6fV">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4pQ-BQ-6fV">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i2w-a6-Xns">
@@ -782,9 +782,9 @@
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
+                                                <exclude reference="P1T-wu-7Wy"/>
                                                 <exclude reference="3Dc-eD-Ndm"/>
                                                 <exclude reference="jvV-eF-0iQ"/>
-                                                <exclude reference="P1T-wu-7Wy"/>
                                             </mask>
                                         </variation>
                                     </view>
@@ -992,7 +992,7 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VfN-Sz-tjs">
                                                             <rect key="frame" x="40" y="14" width="470" height="24"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -1072,6 +1072,46 @@
             </objects>
             <point key="canvasLocation" x="1999" y="3632"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="ceN-kP-yzZ">
+            <objects>
+                <viewController id="rsn-Aa-CaY" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1YU-18-Fez"/>
+                        <viewControllerLayoutGuide type="bottom" id="Yia-qt-qzY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lbc-dW-sjv">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="zcW-Hv-tKw">
+                                <rect key="frame" x="0.0" y="214" width="600" height="386"/>
+                            </mapView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EcY-e6-M8p" customClass="LineChartView" customModule="Charts">
+                                <rect key="frame" x="0.0" y="64" width="600" height="150"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="BpJ-9V-cis"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Yia-qt-qzY" firstAttribute="top" secondItem="zcW-Hv-tKw" secondAttribute="bottom" id="0yT-Nk-GVo"/>
+                            <constraint firstItem="zcW-Hv-tKw" firstAttribute="top" secondItem="EcY-e6-M8p" secondAttribute="bottom" id="DCj-Qm-DOM"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="zcW-Hv-tKw" secondAttribute="trailing" constant="-20" id="UYc-aV-370"/>
+                            <constraint firstItem="EcY-e6-M8p" firstAttribute="top" secondItem="1YU-18-Fez" secondAttribute="bottom" id="lWo-jx-rrf"/>
+                            <constraint firstItem="zcW-Hv-tKw" firstAttribute="leading" secondItem="lbc-dW-sjv" secondAttribute="leadingMargin" constant="-20" id="nUY-Vz-vOf"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="EcY-e6-M8p" secondAttribute="trailing" constant="-20" id="rcn-m8-Bc9"/>
+                            <constraint firstItem="EcY-e6-M8p" firstAttribute="leading" secondItem="lbc-dW-sjv" secondAttribute="leadingMargin" constant="-20" id="vB4-6E-9Aj"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="0Tp-eg-GAB"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ijX-q9-gOe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1999" y="4412"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="lSc-xh-72h">
             <objects>
@@ -1135,6 +1175,28 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bip-xb-DCO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="937" y="1275"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="qBv-SE-MYV">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="DTu-7W-M3l" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="NU2-XV-TKR">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.25490196079999999" green="0.73725490199999999" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="rsn-Aa-CaY" kind="relationship" relationship="rootViewController" id="Cxe-Wy-ucN"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E02-St-MIm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1187" y="4412"/>
         </scene>
     </scenes>
     <resources>

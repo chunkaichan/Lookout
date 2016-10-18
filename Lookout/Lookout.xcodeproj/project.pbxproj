@@ -38,6 +38,7 @@
 		B5F9165E1D98F4B400CD01EB /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F9165D1D98F4B400CD01EB /* ContactTableViewCell.swift */; };
 		B5F916601D99043400CD01EB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5F9165F1D99043400CD01EB /* GoogleService-Info.plist */; };
 		B5F9166A1D9937AE00CD01EB /* ContactsMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F916691D9937AE00CD01EB /* ContactsMapViewController.swift */; };
+		B5FD5C071DB4E3A400C9D922 /* EventMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FD5C061DB4E3A400C9D922 /* EventMapViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +78,7 @@
 		B5F9165D1D98F4B400CD01EB /* ContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContactTableViewCell.swift; path = ../ContactTableViewCell.swift; sourceTree = "<group>"; };
 		B5F9165F1D99043400CD01EB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B5F916691D9937AE00CD01EB /* ContactsMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsMapViewController.swift; sourceTree = "<group>"; };
+		B5FD5C061DB4E3A400C9D922 /* EventMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventMapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 			children = (
 				B5C874581D93D73C00D192D9 /* AppDelegate.swift */,
 				B5C8745C1D93D73C00D192D9 /* Main.storyboard */,
+				B5FD5C061DB4E3A400C9D922 /* EventMapViewController.swift */,
 				B5F1E4B31D9FF84C0007F663 /* CoreMotionViewController.swift */,
 				B5C8264C1D9A7241000E9514 /* SignInViewController.swift */,
 				B578DF521D9E34D9002E5439 /* NewContactViewController.swift */,
@@ -328,6 +331,7 @@
 				B5BFA9011D9521FC00496D13 /* LeftMenuTableViewController.swift in Sources */,
 				B5F313A91DB382B7007284D4 /* Events+CoreDataProperties.swift in Sources */,
 				B5F313AA1DB382B7007284D4 /* Events.swift in Sources */,
+				B5FD5C071DB4E3A400C9D922 /* EventMapViewController.swift in Sources */,
 				B5C874611D93D73C00D192D9 /* Lookout.xcdatamodeld in Sources */,
 				B5C826511D9A746F000E9514 /* Constants.swift in Sources */,
 				B5F1E4B41D9FF84C0007F663 /* CoreMotionViewController.swift in Sources */,
