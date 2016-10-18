@@ -16,7 +16,7 @@ class CoreMotionViewController: UIViewController, EventCoreDataManagerDelegate, 
     
     @IBAction func saveEventButton(sender: AnyObject) {
         let time = NSDate()
-        var event = Event(time: time, data: yAxis, latitude: AppState.sharedInstance.userLatitude, longitude: AppState.sharedInstance.userLongitude, isAccident: nil)
+        let event = Event(time: time, data: yAxis, latitude: AppState.sharedInstance.userLatitude, longitude: AppState.sharedInstance.userLongitude, isAccident: nil)
         eventCoreDataManager.saveCoreData(eventToSave: event)
         events = []
         eventCoreDataManager.fetchCoreData()

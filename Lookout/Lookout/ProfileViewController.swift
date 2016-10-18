@@ -283,11 +283,11 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     func keyboardWillHide(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+//        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
             if view.frame.origin.y != 0 {
                 self.view.frame.origin.y = 0
             }
-        }
+//        }
     }
     
     // When the view appears, ensure that the Gmail API service is authorized
