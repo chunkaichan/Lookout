@@ -43,6 +43,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var editButtonStyle: UIButton!
     
     @IBAction func editButton(sender: AnyObject) {
+        dismissKeyboard()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
         if (inEditMode) {
             // tap to cancel
             let alert = UIAlertController(
@@ -85,6 +87,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     @IBAction func closeButton(sender: AnyObject) {
+        dismissKeyboard()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
         if (inEditMode) {
             // tap to save
             let alert = UIAlertController(
@@ -266,7 +270,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
             if view.frame.origin.y == 0 {
-                self.view.frame.origin.y -= (keyboardSize.height - 65)
+                self.view.frame.origin.y -= (keyboardSize.height - 85)
             }
         }
     }
@@ -274,7 +278,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     func keyboardWillHide(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
             if view.frame.origin.y != 0 {
-                self.view.frame.origin.y += (keyboardSize.height - 65)
+                self.view.frame.origin.y = 0
             }
         }
     }

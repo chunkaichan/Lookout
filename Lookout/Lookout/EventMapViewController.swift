@@ -10,7 +10,7 @@ import UIKit
 
 class EventMapViewController: UIViewController {
 
-    let event = Event(time: <#T##NSDate#>, data: <#T##[Double]#>, latitude: <#T##Double#>, longitude: <#T##Double#>, isAccident: <#T##Bool?#>)
+//    let event = Event(time: <#T##NSDate#>, data: <#T##[Double]#>, latitude: <#T##Double#>, longitude: <#T##Double#>, isAccident: <#T##Bool?#>)
     
     override func viewDidLoad() {
         super.viewDidLoad()
