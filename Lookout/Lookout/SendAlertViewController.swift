@@ -86,25 +86,30 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
     
     
     @IBAction func tapSendEmail(sender: AnyObject) {
-        let gtlMessage = GTLRGmail_Message()
-        for contact in contacts {
-            print(contact.email)
-            gtlMessage.raw = self.generateRawString(toMail: contact.email, body: "This is a emergency notification from Lookout.")
-            
-            let query = GTLRGmailQuery_UsersMessagesSend.queryWithObject(gtlMessage, userId: "me", uploadParameters: nil)
-            
-            service.executeQuery(query, completionHandler: {(ticket, response, error) -> Void in
-                print("ticket \(ticket)")
-                print("response \(response)")
-                print("error \(error)")
+        if (contacts.count != 0) {
+            let gtlMessage = GTLRGmail_Message()
+            for contact in contacts {
+                print(contact.email)
+                gtlMessage.raw = self.generateRawString(toMail: contact.email, body: "This is a emergency notification from Lookout.")
                 
-                if error != nil {
-                    self.showAlert(message: "Failed to send your message", actionTitle: "Close")
-                } else {
-                    self.showAlertAfterSending()
-                }
-            })
+                let query = GTLRGmailQuery_UsersMessagesSend.queryWithObject(gtlMessage, userId: "me", uploadParameters: nil)
+                
+                service.executeQuery(query, completionHandler: {(ticket, response, error) -> Void in
+                    print("ticket \(ticket)")
+                    print("response \(response)")
+                    print("error \(error)")
+                    
+                    if error != nil {
+                        self.showAlert(message: "Failed to send your message", actionTitle: "Close")
+                    } else {
+                        self.showAlertAfterSending()
+                    }
+                })
+            }
+        } else {
+            showAlert(message: "Please add a contact", actionTitle: "OK")
         }
+        
     }
     
     @IBAction func tapPhoneCall(sender: AnyObject) {
@@ -114,10 +119,6 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
             let randomNumber = Int(arc4random_uniform(UInt32(contacts.count)))
             callNumber(contacts[randomNumber].phoneNumber)
         }
-    }
-    
-    @IBAction func toggleSetting(sender: AnyObject) {
-        NSNotificationCenter.defaultCenter().postNotificationName("toggleMenu", object: nil)
     }
     
     var fromLocationURL = "- User location unavailable -"
@@ -161,7 +162,7 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
         let time = NSDate()
         let alert = UIAlertController(
             title: nil,
-            message: "\(time)\nYou just sent an notification to your contacts.\nDo you want to send a safety message?",
+            message: "\(time)\nYou just sent a notification to your contacts.\nDo you want to send a safety message?",
             preferredStyle: UIAlertControllerStyle.Alert
         )
         let ok = UIAlertAction(

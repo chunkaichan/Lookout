@@ -14,10 +14,6 @@ class ContactsViewController: TabViewControllerTemplate, UITableViewDataSource, 
 
     @IBOutlet weak var contactsTable: UITableView!
     
-    @IBAction func toggleSetting(sender: AnyObject) {
-        NSNotificationCenter.defaultCenter().postNotificationName("toggleMenu", object: nil)
-    }
-    
     let coreDataManager = CoreDataManager.shared
     
     // Firebase

@@ -35,13 +35,13 @@ class EventCoreDataManager {
     
     weak var delegate: EventCoreDataManagerDelegate?
     
-    func saveCoreData(time time: NSDate, data: [Double], latitude: Double, longitude: Double, isAccident: Bool?) {
+    func saveCoreData(eventToSave eventToSave: Event) {
         let event = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: moc) as! Events
-        event.time = time
-        event.data = data
-        event.latitude = latitude
-        event.longitude = longitude
-        event.isAccident = isAccident
+        event.time = eventToSave.time
+        event.data = eventToSave.data
+        event.latitude = eventToSave.latitude
+        event.longitude = eventToSave.longitude
+        event.isAccident = eventToSave.isAccident
         do {
             try self.moc.save()
             print("Save new event to core data.")

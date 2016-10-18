@@ -57,12 +57,12 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 style: UIAlertActionStyle.Default,
                 handler: {(alert: UIAlertAction!) in
                     self.didCancelEdit()
-                    self.changeBarButtonImage(leftButtonLink: self.editLink, rightButtonLink: self.closeLink)
+                    self.changeBarButtonImage(leftButtonLink: self.editLink, rightButtonLink: self.logOutLink)
                 }
             )
             let cancel = UIAlertAction(
                 title: "Cancel",
-                style: UIAlertActionStyle.Default,
+                style: UIAlertActionStyle.Cancel,
                 handler: nil
             )
             alert.addAction(cancel)
@@ -101,20 +101,27 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 style: UIAlertActionStyle.Default,
                 handler: {(alert: UIAlertAction!) in
                     self.didSaveEdit()
-                    self.changeBarButtonImage(leftButtonLink: self.editLink, rightButtonLink: self.closeLink)
+                    self.changeBarButtonImage(leftButtonLink: self.editLink, rightButtonLink: self.logOutLink)
                     self.sendProfileToDB()
                 }
             )
             let cancel = UIAlertAction(
                 title: "Cancel",
-                style: UIAlertActionStyle.Default,
+                style: UIAlertActionStyle.Cancel,
                 handler: nil
             )
             alert.addAction(cancel)
             alert.addAction(ok)
             presentViewController(alert, animated: true, completion: nil)
         } else {
-            self.dismissViewControllerAnimated(true, completion: nil)
+            let firebaseAuth = FIRAuth.auth()
+            do {
+                try firebaseAuth?.signOut()
+                AppState.sharedInstance.signedIn = false
+                dismissViewControllerAnimated(true, completion: nil)
+            } catch let signOutError as NSError {
+                print ("Error signing out: \(signOutError)")
+            }
         }
         
     }
@@ -132,7 +139,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     var inEditMode = false
     let saveLink = "profile-save-edit"
     let cancelLink = "profile-cancel-edit"
-    let closeLink = "close"
+    let logOutLink = "menu-signout"
     let editLink = "profile-edit"
     
     func changeBarButtonImage(leftButtonLink leftButtonLink: String, rightButtonLink: String) {

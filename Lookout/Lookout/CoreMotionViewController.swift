@@ -16,14 +16,14 @@ class CoreMotionViewController: UIViewController, EventCoreDataManagerDelegate, 
     
     @IBAction func saveEventButton(sender: AnyObject) {
         let time = NSDate()
-        eventCoreDataManager.saveCoreData(time: time, data: yAxis, latitude: AppState.sharedInstance.userLatitude, longitude: AppState.sharedInstance.userLongitude, isAccident: nil)
+        var event = Event(time: time, data: yAxis, latitude: AppState.sharedInstance.userLatitude, longitude: AppState.sharedInstance.userLongitude, isAccident: nil)
+        eventCoreDataManager.saveCoreData(eventToSave: event)
+        events = []
+        eventCoreDataManager.fetchCoreData()
     }
     
     @IBOutlet weak var xLineChartView: LineChartView!
     
-    @IBAction func toggleSetting(sender: AnyObject) {
-        NSNotificationCenter.defaultCenter().postNotificationName("toggleMenu", object: nil)
-    }
     let manager = CMMotionManager()
     
     var xAxis = [""]
@@ -32,6 +32,7 @@ class CoreMotionViewController: UIViewController, EventCoreDataManagerDelegate, 
     var dataEntries: [ChartDataEntry] = []
     
     let eventCoreDataManager = EventCoreDataManager.shared
+    
     
     var events:[Event] = []
     
@@ -47,15 +48,9 @@ class CoreMotionViewController: UIViewController, EventCoreDataManagerDelegate, 
     }
     
     override func viewDidAppear(animated: Bool) {
+        events = []
         eventCoreDataManager.fetchCoreData()
     }
-    
-//    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        
-//    }
-//    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-//        
-//    }
     
     func setChart(dataPoints: [String], values: [Double]) {
         var dataEntries: [ChartDataEntry] = []
@@ -126,6 +121,7 @@ class CoreMotionViewController: UIViewController, EventCoreDataManagerDelegate, 
         if (results.count>0) {
             for result in results {
                 events.append(Event(time: result.time!, data: result.data! as! [Double], latitude: result.latitude! as Double, longitude: result.longitude! as Double, isAccident: result.isAccident as? Bool))
+                
             }
             dispatch_async(dispatch_get_main_queue(), {
                 self.eventsUITableView.reloadData()
@@ -137,16 +133,28 @@ class CoreMotionViewController: UIViewController, EventCoreDataManagerDelegate, 
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(events.count)
         return events.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let index = (events.count - 1) - indexPath.row
         let cell = tableView.dequeueReusableCellWithIdentifier("EventsTableCell", forIndexPath: indexPath) as! EventsTableViewCell
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy/MM/dd  HH:mm:ss"
-        let convertedDate = dateFormatter.stringFromDate(events[indexPath.row].time)
+        let convertedDate = dateFormatter.stringFromDate(events[index].time)
         cell.eventTime.text = "\(convertedDate)"
         return cell
+    }
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            let index = (events.count - 1) - indexPath.row
+            events.removeAtIndex(index)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+            eventCoreDataManager.clearCoreData()
+            for event in events {
+                eventCoreDataManager.saveCoreData(eventToSave: event)
+            }
+        }
+
     }
 }
