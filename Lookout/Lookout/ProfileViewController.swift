@@ -10,6 +10,7 @@ import UIKit
 import GoogleAPIClientForREST
 import GTMOAuth2
 import Firebase
+import Crashlytics
 
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
@@ -78,6 +79,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             didTapEdit()
             changeBarButtonImage(leftButtonLink: cancelLink, rightButtonLink: saveLink)
             inEditMode = true
+            // Test Crashlytics
+//            Crashlytics.sharedInstance().crash()
         }
     }
     
