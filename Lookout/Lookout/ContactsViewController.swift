@@ -54,6 +54,7 @@ class ContactsViewController: TabViewControllerTemplate, UITableViewDataSource, 
     
     var trackID: String = ""
     var name: String = ""
+    var number: String = ""
     // [Section]
     var contacts: [ContactForTable] = []
     
@@ -79,6 +80,7 @@ class ContactsViewController: TabViewControllerTemplate, UITableViewDataSource, 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.trackID = contacts[indexPath.row].trackID
         self.name = contacts[indexPath.row].name
+        self.number = contacts[indexPath.row].phoneNumber
         performSegueWithIdentifier("SegueContactMap", sender: [])
     }
     
@@ -103,7 +105,8 @@ class ContactsViewController: TabViewControllerTemplate, UITableViewDataSource, 
             let destination: ContactsMapViewController = segue.destinationViewController as! ContactsMapViewController
             destination.trackID = self.trackID
             destination.navigationItem.title = self.name
-            
+            destination.contactNumber = self.number
+            print(number)
         }
     }
     

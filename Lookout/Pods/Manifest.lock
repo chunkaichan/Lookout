@@ -75,6 +75,7 @@ DEPENDENCIES:
   - Fabric
   - Firebase
   - Firebase/Auth
+  - Firebase/Core
   - Firebase/Database
   - Firebase/Storage
   - GoogleAPIClientForREST/Gmail (~> 1.0.3)
@@ -105,6 +106,6 @@ SPEC CHECKSUMS:
   RealmSwift: 838058b2db95b12cb86bd0cf209df642c33fb60a
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
 
-PODFILE CHECKSUM: 5aa39a9c87c4242b5851af2b7a4ce8d590484966
+PODFILE CHECKSUM: ce8e3785e3e621ae1fc13ef8a22489f286dc034a
 
 COCOAPODS: 1.0.1

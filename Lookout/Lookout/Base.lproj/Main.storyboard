@@ -163,7 +163,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="contactsTable" destination="XhM-qj-F18" id="LRh-hu-nVe"/>
-                        <segue destination="Oc4-u1-ACb" kind="show" identifier="SegueContactMap" id="vKw-co-SU8"/>
+                        <segue destination="Oc4-u1-ACb" kind="push" identifier="SegueContactMap" id="vKw-co-SU8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IwK-Ae-LpR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -285,7 +285,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="axQ-w1-BcV">
-                                <rect key="frame" x="520" y="427" width="40" height="40"/>
+                                <rect key="frame" x="540" y="427" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="2vd-6h-UuN"/>
                                     <constraint firstAttribute="height" constant="40" id="8mp-OD-Hzg"/>
@@ -296,7 +296,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u9k-RU-ZGY">
-                                <rect key="frame" x="460" y="427" width="40" height="40"/>
+                                <rect key="frame" x="480" y="427" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="3Kb-qd-T2E"/>
                                     <constraint firstAttribute="height" constant="40" id="feR-0i-1MK"/>
@@ -309,9 +309,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="axQ-w1-BcV" secondAttribute="trailing" constant="20" id="FL8-lY-p2u"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="axQ-w1-BcV" secondAttribute="trailing" id="FL8-lY-p2u"/>
                             <constraint firstItem="NQA-Nb-uUQ" firstAttribute="top" secondItem="6T4-Ie-jbG" secondAttribute="bottom" id="Qxo-mz-YRz"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="u9k-RU-ZGY" secondAttribute="trailing" constant="80" id="S4r-HX-mss"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="u9k-RU-ZGY" secondAttribute="trailing" constant="60" id="S4r-HX-mss"/>
                             <constraint firstItem="NQA-Nb-uUQ" firstAttribute="bottom" secondItem="Sdh-tr-8I4" secondAttribute="top" id="WC2-Ge-4zu"/>
                             <constraint firstAttribute="trailing" secondItem="NQA-Nb-uUQ" secondAttribute="trailing" id="WwB-kk-FV0"/>
                             <constraint firstItem="Sdh-tr-8I4" firstAttribute="top" secondItem="u9k-RU-ZGY" secondAttribute="bottom" constant="20" id="fSp-JW-8zU"/>
@@ -320,7 +320,20 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" id="RYa-bf-MQI"/>
+                    <navigationItem key="navigationItem" id="RYa-bf-MQI">
+                        <barButtonItem key="rightBarButtonItem" id="KGz-0s-6gj">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="GPC-Q5-HVk">
+                                <rect key="frame" x="550" y="7" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Call">
+                                    <color key="titleColor" red="0.25490196079999999" green="0.73725490199999999" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="tapCallButton:" destination="Oc4-u1-ACb" eventType="touchUpInside" id="VG4-6M-3Jn"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="contactMap" destination="NQA-Nb-uUQ" id="pYJ-Qt-aiq"/>
                     </connections>
@@ -363,7 +376,9 @@
                             <constraint firstItem="R5D-x7-TaU" firstAttribute="leading" secondItem="vOm-dQ-O6K" secondAttribute="leadingMargin" constant="5" id="oVP-fs-fkY"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="STF-St-0YD"/>
+                    <navigationItem key="navigationItem" id="STF-St-0YD">
+                        <barButtonItem key="backBarButtonItem" title=" " id="Pdy-qG-8CB"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="eventChart" destination="R5D-x7-TaU" id="iDV-kk-LA0"/>
                         <outlet property="eventMap" destination="Jwm-m9-XdJ" id="1pP-B7-Luh"/>
@@ -592,13 +607,13 @@
                                                             <constraint firstAttribute="height" constant="30" id="kj1-S6-hwh"/>
                                                         </constraints>
                                                     </stackView>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="pFx-ic-Stl" userLabel="Mail Stack View">
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="pFx-ic-Stl" userLabel="Mail Stack View">
                                                         <rect key="frame" x="0.0" y="240" width="159" height="30"/>
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile-mail" translatesAutoresizingMaskIntoConstraints="NO" id="iU2-Up-3Qj">
                                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                             </imageView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Not connected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EVo-uR-bII">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Not connected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EVo-uR-bII">
                                                                 <rect key="frame" x="45" y="0.0" width="114" height="30"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

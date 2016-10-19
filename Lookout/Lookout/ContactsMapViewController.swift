@@ -17,6 +17,28 @@ class ContactsMapViewController: UIViewController, MKMapViewDelegate, CLLocation
     @IBOutlet weak var contactMap: MKMapView!
 
     
+    var contactNumber = ""
+    
+        
+    @IBAction func tapCallButton(sender: AnyObject) {
+        if (contactNumber == "") {
+            let alert = UIAlertController(title: nil, message: "Contact number unavailable.", preferredStyle: .Alert)
+            if (alert.actions.count == 0) {
+                let alertAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                alert.addAction(alertAction)
+            }
+            self.presentViewController(alert, animated: true, completion: nil)
+        } else {
+            if let phoneCallURL:NSURL = NSURL(string: "tel://\(contactNumber)") {
+                let application:UIApplication = UIApplication.sharedApplication()
+                if (application.canOpenURL(phoneCallURL)) {
+                    application.openURL(phoneCallURL);
+                }
+            }
+        }
+
+    }
+    
     @IBAction func tapNavigation(sender: AnyObject) {
         let region = MKCoordinateRegion(center: CLLocationCoordinate2DMake(AppState.sharedInstance.userLatitude, AppState.sharedInstance.userLongitude), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
         self.contactMap.setRegion(region, animated: true)
@@ -56,6 +78,7 @@ class ContactsMapViewController: UIViewController, MKMapViewDelegate, CLLocation
         contactMap.delegate = self
 
         configureDatabase()
+        self.navigationController!.navigationBar.tintColor = UIColor(red: 65/255, green: 188/255, blue: 165/255, alpha: 1)
         
     }
     
