@@ -10,6 +10,7 @@ import UIKit
 import GoogleAPIClientForREST
 import GTMOAuth2
 import Firebase
+import Crashlytics
 
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
@@ -78,6 +79,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             didTapEdit()
             changeBarButtonImage(leftButtonLink: cancelLink, rightButtonLink: saveLink)
             inEditMode = true
+            
+            // MARK: Test crashlytics
+            Crashlytics.sharedInstance().crash()
         }
     }
     
@@ -383,18 +387,22 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         let storageRef = FIRStorage.storage().referenceForURL("gs://lookout-ea551.appspot.com")
         
         // Create a reference to the file you want to download
-        let profileImageRef = storageRef.child("profilePhotos/\(AppState.sharedInstance.UUID)")
-        profileImageRef.dataWithMaxSize(1 * 1024 * 1024) { (data, error) -> Void in
-            if (error != nil) {
-                print(error)
-            } else {
-                if let data = data {
-                    print("Load profile photo from storage")
-                    self.profilePhoto.image = UIImage(data: data)
-                    self.profilePhoto.contentMode = .ScaleAspectFill
-                }
-            }
-        }
+        let profileImageRef = storageRef.child("profilePhotos/\(AppState.sharedInstance.UUID)").downloadURLWithCompletion({ (URL,error) -> Void in
+            print("\(URL)")
+            print("***")
+            print("\(error)")
+        })
+//        profileImageRef.dataWithMaxSize(1 * 1024 * 1024) { (data, error) -> Void in
+//            if (error != nil) {
+//                print(error)
+//            } else {
+//                if let data = data {
+//                    print("Load profile photo from storage")
+//                    self.profilePhoto.image = UIImage(data: data)
+//                    self.profilePhoto.contentMode = .ScaleAspectFill
+//                }
+//            }
+//        }
     }
     
     // Creates the auth controller for authorizing access to Gmail API
