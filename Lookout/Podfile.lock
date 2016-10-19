@@ -59,7 +59,6 @@ PODS:
   - GTMSessionFetcher/Core (1.1.6)
   - GTMSessionFetcher/Full (1.1.6):
     - GTMSessionFetcher/Core (= 1.1.6)
-  - HanekeSwift (0.10.1)
   - mailcore2-ios (0.6.4)
   - Realm (1.1.0):
     - Realm/Headers (= 1.1.0)
@@ -77,7 +76,6 @@ DEPENDENCIES:
   - Firebase/Storage
   - GoogleAPIClientForREST/Gmail (~> 1.0.3)
   - GTMOAuth2 (~> 1.1.2)
-  - HanekeSwift
   - mailcore2-ios
 
 SPEC CHECKSUMS:
@@ -98,11 +96,10 @@ SPEC CHECKSUMS:
   GoogleUtilities: 56c5ac05b7aa5dc417a1bb85221a9516e04d7032
   GTMOAuth2: 1707e2f7fe3a6d7240223c23c473ba5a2d104474
   GTMSessionFetcher: 6aacd0ab48ddf0c3633ab2642d792abfcad1b08a
-  HanekeSwift: 08e47d3d0f2899ec58e5d257beba0de619aca9e8
   mailcore2-ios: 3ff0be2fa553d4da9c11d39c11d51863c768f24f
   Realm: ceecf1a4540c4ce9efe196fe73fa9855bce05bd8
   RealmSwift: 838058b2db95b12cb86bd0cf209df642c33fb60a
 
-PODFILE CHECKSUM: cdfd347b0240f9aee053c171cab2013fc3584d07
+PODFILE CHECKSUM: fe1e5465fd2987949432434b1907f757f3101f7a
 
 COCOAPODS: 1.0.1

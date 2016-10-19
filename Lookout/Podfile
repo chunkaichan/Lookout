@@ -17,6 +17,5 @@ target 'Lookout' do
   pod 'Firebase/Storage'
   pod 'Fabric'
   pod 'Crashlytics'
-  pod 'HanekeSwift'
 
 end
