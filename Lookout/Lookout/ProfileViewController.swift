@@ -382,19 +382,15 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     func downloadFromStorage() {
         let storageRef = FIRStorage.storage().referenceForURL("gs://lookout-ea551.appspot.com")
         
-        // Create a reference to the file you want to download
-        let profileImageRef = storageRef.child("profilePhotos/\(AppState.sharedInstance.UUID)")
-        profileImageRef.dataWithMaxSize(1 * 1024 * 1024) { (data, error) -> Void in
-            if (error != nil) {
-                print(error)
-            } else {
-                if let data = data {
-                    print("Load profile photo from storage")
-                    self.profilePhoto.image = UIImage(data: data)
-                    self.profilePhoto.contentMode = .ScaleAspectFill
-                }
+        storageRef.child("profilePhotos/\(AppState.sharedInstance.UUID)").downloadURLWithCompletion({
+            (URL,error) in
+            if (error == nil) {
+                // SDWebImage
+                self.profilePhoto.sd_setImageWithURL(URL)
+                self.profilePhoto.contentMode = .ScaleAspectFill
             }
-        }
+        })
+        
     }
     
     // Creates the auth controller for authorizing access to Gmail API

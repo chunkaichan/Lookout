@@ -65,6 +65,9 @@ PODS:
   - Realm/Headers (1.1.0)
   - RealmSwift (1.1.0):
     - Realm (= 1.1.0)
+  - SDWebImage (3.8.2):
+    - SDWebImage/Core (= 3.8.2)
+  - SDWebImage/Core (3.8.2)
 
 DEPENDENCIES:
   - Charts/Realm
@@ -77,6 +80,7 @@ DEPENDENCIES:
   - GoogleAPIClientForREST/Gmail (~> 1.0.3)
   - GTMOAuth2 (~> 1.1.2)
   - mailcore2-ios
+  - SDWebImage (~> 3.8)
 
 SPEC CHECKSUMS:
   Charts: 55d7fd9af175b500208601bea872f0fc72c1d19e
@@ -99,7 +103,8 @@ SPEC CHECKSUMS:
   mailcore2-ios: 3ff0be2fa553d4da9c11d39c11d51863c768f24f
   Realm: ceecf1a4540c4ce9efe196fe73fa9855bce05bd8
   RealmSwift: 838058b2db95b12cb86bd0cf209df642c33fb60a
+  SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
 
-PODFILE CHECKSUM: fe1e5465fd2987949432434b1907f757f3101f7a
+PODFILE CHECKSUM: 5aa39a9c87c4242b5851af2b7a4ce8d590484966
 
 COCOAPODS: 1.0.1

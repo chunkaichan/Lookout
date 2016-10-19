@@ -14,5 +14,6 @@
 #import <GTMOAuth2/GTMOAuth2SignIn.h>
 #import <MailCore/MailCore.h>
 #import <MailCore/MCOAbstractMessage.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 #endif /* Lookout_Bridging_Header_h */
