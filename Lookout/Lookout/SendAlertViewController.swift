@@ -13,7 +13,7 @@ import GTMOAuth2
 import CoreLocation
 import AudioToolbox
 
-class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDelegate, CoreDataManagerDelegate {
+class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDelegate, CoreDataManagerDelegate, CoreMotionManagerDelegate {
     
     // Google Auth
     private let kKeychainItemName = "Gmail API"
@@ -24,6 +24,7 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
     var ref: FIRDatabaseReference!
     
     let coreDataManager = CoreDataManager.shared
+    let coreMotionManager = CoreMotionManager.shared
     
     override func viewDidLoad() {
         ref = FIRDatabase.database().reference()
@@ -41,7 +42,6 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
             AppState.sharedInstance.detectionEnabled = true
             sender.setImage(originalImage, forState: .Normal)
         }
-        
     }
 
     var locationManager: CLLocationManager!
@@ -94,9 +94,16 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
         
         coreDataManager.delegate = self
         coreDataManager.fetchCoreData()
+        
+        if (AppState.sharedInstance.detectionEnabled) {
+            coreMotionManager.delegate = self
+            coreMotionManager.startDetection()
+        }
     }
     
-    
+    func manager(manager: CoreMotionManager, didGetMotion: Double) {
+        print("Send view: \(didGetMotion)")
+    }
     
     @IBAction func tapSendEmail(sender: AnyObject) {
         if (contacts.count != 0) {
