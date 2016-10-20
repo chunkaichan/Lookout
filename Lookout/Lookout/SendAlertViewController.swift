@@ -36,7 +36,7 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
     func setLocationManager() {
         
         self.locationManager = CLLocationManager()
-        self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.requestAlwaysAuthorization()
                 self.locationManager.startUpdatingLocation()
         self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
         self.locationManager.delegate = self

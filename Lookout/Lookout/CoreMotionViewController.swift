@@ -42,14 +42,14 @@ class CoreMotionViewController: UIViewController, EventCoreDataManagerDelegate, 
             xAxis.append("")
             yAxis.append(1.0)
         }
-        getAccelerationMotion()
+        
         eventCoreDataManager.delegate = self
         events = []
         eventCoreDataManager.fetchCoreData()
     }
     
     override func viewDidAppear(animated: Bool) {
-        
+        getAccelerationMotion()
     }
     
     func setChart(dataPoints: [String], values: [Double]) {
@@ -102,15 +102,26 @@ class CoreMotionViewController: UIViewController, EventCoreDataManagerDelegate, 
                     let overallAcceleration = sqrt(acceleration.x*acceleration.x + acceleration.y*acceleration.y + acceleration.z*acceleration.z)
                     self!.yAxis.removeAtIndex(0)
                     self!.yAxis.append(overallAcceleration)
-                    dispatch_async(dispatch_get_main_queue(), {
-                        self!.setChart(self!.xAxis, values: self!.yAxis)
-                    })
                     
+                    if (UIApplication.sharedApplication().applicationState == .Active) {
+                        dispatch_async(dispatch_get_main_queue(), {
+                            self!.setChart(self!.xAxis, values: self!.yAxis)
+                        })
+                    }
                 }
                 
             }
         }
     }
+    
+    override func viewWillDisappear(animated: Bool) {
+        if manager.accelerometerAvailable {
+            manager.stopAccelerometerUpdates()
+            print("Stop updating accelerometer.")
+        }
+    }
+    
+    
     
     func manager(manager: EventCoreDataManager, didSaveEventData: AnyObject) {
         print("Save an event to core data")

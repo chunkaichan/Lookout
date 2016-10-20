@@ -129,10 +129,12 @@ class ContactsViewController: TabViewControllerTemplate, UITableViewDataSource, 
     func queryContactsFromDB() {
         _refHandle = self.ref.child("user_contacts").observeEventType(.Value, withBlock: { (snapshot) -> Void in
             if let contactsDictionary = snapshot.value as? [String: [String:Bool]] {
-                print(contactsDictionary)
+                
                 let keyArray = Array(contactsDictionary.keys)
                 let currentDeviceID = AppState.sharedInstance.UUID
-                let currentDeviceContacts = contactsDictionary[currentDeviceID]!
+                
+                let currentDeviceContacts = contactsDictionary[currentDeviceID] ?? ["NO CONTACTS": true]
+                
                 var alreadyAddedAsContact = false
                 
                 for key in keyArray { // key == remote device ID

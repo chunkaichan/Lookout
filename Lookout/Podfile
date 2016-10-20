@@ -19,5 +19,6 @@ target 'Lookout' do
   pod 'Crashlytics'
   pod 'SDWebImage', '~>3.8'
   pod 'Firebase/Core'
+  pod 'Firebase/Messaging'
 
 end

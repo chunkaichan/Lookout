@@ -235,6 +235,10 @@ Copyright 2016 Google
 
 Copyright 2016 Google Inc.
 
+## FirebaseMessaging
+
+Copyright 2016 Google Inc.
+
 ## FirebaseStorage
 
 Copyright 2016 Google Inc.
@@ -856,6 +860,10 @@ Copyright 2016 Google Inc.
    See the License for the specific language governing permissions and
    limitations under the License.
 
+
+## GoogleIPhoneUtilities
+
+Copyright 2015 Google Inc.
 
 ## GoogleInterchangeUtilities
 

@@ -37,9 +37,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string></string>
+	<string>Share current location with your contacts when app is in use/backgounrd.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>Share current location with your contacts when app is in use/backgounrd.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>
