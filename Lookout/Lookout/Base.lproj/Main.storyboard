@@ -32,9 +32,6 @@
                                         </constraints>
                                         <state key="normal" image="alert"/>
                                     </button>
-                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="grU-mk-wr8">
-                                        <rect key="frame" x="521" y="30" width="51" height="31"/>
-                                    </switch>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ls1-EQ-x9C">
                                         <rect key="frame" x="30" y="383" width="64" height="64"/>
                                         <constraints>
@@ -65,6 +62,17 @@
                                             <action selector="tapSendEmail:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dpK-Jl-W8L"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OGo-S5-r6g">
+                                        <rect key="frame" x="530" y="20" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="GJm-ue-JLw"/>
+                                            <constraint firstAttribute="width" constant="40" id="jXy-e0-1Dx"/>
+                                        </constraints>
+                                        <state key="normal" image="fall-detection"/>
+                                        <connections>
+                                            <action selector="detectionEnabledButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Fcy-LG-tnv"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="cEs-2L-twd" firstAttribute="top" secondItem="Wfe-qw-dU7" secondAttribute="top" constant="80" id="05S-Zj-6bf"/>
@@ -75,11 +83,9 @@
                                     <constraint firstItem="rdV-nj-6Tq" firstAttribute="centerX" secondItem="Wfe-qw-dU7" secondAttribute="centerX" id="VtK-wd-EGc"/>
                                     <constraint firstItem="SBX-zJ-LBD" firstAttribute="leading" secondItem="Wfe-qw-dU7" secondAttribute="leading" id="Wd3-dg-dBW"/>
                                     <constraint firstAttribute="bottom" secondItem="rdV-nj-6Tq" secondAttribute="bottom" constant="40" id="a7g-Xl-7iM"/>
-                                    <constraint firstItem="grU-mk-wr8" firstAttribute="top" secondItem="Wfe-qw-dU7" secondAttribute="top" constant="30" id="cDU-uQ-xD6"/>
                                     <constraint firstItem="Ls1-EQ-x9C" firstAttribute="leading" secondItem="Wfe-qw-dU7" secondAttribute="leading" constant="30" id="cHA-ct-ekv"/>
                                     <constraint firstAttribute="bottom" secondItem="Ls1-EQ-x9C" secondAttribute="bottom" constant="40" id="e5u-8U-d1E"/>
                                     <constraint firstItem="cEs-2L-twd" firstAttribute="centerX" secondItem="Wfe-qw-dU7" secondAttribute="centerX" id="iTD-MM-p3h"/>
-                                    <constraint firstAttribute="trailing" secondItem="grU-mk-wr8" secondAttribute="trailing" constant="30" id="xHl-wK-W3u"/>
                                     <constraint firstItem="SBX-zJ-LBD" firstAttribute="top" secondItem="Wfe-qw-dU7" secondAttribute="top" id="ycb-AL-F8w"/>
                                 </constraints>
                             </view>
@@ -87,9 +93,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Wfe-qw-dU7" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="QVs-ky-3az"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="OGo-S5-r6g" secondAttribute="trailing" constant="10" id="VAL-PJ-MtX"/>
                             <constraint firstAttribute="trailing" secondItem="Wfe-qw-dU7" secondAttribute="trailing" id="avX-B0-wrU"/>
                             <constraint firstItem="Wfe-qw-dU7" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="avh-jn-hwW"/>
                             <constraint firstItem="Wfe-qw-dU7" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="viW-id-qQr"/>
+                            <constraint firstItem="OGo-S5-r6g" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="wBt-VL-uD4"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="OXm-cJ-NfJ">
@@ -1065,6 +1073,7 @@
         <image name="contacts" width="20" height="20"/>
         <image name="device-detection" width="20" height="20"/>
         <image name="event-add" width="30" height="30"/>
+        <image name="fall-detection" width="64" height="64"/>
         <image name="google-icon" width="24" height="24"/>
         <image name="menu-profile" width="20" height="20"/>
         <image name="menu-signout" width="32" height="32"/>

@@ -30,6 +30,19 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
         setLocationManager()
     }
     
+    @IBAction func detectionEnabledButton(sender: UIButton) {
+        let originalImage = UIImage(named: "fall-detection")
+        let tintImage = originalImage?.imageWithRenderingMode(.AlwaysTemplate)
+        if (AppState.sharedInstance.detectionEnabled == true) {
+            AppState.sharedInstance.detectionEnabled = false
+            sender.setImage(tintImage, forState: .Normal)
+            sender.tintColor = UIColor.grayColor()
+        } else {
+            AppState.sharedInstance.detectionEnabled = true
+            sender.setImage(originalImage, forState: .Normal)
+        }
+        
+    }
 
     var locationManager: CLLocationManager!
     
