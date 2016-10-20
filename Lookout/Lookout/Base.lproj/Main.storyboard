@@ -826,10 +826,10 @@
             </objects>
             <point key="canvasLocation" x="1989" y="4483"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Super View Controller-->
         <scene sceneID="mOm-Fo-RmT">
             <objects>
-                <tabBarController id="2TU-xn-Zid" sceneMemberID="viewController">
+                <tabBarController id="2TU-xn-Zid" customClass="SuperViewController" customModule="Lookout" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="7ZV-4f-dlF">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

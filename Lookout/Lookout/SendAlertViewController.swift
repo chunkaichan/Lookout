@@ -95,10 +95,10 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
         coreDataManager.delegate = self
         coreDataManager.fetchCoreData()
         
-        if (AppState.sharedInstance.detectionEnabled) {
-            coreMotionManager.delegate = self
-            coreMotionManager.startDetection()
-        }
+//        if (AppState.sharedInstance.detectionEnabled) {
+//            coreMotionManager.delegate = self
+//            coreMotionManager.startDetection()
+//        }
     }
     
     func manager(manager: CoreMotionManager, didGetMotion: Double) {
