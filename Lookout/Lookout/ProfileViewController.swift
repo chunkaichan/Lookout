@@ -302,6 +302,19 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         
     }
     
+    
+    // When the view appears, ensure that the Gmail API service is authorized
+    // and perform API calls
+    override func viewDidAppear(animated: Bool) {
+        // If user alreay connected
+        if let authorizer = service.authorizer,
+            canAuth = authorizer.canAuthorize where canAuth {
+            connectedStatus.text = "Connected!"
+            connectGmail.setTitle(" Disconnect ", forState: .Normal)
+        }
+    }
+    
+    
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
             if view.frame.origin.y == 0 {
@@ -316,17 +329,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 self.view.frame.origin.y = 0
             }
 //        }
-    }
-    
-    // When the view appears, ensure that the Gmail API service is authorized
-    // and perform API calls
-    override func viewDidAppear(animated: Bool) {
-        // If user alreay connected
-        if let authorizer = service.authorizer,
-            canAuth = authorizer.canAuthorize where canAuth {
-            connectedStatus.text = "Connected!"
-            connectGmail.setTitle(" Disconnect ", forState: .Normal)
-        }
     }
     
     
@@ -360,7 +362,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     func saveToStorage() {
         // Points to the root reference
-        let storageRef = FIRStorage.storage().referenceForURL("gs://lookout-ea551.appspot.com")
+        let storageRef = FIRStorage.storage().referenceForURL("gs://project2-4b2f3.appspot.com")
         
         // Points to "images"
         let imagesRef = storageRef.child("profilePhotos")
@@ -383,7 +385,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     func downloadFromStorage() {
-        let storageRef = FIRStorage.storage().referenceForURL("gs://lookout-ea551.appspot.com")
+        let storageRef = FIRStorage.storage().referenceForURL("gs://project2-4b2f3.appspot.com")
         
         storageRef.child("profilePhotos/\(AppState.sharedInstance.UUID)").downloadURLWithCompletion({
             (URL,error) in
