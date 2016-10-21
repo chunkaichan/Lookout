@@ -10,6 +10,7 @@
 		4C5BF48C5B9A12D22FE10AB6 /* Pods_Lookout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9203B3DC0F7852FEE61941CB /* Pods_Lookout.framework */; };
 		B51BDBB21DB8A11600069289 /* CoreMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51BDBB11DB8A11600069289 /* CoreMotionManager.swift */; };
 		B51BDBB41DB8C05D00069289 /* SuperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51BDBB31DB8C05D00069289 /* SuperViewController.swift */; };
+		B51BDBB61DB9DB5800069289 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B51BDBB51DB9DB5800069289 /* GoogleService-Info.plist */; };
 		B52C04181DA232E900A5CC06 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52C04171DA232E900A5CC06 /* ProfileViewController.swift */; };
 		B578DF531D9E34D9002E5439 /* NewContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B578DF521D9E34D9002E5439 /* NewContactViewController.swift */; };
 		B578DF5D1D9E3C36002E5439 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B578DF5C1D9E3C36002E5439 /* CoreDataManager.swift */; };
@@ -35,7 +36,6 @@
 		B5F916571D98F01200CD01EB /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F916561D98F01200CD01EB /* Person.swift */; };
 		B5F9165C1D98F29C00CD01EB /* ContactTableViewXib.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5F9165B1D98F29C00CD01EB /* ContactTableViewXib.xib */; };
 		B5F9165E1D98F4B400CD01EB /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F9165D1D98F4B400CD01EB /* ContactTableViewCell.swift */; };
-		B5F916601D99043400CD01EB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B5F9165F1D99043400CD01EB /* GoogleService-Info.plist */; };
 		B5F9166A1D9937AE00CD01EB /* ContactsMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F916691D9937AE00CD01EB /* ContactsMapViewController.swift */; };
 		B5FD5C071DB4E3A400C9D922 /* EventMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FD5C061DB4E3A400C9D922 /* EventMapViewController.swift */; };
 /* End PBXBuildFile section */
@@ -46,6 +46,7 @@
 		9203B3DC0F7852FEE61941CB /* Pods_Lookout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lookout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B51BDBB11DB8A11600069289 /* CoreMotionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreMotionManager.swift; sourceTree = "<group>"; };
 		B51BDBB31DB8C05D00069289 /* SuperViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperViewController.swift; sourceTree = "<group>"; };
+		B51BDBB51DB9DB5800069289 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B52C04171DA232E900A5CC06 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		B578DF521D9E34D9002E5439 /* NewContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewContactViewController.swift; sourceTree = "<group>"; };
 		B578DF5C1D9E3C36002E5439 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -74,7 +75,6 @@
 		B5F916561D98F01200CD01EB /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		B5F9165B1D98F29C00CD01EB /* ContactTableViewXib.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ContactTableViewXib.xib; path = ../ContactTableViewXib.xib; sourceTree = "<group>"; };
 		B5F9165D1D98F4B400CD01EB /* ContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContactTableViewCell.swift; path = ../ContactTableViewCell.swift; sourceTree = "<group>"; };
-		B5F9165F1D99043400CD01EB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B5F916691D9937AE00CD01EB /* ContactsMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsMapViewController.swift; sourceTree = "<group>"; };
 		B5FD5C061DB4E3A400C9D922 /* EventMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventMapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -160,7 +160,7 @@
 				B5F313AF1DB39344007284D4 /* EventsTableViewCell.swift */,
 				B5F9165D1D98F4B400CD01EB /* ContactTableViewCell.swift */,
 				B5F9165B1D98F29C00CD01EB /* ContactTableViewXib.xib */,
-				B5F9165F1D99043400CD01EB /* GoogleService-Info.plist */,
+				B51BDBB51DB9DB5800069289 /* GoogleService-Info.plist */,
 			);
 			path = Lookout;
 			sourceTree = "<group>";
@@ -238,7 +238,7 @@
 			files = (
 				B5C874661D93D73C00D192D9 /* LaunchScreen.storyboard in Resources */,
 				B5F9165C1D98F29C00CD01EB /* ContactTableViewXib.xib in Resources */,
-				B5F916601D99043400CD01EB /* GoogleService-Info.plist in Resources */,
+				B51BDBB61DB9DB5800069289 /* GoogleService-Info.plist in Resources */,
 				B5C874631D93D73C00D192D9 /* Assets.xcassets in Resources */,
 				B5C8745E1D93D73C00D192D9 /* Main.storyboard in Resources */,
 			);
