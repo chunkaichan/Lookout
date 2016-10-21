@@ -29,7 +29,7 @@ class CoreMotionManager {
     
     func startDetection() {
         if manager.accelerometerAvailable {
-            manager.accelerometerUpdateInterval = 0.5
+            manager.accelerometerUpdateInterval = 0.04
             manager.startAccelerometerUpdatesToQueue(NSOperationQueue.mainQueue()) {
                 (data: CMAccelerometerData?, error: NSError?) in
                 if let acceleration = data?.acceleration {

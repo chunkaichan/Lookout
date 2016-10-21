@@ -18,7 +18,6 @@ class CoreMotionViewController: UIViewController, EventCoreDataManagerDelegate, 
         let time = NSDate()
         let event = Event(time: time, data: yAxis, latitude: AppState.sharedInstance.userLatitude, longitude: AppState.sharedInstance.userLongitude, isAccident: nil)
         eventCoreDataManager.saveCoreData(eventToSave: event)
-        events = []
         eventCoreDataManager.fetchCoreData()
     }
     
@@ -44,12 +43,21 @@ class CoreMotionViewController: UIViewController, EventCoreDataManagerDelegate, 
         }
         
         eventCoreDataManager.delegate = self
-        events = []
-        eventCoreDataManager.fetchCoreData()
+        
     }
     
     override func viewDidAppear(animated: Bool) {
+        print("Start updating chart.")
         getAccelerationMotion()
+        eventCoreDataManager.fetchCoreData()
+    }
+    
+    
+    override func viewWillDisappear(animated: Bool) {
+        if manager.accelerometerAvailable {
+            manager.stopAccelerometerUpdates()
+            print("Stop updating chart.")
+        }
     }
     
     func setChart(dataPoints: [String], values: [Double]) {
@@ -69,6 +77,7 @@ class CoreMotionViewController: UIViewController, EventCoreDataManagerDelegate, 
         lineChartDataSet.drawCirclesEnabled = false
         
         xLineChartView.data = lineChartData
+        
         xLineChartView.xAxis.labelPosition = .Bottom
         
         //remove xAxis line
@@ -114,19 +123,11 @@ class CoreMotionViewController: UIViewController, EventCoreDataManagerDelegate, 
         }
     }
     
-    override func viewWillDisappear(animated: Bool) {
-        if manager.accelerometerAvailable {
-            manager.stopAccelerometerUpdates()
-            print("Stop updating accelerometer.")
-        }
-    }
-    
-    
-    
     func manager(manager: EventCoreDataManager, didSaveEventData: AnyObject) {
         print("Save an event to core data")
     }
     func manager(manager: EventCoreDataManager, didFetchEventData: AnyObject) {
+        events = []
         print("Fetch events from core data.")
         guard let results = didFetchEventData as? [Events] else {fatalError()}
         if (results.count>0) {

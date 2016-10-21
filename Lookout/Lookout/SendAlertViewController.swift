@@ -38,9 +38,11 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
             AppState.sharedInstance.detectionEnabled = false
             sender.setImage(tintImage, forState: .Normal)
             sender.tintColor = UIColor.grayColor()
+            CoreMotionManager.shared.stopDetection()
         } else {
             AppState.sharedInstance.detectionEnabled = true
             sender.setImage(originalImage, forState: .Normal)
+            CoreMotionManager.shared.startDetection()
         }
     }
 
@@ -95,14 +97,10 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
         coreDataManager.delegate = self
         coreDataManager.fetchCoreData()
         
-//        if (AppState.sharedInstance.detectionEnabled) {
-//            coreMotionManager.delegate = self
-//            coreMotionManager.startDetection()
-//        }
     }
     
-    func manager(manager: CoreMotionManager, didGetMotion: Double) {
-        print("Send view: \(didGetMotion)")
+    func sendAlertWhenAccidentDeteced() {
+        print("Send alert automatically when accident is detected.")
     }
     
     @IBAction func tapSendEmail(sender: AnyObject) {

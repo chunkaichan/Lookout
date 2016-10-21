@@ -12,7 +12,7 @@ import CoreLocation
 import Firebase
 import FirebaseDatabase
 
-class ContactsMapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class ContactsMapViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var contactMap: MKMapView!
 
@@ -67,7 +67,6 @@ class ContactsMapViewController: UIViewController, MKMapViewDelegate, CLLocation
     var location: [FIRDataSnapshot]! = []
     private var _refHandle: FIRDatabaseHandle!
     
-    var locationManager: CLLocationManager!
     var center = CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0)
     
     override func viewDidLoad() {
