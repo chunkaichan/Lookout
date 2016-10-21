@@ -362,7 +362,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     func saveToStorage() {
         // Points to the root reference
-        let storageRef = FIRStorage.storage().referenceForURL("gs://project2-4b2f3.appspot.com")
+        let storageRef = FIRStorage.storage().referenceForURL("gs://asic-lookout.appspot.com")
         
         // Points to "images"
         let imagesRef = storageRef.child("profilePhotos")
@@ -385,7 +385,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     func downloadFromStorage() {
-        let storageRef = FIRStorage.storage().referenceForURL("gs://project2-4b2f3.appspot.com")
+        let storageRef = FIRStorage.storage().referenceForURL("gs://asic-lookout.appspot.com")
         
         storageRef.child("profilePhotos/\(AppState.sharedInstance.UUID)").downloadURLWithCompletion({
             (URL,error) in
