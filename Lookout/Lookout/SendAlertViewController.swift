@@ -31,6 +31,43 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
         setLocationManager()
     }
     
+    @IBAction func clickSendMessage(sender: UIButton) {
+        
+        var deviceToken = "unavailable"
+        
+        let body = [ "to" : deviceToken ,
+                     "notification" :
+                        [ "body" :"this is body",
+                          "title" :"thisis title",
+                          "sound": "default"],
+                   ]
+        
+        print(123)
+        let url = NSURL(string: "https://fcm.googleapis.com/fcm/send")
+        let mutableURLRequest = NSMutableURLRequest(URL: url!)
+        let session = NSURLSession.sharedSession()
+        do {
+            let jsonBody = try NSJSONSerialization.dataWithJSONObject(body, options: .PrettyPrinted)
+            mutableURLRequest.HTTPMethod = "POST"
+            print(jsonBody)
+            mutableURLRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            mutableURLRequest.setValue("key=\(apiKey)", forHTTPHeaderField: "Authorization")
+            mutableURLRequest.HTTPBody = jsonBody
+            let task = session.dataTaskWithRequest(mutableURLRequest) {
+                ( data , response, error ) in
+                print(data)
+                print(response)
+                print(error)
+                
+            }
+            task.resume()
+        } catch {
+            print("QQ")
+        }
+        
+        
+    }
+    
     @IBAction func detectionEnabledButton(sender: UIButton) {
         let originalImage = UIImage(named: "fall-detection")
         let tintImage = originalImage?.imageWithRenderingMode(.AlwaysTemplate)

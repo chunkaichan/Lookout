@@ -17,6 +17,7 @@ DerivedData/
 !default.perspectivev3
 xcuserdata/
 *.plist
+Apostate.swift
 
 ## Other
 *.moved-aside

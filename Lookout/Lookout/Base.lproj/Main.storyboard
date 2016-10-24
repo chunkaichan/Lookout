@@ -50,6 +50,9 @@
                                             <constraint firstAttribute="width" constant="64" id="upk-7n-cjg"/>
                                         </constraints>
                                         <state key="normal" image="send-message"/>
+                                        <connections>
+                                            <action selector="clickSendMessage:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eYM-5j-W0k"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O6Z-4F-uc2">
                                         <rect key="frame" x="506" y="383" width="64" height="64"/>
