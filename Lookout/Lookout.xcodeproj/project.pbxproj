@@ -27,6 +27,8 @@
 		B5C874611D93D73C00D192D9 /* Lookout.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B5C8745F1D93D73C00D192D9 /* Lookout.xcdatamodeld */; };
 		B5C874631D93D73C00D192D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5C874621D93D73C00D192D9 /* Assets.xcassets */; };
 		B5C874661D93D73C00D192D9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5C874641D93D73C00D192D9 /* LaunchScreen.storyboard */; };
+		B5CBA2571DBF5A440056A2F9 /* AccountKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5CBA2551DBF5A440056A2F9 /* AccountKit.framework */; };
+		B5CBA2581DBF5A440056A2F9 /* AccountKitStrings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B5CBA2561DBF5A440056A2F9 /* AccountKitStrings.bundle */; };
 		B5F1E4B41D9FF84C0007F663 /* CoreMotionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F1E4B31D9FF84C0007F663 /* CoreMotionViewController.swift */; };
 		B5F313A91DB382B7007284D4 /* Events+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F313A71DB382B7007284D4 /* Events+CoreDataProperties.swift */; };
 		B5F313AA1DB382B7007284D4 /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F313A81DB382B7007284D4 /* Events.swift */; };
@@ -65,6 +67,8 @@
 		B5C874621D93D73C00D192D9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B5C874651D93D73C00D192D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B5C874671D93D73C00D192D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B5CBA2551DBF5A440056A2F9 /* AccountKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AccountKit.framework; sourceTree = "<group>"; };
+		B5CBA2561DBF5A440056A2F9 /* AccountKitStrings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AccountKitStrings.bundle; sourceTree = "<group>"; };
 		B5E776361DA3870800F0A0E1 /* Lookout-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Lookout-Bridging-Header.h"; path = "Lookout/Lookout-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		B5F1E4B31D9FF84C0007F663 /* CoreMotionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreMotionViewController.swift; sourceTree = "<group>"; };
 		B5F313A71DB382B7007284D4 /* Events+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Events+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -85,6 +89,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C5BF48C5B9A12D22FE10AB6 /* Pods_Lookout.framework in Frameworks */,
+				B5CBA2571DBF5A440056A2F9 /* AccountKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,6 +116,8 @@
 		B5C8744C1D93D73C00D192D9 = {
 			isa = PBXGroup;
 			children = (
+				B5CBA2551DBF5A440056A2F9 /* AccountKit.framework */,
+				B5CBA2561DBF5A440056A2F9 /* AccountKitStrings.bundle */,
 				B5F313A71DB382B7007284D4 /* Events+CoreDataProperties.swift */,
 				B5F313A81DB382B7007284D4 /* Events.swift */,
 				B578DF5E1D9E4630002E5439 /* Contact+CoreDataProperties.swift */,
@@ -242,6 +249,7 @@
 				B5C874661D93D73C00D192D9 /* LaunchScreen.storyboard in Resources */,
 				B5F9165C1D98F29C00CD01EB /* ContactTableViewXib.xib in Resources */,
 				B56F06511DBA1BAD00427337 /* GoogleService-Info.plist in Resources */,
+				B5CBA2581DBF5A440056A2F9 /* AccountKitStrings.bundle in Resources */,
 				B5C874631D93D73C00D192D9 /* Assets.xcassets in Resources */,
 				B5C8745E1D93D73C00D192D9 /* Main.storyboard in Resources */,
 			);
@@ -459,6 +467,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Lookout/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kylechan.lookout;
@@ -476,6 +488,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Lookout/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kylechan.lookout;

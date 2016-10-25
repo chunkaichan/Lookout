@@ -15,5 +15,6 @@
 #import <MailCore/MailCore.h>
 #import <MailCore/MCOAbstractMessage.h>
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <AccountKit/AccountKit.h>
 
 #endif /* Lookout_Bridging_Header_h */
