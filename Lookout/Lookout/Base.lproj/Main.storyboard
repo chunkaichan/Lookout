@@ -1044,11 +1044,11 @@
             </objects>
             <point key="canvasLocation" x="1187" y="3712"/>
         </scene>
-        <!--Item-->
+        <!--Profile-->
         <scene sceneID="1Pc-dc-qNl">
             <objects>
                 <navigationController storyboardIdentifier="profileVC" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Kij-72-5zP" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" image="menu-profile" id="xPC-ku-mWM"/>
+                    <tabBarItem key="tabBarItem" title="Profile" image="menu-profile" id="xPC-ku-mWM"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="4Q0-Cx-RsN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
