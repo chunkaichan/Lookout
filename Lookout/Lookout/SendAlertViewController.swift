@@ -30,8 +30,46 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
     override func viewDidLoad() {
         ref = FIRDatabase.database().reference()
         setLocationManager()
-        
-        
+    }
+    
+    @IBAction func sendAllAlert(sender: UIButton) {
+        if (contacts.count != 0) {
+            
+            for contact in contacts {
+                print(contact.trackID)
+                
+                _refHandle = self.ref.child("user_token/\(contact.trackID)").observeEventType(.Value, withBlock: { (snapshot) -> Void in
+                    if let contactsToken = snapshot.value as? [String:String] {
+                        if let token = contactsToken["token"] {
+                            self.pushNotificationToContact(token: token, message: "msg body")
+                        }
+                    }
+                })
+                
+                let gtlMessage = GTLRGmail_Message()
+                for contact in contacts {
+                    gtlMessage.raw = self.generateRawString(toMail: contact.email, body: "This is a emergency notification from Lookout.")
+                    
+                    let query = GTLRGmailQuery_UsersMessagesSend.queryWithObject(gtlMessage, userId: "me", uploadParameters: nil)
+                    
+                    service.executeQuery(query, completionHandler: {(ticket, response, error) -> Void in
+                        print("ticket \(ticket)")
+                        print("response \(response)")
+                        print("error \(error)")
+                        
+                        if error != nil {
+                            self.showAlert(message: "Failed to send email.", actionTitle: "Close")
+                        } else {
+                            self.showAlertAfterSending()
+                        }
+                    })
+                }
+            }
+            
+            
+        } else {
+            showAlert(message: "Please add a contact", actionTitle: "OK")
+        }
     }
     
     @IBAction func clickSendMessage(sender: UIButton) {
