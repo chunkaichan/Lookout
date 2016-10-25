@@ -22,6 +22,7 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
     
     // Firebase
     var ref: FIRDatabaseReference!
+    private var _refHandle: FIRDatabaseHandle!
     
     let coreDataManager = CoreDataManager.shared
     let coreMotionManager = CoreMotionManager.shared
@@ -29,43 +30,57 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
     override func viewDidLoad() {
         ref = FIRDatabase.database().reference()
         setLocationManager()
+        
+        
     }
     
     @IBAction func clickSendMessage(sender: UIButton) {
-        
-        var deviceToken = "unavailable"
-        
-        let body = [ "to" : deviceToken ,
-                     "notification" :
-                        [ "body" :"this is body",
-                          "title" :"thisis title",
-                          "sound": "default"],
-                   ]
-        
-        print(123)
-        let url = NSURL(string: "https://fcm.googleapis.com/fcm/send")
-        let mutableURLRequest = NSMutableURLRequest(URL: url!)
-        let session = NSURLSession.sharedSession()
-        do {
-            let jsonBody = try NSJSONSerialization.dataWithJSONObject(body, options: .PrettyPrinted)
-            mutableURLRequest.HTTPMethod = "POST"
-            print(jsonBody)
-            mutableURLRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            mutableURLRequest.setValue("key=\(apiKey)", forHTTPHeaderField: "Authorization")
-            mutableURLRequest.HTTPBody = jsonBody
-            let task = session.dataTaskWithRequest(mutableURLRequest) {
-                ( data , response, error ) in
-                print(data)
-                print(response)
-                print(error)
+        if (contacts.count != 0) {
+            
+            for contact in contacts {
+                print(contact.trackID)
                 
+                _refHandle = self.ref.child("user_token/\(contact.trackID)").observeEventType(.Value, withBlock: { (snapshot) -> Void in
+                    if let contactsToken = snapshot.value as? [String:String] {
+                        if let token = contactsToken["token"] {
+                            self.pushNotificationToContact(token: token, message: "msg body")
+                        }
+                    }
+                })
             }
-            task.resume()
-        } catch {
-            print("QQ")
         }
         
+    }
+    
+    func pushNotificationToContact(token token: String, message: String) {
+                let body = [ "to" : token ,
+                             "priority" : "high",
+                             "notification" : [ "title": "this is title",
+                                                "body" : message,
+                                                "alert" :"this is alert",
+                                                "sound": "default"
+                                              ]
+                           ]
         
+                let url = NSURL(string: "https://fcm.googleapis.com/fcm/send")
+                let mutableURLRequest = NSMutableURLRequest(URL: url!)
+                let session = NSURLSession.sharedSession()
+                do {
+                    let jsonBody = try NSJSONSerialization.dataWithJSONObject(body, options: .PrettyPrinted)
+                    mutableURLRequest.HTTPMethod = "POST"
+                    mutableURLRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+                    mutableURLRequest.setValue("key=\(AppState.sharedInstance.APIKey)", forHTTPHeaderField: "Authorization")
+                    mutableURLRequest.HTTPBody = jsonBody
+                    let task = session.dataTaskWithRequest(mutableURLRequest) {
+                        ( data , response, error ) in
+                        let httpResponse = response as! NSHTTPURLResponse
+                        let statusCode = httpResponse.statusCode
+                        print(statusCode)
+                    }
+                    task.resume()
+                } catch {
+                    print(error)
+                }
     }
     
     @IBAction func detectionEnabledButton(sender: UIButton) {
@@ -134,6 +149,19 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
         coreDataManager.delegate = self
         coreDataManager.fetchCoreData()
         
+        if let refreshedToken = FIRInstanceID.instanceID().token() {
+            tokenUploadToDatabase(token: refreshedToken)
+        }
+        
+    }
+    
+    func tokenUploadToDatabase(token token: String) {
+        var ref: FIRDatabaseReference!
+        ref = FIRDatabase.database().reference()
+        let data = ["token": token ]
+        print("user_token/\(AppState.sharedInstance.UUID)")
+        ref.child("user_token/\(AppState.sharedInstance.UUID)").setValue(data)
+        print("send token to db")
     }
     
     func sendAlertWhenAccidentDeteced() {
@@ -144,7 +172,6 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
         if (contacts.count != 0) {
             let gtlMessage = GTLRGmail_Message()
             for contact in contacts {
-                print(contact.email)
                 gtlMessage.raw = self.generateRawString(toMail: contact.email, body: "This is a emergency notification from Lookout.")
                 
                 let query = GTLRGmailQuery_UsersMessagesSend.queryWithObject(gtlMessage, userId: "me", uploadParameters: nil)

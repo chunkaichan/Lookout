@@ -19,7 +19,7 @@ import FirebaseInstanceID
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         Fabric.with([Crashlytics.self])
         
@@ -49,27 +49,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.tokenRefreshNotification), name:kFIRInstanceIDTokenRefreshNotification, object: nil)
         
         if let refreshedToken = FIRInstanceID.instanceID().token() {
-            print("InstanceID token: \(refreshedToken)")
+            print("InstanceID token: \(refreshedToken)")   
         }
-        
         return true
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        print(userInfo["gcm.message_id"])
-        print("%@",userInfo)
+        if let info = userInfo["notification"] as? [String:String] {
+            if let message = info["body"] {
+                print(message)
+                let alert = UIAlertView(title: "Message from contact", message: message, delegate: nil, cancelButtonTitle: "OK")
+                alert.show()
+            }
+        }
+        
     }
     
     // [START refresh_token]
     func tokenRefreshNotification(notification: NSNotification ) {
-        print("------")
         if let refreshedToken = FIRInstanceID.instanceID().token() {
             print("InstanceID token: \(refreshedToken)")
         }
-        print("------")
         // Connect to FCM since connection may have failed when attempted before having a token.
         connectToFcm()
-        print("------")
     }
     // [END refresh_token]
     
@@ -105,9 +107,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        print("***")
         connectToFcm()
-        print("***")
     }
 
     func applicationWillTerminate(application: UIApplication) {
