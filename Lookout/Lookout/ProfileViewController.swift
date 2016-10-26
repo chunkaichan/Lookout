@@ -272,6 +272,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     // and initialize the Gmail API service
     override func viewDidLoad() {
         super.viewDidLoad()
+        phoneTextField.text = AppState.sharedInstance.phone
         setTextFieldEditable(isEditable: false)
         trackID.text = AppState.sharedInstance.UUID
         profilePhoto.layer.cornerRadius = profilePhoto.layer.frame.width/2
