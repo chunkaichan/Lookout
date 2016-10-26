@@ -41,7 +41,11 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
                 _refHandle = self.ref.child("user_token/\(contact.trackID)").observeEventType(.Value, withBlock: { (snapshot) -> Void in
                     if let contactsToken = snapshot.value as? [String:String] {
                         if let token = contactsToken["token"] {
-                            self.pushNotificationToContact(token: token, message: "msg body")
+                            let defaults = NSUserDefaults.standardUserDefaults()
+                            if let phone = defaults.stringForKey("userPhoneNumber") {
+                                self.pushNotificationToContact(token: token, message: "Sent from \(phone)")
+                            }
+                            
                         }
                     }
                 })
@@ -81,7 +85,10 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
                 _refHandle = self.ref.child("user_token/\(contact.trackID)").observeEventType(.Value, withBlock: { (snapshot) -> Void in
                     if let contactsToken = snapshot.value as? [String:String] {
                         if let token = contactsToken["token"] {
-                            self.pushNotificationToContact(token: token, message: "msg body")
+                            let defaults = NSUserDefaults.standardUserDefaults()
+                            if let phone = defaults.stringForKey("userPhoneNumber") {
+                                self.pushNotificationToContact(token: token, message: "Sent from \(phone)")
+                            }
                         }
                     }
                 })
@@ -93,9 +100,8 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
     func pushNotificationToContact(token token: String, message: String) {
                 let body = [ "to" : token ,
                              "priority" : "high",
-                             "notification" : [ "title": "this is title",
+                             "notification" : [ "title": "Emegency Notification",
                                                 "body" : message,
-                                                "alert" :"this is alert",
                                                 "sound": "default"
                                               ]
                            ]
@@ -341,6 +347,14 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
                     trackID: result.trackID!,
                     email: result.email!,
                     photo: result.photo!))
+            }
+        }
+    }
+    
+    deinit {
+        if (contacts.count != 0) {
+            for contact in contacts {
+                ref.child("user_token/\(contact.trackID)").removeObserverWithHandle(_refHandle)
             }
         }
     }

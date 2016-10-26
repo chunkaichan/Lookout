@@ -178,8 +178,6 @@ class ContactsViewController: TabViewControllerTemplate, UITableViewDataSource, 
         presentViewController(alert, animated: true, completion: nil)
     }
     
-    
-    
     func confirmContactToDatabase(remoteUID remoteUID: String) {
         let databaseContactPath = "user_contacts/\(AppState.sharedInstance.UUID)/"
         print(AppState.sharedInstance.UUID)
@@ -187,6 +185,10 @@ class ContactsViewController: TabViewControllerTemplate, UITableViewDataSource, 
         let data = [remoteUID : true]
         self.ref.child(databaseContactPath).updateChildValues(data)
         print("Contact \(remoteUID) is set to be true.")
+    }
+    
+    deinit {
+        ref.child("user_contacts").removeObserverWithHandle(_refHandle)
     }
 
 }

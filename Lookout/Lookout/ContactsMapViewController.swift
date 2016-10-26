@@ -16,10 +16,8 @@ class ContactsMapViewController: UIViewController, MKMapViewDelegate {
 
     @IBOutlet weak var contactMap: MKMapView!
 
-    
     var contactNumber = ""
     
-        
     @IBAction func tapCallButton(sender: AnyObject) {
         if (contactNumber == "") {
             let alert = UIAlertController(title: nil, message: "Contact number unavailable.", preferredStyle: .Alert)
@@ -71,21 +69,21 @@ class ContactsMapViewController: UIViewController, MKMapViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.ref = FIRDatabase.database().reference()
+        ref = FIRDatabase.database().reference()
         
         contactMap.showsUserLocation = true
         contactMap.delegate = self
 
         configureDatabase()
-        self.navigationController!.navigationBar.tintColor = UIColor(red: 65/255, green: 188/255, blue: 165/255, alpha: 1)
+        navigationController!.navigationBar.tintColor = UIColor(red: 65/255, green: 188/255, blue: 165/255, alpha: 1)
         
     }
     
     
     deinit {
-        self.latitude = 0.0
-        self.longitude = 0.0
-        self.ref.child("user_locations").removeObserverWithHandle(_refHandle)
+        latitude = 0.0
+        longitude = 0.0
+        ref.child("user_locations").removeObserverWithHandle(_refHandle)
         let allAnnotations = contactMap.annotations
         contactMap.removeAnnotations(allAnnotations)
     }

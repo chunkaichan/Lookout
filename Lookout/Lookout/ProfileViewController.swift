@@ -443,4 +443,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }
+    
+    deinit {
+        ref.child("user_profiles/\(AppState.sharedInstance.UUID)").removeObserverWithHandle(_refHandle)
+    }
 }

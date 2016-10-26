@@ -55,14 +55,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        print("NOTIFICATION RECEIVCED")
+        print(userInfo)
         if let info = userInfo["notification"] as? [String:String] {
             if let message = info["body"] {
                 print(message)
-                let alert = UIAlertView(title: "Message from contact", message: message, delegate: nil, cancelButtonTitle: "OK")
-                alert.show()
+//                let alert = UIAlertController(title: "Message from contact", message: message, preferredStyle: .Alert)
+//                alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { _ in }))
+//                UIApplication.sharedApplication().keyWindow?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
             }
         }
-        
     }
     
     // [START refresh_token]
