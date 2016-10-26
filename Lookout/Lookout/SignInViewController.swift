@@ -23,7 +23,7 @@ extension SignInViewController: AKFViewControllerDelegate{
             if let phoneNumber = account?.phoneNumber?.stringRepresentation() {
                 self.signUpAccount(email: "\(phoneNumber)@lookout.com", password: phoneNumber)
                 self.signInAccount(email: "\(phoneNumber)@lookout.com", password: phoneNumber)
-                AppState.sharedInstance.phone = phoneNumber
+                self.defaults.setObject(phoneNumber, forKey: "userPhoneNumber")
             }
         }
     }
@@ -41,6 +41,7 @@ extension SignInViewController: AKFViewControllerDelegate{
 class SignInViewController: UIViewController {
 
     var accountKit: AKFAccountKit!
+    let defaults = NSUserDefaults.standardUserDefaults()
     
     @IBAction func loginWithPhone(sender: UIButton) {
         FIRAnalytics.logEventWithName(kFIREventSelectContent, parameters: [

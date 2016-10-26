@@ -203,6 +203,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         setTextFieldTransparent()
         inEditMode = false
     }
+    
     // TODO: combine the functions below as 
     // setTextFieldStatus(backgroundColor backgroundColor: CGColor,
     // isEditable: Bool)
@@ -220,8 +221,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 self.bloodTextField.layer.backgroundColor = UIColor.grayColor().CGColor
                 self.bloodTextField.layer.cornerRadius = 5
                 
-                self.phoneTextField.layer.backgroundColor = UIColor.grayColor().CGColor
-                self.phoneTextField.layer.cornerRadius = 5
                 }, completion: nil)
             
         })
@@ -236,7 +235,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 self.birthTextField.layer.backgroundColor = UIColor.clearColor().CGColor
                 self.addressTextField.layer.backgroundColor = UIColor.clearColor().CGColor
                 self.bloodTextField.layer.backgroundColor = UIColor.clearColor().CGColor
-                self.phoneTextField.layer.backgroundColor = UIColor.clearColor().CGColor
+
                 
                 }, completion: nil)
             
@@ -248,12 +247,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         nameTextField.userInteractionEnabled = isEditable
         birthTextField.userInteractionEnabled = isEditable
         addressTextField.userInteractionEnabled = isEditable
-        phoneTextField.userInteractionEnabled = isEditable
-        phoneTextField.userInteractionEnabled = isEditable
+        bloodTextField.userInteractionEnabled = isEditable
     }
-    
-    
-    
     
     private let kKeychainItemName = "Gmail API"
     private let kClientID = "556205392726-s6pohtn44l7eqpgmf0qtjq8mp0crt1nd.apps.googleusercontent.com"
@@ -272,7 +267,10 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     // and initialize the Gmail API service
     override func viewDidLoad() {
         super.viewDidLoad()
-        phoneTextField.text = AppState.sharedInstance.phone
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if let phone = defaults.stringForKey("userPhoneNumber") {
+            phoneTextField.text = phone
+        }
         setTextFieldEditable(isEditable: false)
         trackID.text = AppState.sharedInstance.UUID
         profilePhoto.layer.cornerRadius = profilePhoto.layer.frame.width/2
