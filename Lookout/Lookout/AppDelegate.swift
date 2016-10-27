@@ -46,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FIRApp.configure()
         
         // Add observer for InstanceID token refresh callback.
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.tokenRefreshNotification), name:kFIRInstanceIDTokenRefreshNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(tokenRefreshNotification), name:kFIRInstanceIDTokenRefreshNotification, object: nil)
         
         if let refreshedToken = FIRInstanceID.instanceID().token() {
             print("InstanceID token: \(refreshedToken)")   

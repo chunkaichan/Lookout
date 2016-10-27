@@ -13,7 +13,48 @@ import GTMOAuth2
 import CoreLocation
 import AudioToolbox
 
-class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDelegate, CoreDataManagerDelegate, CoreMotionManagerDelegate {
+class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDelegate, CoreDataManagerDelegate, CoreMotionManagerDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    @IBOutlet weak var contactsCollectionView: UICollectionView!
+    
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = contactsCollectionView.dequeueReusableCellWithReuseIdentifier("contactsCollectionCell", forIndexPath: indexPath) as! contactsCollectionViewCell
+        cell.contactsButton.tag = indexPath.row
+        cell.contactsButton.addTarget(self,action: #selector(buttonTapAction),forControlEvents: .TouchUpInside)
+        cell.contactsButton.setImage(UIImage(named:"add-contact-circle" ), forState: .Normal)
+        cell.contactsButton.imageView?.contentMode = .ScaleAspectFill
+        if (indexPath.row < contacts.count) {
+            if let contactPhoto = contacts[indexPath.row].photo {
+                cell.contactsButton.setImage(UIImage(data: contactPhoto), forState: .Normal)
+                cell.contactsButton.layer.cornerRadius = cell.contactsButton.layer.frame.width/2
+                cell.contactsButton.clipsToBounds = true
+            }
+        }
+        return cell
+    }
+    
+    func buttonTapAction(sender: UIButton) {
+        if (sender.tag < contacts.count) {
+            let contact = contacts[sender.tag]
+            showActionSheet(name: contact.name,
+                            phoneNumber: contact.phoneNumber,
+                            trackID: contact.trackID,
+                            photoData: contact.photo!)
+        } else {
+            performSegueWithIdentifier("pushToAddContact", sender: nil)
+        }
+        
+    }
+    
+    
     
     // Google Auth
     private let kKeychainItemName = "Gmail API"
@@ -36,7 +77,6 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
         if (contacts.count != 0) {
             
             for contact in contacts {
-                print(contact.trackID)
                 
                 _refHandle = self.ref.child("user_token/\(contact.trackID)").observeEventType(.Value, withBlock: { (snapshot) -> Void in
                     if let contactsToken = snapshot.value as? [String:String] {
@@ -45,7 +85,6 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
                             if let phone = defaults.stringForKey("userPhoneNumber") {
                                 self.pushNotificationToContact(token: token, message: "Sent from \(phone)")
                             }
-                            
                         }
                     }
                 })
@@ -119,7 +158,7 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
                         ( data , response, error ) in
                         let httpResponse = response as! NSHTTPURLResponse
                         let statusCode = httpResponse.statusCode
-                        print(statusCode)
+                        print("STATUS CODE: \(statusCode)")
                     }
                     task.resume()
                 } catch {
@@ -273,6 +312,34 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
         return GTLREncodeWebSafeBase64(rfc822Data)!
     }
     
+    func showActionSheet(name name: String, phoneNumber: String, trackID: String, photoData: NSData) {
+        
+        let alert = UIAlertController(title: "\n\n\n\n\n", message: nil, preferredStyle: .ActionSheet)
+        let rect = CGRectMake(10, 10, 100, 100)
+        
+        let contactPhoto = UIImageView(frame: rect)
+        contactPhoto.image = UIImage(data: photoData)
+        contactPhoto.contentMode = .ScaleAspectFill
+        contactPhoto.clipsToBounds = true
+        contactPhoto.layer.cornerRadius = contactPhoto.layer.frame.width/2
+        
+        let button = UIButton(type: .Custom)
+        button.frame = CGRectMake(140, 70, 40, 40)
+        button.setTitle("", forState: .Normal)
+        button.setImage(UIImage(named: "phone-call"), forState: .Normal)
+        button.backgroundColor = UIColor.clearColor()
+        
+        alert.view.addSubview(contactPhoto)
+        alert.view.addSubview(button)
+        if (alert.actions.count == 0) {
+            alert.addAction(UIAlertAction(title: "Call \(phoneNumber)", style: .Default, handler: nil))
+            alert.addAction(UIAlertAction(title: "View Map", style: .Default, handler: nil))
+            alert.addAction(UIAlertAction(title: "Delete contact", style: .Destructive, handler: nil))
+            alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        }
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
     func showAlert(message message: String, actionTitle: String) {
         AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
         let alert = UIAlertController(title: nil, message: message, preferredStyle: .Alert)
@@ -338,6 +405,7 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
     var contacts: [Person] = []
     
     func manager(manager: CoreDataManager, didFetchContactData: AnyObject) {
+        contacts = []
         guard let results = didFetchContactData as? [Contact] else { fatalError() }
         if (results.count > 0) {
             for result in results {
@@ -348,6 +416,7 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
                     email: result.email!,
                     photo: result.photo!))
             }
+            contactsCollectionView.reloadData()
         }
     }
     

@@ -79,11 +79,49 @@
                                             <action selector="detectionEnabledButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Fcy-LG-tnv"/>
                                         </connections>
                                     </button>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="CZ7-Fm-Ugm">
+                                        <rect key="frame" x="155" y="8" width="290" height="70"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="290" id="Gdf-qt-nLv"/>
+                                            <constraint firstAttribute="height" constant="70" id="hZt-Vh-7M0"/>
+                                        </constraints>
+                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="40" id="TYX-PN-LeC">
+                                            <size key="itemSize" width="70" height="70"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="contactsCollectionCell" id="YUE-sc-6lH" customClass="contactsCollectionViewCell" customModule="Lookout" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                                    <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UrN-iq-geb">
+                                                            <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+                                                            <state key="normal" image="add-contact-circle"/>
+                                                        </button>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </view>
+                                                <connections>
+                                                    <outlet property="contactsButton" destination="UrN-iq-geb" id="ntB-ot-mUZ"/>
+                                                </connections>
+                                            </collectionViewCell>
+                                        </cells>
+                                        <connections>
+                                            <outlet property="dataSource" destination="BYZ-38-t0r" id="qzv-sr-hN8"/>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="4Sz-Ww-eUl"/>
+                                        </connections>
+                                    </collectionView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="cEs-2L-twd" firstAttribute="top" secondItem="Wfe-qw-dU7" secondAttribute="top" constant="80" id="05S-Zj-6bf"/>
                                     <constraint firstAttribute="trailing" secondItem="O6Z-4F-uc2" secondAttribute="trailing" constant="30" id="7Di-gB-bwd"/>
                                     <constraint firstAttribute="bottom" secondItem="O6Z-4F-uc2" secondAttribute="bottom" constant="40" id="9Wy-M9-dVB"/>
+                                    <constraint firstItem="CZ7-Fm-Ugm" firstAttribute="leading" secondItem="Wfe-qw-dU7" secondAttribute="leading" constant="20" id="BlX-dq-KD3"/>
                                     <constraint firstAttribute="bottom" secondItem="SBX-zJ-LBD" secondAttribute="bottom" id="OVi-Y5-g9U"/>
                                     <constraint firstAttribute="trailing" secondItem="SBX-zJ-LBD" secondAttribute="trailing" id="QJL-Ve-9Vo"/>
                                     <constraint firstItem="rdV-nj-6Tq" firstAttribute="centerX" secondItem="Wfe-qw-dU7" secondAttribute="centerX" id="VtK-wd-EGc"/>
@@ -92,16 +130,25 @@
                                     <constraint firstItem="Ls1-EQ-x9C" firstAttribute="leading" secondItem="Wfe-qw-dU7" secondAttribute="leading" constant="30" id="cHA-ct-ekv"/>
                                     <constraint firstAttribute="bottom" secondItem="Ls1-EQ-x9C" secondAttribute="bottom" constant="40" id="e5u-8U-d1E"/>
                                     <constraint firstItem="cEs-2L-twd" firstAttribute="centerX" secondItem="Wfe-qw-dU7" secondAttribute="centerX" id="iTD-MM-p3h"/>
+                                    <constraint firstAttribute="trailing" secondItem="CZ7-Fm-Ugm" secondAttribute="trailing" constant="20" id="jWO-Nn-h7A"/>
                                     <constraint firstItem="SBX-zJ-LBD" firstAttribute="top" secondItem="Wfe-qw-dU7" secondAttribute="top" id="ycb-AL-F8w"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="BlX-dq-KD3"/>
+                                        <exclude reference="jWO-Nn-h7A"/>
+                                    </mask>
+                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Wfe-qw-dU7" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="QVs-ky-3az"/>
                             <constraint firstAttribute="trailingMargin" secondItem="OGo-S5-r6g" secondAttribute="trailing" constant="10" id="VAL-PJ-MtX"/>
+                            <constraint firstItem="CZ7-Fm-Ugm" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="WjM-5E-DE5"/>
                             <constraint firstAttribute="trailing" secondItem="Wfe-qw-dU7" secondAttribute="trailing" id="avX-B0-wrU"/>
                             <constraint firstItem="Wfe-qw-dU7" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="avh-jn-hwW"/>
+                            <constraint firstItem="CZ7-Fm-Ugm" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="vVS-en-GQo"/>
                             <constraint firstItem="Wfe-qw-dU7" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="viW-id-qQr"/>
                             <constraint firstItem="OGo-S5-r6g" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="wBt-VL-uD4"/>
                         </constraints>
@@ -114,6 +161,10 @@
                             </button>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="contactsCollectionView" destination="CZ7-Fm-Ugm" id="5cd-RC-9NY"/>
+                        <segue destination="LQQ-cH-uHf" kind="push" identifier="pushToAddContact" id="O5g-TV-0JC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -1057,6 +1108,7 @@
     </scenes>
     <resources>
         <image name="add-contact" width="20" height="20"/>
+        <image name="add-contact-circle" width="100" height="100"/>
         <image name="add-photo" width="44" height="44"/>
         <image name="alert" width="256" height="256"/>
         <image name="background" width="512" height="512"/>
@@ -1082,4 +1134,7 @@
         <image name="send-email" width="64" height="64"/>
         <image name="send-message" width="64" height="64"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="O5g-TV-0JC"/>
+    </inferredMetricsTieBreakers>
 </document>

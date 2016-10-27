@@ -12,6 +12,7 @@
 		B51BDBB41DB8C05D00069289 /* SuperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51BDBB31DB8C05D00069289 /* SuperViewController.swift */; };
 		B52C04181DA232E900A5CC06 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52C04171DA232E900A5CC06 /* ProfileViewController.swift */; };
 		B53D9B9C1DBB4F9200606817 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C874581D93D73C00D192D9 /* AppDelegate.swift */; };
+		B542D1961DC1AF6300F09B61 /* contactsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B542D1951DC1AF6300F09B61 /* contactsCollectionViewCell.swift */; };
 		B56F06511DBA1BAD00427337 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B56F06501DBA1BAD00427337 /* GoogleService-Info.plist */; };
 		B578DF531D9E34D9002E5439 /* NewContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B578DF521D9E34D9002E5439 /* NewContactViewController.swift */; };
 		B578DF5D1D9E3C36002E5439 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B578DF5C1D9E3C36002E5439 /* CoreDataManager.swift */; };
@@ -49,6 +50,7 @@
 		B51BDBB11DB8A11600069289 /* CoreMotionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreMotionManager.swift; sourceTree = "<group>"; };
 		B51BDBB31DB8C05D00069289 /* SuperViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperViewController.swift; sourceTree = "<group>"; };
 		B52C04171DA232E900A5CC06 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		B542D1951DC1AF6300F09B61 /* contactsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = contactsCollectionViewCell.swift; sourceTree = "<group>"; };
 		B56F06501DBA1BAD00427337 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B578DF521D9E34D9002E5439 /* NewContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewContactViewController.swift; sourceTree = "<group>"; };
 		B578DF5C1D9E3C36002E5439 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 			children = (
 				B5C874581D93D73C00D192D9 /* AppDelegate.swift */,
 				B5C8745C1D93D73C00D192D9 /* Main.storyboard */,
+				B542D1951DC1AF6300F09B61 /* contactsCollectionViewCell.swift */,
 				B51BDBB31DB8C05D00069289 /* SuperViewController.swift */,
 				B5FD5C061DB4E3A400C9D922 /* EventMapViewController.swift */,
 				B5F1E4B31D9FF84C0007F663 /* CoreMotionViewController.swift */,
@@ -339,6 +342,7 @@
 				B53D9B9C1DBB4F9200606817 /* AppDelegate.swift in Sources */,
 				B5BFA9031D95222600496D13 /* SendAlertViewController.swift in Sources */,
 				B5F313A91DB382B7007284D4 /* Events+CoreDataProperties.swift in Sources */,
+				B542D1961DC1AF6300F09B61 /* contactsCollectionViewCell.swift in Sources */,
 				B5F313AA1DB382B7007284D4 /* Events.swift in Sources */,
 				B5FD5C071DB4E3A400C9D922 /* EventMapViewController.swift in Sources */,
 				B5C874611D93D73C00D192D9 /* Lookout.xcdatamodeld in Sources */,
