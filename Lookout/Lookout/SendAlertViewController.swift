@@ -74,6 +74,10 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
         contactsCollectionView.backgroundColor = UIColor.clearColor()
     }
     
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
+    }
+    
     @IBAction func sendAllAlert(sender: UIButton) {
         if (contacts.count != 0) {
             
@@ -319,38 +323,79 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
     func showActionSheet(name name: String, phoneNumber: String, trackID: String, photoData: NSData) {
         
         let alert = UIAlertController(title: "\n\n\n\n\n", message: nil, preferredStyle: .ActionSheet)
-        let rect = CGRectMake(10, 10, 100, 100)
+        let alertViewWidth = alert.view.bounds.size.width
+        let buttonRadius: CGFloat = 40
+        let photoRadios: CGFloat = 100
+        let space: CGFloat = (alertViewWidth - 10 - photoRadios - 3*buttonRadius)/5
         
-        let contactPhoto = UIImageView(frame: rect)
+        let contactPhoto = UIImageView(frame: CGRectMake(10, 10, photoRadios, photoRadios))
         contactPhoto.image = UIImage(data: photoData)
         contactPhoto.contentMode = .ScaleAspectFill
         contactPhoto.clipsToBounds = true
         contactPhoto.layer.cornerRadius = contactPhoto.layer.frame.width/2
-        
-        let button = UIButton(type: .Custom)
-        button.frame = CGRectMake(140, 70, 40, 40)
-        button.setTitle("", forState: .Normal)
-        button.setImage(UIImage(named: "phone-call"), forState: .Normal)
-        button.backgroundColor = UIColor.clearColor()
-        button.addTarget(self, action: #selector(callContact), forControlEvents: .TouchUpInside)
-        
         alert.view.addSubview(contactPhoto)
-        alert.view.addSubview(button)
+        
+        let contactName = UILabel(frame: CGRectMake(10+photoRadios+space, 20, 200, 40))
+        contactName.text = name
+        contactName.font = contactName.font.fontWithSize(25)
+        alert.view.addSubview(contactName)
+        
+        let callButton = UIButton(type: .Custom)
+        callButton.frame = CGRectMake(10+photoRadios+space, 70, buttonRadius, buttonRadius)
+        callButton.setTitle("", forState: .Normal)
+        callButton.setImage(UIImage(named: "call-contact"), forState: .Normal)
+        callButton.backgroundColor = UIColor.clearColor()
+        callButton.addTarget(self, action: #selector(callContact), forControlEvents: .TouchUpInside)
+        alert.view.addSubview(callButton)
+        
+        let viewMapButton = UIButton(type: .Custom)
+        viewMapButton.frame = CGRectMake(10+photoRadios+space*2+buttonRadius, 70, buttonRadius, buttonRadius)
+        viewMapButton.setTitle("", forState: .Normal)
+        viewMapButton.setImage(UIImage(named: "view-map"), forState: .Normal)
+        viewMapButton.backgroundColor = UIColor.clearColor()
+        viewMapButton.addTarget(self, action: #selector(viewContactMap), forControlEvents: .TouchUpInside)
+        alert.view.addSubview(viewMapButton)
+        
+        let viewProfileButton = UIButton(type: .Custom)
+        viewProfileButton.frame = CGRectMake(10+photoRadios+space*3+buttonRadius*2, 70, buttonRadius, buttonRadius)
+        viewProfileButton.setTitle("", forState: .Normal)
+        viewProfileButton.setImage(UIImage(named: "contact-profile"), forState: .Normal)
+        viewProfileButton.backgroundColor = UIColor.clearColor()
+        viewProfileButton.addTarget(self, action: #selector(viewContactProfile), forControlEvents: .TouchUpInside)
+        alert.view.addSubview(viewProfileButton)
+        
         if (alert.actions.count == 0) {
-            alert.addAction(UIAlertAction(title: "Call \(phoneNumber)", style: .Default, handler: nil))
-            alert.addAction(UIAlertAction(title: "View Map", style: .Default, handler: nil))
             alert.addAction(UIAlertAction(title: "Delete contact", style: .Destructive, handler: nil))
             alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
         }
         self.presentViewController(alert, animated: true, completion: nil)
     }
     
-    func callContact(sender sender: UIButton) {
-        if let phoneCallURL:NSURL = NSURL(string: "tel://contacts[sender.tag].phoneNumber") {
+    func callContact(sender: UIButton) {
+        if let phoneCallURL:NSURL = NSURL(string: "tel://\(contacts[sender.tag].phoneNumber)") {
             let application:UIApplication = UIApplication.sharedApplication()
             if (application.canOpenURL(phoneCallURL)) {
                 application.openURL(phoneCallURL);
             }
+        }
+    }
+    
+    func viewContactMap(sender: UIButton) {
+        dismissViewControllerAnimated(true, completion: nil)
+        performSegueWithIdentifier("viewContactMap", sender: sender)
+    }
+    
+    func viewContactProfile(sender: UIButton) {
+        performSegueWithIdentifier("pushToAddContact", sender: nil)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "viewContactMap" {
+            let destination: ContactsMapViewController = segue.destinationViewController as! ContactsMapViewController
+            destination.trackID = contacts[(sender?.tag)!].trackID
+            destination.navigationItem.title = contacts[(sender?.tag)!].name
+            destination.contactNumber = contacts[(sender?.tag)!].phoneNumber
+            print("press segue to map")
         }
     }
     

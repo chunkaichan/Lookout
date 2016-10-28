@@ -301,6 +301,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         
     }
     
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
+    }
     
     // When the view appears, ensure that the Gmail API service is authorized
     // and perform API calls

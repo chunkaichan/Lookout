@@ -103,9 +103,9 @@ class ContactsViewController: TabViewControllerTemplate, UITableViewDataSource, 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "SegueContactMap" {
             let destination: ContactsMapViewController = segue.destinationViewController as! ContactsMapViewController
-            destination.trackID = self.trackID
-            destination.navigationItem.title = self.name
-            destination.contactNumber = self.number
+            destination.trackID = trackID
+            destination.navigationItem.title = name
+            destination.contactNumber = number
             print(number)
         }
     }

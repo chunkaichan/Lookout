@@ -164,6 +164,7 @@
                     <connections>
                         <outlet property="contactsCollectionView" destination="CZ7-Fm-Ugm" id="5cd-RC-9NY"/>
                         <segue destination="LQQ-cH-uHf" kind="push" identifier="pushToAddContact" id="O5g-TV-0JC"/>
+                        <segue destination="Oc4-u1-ACb" kind="push" identifier="viewContactMap" id="nVE-eQ-tJK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -332,7 +333,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sIQ-To-WWn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2853" y="2348"/>
+            <point key="canvasLocation" x="3111" y="2144"/>
         </scene>
         <!--Contacts Map View Controller-->
         <scene sceneID="lw6-SN-MnG">
@@ -405,7 +406,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MG4-ob-iQ9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2853" y="3004"/>
+            <point key="canvasLocation" x="3069" y="2952"/>
         </scene>
         <!--Event Map View Controller-->
         <scene sceneID="dFT-1a-tGu">
@@ -1136,5 +1137,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="O5g-TV-0JC"/>
+        <segue reference="nVE-eQ-tJK"/>
     </inferredMetricsTieBreakers>
 </document>
