@@ -36,6 +36,8 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
                 cell.contactsButton.setImage(UIImage(data: contactPhoto), forState: .Normal)
                 cell.contactsButton.layer.cornerRadius = cell.contactsButton.layer.frame.width/2
                 cell.contactsButton.clipsToBounds = true
+                cell.contactsButton.layer.borderWidth = 2
+                cell.contactsButton.layer.borderColor = UIColor(red: 230/255, green: 236/255, blue: 237/255, alpha: 1).CGColor
             }
         }
         return cell
@@ -84,6 +86,10 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
     }
     
     @IBAction func sendAllAlert(sender: UIButton) {
+        sendAlertToContacts()
+    }
+    
+    func sendAlertToContacts() {
         if (contacts.count != 0) {
             
             for contact in contacts {
@@ -111,7 +117,7 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
                         print("error \(error)")
                         
                         if error != nil {
-                            self.showAlert(message: "Failed to send email.", actionTitle: "Close")
+                            self.showAlert(message: "Failed to send email. Please check your internet environment and contacts' email.", actionTitle: "Close")
                         } else {
                             self.showAlertAfterSending()
                         }
@@ -123,27 +129,6 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
         } else {
             showAlert(message: "Please add a contact", actionTitle: "OK")
         }
-    }
-    
-    @IBAction func clickSendMessage(sender: UIButton) {
-        if (contacts.count != 0) {
-            
-            for contact in contacts {
-                print(contact.trackID)
-                
-                _refHandle = self.ref.child("user_token/\(contact.trackID)").observeEventType(.Value, withBlock: { (snapshot) -> Void in
-                    if let contactsToken = snapshot.value as? [String:String] {
-                        if let token = contactsToken["token"] {
-                            let defaults = NSUserDefaults.standardUserDefaults()
-                            if let phone = defaults.stringForKey("userPhoneNumber") {
-                                self.pushNotificationToContact(token: token, message: "Sent from \(phone)")
-                            }
-                        }
-                    }
-                })
-            }
-        }
-        
     }
     
     func pushNotificationToContact(token token: String, message: String) {
@@ -264,32 +249,6 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
         print("Send alert automatically when accident is detected.")
     }
     
-    @IBAction func tapSendEmail(sender: AnyObject) {
-        if (contacts.count != 0) {
-            let gtlMessage = GTLRGmail_Message()
-            for contact in contacts {
-                gtlMessage.raw = self.generateRawString(toMail: contact.email, body: "This is a emergency notification from Lookout.")
-                
-                let query = GTLRGmailQuery_UsersMessagesSend.queryWithObject(gtlMessage, userId: "me", uploadParameters: nil)
-                
-                service.executeQuery(query, completionHandler: {(ticket, response, error) -> Void in
-                    print("ticket \(ticket)")
-                    print("response \(response)")
-                    print("error \(error)")
-                    
-                    if error != nil {
-                        self.showAlert(message: "Failed to send your message", actionTitle: "Close")
-                    } else {
-                        self.showAlertAfterSending()
-                    }
-                })
-            }
-        } else {
-            showAlert(message: "Please add a contact", actionTitle: "OK")
-        }
-        
-    }
-    
     var fromLocationURL = "- User location unavailable -"
     
     func generateRawString(toMail toMail: String, body: String) -> String {
@@ -310,7 +269,6 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
         
         builder.header.date = NSDate()
         
-        //
         let rfc822Data = builder.data()
         
         return GTLREncodeWebSafeBase64(rfc822Data)!
@@ -445,9 +403,14 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
     func showAlertAfterSending() {
         AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
         let time = NSDate()
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy/MM/dd  HH:mm:ss"
+        let convertedDate = dateFormatter.stringFromDate(time)
+        
+        
         let alert = UIAlertController(
             title: nil,
-            message: "\(time)\nYou just sent a notification to your contacts.\nDo you want to send a safety message?",
+            message: "\(convertedDate)\nYou just sent a notification to your contacts.\nDo you want to send a safety message?",
             preferredStyle: UIAlertControllerStyle.Alert
         )
         let ok = UIAlertAction(
@@ -508,8 +471,8 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
                     email: result.email!,
                     photo: result.photo!))
             }
-            contactsCollectionView.reloadData()
         }
+        contactsCollectionView.reloadData()
     }
     
     deinit {
@@ -519,14 +482,4 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
             }
         }
     }
-}
-
-protocol SendAlertViewControllerDelegate: class {
-    func manager(manager manager: SendAlertViewController, didGetCoreMotion: AnyObject)
-    func manager(manager manager: SendAlertViewController, didReachThreshold: AnyObject)
-}
-
-extension SendAlertViewController {
-    func manager(manager manager: SendAlertViewController, didGetCoreMotion: AnyObject) {}
-    func manager(manager manager: SendAlertViewController, didReachThreshold: AnyObject) {}
 }

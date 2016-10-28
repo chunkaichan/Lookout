@@ -35,28 +35,6 @@
                                             <action selector="sendAllAlert:" destination="BYZ-38-t0r" eventType="touchUpInside" id="W0O-Y0-hoG"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rdV-nj-6Tq">
-                                        <rect key="frame" x="268" y="383" width="64" height="64"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="64" id="Qx9-qw-5Cc"/>
-                                            <constraint firstAttribute="width" constant="64" id="upk-7n-cjg"/>
-                                        </constraints>
-                                        <state key="normal" image="send-message"/>
-                                        <connections>
-                                            <action selector="clickSendMessage:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eYM-5j-W0k"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O6Z-4F-uc2">
-                                        <rect key="frame" x="506" y="383" width="64" height="64"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="64" id="1ZW-ZJ-PYp"/>
-                                            <constraint firstAttribute="width" constant="64" id="dxC-xM-nC0"/>
-                                        </constraints>
-                                        <state key="normal" image="send-email"/>
-                                        <connections>
-                                            <action selector="tapSendEmail:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dpK-Jl-W8L"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OGo-S5-r6g">
                                         <rect key="frame" x="530" y="20" width="40" height="40"/>
                                         <constraints>
@@ -69,7 +47,8 @@
                                         </connections>
                                     </button>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="CZ7-Fm-Ugm">
-                                        <rect key="frame" x="155" y="317" width="290" height="70"/>
+                                        <rect key="frame" x="155" y="377" width="290" height="70"/>
+                                        <color key="backgroundColor" red="0.10980392160000001" green="0.10980392160000001" blue="0.10980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="290" id="Gdf-qt-nLv"/>
                                             <constraint firstAttribute="height" constant="70" id="hZt-Vh-7M0"/>
@@ -105,19 +84,41 @@
                                             <outlet property="delegate" destination="BYZ-38-t0r" id="4Sz-Ww-eUl"/>
                                         </connections>
                                     </collectionView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X6F-bZ-GAA">
+                                        <rect key="frame" x="40" y="351" width="240" height="1"/>
+                                        <color key="backgroundColor" red="0.90196078431372551" green="0.92549019607843142" blue="0.92941176470588238" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="c0w-1M-rwf"/>
+                                        </constraints>
+                                    </view>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="family" translatesAutoresizingMaskIntoConstraints="NO" id="bD4-dn-Rf1">
+                                        <rect key="frame" x="290" y="337" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="87c-Bj-D4n"/>
+                                            <constraint firstAttribute="width" constant="20" id="Vt5-6t-oC6"/>
+                                        </constraints>
+                                    </imageView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aik-O5-G1Q">
+                                        <rect key="frame" x="320" y="351" width="240" height="1"/>
+                                        <color key="backgroundColor" red="0.90196078430000004" green="0.92549019610000005" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="IQN-MW-9TT"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="cEs-2L-twd" firstAttribute="top" secondItem="Wfe-qw-dU7" secondAttribute="top" constant="80" id="05S-Zj-6bf"/>
-                                    <constraint firstAttribute="trailing" secondItem="O6Z-4F-uc2" secondAttribute="trailing" constant="30" id="7Di-gB-bwd"/>
-                                    <constraint firstAttribute="bottom" secondItem="O6Z-4F-uc2" secondAttribute="bottom" constant="40" id="9Wy-M9-dVB"/>
                                     <constraint firstItem="CZ7-Fm-Ugm" firstAttribute="leading" secondItem="Wfe-qw-dU7" secondAttribute="leading" constant="20" id="BlX-dq-KD3"/>
+                                    <constraint firstItem="bD4-dn-Rf1" firstAttribute="leading" secondItem="X6F-bZ-GAA" secondAttribute="trailing" constant="10" id="NNj-i2-in2"/>
                                     <constraint firstAttribute="bottom" secondItem="SBX-zJ-LBD" secondAttribute="bottom" id="OVi-Y5-g9U"/>
+                                    <constraint firstItem="CZ7-Fm-Ugm" firstAttribute="top" secondItem="aik-O5-G1Q" secondAttribute="bottom" constant="25" id="Opd-pg-WWy"/>
                                     <constraint firstAttribute="trailing" secondItem="SBX-zJ-LBD" secondAttribute="trailing" id="QJL-Ve-9Vo"/>
-                                    <constraint firstItem="rdV-nj-6Tq" firstAttribute="centerX" secondItem="Wfe-qw-dU7" secondAttribute="centerX" id="VtK-wd-EGc"/>
                                     <constraint firstItem="SBX-zJ-LBD" firstAttribute="leading" secondItem="Wfe-qw-dU7" secondAttribute="leading" id="Wd3-dg-dBW"/>
-                                    <constraint firstAttribute="bottom" secondItem="rdV-nj-6Tq" secondAttribute="bottom" constant="40" id="a7g-Xl-7iM"/>
                                     <constraint firstItem="cEs-2L-twd" firstAttribute="centerX" secondItem="Wfe-qw-dU7" secondAttribute="centerX" id="iTD-MM-p3h"/>
                                     <constraint firstAttribute="trailing" secondItem="CZ7-Fm-Ugm" secondAttribute="trailing" constant="20" id="jWO-Nn-h7A"/>
+                                    <constraint firstItem="CZ7-Fm-Ugm" firstAttribute="top" secondItem="X6F-bZ-GAA" secondAttribute="bottom" constant="25" id="n4l-XO-Rtn"/>
+                                    <constraint firstItem="CZ7-Fm-Ugm" firstAttribute="top" secondItem="bD4-dn-Rf1" secondAttribute="bottom" constant="20" id="nUF-RO-wyn"/>
+                                    <constraint firstItem="aik-O5-G1Q" firstAttribute="leading" secondItem="bD4-dn-Rf1" secondAttribute="trailing" constant="10" id="tBp-0X-Hw6"/>
                                     <constraint firstItem="SBX-zJ-LBD" firstAttribute="top" secondItem="Wfe-qw-dU7" secondAttribute="top" id="ycb-AL-F8w"/>
                                 </constraints>
                                 <variation key="default">
@@ -130,11 +131,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="aik-O5-G1Q" secondAttribute="trailing" constant="20" id="Ev7-d5-Rex"/>
+                            <constraint firstItem="bD4-dn-Rf1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="PEi-xc-8EI"/>
                             <constraint firstItem="Wfe-qw-dU7" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="QVs-ky-3az"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="CZ7-Fm-Ugm" secondAttribute="bottom" constant="100" id="V9O-hL-fjr"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="CZ7-Fm-Ugm" secondAttribute="bottom" constant="40" id="V9O-hL-fjr"/>
                             <constraint firstAttribute="trailingMargin" secondItem="OGo-S5-r6g" secondAttribute="trailing" constant="10" id="VAL-PJ-MtX"/>
                             <constraint firstAttribute="trailing" secondItem="Wfe-qw-dU7" secondAttribute="trailing" id="avX-B0-wrU"/>
                             <constraint firstItem="Wfe-qw-dU7" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="avh-jn-hwW"/>
+                            <constraint firstItem="X6F-bZ-GAA" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="c8E-uw-u6W"/>
                             <constraint firstItem="CZ7-Fm-Ugm" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="vVS-en-GQo"/>
                             <constraint firstItem="Wfe-qw-dU7" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="viW-id-qQr"/>
                             <constraint firstItem="OGo-S5-r6g" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="wBt-VL-uD4"/>
@@ -1096,7 +1100,7 @@
     </scenes>
     <resources>
         <image name="add-contact" width="20" height="20"/>
-        <image name="add-contact-circle" width="100" height="100"/>
+        <image name="add-contact-circle" width="70" height="70"/>
         <image name="add-photo" width="44" height="44"/>
         <image name="alert" width="256" height="256"/>
         <image name="background" width="512" height="512"/>
@@ -1104,6 +1108,7 @@
         <image name="device-detection" width="20" height="20"/>
         <image name="event-add" width="30" height="30"/>
         <image name="fall-detection" width="64" height="64"/>
+        <image name="family" width="20" height="20"/>
         <image name="google-icon" width="24" height="24"/>
         <image name="menu-profile" width="20" height="20"/>
         <image name="menu-signout" width="32" height="32"/>
@@ -1118,8 +1123,6 @@
         <image name="profile-trackID" width="30" height="30"/>
         <image name="refresh" width="64" height="64"/>
         <image name="send-alert" width="20" height="20"/>
-        <image name="send-email" width="64" height="64"/>
-        <image name="send-message" width="64" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="O5g-TV-0JC"/>

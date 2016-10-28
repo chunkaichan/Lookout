@@ -41,6 +41,7 @@ class SuperViewController: UITabBarController, CoreMotionManagerDelegate {
             let time = NSDate()
             let event = Event(time: time, data: yAxis, latitude: AppState.sharedInstance.userLatitude, longitude: AppState.sharedInstance.userLongitude, isAccident: nil)
             EventCoreDataManager.shared.saveCoreData(eventToSave: event)
+            
         }
     }
     
