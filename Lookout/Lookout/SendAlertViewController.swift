@@ -71,6 +71,7 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
     override func viewDidLoad() {
         ref = FIRDatabase.database().reference()
         setLocationManager()
+        contactsCollectionView.backgroundColor = UIColor.clearColor()
     }
     
     @IBAction func sendAllAlert(sender: UIButton) {
@@ -236,6 +237,9 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
             tokenUploadToDatabase(token: refreshedToken)
         }
         
+        UIApplication.sharedApplication().keyWindow?.makeKeyAndVisible()
+        UIApplication.sharedApplication().keyWindow?.rootViewController = self
+        
     }
     
     func tokenUploadToDatabase(token token: String) {
@@ -328,6 +332,7 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
         button.setTitle("", forState: .Normal)
         button.setImage(UIImage(named: "phone-call"), forState: .Normal)
         button.backgroundColor = UIColor.clearColor()
+        button.addTarget(self, action: #selector(callContact), forControlEvents: .TouchUpInside)
         
         alert.view.addSubview(contactPhoto)
         alert.view.addSubview(button)
@@ -338,6 +343,15 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
             alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
         }
         self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func callContact(sender sender: UIButton) {
+        if let phoneCallURL:NSURL = NSURL(string: "tel://contacts[sender.tag].phoneNumber") {
+            let application:UIApplication = UIApplication.sharedApplication()
+            if (application.canOpenURL(phoneCallURL)) {
+                application.openURL(phoneCallURL);
+            }
+        }
     }
     
     func showAlert(message message: String, actionTitle: String) {

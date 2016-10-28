@@ -55,14 +55,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        print("NOTIFICATION RECEIVCED")
+        
+        let alert = UIAlertController(title: "You got a push notification", message: "sent by your contact", preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { _ in }))
+        UIApplication.sharedApplication().keyWindow?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+        
         print(userInfo)
         if let info = userInfo["notification"] as? [String:String] {
             if let message = info["body"] {
                 print(message)
-//                let alert = UIAlertController(title: "Message from contact", message: message, preferredStyle: .Alert)
-//                alert.addAction(UIAlertAction(title: "OK", style: .Default, handler: { _ in }))
-//                UIApplication.sharedApplication().keyWindow?.rootViewController?.presentViewController(alert, animated: true, completion: nil)
             }
         }
     }
