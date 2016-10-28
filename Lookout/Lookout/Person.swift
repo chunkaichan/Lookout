@@ -10,11 +10,11 @@ import Foundation
 
 class Person {
     
-    let name: String
-    let phoneNumber: String
-    let trackID: String
-    let email: String
-    let photo: NSData?
+    var name: String
+    var phoneNumber: String
+    var trackID: String
+    var email: String
+    var photo: NSData?
 //    let photo: NSdata
     
     init(name: String, phoneNumber: String, trackID: String, email: String, photo: NSData) {

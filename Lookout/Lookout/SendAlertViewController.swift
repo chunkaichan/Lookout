@@ -47,7 +47,8 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
             showActionSheet(name: contact.name,
                             phoneNumber: contact.phoneNumber,
                             trackID: contact.trackID,
-                            photoData: contact.photo!)
+                            photoData: contact.photo!,
+                            tag: sender.tag)
         } else {
             performSegueWithIdentifier("pushToAddContact", sender: nil)
         }
@@ -72,6 +73,10 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
         ref = FIRDatabase.database().reference()
         setLocationManager()
         contactsCollectionView.backgroundColor = UIColor.clearColor()
+        
+        coreDataManager.delegate = self
+        coreDataManager.fetchCoreData()
+        
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -285,15 +290,6 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
         
     }
     
-    @IBAction func tapPhoneCall(sender: AnyObject) {
-        if contacts.count==0 {
-            showAlert(message: "Please add a contact", actionTitle: "OK")
-        } else {
-            let randomNumber = Int(arc4random_uniform(UInt32(contacts.count)))
-            callNumber(contacts[randomNumber].phoneNumber)
-        }
-    }
-    
     var fromLocationURL = "- User location unavailable -"
     
     func generateRawString(toMail toMail: String, body: String) -> String {
@@ -320,7 +316,7 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
         return GTLREncodeWebSafeBase64(rfc822Data)!
     }
     
-    func showActionSheet(name name: String, phoneNumber: String, trackID: String, photoData: NSData) {
+    func showActionSheet(name name: String, phoneNumber: String, trackID: String, photoData: NSData, tag: Int) {
         
         let alert = UIAlertController(title: "\n\n\n\n\n", message: nil, preferredStyle: .ActionSheet)
         let alertViewWidth = alert.view.bounds.size.width
@@ -346,6 +342,7 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
         callButton.setImage(UIImage(named: "call-contact"), forState: .Normal)
         callButton.backgroundColor = UIColor.clearColor()
         callButton.addTarget(self, action: #selector(callContact), forControlEvents: .TouchUpInside)
+        callButton.tag = tag
         alert.view.addSubview(callButton)
         
         let viewMapButton = UIButton(type: .Custom)
@@ -354,6 +351,7 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
         viewMapButton.setImage(UIImage(named: "view-map"), forState: .Normal)
         viewMapButton.backgroundColor = UIColor.clearColor()
         viewMapButton.addTarget(self, action: #selector(viewContactMap), forControlEvents: .TouchUpInside)
+        viewMapButton.tag = tag
         alert.view.addSubview(viewMapButton)
         
         let viewProfileButton = UIButton(type: .Custom)
@@ -362,16 +360,22 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
         viewProfileButton.setImage(UIImage(named: "contact-profile"), forState: .Normal)
         viewProfileButton.backgroundColor = UIColor.clearColor()
         viewProfileButton.addTarget(self, action: #selector(viewContactProfile), forControlEvents: .TouchUpInside)
+        viewProfileButton.tag = tag
         alert.view.addSubview(viewProfileButton)
         
         if (alert.actions.count == 0) {
-            alert.addAction(UIAlertAction(title: "Delete contact", style: .Destructive, handler: nil))
+            alert.addAction(UIAlertAction(title: "Delete contact", style: .Destructive, handler: { _ in
+                
+                self.deleteContact(senderTag: tag)
+                
+            }))
             alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
         }
         self.presentViewController(alert, animated: true, completion: nil)
     }
     
     func callContact(sender: UIButton) {
+        print(sender.tag)
         if let phoneCallURL:NSURL = NSURL(string: "tel://\(contacts[sender.tag].phoneNumber)") {
             let application:UIApplication = UIApplication.sharedApplication()
             if (application.canOpenURL(phoneCallURL)) {
@@ -381,12 +385,31 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
     }
     
     func viewContactMap(sender: UIButton) {
+        print(sender.tag)
         dismissViewControllerAnimated(true, completion: nil)
         performSegueWithIdentifier("viewContactMap", sender: sender)
     }
     
     func viewContactProfile(sender: UIButton) {
-        performSegueWithIdentifier("pushToAddContact", sender: nil)
+        dismissViewControllerAnimated(true, completion: nil)
+        performSegueWithIdentifier("pushToAddContact", sender: sender)
+    }
+    
+    func deleteContact(senderTag tag: Int) {
+        
+        let confirmDelete = UIAlertController(title: "Delete this contact?", message: nil, preferredStyle: .ActionSheet)
+        confirmDelete.addAction(UIAlertAction(title: "Delete", style: .Destructive, handler: { _ in
+            self.contacts.removeAtIndex(tag)
+            CoreDataManager.shared.clearCoreData()
+            for contact in self.contacts {
+                CoreDataManager.shared.saveCoreData(name: contact.name, number: contact.phoneNumber, email: contact.email, trackID: contact.trackID, photo: contact.photo!)
+            }
+            CoreDataManager.shared.fetchCoreData()
+        }))
+        
+        confirmDelete.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        
+        presentViewController(confirmDelete, animated: true, completion: nil)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -396,6 +419,16 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
             destination.navigationItem.title = contacts[(sender?.tag)!].name
             destination.contactNumber = contacts[(sender?.tag)!].phoneNumber
             print("press segue to map")
+        }
+        if (segue.identifier == "pushToAddContact") {
+            
+            if let tag = sender?.tag {
+                let destination: NewContactViewController = segue.destinationViewController as! NewContactViewController
+                destination.contactIsExist = true
+                destination.senderTag = tag
+                print("press segue to profile")
+            }
+            
         }
     }
     

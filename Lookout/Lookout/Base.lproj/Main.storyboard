@@ -35,17 +35,6 @@
                                             <action selector="sendAllAlert:" destination="BYZ-38-t0r" eventType="touchUpInside" id="W0O-Y0-hoG"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ls1-EQ-x9C">
-                                        <rect key="frame" x="30" y="383" width="64" height="64"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="64" id="MZV-Ts-hVF"/>
-                                            <constraint firstAttribute="width" constant="64" id="QZk-gm-oAG"/>
-                                        </constraints>
-                                        <state key="normal" image="phone-call"/>
-                                        <connections>
-                                            <action selector="tapPhoneCall:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IDZ-SP-lJ7"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rdV-nj-6Tq">
                                         <rect key="frame" x="268" y="383" width="64" height="64"/>
                                         <constraints>
@@ -80,7 +69,7 @@
                                         </connections>
                                     </button>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="CZ7-Fm-Ugm">
-                                        <rect key="frame" x="155" y="8" width="290" height="70"/>
+                                        <rect key="frame" x="155" y="317" width="290" height="70"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="290" id="Gdf-qt-nLv"/>
                                             <constraint firstAttribute="height" constant="70" id="hZt-Vh-7M0"/>
@@ -127,8 +116,6 @@
                                     <constraint firstItem="rdV-nj-6Tq" firstAttribute="centerX" secondItem="Wfe-qw-dU7" secondAttribute="centerX" id="VtK-wd-EGc"/>
                                     <constraint firstItem="SBX-zJ-LBD" firstAttribute="leading" secondItem="Wfe-qw-dU7" secondAttribute="leading" id="Wd3-dg-dBW"/>
                                     <constraint firstAttribute="bottom" secondItem="rdV-nj-6Tq" secondAttribute="bottom" constant="40" id="a7g-Xl-7iM"/>
-                                    <constraint firstItem="Ls1-EQ-x9C" firstAttribute="leading" secondItem="Wfe-qw-dU7" secondAttribute="leading" constant="30" id="cHA-ct-ekv"/>
-                                    <constraint firstAttribute="bottom" secondItem="Ls1-EQ-x9C" secondAttribute="bottom" constant="40" id="e5u-8U-d1E"/>
                                     <constraint firstItem="cEs-2L-twd" firstAttribute="centerX" secondItem="Wfe-qw-dU7" secondAttribute="centerX" id="iTD-MM-p3h"/>
                                     <constraint firstAttribute="trailing" secondItem="CZ7-Fm-Ugm" secondAttribute="trailing" constant="20" id="jWO-Nn-h7A"/>
                                     <constraint firstItem="SBX-zJ-LBD" firstAttribute="top" secondItem="Wfe-qw-dU7" secondAttribute="top" id="ycb-AL-F8w"/>
@@ -144,8 +131,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Wfe-qw-dU7" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="QVs-ky-3az"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="CZ7-Fm-Ugm" secondAttribute="bottom" constant="100" id="V9O-hL-fjr"/>
                             <constraint firstAttribute="trailingMargin" secondItem="OGo-S5-r6g" secondAttribute="trailing" constant="10" id="VAL-PJ-MtX"/>
-                            <constraint firstItem="CZ7-Fm-Ugm" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="WjM-5E-DE5"/>
                             <constraint firstAttribute="trailing" secondItem="Wfe-qw-dU7" secondAttribute="trailing" id="avX-B0-wrU"/>
                             <constraint firstItem="Wfe-qw-dU7" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="avh-jn-hwW"/>
                             <constraint firstItem="CZ7-Fm-Ugm" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="vVS-en-GQo"/>
@@ -1121,7 +1108,6 @@
         <image name="menu-profile" width="20" height="20"/>
         <image name="menu-signout" width="32" height="32"/>
         <image name="navigation" width="64" height="64"/>
-        <image name="phone-call" width="64" height="64"/>
         <image name="profile-address" width="30" height="30"/>
         <image name="profile-birth" width="30" height="30"/>
         <image name="profile-blood" width="30" height="30"/>

@@ -9,12 +9,15 @@
 import UIKit
 import Firebase
 
-class NewContactViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class NewContactViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CoreDataManagerDelegate {
 
     @IBOutlet weak var addPhoto: UIImageView!
     let imagePicker = UIImagePickerController()
     
     @IBOutlet weak var saveNewContact: UIButton!
+    
+    var contactIsExist = false
+    var senderTag = -1
     
     // Firebase
     var ref: FIRDatabaseReference!
@@ -42,6 +45,11 @@ class NewContactViewController: UIViewController, UIImagePickerControllerDelegat
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
+        
+        if contactIsExist {
+            CoreDataManager.shared.delegate = self
+            CoreDataManager.shared.fetchCoreData()
+        }
     }
     
     func keyboardWillShow(notification: NSNotification) {
@@ -66,7 +74,7 @@ class NewContactViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+        if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
             addPhoto.contentMode = .ScaleAspectFill
             addPhoto.image = pickedImage
             dismissViewControllerAnimated(true, completion: nil)
@@ -76,30 +84,48 @@ class NewContactViewController: UIViewController, UIImagePickerControllerDelegat
     }
     
     func addNewPhoto() {
-        imagePicker.allowsEditing = false
+        imagePicker.allowsEditing = true
         imagePicker.sourceType = .PhotoLibrary
         presentViewController(imagePicker, animated: true, completion: nil)
     }
     
     @IBAction func saveNewContact(sender: AnyObject) {
 
-        guard let imageData = UIImageJPEGRepresentation(addPhoto.image!, 1) else { fatalError() }
+        guard let imageData = UIImageJPEGRepresentation(addPhoto.image!, 0.3) else { fatalError() }
         
-        if ( self.newName.text == "" ||
-             self.newNumber.text == "" ||
-             self.newEmail.text == "" ||
-            self.newTrackID.text == "" ) {
-            self.presentViewController(self.alert, animated: true, completion: nil)
-        } else {
-            CoreDataManager.shared.saveCoreData(
-                name: self.newName.text!,
-                number: self.newNumber.text!,
-                email: self.newEmail.text!,
-                trackID: self.newTrackID.text!,
-                photo: imageData)
-            sendProfileToDB(trackID: self.newTrackID.text!)
-            self.navigationController?.popToRootViewControllerAnimated(true)
+        if ( newName.text == "" || newNumber.text == "" ||
+            newEmail.text == "" || newTrackID.text == "" ) {
+            
+            presentViewController(alert, animated: true, completion: nil)
+            
         }
+        
+        else if ( contactIsExist ){
+            
+            contacts[senderTag].name = newName.text!
+            contacts[senderTag].trackID = newTrackID.text!
+            contacts[senderTag].email = newEmail.text!
+            contacts[senderTag].phoneNumber = newNumber.text!
+            contacts[senderTag].photo = imageData
+            CoreDataManager.shared.clearCoreData()
+            sendContactTrackIDToDB(trackID: newTrackID.text!)
+            for contact in contacts {
+                CoreDataManager.shared.saveCoreData(name: contact.name, number: contact.phoneNumber, email: contact.email, trackID: contact.trackID, photo: contact.photo!)
+            }
+            navigationController?.popToRootViewControllerAnimated(true)
+        }
+        
+        else {
+            CoreDataManager.shared.saveCoreData(
+                name: newName.text!,
+                number: newNumber.text!,
+                email: newEmail.text!,
+                trackID: newTrackID.text!,
+                photo: imageData)
+            sendContactTrackIDToDB(trackID: newTrackID.text!)
+            navigationController?.popToRootViewControllerAnimated(true)
+        }
+        
     }
     
     @IBOutlet weak var newName: UITextField!
@@ -116,9 +142,35 @@ class NewContactViewController: UIViewController, UIImagePickerControllerDelegat
         }
     }
     
-    func sendProfileToDB(trackID trackID: String) {
+    var contacts: [Person] = []
+    
+    func manager(manager: CoreDataManager, didFetchContactData: AnyObject) {
+        contacts = []
+        guard let results = didFetchContactData as? [Contact] else { fatalError() }
+        if (results.count > 0) {
+            for result in results {
+                contacts.append(Person(
+                    name: result.name!,
+                    phoneNumber: result.number!,
+                    trackID: result.trackID!,
+                    email: result.email!,
+                    photo: result.photo!))
+            }
+        }
+        let contact = contacts[senderTag]
+        newName.text = contact.name
+        newTrackID.text = contact.trackID
+        newEmail.text = contact.email
+        newNumber.text = contact.phoneNumber
+        addPhoto.image = UIImage(data: contact.photo!)
+        addPhoto.contentMode = .ScaleAspectFill
+        addPhoto.clipsToBounds = true
+    }
+    
+    func sendContactTrackIDToDB(trackID trackID: String) {
         let databaseChildPath = "user_contacts/\(AppState.sharedInstance.UUID)"
         let data = [trackID : true]
+        
         self.ref.child(databaseChildPath).updateChildValues(data)
         print("Profile sent to DB")
     }
