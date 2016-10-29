@@ -123,8 +123,12 @@ class ContactsMapViewController: UIViewController, MKMapViewDelegate {
     
     func setAnnotation(latitudeDegree latitudeDegree: Double, longitudeDegree: Double) {
         
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy/MM/dd  HH:mm:ss"
+        let convertedDate = dateFormatter.stringFromDate(NSDate(timeIntervalSince1970: self.timestamp))
+        
         myAnnotation.coordinate = CLLocationCoordinate2DMake(latitudeDegree, longitudeDegree)
-        myAnnotation.title = "\(NSDate(timeIntervalSince1970: self.timestamp))"
+        myAnnotation.title = "\(convertedDate)"
         
         if (contactMap.annotations.isEmpty && self.latitude != 0.0) {
             // remote location is available and annotation has not been set yet

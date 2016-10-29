@@ -371,6 +371,7 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
         let contactName = UILabel(frame: CGRectMake(10+photoRadios+space, 20, 200, 40))
         contactName.text = name
         contactName.font = contactName.font.fontWithSize(25)
+        contactName.adjustsFontSizeToFitWidth = true
         alert.view.addSubview(contactName)
         
         let callButton = UIButton(type: .Custom)
