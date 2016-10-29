@@ -79,8 +79,7 @@ class ContactsMapViewController: UIViewController, MKMapViewDelegate {
         
     }
     
-    
-    deinit {
+    override func viewDidDisappear(animated: Bool) {
         latitude = 0.0
         longitude = 0.0
         ref.child("user_locations").removeObserverWithHandle(_refHandle)

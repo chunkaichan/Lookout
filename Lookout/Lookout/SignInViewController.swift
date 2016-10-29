@@ -18,6 +18,7 @@ extension SignInViewController: AKFViewControllerDelegate{
     
     func viewController(viewController: UIViewController!, didCompleteLoginWithAccessToken accessToken: AKFAccessToken!, state: String!) {
         print("didCompleteLoginWithAccessToken")
+        didLoginWithPhone = true
         accountKit.requestAccount {
             (account, error) in
             if let phoneNumber = account?.phoneNumber?.stringRepresentation() {
@@ -42,6 +43,9 @@ class SignInViewController: UIViewController {
 
     var accountKit: AKFAccountKit!
     let defaults = NSUserDefaults.standardUserDefaults()
+    var didLoginWithPhone = false
+    
+    @IBOutlet weak var loginButtonStyle: UIButton!
     
     @IBAction func loginWithPhone(sender: UIButton) {
         FIRAnalytics.logEventWithName(kFIREventSelectContent, parameters: [
@@ -59,18 +63,34 @@ class SignInViewController: UIViewController {
         }
         
     }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
+    }
+    
     override func viewDidAppear(animated: Bool) {
-        
         if accountKit == nil {
             // may also specify AKFResponseTypeAccessToken
             self.accountKit = AKFAccountKit(responseType: AKFResponseType.AccessToken)
         }
         
+        loginButtonStyle.layer.hidden = false
+        
+        if didLoginWithPhone {
+//            loginButtonStyle.layer.hidden = true
+        }
+        
         if let user = FIRAuth.auth()?.currentUser {
+//            loginButtonStyle.layer.hidden = true
             self.signedIn(user)
             AppState.sharedInstance.UUID = user.uid
             AppState.sharedInstance.email = user.email!
         }
+        
+        UIApplication.sharedApplication().keyWindow?.makeKeyAndVisible()
+        UIApplication.sharedApplication().keyWindow?.rootViewController = self
+        self.loginButtonStyle.translatesAutoresizingMaskIntoConstraints = true
+        
     }
     
     func signInAccount(email email: String, password: String) {
@@ -96,14 +116,6 @@ class SignInViewController: UIViewController {
             self.setDisplayName(user!)
             AppState.sharedInstance.UUID = user!.uid
         }
-    }
-    
-    @IBAction func didTapSignIn(sender: AnyObject) {
-        
-    }
-    
-    @IBAction func didTapSignUp(sender: AnyObject) {
-        
     }
     
     func setDisplayName(user: FIRUser) {

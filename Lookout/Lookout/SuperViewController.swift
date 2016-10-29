@@ -9,9 +9,14 @@
 import UIKit
 import Charts
 
+protocol SuperViewControllerDelegate: class {
+    func accidentDeteced(manager: SuperViewController)
+}
+
 class SuperViewController: UITabBarController, CoreMotionManagerDelegate {
     
-    let sendAlertViewController = SendAlertViewController()
+    static let shared = SuperViewController()
+    
     let coreMotionViewController = CoreMotionViewController()
     
     var xAxis = [""]
@@ -31,16 +36,18 @@ class SuperViewController: UITabBarController, CoreMotionManagerDelegate {
         }
     }
     
+    weak var myDelegate: SuperViewControllerDelegate?
+    
     func manager(manager: CoreMotionManager, didGetMotion: Double) {
         
         yAxis.removeAtIndex(0)
         yAxis.append(didGetMotion)
         
-        if (didGetMotion > 8.0) {
-            sendAlertViewController.sendAlertWhenAccidentDeteced()
-            let time = NSDate()
-            let event = Event(time: time, data: yAxis, latitude: AppState.sharedInstance.userLatitude, longitude: AppState.sharedInstance.userLongitude, isAccident: nil)
-            EventCoreDataManager.shared.saveCoreData(eventToSave: event)
+        if (didGetMotion > 6.0) {
+            myDelegate?.accidentDeteced(self)
+//            let time = NSDate()
+//            let event = Event(time: time, data: yAxis, latitude: AppState.sharedInstance.userLatitude, longitude: AppState.sharedInstance.userLongitude, isAccident: nil)
+//            EventCoreDataManager.shared.saveCoreData(eventToSave: event)
             
         }
     }

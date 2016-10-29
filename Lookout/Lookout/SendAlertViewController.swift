@@ -13,7 +13,7 @@ import GTMOAuth2
 import CoreLocation
 import AudioToolbox
 
-class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDelegate, CoreDataManagerDelegate, CoreMotionManagerDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDelegate, CoreDataManagerDelegate, CoreMotionManagerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, SuperViewControllerDelegate {
     
     @IBOutlet weak var contactsCollectionView: UICollectionView!
     
@@ -89,26 +89,94 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
         sendAlertToContacts()
     }
     
+    func queryContactsFromDB() {
+        _refHandle = self.ref.child("user_contacts").observeEventType(.Value, withBlock: { (snapshot) -> Void in
+            if let contactsDictionary = snapshot.value as? [String: [String:Bool]] {
+                
+                let keyArray = Array(contactsDictionary.keys)
+                let currentDeviceID = AppState.sharedInstance.UUID
+                
+                let currentDeviceContacts = contactsDictionary[currentDeviceID] ?? ["NO CONTACTS": true]
+                
+                var alreadyAddedAsContact = false
+                
+                for key in keyArray { // key == remote device ID
+                    if (currentDeviceContacts[key] == true) { // check if current device has added remote device as a contact
+                        alreadyAddedAsContact = true
+                    }
+                    
+                    var remoteDeviceContacts = contactsDictionary[key]!
+                    if (remoteDeviceContacts[AppState.sharedInstance.UUID] == true && !alreadyAddedAsContact) {
+                        // if remote device add current device as contact, show alert
+                        self.showContactAlert(remoteUID: key)
+                    }
+                    
+                    
+                }
+                
+            }
+        })
+    }
+    
+    func showContactAlert(remoteUID remoteUID: String) {
+        let alert = UIAlertController(
+            title: nil,
+            message: "<\(remoteUID)> wants to set you as a contact",
+            preferredStyle: UIAlertControllerStyle.Alert
+        )
+        let ok = UIAlertAction(
+            title: "Confirm",
+            style: UIAlertActionStyle.Default,
+            handler: {(alert: UIAlertAction!) in
+                self.confirmContactToDatabase(remoteUID: remoteUID)
+            }
+        )
+        let cancel = UIAlertAction(
+            title: "Cancel",
+            style: UIAlertActionStyle.Default,
+            handler: nil
+        )
+        alert.addAction(cancel)
+        alert.addAction(ok)
+        presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    
+    func confirmContactToDatabase(remoteUID remoteUID: String) {
+        let databaseContactPath = "user_contacts/\(AppState.sharedInstance.UUID)/"
+        print(AppState.sharedInstance.UUID)
+        print(databaseContactPath)
+        let data = [remoteUID : true]
+        self.ref.child(databaseContactPath).updateChildValues(data)
+        print("Contact \(remoteUID) is set to be true.")
+    }
+    
     func sendAlertToContacts() {
         if (contacts.count != 0) {
             
             for contact in contacts {
                 
                 _refHandle = self.ref.child("user_token/\(contact.trackID)").observeEventType(.Value, withBlock: { (snapshot) -> Void in
+                    
                     if let contactsToken = snapshot.value as? [String:String] {
+                        
                         if let token = contactsToken["token"] {
+                            
                             let defaults = NSUserDefaults.standardUserDefaults()
                             if let phone = defaults.stringForKey("userPhoneNumber") {
                                 self.pushNotificationToContact(token: token, message: "Sent from \(phone)")
                             }
+                            
                         }
+                        
                     }
                 })
                 
                 let gtlMessage = GTLRGmail_Message()
+                
                 for contact in contacts {
+                
                     gtlMessage.raw = self.generateRawString(toMail: contact.email, body: "This is a emergency notification from Lookout.")
-                    
                     let query = GTLRGmailQuery_UsersMessagesSend.queryWithObject(gtlMessage, userId: "me", uploadParameters: nil)
                     
                     service.executeQuery(query, completionHandler: {(ticket, response, error) -> Void in
@@ -131,34 +199,40 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
         }
     }
     
+    func accidentDeteced(manager: SuperViewController) {
+        print("!!!!!!!!!!!!!!!!")
+        sendAlertToContacts()
+    }
+    
     func pushNotificationToContact(token token: String, message: String) {
-                let body = [ "to" : token ,
-                             "priority" : "high",
-                             "notification" : [ "title": "Emegency Notification",
-                                                "body" : message,
-                                                "sound": "default"
-                                              ]
-                           ]
+        print(token)
+        let body = [ "to" : token ,
+                     "priority" : "high",
+                     "notification" : [ "title": "Emegency Notification",
+                        "body" : message,
+                        "sound": "default"
+            ]
+        ]
         
-                let url = NSURL(string: "https://fcm.googleapis.com/fcm/send")
-                let mutableURLRequest = NSMutableURLRequest(URL: url!)
-                let session = NSURLSession.sharedSession()
-                do {
-                    let jsonBody = try NSJSONSerialization.dataWithJSONObject(body, options: .PrettyPrinted)
-                    mutableURLRequest.HTTPMethod = "POST"
-                    mutableURLRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-                    mutableURLRequest.setValue("key=\(AppState.sharedInstance.APIKey)", forHTTPHeaderField: "Authorization")
-                    mutableURLRequest.HTTPBody = jsonBody
-                    let task = session.dataTaskWithRequest(mutableURLRequest) {
-                        ( data , response, error ) in
-                        let httpResponse = response as! NSHTTPURLResponse
-                        let statusCode = httpResponse.statusCode
-                        print("STATUS CODE: \(statusCode)")
-                    }
-                    task.resume()
-                } catch {
-                    print(error)
-                }
+        let url = NSURL(string: "https://fcm.googleapis.com/fcm/send")
+        let mutableURLRequest = NSMutableURLRequest(URL: url!)
+        let session = NSURLSession.sharedSession()
+        do {
+            let jsonBody = try NSJSONSerialization.dataWithJSONObject(body, options: .PrettyPrinted)
+            mutableURLRequest.HTTPMethod = "POST"
+            mutableURLRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            mutableURLRequest.setValue("key=\(AppState.sharedInstance.APIKey)", forHTTPHeaderField: "Authorization")
+            mutableURLRequest.HTTPBody = jsonBody
+            let task = session.dataTaskWithRequest(mutableURLRequest) {
+                ( data , response, error ) in
+                let httpResponse = response as! NSHTTPURLResponse
+                let statusCode = httpResponse.statusCode
+                print("STATUS CODE: \(statusCode)")
+            }
+            task.resume()
+        } catch {
+            print(error)
+        }
     }
     
     @IBAction func detectionEnabledButton(sender: UIButton) {
@@ -233,7 +307,9 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
         
         UIApplication.sharedApplication().keyWindow?.makeKeyAndVisible()
         UIApplication.sharedApplication().keyWindow?.rootViewController = self
+        queryContactsFromDB()
         
+        SuperViewController.shared.myDelegate = self
     }
     
     func tokenUploadToDatabase(token token: String) {
@@ -246,7 +322,10 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
     }
     
     func sendAlertWhenAccidentDeteced() {
-        print("Send alert automatically when accident is detected.")
+        print("!!!accident!!!")
+        print(contacts)
+        sendAlertToContacts()
+        print("!!!accident!!!")
     }
     
     var fromLocationURL = "- User location unavailable -"
