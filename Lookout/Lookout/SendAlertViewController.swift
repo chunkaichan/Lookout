@@ -190,7 +190,7 @@ class SendAlertViewController: UIViewController, CLLocationManagerDelegate, Core
                 })
                 
                 if let myToken = FIRInstanceID.instanceID().token() {
-                    pushNotificationToContact(token: myToken , message: "An accident is detected. Do you need help?")
+                    pushNotificationToContact(token: myToken , message: "An accident is detected. Notifications are sent!")
                 }
             }
             
