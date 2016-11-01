@@ -63,6 +63,7 @@ class SignInViewController: UIViewController {
     
     @IBOutlet weak var loginButtonStyle: UIButton!
     @IBOutlet weak var loginMailButtonStyle: UIButton!
+    @IBOutlet weak var loginLabelStyle: UILabel!
     
     @IBAction func loginWithEmail(sender: UIButton) {
         FIRAnalytics.logEventWithName(kFIREventSelectContent, parameters: [
@@ -110,11 +111,13 @@ class SignInViewController: UIViewController {
         if didLoginAccountkit {
             loginButtonStyle.layer.hidden = true
             loginMailButtonStyle.layer.hidden = true
+            loginLabelStyle.layer.hidden = true
             activityIndicatorView.layer.hidden = false
             activityIndicatorView.startAnimating()
         } else {
             loginButtonStyle.layer.hidden = false
             loginMailButtonStyle.layer.hidden = false
+            loginLabelStyle.layer.hidden = false
             activityIndicatorView.layer.hidden = true
             activityIndicatorView.stopAnimating()
         }
@@ -129,6 +132,7 @@ class SignInViewController: UIViewController {
         if let user = FIRAuth.auth()?.currentUser {
             loginButtonStyle.layer.hidden = true
             loginMailButtonStyle.layer.hidden = true
+            loginLabelStyle.layer.hidden = true
             activityIndicatorView.layer.hidden = false
             activityIndicatorView.startAnimating()
             self.signedIn(user)

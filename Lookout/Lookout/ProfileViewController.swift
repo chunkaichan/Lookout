@@ -16,6 +16,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     let imagePicker = UIImagePickerController()
     
+    @IBOutlet weak var loadDataIndicator: UIActivityIndicatorView!
     @IBOutlet weak var profilePhoto: UIImageView!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var birthTextField: UITextField!
@@ -142,7 +143,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     var inEditMode = false
     let saveLink = "profile-save-edit"
     let cancelLink = "profile-cancel-edit"
-    let logOutLink = "menu-signout"
+    let logOutLink = "signout"
     let editLink = "profile-edit"
     
     func changeBarButtonImage(leftButtonLink leftButtonLink: String, rightButtonLink: String) {
@@ -299,6 +300,10 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
         
+        loadDataIndicator.layer.hidden = false
+        loadDataIndicator.startAnimating()
+        UIApplication.sharedApplication().beginIgnoringInteractionEvents()
+        
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -350,6 +355,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         print("Profile sent to DB")
     }
     
+    var loadIsDone = false
+    
     func queryProfileFromDB() {
         let databaseChildPath = "user_profiles/\(AppState.sharedInstance.UUID)"
         _refHandle = self.ref.child(databaseChildPath).observeEventType(.Value, withBlock: { (snapshot) -> Void in
@@ -362,6 +369,13 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                     self.bloodTextField.text = profile[Constants.Profile.blood]
                     self.phoneTextField.text = profile[Constants.Profile.phone]
                 }
+            }
+            if self.loadIsDone {
+                self.loadDataIndicator.layer.hidden = true
+                self.loadDataIndicator.stopAnimating()
+                UIApplication.sharedApplication().endIgnoringInteractionEvents()
+            } else {
+                self.loadIsDone = true
             }
         })
     }
@@ -378,7 +392,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         let fileName = "\(AppState.sharedInstance.UUID)"
         let spaceRef = imagesRef.child(fileName)
         
-        guard let imageData = UIImageJPEGRepresentation(profilePhoto.image!, 0.5) else { fatalError() }
+        guard let imageData = UIImageJPEGRepresentation(profilePhoto.image!, 0.3) else { fatalError() }
         
         let _ = spaceRef.putData(imageData, metadata: nil) { metadata, error in
             if (error != nil) {
@@ -399,6 +413,14 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 // SDWebImage
                 self.profilePhoto.sd_setImageWithURL(URL)
                 self.profilePhoto.contentMode = .ScaleAspectFill
+            }
+            
+            if self.loadIsDone {
+                self.loadDataIndicator.layer.hidden = true
+                self.loadDataIndicator.stopAnimating()
+                UIApplication.sharedApplication().endIgnoringInteractionEvents()
+            } else {
+                self.loadIsDone = true
             }
         })
         

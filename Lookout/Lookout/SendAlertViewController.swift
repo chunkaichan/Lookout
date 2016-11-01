@@ -156,6 +156,7 @@ class SendAlertViewController: UIViewController, CLLocationManagerDelegate, Core
             
             for contact in contacts {
                 
+                // push notification
                 _refHandle = self.ref.child("user_token/\(contact.trackID)").observeEventType(.Value, withBlock: { (snapshot) -> Void in
                     
                     if let contactsToken = snapshot.value as? [String:String] {
@@ -166,30 +167,30 @@ class SendAlertViewController: UIViewController, CLLocationManagerDelegate, Core
                             if let phone = defaults.stringForKey("userPhoneNumber") {
                                 self.pushNotificationToContact(token: token, message: "Sent from \(phone)")
                             }
-                            
                         }
-                        
                     }
                 })
                 
+                // send email notification to contact
                 let gtlMessage = GTLRGmail_Message()
                 
-                for contact in contacts {
+                gtlMessage.raw = self.generateRawString(toMail: contact.email, body: "This is a emergency notification from Lookout.")
+                let query = GTLRGmailQuery_UsersMessagesSend.queryWithObject(gtlMessage, userId: "me", uploadParameters: nil)
                 
-                    gtlMessage.raw = self.generateRawString(toMail: contact.email, body: "This is a emergency notification from Lookout.")
-                    let query = GTLRGmailQuery_UsersMessagesSend.queryWithObject(gtlMessage, userId: "me", uploadParameters: nil)
+                service.executeQuery(query, completionHandler: {(ticket, response, error) -> Void in
+                    print("ticket \(ticket)")
+                    print("response \(response)")
+                    print("error \(error)")
                     
-                    service.executeQuery(query, completionHandler: {(ticket, response, error) -> Void in
-                        print("ticket \(ticket)")
-                        print("response \(response)")
-                        print("error \(error)")
-                        
-                        if error != nil {
-                            self.showAlert(message: "Failed to send email. Please check your internet environment and contacts' email.", actionTitle: "Close")
-                        } else {
-                            self.showAlertAfterSending()
-                        }
-                    })
+                    if error != nil {
+                        self.showAlert(message: "Failed to send email. Please check your internet environment and contacts' email.", actionTitle: "Close")
+                    } else {
+                        self.showAlertAfterSending()
+                    }
+                })
+                
+                if let myToken = FIRInstanceID.instanceID().token() {
+                    pushNotificationToContact(token: myToken , message: "An accident is detected. Do you need help?")
                 }
             }
             
@@ -252,14 +253,14 @@ class SendAlertViewController: UIViewController, CLLocationManagerDelegate, Core
             CoreMotionManager.shared.startDetection()
         }
     }
-
+    
     var locationManager: CLLocationManager!
     
     func setLocationManager() {
         
         self.locationManager = CLLocationManager()
         self.locationManager.requestAlwaysAuthorization()
-                self.locationManager.startUpdatingLocation()
+        self.locationManager.startUpdatingLocation()
         self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
         self.locationManager.delegate = self
         print(locationManager.location?.coordinate)
@@ -342,13 +343,13 @@ class SendAlertViewController: UIViewController, CLLocationManagerDelegate, Core
         
         let builder = MCOMessageBuilder()
         builder.header.to = [MCOAddress(displayName: "Emergency contact", mailbox: toMail)]
-//        builder.header.from = MCOAddress(displayName: "From Lookout: Emergency Notification", mailbox: "kyle791121@hotmail.com")
+        //        builder.header.from = MCOAddress(displayName: "From Lookout: Emergency Notification", mailbox: "kyle791121@hotmail.com")
         builder.header.subject = "From Lookout"
         builder.htmlBody = "\(body)" +
-                           "<br><br>" +
-                           "Sent from location:" +
-                           "<br>" +
-                           "\(fromLocationURL)"
+            "<br><br>" +
+            "Sent from location:" +
+            "<br>" +
+            "\(fromLocationURL)"
         
         builder.header.date = NSDate()
         

@@ -411,8 +411,8 @@
                                     <constraint firstAttribute="height" constant="128" id="CQH-uk-ak7"/>
                                 </constraints>
                             </imageView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="R15-rv-0ni">
-                                <rect key="frame" x="290" y="290" width="20" height="20"/>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="R15-rv-0ni">
+                                <rect key="frame" x="282" y="281" width="37" height="37"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="APj-3b-Nk9"/>
                                     <constraint firstAttribute="width" constant="40" id="Jub-uf-pan"/>
@@ -424,35 +424,37 @@
                                     </mask>
                                 </variation>
                             </activityIndicatorView>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="qWq-7b-Ogr">
-                                <rect key="frame" x="197" y="340" width="207" height="40"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log in with:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ut9-KC-Zue">
+                                <rect key="frame" x="239" y="315" width="123" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="CEJ-om-dlH">
+                                <rect key="frame" x="235" y="363" width="130" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XHv-c4-ABC">
-                                        <rect key="frame" x="0.0" y="0.0" width="120" height="40"/>
-                                        <color key="backgroundColor" red="0.25490196079999999" green="0.73725490199999999" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="egt-qy-EWh">
+                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="120" id="QTk-RV-IXZ"/>
-                                            <constraint firstAttribute="height" constant="40" id="gZs-oC-I3e"/>
+                                            <constraint firstAttribute="width" constant="40" id="3OS-dJ-6b2"/>
+                                            <constraint firstAttribute="height" constant="40" id="XFP-XA-3kX"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <state key="normal" title="Phone Number ">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="loginWithPhone:" destination="WHM-2U-sJ5" eventType="touchUpInside" id="pnO-Z2-LXi"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="egt-qy-EWh">
-                                        <rect key="frame" x="170" y="0.0" width="37" height="40"/>
-                                        <color key="backgroundColor" red="0.25490196079999999" green="0.73725490199999999" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="Email"/>
+                                        <state key="normal" image="login-mail"/>
                                         <connections>
                                             <action selector="loginWithEmail:" destination="WHM-2U-sJ5" eventType="touchUpInside" id="AAm-Fg-a7X"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XHv-c4-ABC">
+                                        <rect key="frame" x="90" y="0.0" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="QTk-RV-IXZ"/>
+                                            <constraint firstAttribute="height" constant="40" id="gZs-oC-I3e"/>
+                                        </constraints>
+                                        <state key="normal" image="login-phone">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="loginWithPhone:" destination="WHM-2U-sJ5" eventType="touchUpInside" id="pnO-Z2-LXi"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -462,20 +464,23 @@
                         <constraints>
                             <constraint firstItem="qKd-fO-sxN" firstAttribute="centerX" secondItem="dWA-my-wnJ" secondAttribute="centerX" id="1ts-gS-ZbM"/>
                             <constraint firstAttribute="trailingMargin" secondItem="D9T-13-6al" secondAttribute="trailing" constant="-20" id="3xJ-ma-OC4"/>
+                            <constraint firstItem="ut9-KC-Zue" firstAttribute="centerX" secondItem="dWA-my-wnJ" secondAttribute="centerX" id="9Xx-tn-cfB"/>
+                            <constraint firstItem="CEJ-om-dlH" firstAttribute="top" secondItem="g6U-CM-PcF" secondAttribute="bottom" constant="91" id="Fdc-7J-csI"/>
+                            <constraint firstItem="CEJ-om-dlH" firstAttribute="top" secondItem="ut9-KC-Zue" secondAttribute="bottom" constant="19" id="LtD-EP-bxX"/>
                             <constraint firstItem="g6U-CM-PcF" firstAttribute="centerX" secondItem="dWA-my-wnJ" secondAttribute="centerX" id="Ucs-Kx-AiG"/>
                             <constraint firstItem="D9T-13-6al" firstAttribute="top" secondItem="dWA-my-wnJ" secondAttribute="topMargin" id="XLV-Ci-AfI"/>
                             <constraint firstItem="g6U-CM-PcF" firstAttribute="top" secondItem="qKd-fO-sxN" secondAttribute="bottom" constant="-8" id="bgc-h3-WXN"/>
                             <constraint firstItem="R15-rv-0ni" firstAttribute="centerX" secondItem="dWA-my-wnJ" secondAttribute="centerX" id="cR8-ya-s3h"/>
                             <constraint firstItem="D9T-13-6al" firstAttribute="leading" secondItem="dWA-my-wnJ" secondAttribute="leadingMargin" constant="-20" id="jwn-hf-y2R"/>
-                            <constraint firstItem="qWq-7b-Ogr" firstAttribute="centerX" secondItem="dWA-my-wnJ" secondAttribute="centerX" id="p4f-Mc-vSL"/>
+                            <constraint firstItem="CEJ-om-dlH" firstAttribute="centerX" secondItem="dWA-my-wnJ" secondAttribute="centerX" id="otO-eI-GrZ"/>
                             <constraint firstItem="R15-rv-0ni" firstAttribute="centerY" secondItem="dWA-my-wnJ" secondAttribute="centerY" id="pQA-2a-epj"/>
                             <constraint firstItem="g6U-CM-PcF" firstAttribute="top" secondItem="foa-7H-i17" secondAttribute="bottom" constant="200" id="wvl-Ec-0W8"/>
-                            <constraint firstItem="qWq-7b-Ogr" firstAttribute="top" secondItem="g6U-CM-PcF" secondAttribute="bottom" constant="68" id="yKX-a5-Aea"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="activityIndicatorView" destination="R15-rv-0ni" id="VP6-o5-vQb"/>
                         <outlet property="loginButtonStyle" destination="XHv-c4-ABC" id="Di9-Oj-OhX"/>
+                        <outlet property="loginLabelStyle" destination="ut9-KC-Zue" id="mgG-2l-l3f"/>
                         <outlet property="loginMailButtonStyle" destination="egt-qy-EWh" id="rM4-I8-ox1"/>
                         <segue destination="2TU-xn-Zid" kind="show" identifier="SignInToFP" id="xJv-no-dOc"/>
                     </connections>
@@ -484,7 +489,7 @@
             </objects>
             <point key="canvasLocation" x="143" y="663"/>
         </scene>
-        <!--Profile-->
+        <!--Profile View Controller-->
         <scene sceneID="5aa-8N-mbe">
             <objects>
                 <viewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="W0f-mr-W1w" customClass="ProfileViewController" customModule="Lookout" customModuleProvider="target" sceneMemberID="viewController">
@@ -736,6 +741,9 @@
                                                     <constraint firstAttribute="height" constant="160" id="NMQ-bI-oKr"/>
                                                 </constraints>
                                             </imageView>
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="AdM-nd-Id0">
+                                                <rect key="frame" x="282" y="217" width="37" height="37"/>
+                                            </activityIndicatorView>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="XHM-NP-4XW" firstAttribute="centerX" secondItem="X18-NA-rcE" secondAttribute="centerX" id="8IA-Gn-lHu"/>
@@ -764,10 +772,12 @@
                             <constraint firstItem="4pQ-BQ-6fV" firstAttribute="leading" secondItem="YCR-cB-csP" secondAttribute="leadingMargin" constant="-20" id="IeB-3W-h4K"/>
                             <constraint firstItem="ilt-C9-qey" firstAttribute="top" secondItem="bDc-y6-yri" secondAttribute="bottom" id="TDC-WD-RKW"/>
                             <constraint firstItem="4pQ-BQ-6fV" firstAttribute="trailing" secondItem="ilt-C9-qey" secondAttribute="trailing" id="amg-dh-27f"/>
+                            <constraint firstItem="AdM-nd-Id0" firstAttribute="centerY" secondItem="YCR-cB-csP" secondAttribute="centerY" id="ayp-Rg-SvB"/>
                             <constraint firstItem="4pQ-BQ-6fV" firstAttribute="leading" secondItem="ilt-C9-qey" secondAttribute="leading" id="dZr-Vr-ONQ"/>
                             <constraint firstItem="ilt-C9-qey" firstAttribute="leading" secondItem="YCR-cB-csP" secondAttribute="leadingMargin" constant="-20" id="eRA-hp-mPG"/>
                             <constraint firstItem="Yti-g2-v02" firstAttribute="top" secondItem="4pQ-BQ-6fV" secondAttribute="bottom" id="fLd-9c-abv"/>
                             <constraint firstItem="4pQ-BQ-6fV" firstAttribute="top" secondItem="ilt-C9-qey" secondAttribute="top" id="mgh-8j-YLa"/>
+                            <constraint firstItem="AdM-nd-Id0" firstAttribute="centerX" secondItem="YCR-cB-csP" secondAttribute="centerX" id="vb3-v6-IQf"/>
                             <constraint firstItem="4pQ-BQ-6fV" firstAttribute="bottom" secondItem="Yti-g2-v02" secondAttribute="top" id="vg4-3f-YYk"/>
                             <constraint firstItem="4pQ-BQ-6fV" firstAttribute="top" secondItem="bDc-y6-yri" secondAttribute="bottom" id="xN0-PK-ZeM"/>
                         </constraints>
@@ -782,7 +792,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Profile" id="hOH-9X-gnf">
+                    <navigationItem key="navigationItem" id="hOH-9X-gnf">
                         <barButtonItem key="leftBarButtonItem" id="NQb-WB-UWu">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="OBl-hP-nve">
                                 <rect key="frame" x="20" y="12" width="20" height="20"/>
@@ -815,6 +825,7 @@
                         <outlet property="connectGmail" destination="wXo-Gm-Knq" id="HZY-xR-adP"/>
                         <outlet property="connectedStatus" destination="EVo-uR-bII" id="Wah-bu-Ir9"/>
                         <outlet property="editButtonStyle" destination="OBl-hP-nve" id="AO5-9u-Qww"/>
+                        <outlet property="loadDataIndicator" destination="AdM-nd-Id0" id="gxU-HF-25b"/>
                         <outlet property="nameTextField" destination="uVd-Wc-Yos" id="Ujm-1u-gaM"/>
                         <outlet property="phoneTextField" destination="miD-ib-APz" id="PpW-Mo-AyL"/>
                         <outlet property="profilePhoto" destination="XHM-NP-4XW" id="WLM-EA-vDY"/>
@@ -1052,6 +1063,8 @@
         <image name="fall-detection" width="64" height="64"/>
         <image name="family" width="20" height="20"/>
         <image name="google-icon" width="24" height="24"/>
+        <image name="login-mail" width="40" height="40"/>
+        <image name="login-phone" width="40" height="40"/>
         <image name="menu-profile" width="20" height="20"/>
         <image name="navigation" width="64" height="64"/>
         <image name="profile-address" width="30" height="30"/>
