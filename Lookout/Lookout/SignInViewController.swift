@@ -9,23 +9,37 @@
 import UIKit
 import FirebaseAuth
 import FirebaseAnalytics
+import LocalAuthentication
 
 extension SignInViewController: AKFViewControllerDelegate{
- 
+    
     func viewController(viewController: UIViewController!, didCompleteLoginWithAuthorizationCode code: String!, state: String!) {
         print("didCompleteLoginWithAuthorizationCode")
     }
     
     func viewController(viewController: UIViewController!, didCompleteLoginWithAccessToken accessToken: AKFAccessToken!, state: String!) {
         print("didCompleteLoginWithAccessToken")
-        didLoginWithPhone = true
+        didLoginAccountkit = true
+        
+        self.activityIndicatorView.layer.hidden = false
+        self.activityIndicatorView.startAnimating()
+        
         accountKit.requestAccount {
             (account, error) in
             if let phoneNumber = account?.phoneNumber?.stringRepresentation() {
-                self.signUpAccount(email: "\(phoneNumber)@lookout.com", password: phoneNumber)
-                self.signInAccount(email: "\(phoneNumber)@lookout.com", password: phoneNumber)
-                self.defaults.setObject(phoneNumber, forKey: "userPhoneNumber")
+                if (phoneNumber != "") {
+                    self.signUpAccount(email: "\(phoneNumber)@lookout.com", password: phoneNumber)
+                    self.signInAccount(email: "\(phoneNumber)@lookout.com", password: phoneNumber)
+                    self.defaults.setObject(phoneNumber, forKey: "userPhoneNumber")
+                }
             }
+            if let emailAddress = account?.emailAddress {
+                let account = emailAddress
+                let accountKey = emailAddress.componentsSeparatedByString("@")[0]
+                self.signUpAccount(email: account, password: accountKey)
+                self.signInAccount(email: account, password: accountKey)
+            }
+            
         }
     }
     
@@ -41,17 +55,39 @@ extension SignInViewController: AKFViewControllerDelegate{
 
 class SignInViewController: UIViewController {
 
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+    
     var accountKit: AKFAccountKit!
     let defaults = NSUserDefaults.standardUserDefaults()
-    var didLoginWithPhone = false
+    var didLoginAccountkit = false
     
     @IBOutlet weak var loginButtonStyle: UIButton!
+    @IBOutlet weak var loginMailButtonStyle: UIButton!
     
-    @IBAction func loginWithPhone(sender: UIButton) {
+    @IBAction func loginWithEmail(sender: UIButton) {
         FIRAnalytics.logEventWithName(kFIREventSelectContent, parameters: [
             kFIRParameterContentType: "User registration" as NSObject,
-            kFIRParameterItemID: "0" as NSObject
+            kFIRParameterItemID: "Email" as NSObject
             ])
+        
+        if let accountKitEmailLoginVC: AKFViewController = accountKit.viewControllerForEmailLoginWithEmail(nil, state: nil) as? AKFViewController {
+            
+            accountKitEmailLoginVC.enableSendToFacebook = true
+            
+            accountKitEmailLoginVC.delegate = self
+            
+            presentViewController(accountKitEmailLoginVC as! UIViewController, animated: true, completion: nil)
+            
+        }
+    }
+    
+    @IBAction func loginWithPhone(sender: UIButton) {
+        
+        FIRAnalytics.logEventWithName(kFIREventSelectContent, parameters: [
+            kFIRParameterContentType: "User registration" as NSObject,
+            kFIRParameterItemID: "PhoneNumber" as NSObject
+            ])
+        
         if let accountKitPhoneLoginVC: AKFViewController = accountKit.viewControllerForPhoneLoginWithPhoneNumber(nil, state: nil) as? AKFViewController {
             
             accountKitPhoneLoginVC.enableSendToFacebook = true
@@ -62,10 +98,26 @@ class SignInViewController: UIViewController {
             
         }
         
+        
+        
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        if didLoginAccountkit {
+            loginButtonStyle.layer.hidden = true
+            loginMailButtonStyle.layer.hidden = true
+            activityIndicatorView.layer.hidden = false
+            activityIndicatorView.startAnimating()
+        } else {
+            loginButtonStyle.layer.hidden = false
+            loginMailButtonStyle.layer.hidden = false
+            activityIndicatorView.layer.hidden = true
+            activityIndicatorView.stopAnimating()
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -74,14 +126,11 @@ class SignInViewController: UIViewController {
             self.accountKit = AKFAccountKit(responseType: AKFResponseType.AccessToken)
         }
         
-        loginButtonStyle.layer.hidden = false
-        
-        if didLoginWithPhone {
-//            loginButtonStyle.layer.hidden = true
-        }
-        
         if let user = FIRAuth.auth()?.currentUser {
-//            loginButtonStyle.layer.hidden = true
+            loginButtonStyle.layer.hidden = true
+            loginMailButtonStyle.layer.hidden = true
+            activityIndicatorView.layer.hidden = false
+            activityIndicatorView.startAnimating()
             self.signedIn(user)
             AppState.sharedInstance.UUID = user.uid
             AppState.sharedInstance.email = user.email!
@@ -89,7 +138,8 @@ class SignInViewController: UIViewController {
         
         UIApplication.sharedApplication().keyWindow?.makeKeyAndVisible()
         UIApplication.sharedApplication().keyWindow?.rootViewController = self
-        self.loginButtonStyle.translatesAutoresizingMaskIntoConstraints = true
+        loginButtonStyle.translatesAutoresizingMaskIntoConstraints = true
+        
         
     }
     
@@ -100,7 +150,6 @@ class SignInViewController: UIViewController {
                 print(error.localizedDescription)
                 return
             }
-            
             self.signedIn(user!)
             AppState.sharedInstance.UUID = user!.uid
         }
@@ -131,12 +180,12 @@ class SignInViewController: UIViewController {
     }
     
     func signedIn(user: FIRUser?) {
-//        MeasurementHelper.sendLoginEvent()
         
         AppState.sharedInstance.displayName = user?.displayName ?? user?.email
         AppState.sharedInstance.photoUrl = user?.photoURL
         AppState.sharedInstance.signedIn = true
         NSNotificationCenter.defaultCenter().postNotificationName(Constants.NotificationKeys.SignedIn, object: nil, userInfo: nil)
         performSegueWithIdentifier(Constants.Segues.SignInToFp, sender: nil)
+        didLoginAccountkit = false
     }
 }

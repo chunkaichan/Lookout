@@ -13,7 +13,7 @@ import GTMOAuth2
 import CoreLocation
 import AudioToolbox
 
-class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDelegate, CoreDataManagerDelegate, CoreMotionManagerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, SuperViewControllerDelegate {
+class SendAlertViewController: UIViewController, CLLocationManagerDelegate, CoreDataManagerDelegate, CoreMotionManagerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, SuperViewControllerDelegate {
     
     @IBOutlet weak var contactsCollectionView: UICollectionView!
     
@@ -236,14 +236,17 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
     }
     
     @IBAction func detectionEnabledButton(sender: UIButton) {
+        
         let originalImage = UIImage(named: "fall-detection")
         let tintImage = originalImage?.imageWithRenderingMode(.AlwaysTemplate)
         if (AppState.sharedInstance.detectionEnabled == true) {
+            showAlert(message: "Stop detecting.", actionTitle: "OK")
             AppState.sharedInstance.detectionEnabled = false
             sender.setImage(tintImage, forState: .Normal)
             sender.tintColor = UIColor.grayColor()
             CoreMotionManager.shared.stopDetection()
         } else {
+            showAlert(message: "Start detecting your activity.\nEnable detection can consume more battery power. ", actionTitle: "OK")
             AppState.sharedInstance.detectionEnabled = true
             sender.setImage(originalImage, forState: .Normal)
             CoreMotionManager.shared.startDetection()
@@ -296,6 +299,7 @@ class SendAlertViewController: TabViewControllerTemplate, CLLocationManagerDeleg
             clientSecret: nil) {
             service.authorizer = auth
         }
+        
         contacts = []
         
         coreDataManager.delegate = self
