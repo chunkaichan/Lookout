@@ -101,6 +101,7 @@ class CoreMotionViewController: UIViewController, EventCoreDataManagerDelegate, 
         xLineChartView.legend.enabled = false
     }
     
+    var sum = 0.0
     
     func getAccelerationMotion() {
         if manager.accelerometerAvailable {
@@ -109,8 +110,25 @@ class CoreMotionViewController: UIViewController, EventCoreDataManagerDelegate, 
                 [weak self] (data: CMAccelerometerData?, error: NSError?) in
                 if let acceleration = data?.acceleration {
                     let overallAcceleration = sqrt(acceleration.x*acceleration.x + acceleration.y*acceleration.y + acceleration.z*acceleration.z)
+                    
+                    let thetaX = acos(acceleration.x/overallAcceleration)
+                    let thetaY = acos(acceleration.y/overallAcceleration)
+                    let thetaZ = acos(acceleration.z/overallAcceleration)
+                    
+                    let Gx = acceleration.x - cos(thetaX)
+                    let Gy = acceleration.y - cos(thetaY)
+                    let Gz = acceleration.z - cos(thetaZ)
+                    let overallAccelerationWithoutG = sqrt(Gx*Gx+Gy*Gy+Gz*Gz)
+//                    print("D-G x: \(Gx), Gy: \(Gy), Gz: \(Gz), ")
+//                    print("Acc x: \(acceleration.x), y: \(acceleration.y), z: \(acceleration.z), ")
+//                    print("theta x: \(thetaX*180/M_PI), y: \(thetaY*180/M_PI), z: \(thetaZ*180/M_PI), ")
+                    
+//                    print(acceleration.z)
+//                    print(overallAcceleration*cos(thetaZ))
+//                    print(cos(60.0/180*M_PI))
                     self!.yAxis.removeAtIndex(0)
                     self!.yAxis.append(overallAcceleration)
+                    
                     
                     if (UIApplication.sharedApplication().applicationState == .Active) {
                         dispatch_async(dispatch_get_main_queue(), {

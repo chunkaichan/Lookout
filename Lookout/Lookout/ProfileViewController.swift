@@ -213,6 +213,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             UIView.animateWithDuration(0.25, delay: 0, options: .TransitionCrossDissolve, animations: {() -> Void in
                 self.nameTextField.layer.backgroundColor = UIColor.grayColor().CGColor
                 self.nameTextField.layer.cornerRadius = 5
+                
                 self.birthTextField.layer.backgroundColor = UIColor.grayColor().CGColor
                 self.birthTextField.layer.cornerRadius = 5
                 
@@ -221,6 +222,12 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 
                 self.bloodTextField.layer.backgroundColor = UIColor.grayColor().CGColor
                 self.bloodTextField.layer.cornerRadius = 5
+                
+                if self.defaults.stringForKey("userPhoneNumber") != nil {}
+                else {
+                    self.phoneTextField.layer.backgroundColor = UIColor.grayColor().CGColor
+                    self.phoneTextField.layer.cornerRadius = 5
+                }
                 
                 }, completion: nil)
             
@@ -236,7 +243,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 self.birthTextField.layer.backgroundColor = UIColor.clearColor().CGColor
                 self.addressTextField.layer.backgroundColor = UIColor.clearColor().CGColor
                 self.bloodTextField.layer.backgroundColor = UIColor.clearColor().CGColor
-
+                if self.defaults.stringForKey("userPhoneNumber") != nil {}
+                else { self.phoneTextField.layer.backgroundColor = UIColor.clearColor().CGColor }
                 
                 }, completion: nil)
             
@@ -249,6 +257,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         birthTextField.userInteractionEnabled = isEditable
         addressTextField.userInteractionEnabled = isEditable
         bloodTextField.userInteractionEnabled = isEditable
+        if defaults.stringForKey("userPhoneNumber") != nil {}
+        else { phoneTextField.userInteractionEnabled = isEditable }
     }
     
     private let kKeychainItemName = "Gmail API"
@@ -264,11 +274,12 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     var ref: FIRDatabaseReference!
     private var _refHandle: FIRDatabaseHandle!
     
+    let defaults = NSUserDefaults.standardUserDefaults()
     // When the view loads, create necessary subviews
     // and initialize the Gmail API service
     override func viewDidLoad() {
         super.viewDidLoad()
-        let defaults = NSUserDefaults.standardUserDefaults()
+        
         if let phone = defaults.stringForKey("userPhoneNumber") {
             phoneTextField.text = phone
         }
@@ -359,7 +370,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     func queryProfileFromDB() {
         let databaseChildPath = "user_profiles/\(AppState.sharedInstance.UUID)"
+        
         _refHandle = self.ref.child(databaseChildPath).observeEventType(.Value, withBlock: { (snapshot) -> Void in
+            
             if (snapshot.childrenCount != 0) {
                 print("Load profile from DB")
                 if let profile = snapshot.value as? [String:String] {
@@ -370,6 +383,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                     self.phoneTextField.text = profile[Constants.Profile.phone]
                 }
             }
+            
             if self.loadIsDone {
                 self.loadDataIndicator.layer.hidden = true
                 self.loadDataIndicator.stopAnimating()
