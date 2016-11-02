@@ -98,9 +98,10 @@ class SendAlertViewController: UIViewController, CLLocationManagerDelegate, Core
                 
                 let currentDeviceContacts = contactsDictionary[currentDeviceID] ?? ["NO CONTACTS": true]
                 
-                var alreadyAddedAsContact = false
+                
                 
                 for key in keyArray { // key == remote device ID
+                    var alreadyAddedAsContact = false
                     if (currentDeviceContacts[key] == true) { // check if current device has added remote device as a contact
                         alreadyAddedAsContact = true
                     }
@@ -155,17 +156,21 @@ class SendAlertViewController: UIViewController, CLLocationManagerDelegate, Core
         if (contacts.count != 0) {
             
             for contact in contacts {
-                
+                print(contact.trackID)
                 // push notification
                 _refHandle = self.ref.child("user_token/\(contact.trackID)").observeEventType(.Value, withBlock: { (snapshot) -> Void in
+                    
                     
                     if let contactsToken = snapshot.value as? [String:String] {
                         
                         if let token = contactsToken["token"] {
-                            
+                            print(token)
                             let defaults = NSUserDefaults.standardUserDefaults()
                             if let phone = defaults.stringForKey("userPhoneNumber") {
                                 self.pushNotificationToContact(token: token, message: "Sent from \(phone)")
+                            } else {
+                                self.showAlert(message: "Please add phone number and verify email in profile.", actionTitle: "OK")
+                                return
                             }
                         }
                     }
@@ -183,17 +188,18 @@ class SendAlertViewController: UIViewController, CLLocationManagerDelegate, Core
                     print("error \(error)")
                     
                     if error != nil {
-                        self.showAlert(message: "Failed to send email. Please check your internet environment and contacts' email.", actionTitle: "Close")
+                        self.showAlert(message: "Failed to send email. Please check contacts email.", actionTitle: "Close")
                     } else {
                         self.showAlertAfterSending()
                     }
                 })
                 
-                if let myToken = FIRInstanceID.instanceID().token() {
-                    pushNotificationToContact(token: myToken , message: "An accident is detected. Notifications are sent!")
-                }
             }
             
+            
+//            if let myToken = FIRInstanceID.instanceID().token() {
+//                pushNotificationToContact(token: myToken , message: "An accident is detected. Notifications are sent!")
+//            }
             
         } else {
             showAlert(message: "Please add a contact", actionTitle: "OK")
@@ -321,14 +327,12 @@ class SendAlertViewController: UIViewController, CLLocationManagerDelegate, Core
         var ref: FIRDatabaseReference!
         ref = FIRDatabase.database().reference()
         let data = ["token": token ]
-        print("user_token/\(AppState.sharedInstance.UUID)")
         ref.child("user_token/\(AppState.sharedInstance.UUID)").setValue(data)
-        print("send token to db")
+        print("@@@send token to db: \(token)")
     }
     
     func sendAlertWhenAccidentDeteced() {
         print("!!!accident!!!")
-        print(contacts)
         sendAlertToContacts()
         print("!!!accident!!!")
     }

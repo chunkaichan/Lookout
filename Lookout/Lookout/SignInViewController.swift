@@ -19,10 +19,9 @@ extension SignInViewController: AKFViewControllerDelegate{
     
     func viewController(viewController: UIViewController!, didCompleteLoginWithAccessToken accessToken: AKFAccessToken!, state: String!) {
         print("didCompleteLoginWithAccessToken")
-        didLoginAccountkit = true
         
-        self.activityIndicatorView.layer.hidden = false
-        self.activityIndicatorView.startAnimating()
+        didLoginAccountkit = true
+        signInIndicator(isLoading: true)
         
         accountKit.requestAccount {
             (account, error) in
@@ -59,80 +58,36 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var loginMailButtonStyle: UIButton!
     @IBOutlet weak var loginLabelStyle: UILabel!
     
-    
     var accountKit: AKFAccountKit!
     let defaults = NSUserDefaults.standardUserDefaults()
     var didLoginAccountkit = false
     
-    @IBAction func loginWithEmail(sender: UIButton) {
-        FIRAnalytics.logEventWithName(kFIREventSelectContent, parameters: [
-            kFIRParameterContentType: "User registration" as NSObject,
-            kFIRParameterItemID: "Email" as NSObject
-            ])
-        
-        if let accountKitEmailLoginVC: AKFViewController = accountKit.viewControllerForEmailLoginWithEmail(nil, state: nil) as? AKFViewController {
-            
-            accountKitEmailLoginVC.enableSendToFacebook = true
-            
-            accountKitEmailLoginVC.delegate = self
-            
-            presentViewController(accountKitEmailLoginVC as! UIViewController, animated: true, completion: nil)
-            
-        }
-    }
-    
-    @IBAction func loginWithPhone(sender: UIButton) {
-        
-        FIRAnalytics.logEventWithName(kFIREventSelectContent, parameters: [
-            kFIRParameterContentType: "User registration" as NSObject,
-            kFIRParameterItemID: "PhoneNumber" as NSObject
-            ])
-        
-        if let accountKitPhoneLoginVC: AKFViewController = accountKit.viewControllerForPhoneLoginWithPhoneNumber(nil, state: nil) as? AKFViewController {
-            
-            accountKitPhoneLoginVC.enableSendToFacebook = true
-            
-            accountKitPhoneLoginVC.delegate = self
-            
-            presentViewController(accountKitPhoneLoginVC as! UIViewController, animated: true, completion: nil)
-            
-        }
-    }
-    
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .LightContent
+    enum LoginAccountType {
+        case phoneNumber
+        case email
     }
     
     override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        // After log in with AccountKit, the view will appear again.
+        // The button should be hidden and the indicator should start animating.
         if didLoginAccountkit {
-            loginButtonStyle.layer.hidden = true
-            loginLabelStyle.layer.hidden = true
-            loginMailButtonStyle.layer.hidden = true
-            
-            activityIndicatorView.layer.hidden = false
-            activityIndicatorView.startAnimating()
+            signInIndicator(isLoading: true)
         } else {
-            loginButtonStyle.layer.hidden = false
-            loginLabelStyle.layer.hidden = false
-            loginMailButtonStyle.layer.hidden = false
-            activityIndicatorView.layer.hidden = true
-            activityIndicatorView.stopAnimating()
+            signInIndicator(isLoading: false)
         }
     }
     
     override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         if accountKit == nil {
             // may also specify AKFResponseTypeAccessToken
             self.accountKit = AKFAccountKit(responseType: AKFResponseType.AccessToken)
         }
         
         if let user = FIRAuth.auth()?.currentUser {
-            loginButtonStyle.layer.hidden = true
-            loginMailButtonStyle.layer.hidden = true
-            loginLabelStyle.layer.hidden = true
-            activityIndicatorView.layer.hidden = false
-            activityIndicatorView.startAnimating()
-            self.signedIn(user)
+            signInIndicator(isLoading: true)
+            signedIn(user)
             AppState.sharedInstance.UUID = user.uid
             AppState.sharedInstance.email = user.email!
         }
@@ -142,6 +97,68 @@ class SignInViewController: UIViewController {
         loginButtonStyle.translatesAutoresizingMaskIntoConstraints = true
         
         
+    }
+    
+    
+    @IBAction func loginWithEmail(sender: UIButton) {
+        FIRAnalytics.logEventWithName(kFIREventSelectContent, parameters: [
+            kFIRParameterContentType: "User registration" as NSObject,
+            kFIRParameterItemID: "Email" as NSObject
+            ])
+        
+        loginAccount(withType: .email)
+        
+    }
+    
+    @IBAction func loginWithPhone(sender: UIButton) {
+        FIRAnalytics.logEventWithName(kFIREventSelectContent, parameters: [
+            kFIRParameterContentType: "User registration" as NSObject,
+            kFIRParameterItemID: "PhoneNumber" as NSObject
+            ])
+        
+        loginAccount(withType: .phoneNumber)
+        
+    }
+    
+    func loginAccount(withType type: LoginAccountType) {
+        switch type {
+        case .phoneNumber:
+            if let accountKitPhoneLoginVC: AKFViewController = accountKit.viewControllerForPhoneLoginWithPhoneNumber(nil, state: nil) as? AKFViewController {
+                accountKitPhoneLoginVC.enableSendToFacebook = true
+                accountKitPhoneLoginVC.delegate = self
+                presentViewController(accountKitPhoneLoginVC as! UIViewController, animated: true, completion: nil)
+            }
+        case .email:
+            if let accountKitEmailLoginVC: AKFViewController = accountKit.viewControllerForEmailLoginWithEmail(nil, state: nil) as? AKFViewController {
+                accountKitEmailLoginVC.enableSendToFacebook = true
+                accountKitEmailLoginVC.delegate = self
+                presentViewController(accountKitEmailLoginVC as! UIViewController, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
+    }
+    
+    
+    
+    
+    func signInIndicator(isLoading isLoading: Bool) {
+        if isLoading {
+            loginButtonStyle.layer.hidden = true
+            loginLabelStyle.layer.hidden = true
+            loginMailButtonStyle.layer.hidden = true
+            activityIndicatorView.layer.hidden = false
+            activityIndicatorView.startAnimating()
+        } else {
+            loginButtonStyle.layer.hidden = false
+            loginLabelStyle.layer.hidden = false
+            loginMailButtonStyle.layer.hidden = false
+            activityIndicatorView.layer.hidden = true
+            activityIndicatorView.stopAnimating()
+        }
     }
     
     func signInAccount(email email: String, password: String) {
@@ -159,7 +176,6 @@ class SignInViewController: UIViewController {
     func signUpAccount(email email: String, password: String) {
         
         FIRAuth.auth()?.createUserWithEmail(email, password: password) { (user, error) in
-            
             if let error = error {
                 print(error.localizedDescription)
                 return
@@ -182,10 +198,8 @@ class SignInViewController: UIViewController {
     }
     
     func signedIn(user: FIRUser?) {
-        
         AppState.sharedInstance.displayName = user?.displayName ?? user?.email
         AppState.sharedInstance.photoUrl = user?.photoURL
-        AppState.sharedInstance.signedIn = true
         NSNotificationCenter.defaultCenter().postNotificationName(Constants.NotificationKeys.SignedIn, object: nil, userInfo: nil)
         performSegueWithIdentifier(Constants.Segues.SignInToFp, sender: nil)
         didLoginAccountkit = false

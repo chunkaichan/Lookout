@@ -111,9 +111,9 @@ class ContactsMapViewController: UIViewController, MKMapViewDelegate {
         })
         
         // set region to current location if remote location unavailable
-        if (self.latitude == 0.0) {
+        if (latitude == 0.0) {
             let region = MKCoordinateRegion(center: CLLocationCoordinate2DMake(AppState.sharedInstance.userLatitude, AppState.sharedInstance.userLongitude), span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-            self.contactMap.setRegion(region, animated: false)
+            contactMap.setRegion(region, animated: false)
         }
 
 

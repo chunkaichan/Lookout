@@ -11,8 +11,9 @@ import GoogleAPIClientForREST
 import GTMOAuth2
 import Firebase
 import Crashlytics
+import MessageUI
 
-class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, MFMessageComposeViewControllerDelegate {
     
     let imagePicker = UIImagePickerController()
     
@@ -28,6 +29,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var connectGmail: UIButton!
     @IBOutlet weak var connectedStatus: UILabel!
     
+    @IBOutlet weak var closeButtonStyle: UIButton!
+    @IBOutlet weak var editButtonStyle: UIButton!
+    
     @IBAction func connectGmail(sender: AnyObject) {
         
         if (connectGmail.titleLabel?.text == " Connect ") {
@@ -39,11 +43,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             self.connectGmail.setTitle(" Connect ", forState: .Normal)
             self.connectedStatus.text = "Not connected"
         }
-        
     }
-    
-    @IBOutlet weak var closeButtonStyle: UIButton!
-    @IBOutlet weak var editButtonStyle: UIButton!
     
     @IBAction func editButton(sender: AnyObject) {
         
@@ -52,81 +52,76 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
         
         if (inEditMode) {
-            // tap to cancel
-            let alert = UIAlertController(
-                title: nil,
-                message: "Discard changes?",
-                preferredStyle: UIAlertControllerStyle.Alert
-            )
-            let ok = UIAlertAction(
-                title: "OK",
-                style: UIAlertActionStyle.Default,
-                handler: {(alert: UIAlertAction!) in
-                    self.didCancelEdit()
-                    self.changeBarButtonImage(leftButtonLink: self.editLink, rightButtonLink: self.logOutLink)
-                }
-            )
-            let cancel = UIAlertAction(
-                title: "Cancel",
-                style: UIAlertActionStyle.Cancel,
-                handler: nil
-            )
-            alert.addAction(cancel)
-            alert.addAction(ok)
-            presentViewController(alert, animated: true, completion: nil)
+            didCancelEdit()
+            changeBarButtonImage(leftButtonLink: editLink, rightButtonLink: logOutLink)
         } else {
             // tap to edit
             userProfileBeforeEdit = Profile(name: nameTextField.text ?? "Empty" ,
-                                  birth: birthTextField.text ?? "Empty" ,
-                                  address: addressTextField.text ?? "Empty" ,
-                                  phone: phoneTextField.text ?? "Empty" ,
-                                  blood: bloodTextField.text ?? "Empty")
+                                            birth: birthTextField.text ?? "Empty" ,
+                                            address: addressTextField.text ?? "Empty" ,
+                                            phone: phoneTextField.text ?? "Empty" ,
+                                            blood: bloodTextField.text ?? "Empty")
             didTapEdit()
             changeBarButtonImage(leftButtonLink: cancelLink, rightButtonLink: saveLink)
-            inEditMode = true
             
             // Test Crashlytics
-//            Crashlytics.sharedInstance().crash()
+            //            Crashlytics.sharedInstance().crash()
         }
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        self.view.endEditing(true)
+        view.endEditing(true)
         return true
+    }
+    
+    @IBAction func sendTrackIDWithSMS(sender: UIButton) {
+        
+        if MFMessageComposeViewController.canSendText() {
+            let messageVC = MFMessageComposeViewController()
+            
+            messageVC.body = "This is my tracking number:\n\(AppState.sharedInstance.UUID)"
+            messageVC.messageComposeDelegate = self
+            self.presentViewController(messageVC, animated: false, completion: nil)
+        }
+    }
+    
+    func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult) {
+        controller.dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction func closeButton(sender: AnyObject) {
         dismissKeyboard()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
-        if (inEditMode) {
-            // tap to save
+        
+        if inEditMode {
+            
             let alert = UIAlertController(
                 title: nil,
                 message: "Save changes?",
-                preferredStyle: UIAlertControllerStyle.Alert
-            )
+                preferredStyle: UIAlertControllerStyle.Alert)
+            
             let ok = UIAlertAction(
                 title: "OK",
                 style: UIAlertActionStyle.Default,
                 handler: {(alert: UIAlertAction!) in
                     self.didSaveEdit()
                     self.changeBarButtonImage(leftButtonLink: self.editLink, rightButtonLink: self.logOutLink)
-                    self.sendProfileToDB()
-                }
-            )
+                    self.sendProfileToDB()})
+            
             let cancel = UIAlertAction(
                 title: "Cancel",
                 style: UIAlertActionStyle.Cancel,
-                handler: nil
-            )
+                handler: nil)
+            
             alert.addAction(cancel)
             alert.addAction(ok)
             presentViewController(alert, animated: true, completion: nil)
+            
         } else {
+            
             let firebaseAuth = FIRAuth.auth()
             do {
                 try firebaseAuth?.signOut()
-                AppState.sharedInstance.signedIn = false
                 dismissViewControllerAnimated(true, completion: nil)
             } catch let signOutError as NSError {
                 print ("Error signing out: \(signOutError)")
@@ -162,8 +157,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 self.closeButtonStyle.setImage(UIImage(named: rightButtonLink), forState: .Normal)
                 }, completion: nil)
         })
-        
-        
     }
     
     func setPhotoPicker() {
@@ -192,7 +185,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     func didTapEdit() {
-        setTextFieldGray()
+        setTextField(isEditable: true)
+        inEditMode = true
     }
     
     func didCancelEdit() {
@@ -201,69 +195,53 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         addressTextField.text = userProfileBeforeEdit?.address
         phoneTextField.text = userProfileBeforeEdit?.phone
         bloodTextField.text = userProfileBeforeEdit?.blood
-        setTextFieldTransparent()
+        setTextField(isEditable: false)
         inEditMode = false
     }
     
     func didSaveEdit() {
-        setTextFieldTransparent()
+        defaults.setObject(phoneTextField.text, forKey: "userPhoneNumber")
+        setTextField(isEditable: false)
         inEditMode = false
     }
     
-    // TODO: combine the functions below as 
+    var textFieldColor = UIColor.clearColor().CGColor
+    
+    // TODO: combine the functions below as
     // setTextFieldStatus(backgroundColor backgroundColor: CGColor,
     // isEditable: Bool)
-    func setTextFieldGray() {
-        dispatch_async(dispatch_get_main_queue(), {
-            UIView.animateWithDuration(0.25, delay: 0, options: .TransitionCrossDissolve, animations: {() -> Void in
-                self.nameTextField.layer.backgroundColor = UIColor.grayColor().CGColor
-                self.nameTextField.layer.cornerRadius = 5
-                
-                self.birthTextField.layer.backgroundColor = UIColor.grayColor().CGColor
-                self.birthTextField.layer.cornerRadius = 5
-                
-                self.addressTextField.layer.backgroundColor = UIColor.grayColor().CGColor
-                self.addressTextField.layer.cornerRadius = 5
-                
-                self.bloodTextField.layer.backgroundColor = UIColor.grayColor().CGColor
-                self.bloodTextField.layer.cornerRadius = 5
-                
-                if self.defaults.stringForKey("userPhoneNumber") != nil {}
-                else {
-                    self.phoneTextField.layer.backgroundColor = UIColor.grayColor().CGColor
-                    self.phoneTextField.layer.cornerRadius = 5
-                }
-                
-                }, completion: nil)
-            
-        })
-        setTextFieldEditable(isEditable: true)
-    }
-    
-    func setTextFieldTransparent() {
-        dispatch_async(dispatch_get_main_queue(), {
-            UIView.animateWithDuration(0.25, delay: 0, options: .TransitionCrossDissolve, animations: {() -> Void in
-                
-                self.nameTextField.layer.backgroundColor = UIColor.clearColor().CGColor
-                self.birthTextField.layer.backgroundColor = UIColor.clearColor().CGColor
-                self.addressTextField.layer.backgroundColor = UIColor.clearColor().CGColor
-                self.bloodTextField.layer.backgroundColor = UIColor.clearColor().CGColor
-                if self.defaults.stringForKey("userPhoneNumber") != nil {}
-                else { self.phoneTextField.layer.backgroundColor = UIColor.clearColor().CGColor }
-                
-                }, completion: nil)
-            
-        })
-        setTextFieldEditable(isEditable: false)
-    }
-    
-    func setTextFieldEditable(isEditable isEditable: Bool) {
+    func setTextField(isEditable isEditable: Bool) {
+        
         nameTextField.userInteractionEnabled = isEditable
         birthTextField.userInteractionEnabled = isEditable
         addressTextField.userInteractionEnabled = isEditable
         bloodTextField.userInteractionEnabled = isEditable
-        if defaults.stringForKey("userPhoneNumber") != nil {}
-        else { phoneTextField.userInteractionEnabled = isEditable }
+        phoneTextField.userInteractionEnabled = isEditable
+        
+        dispatch_async(dispatch_get_main_queue(), {
+            UIView.animateWithDuration(0.25, delay: 0, options: .TransitionCrossDissolve, animations: {() -> Void in
+                
+                if isEditable {
+                    self.textFieldColor = UIColor.grayColor().CGColor
+                } else {
+                    self.textFieldColor = UIColor.clearColor().CGColor
+                }
+                self.nameTextField.layer.cornerRadius = 5
+                self.birthTextField.layer.cornerRadius = 5
+                self.addressTextField.layer.cornerRadius = 5
+                self.bloodTextField.layer.cornerRadius = 5
+                self.nameTextField.layer.backgroundColor = self.textFieldColor
+                self.birthTextField.layer.backgroundColor = self.textFieldColor
+                self.addressTextField.layer.backgroundColor = self.textFieldColor
+                self.bloodTextField.layer.backgroundColor = self.textFieldColor
+                self.phoneTextField.layer.backgroundColor = self.textFieldColor
+                self.phoneTextField.layer.cornerRadius = 5
+                
+                
+                }, completion: nil)
+            
+        })
+        
     }
     
     private let kKeychainItemName = "Gmail API"
@@ -288,8 +266,9 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         if let phone = defaults.stringForKey("userPhoneNumber") {
             phoneTextField.text = phone
         }
-        setTextFieldEditable(isEditable: false)
+        setTextField(isEditable: false)
         trackID.text = AppState.sharedInstance.UUID
+        trackID.userInteractionEnabled = true
         profilePhoto.layer.cornerRadius = profilePhoto.layer.frame.width/2
         profilePhoto.clipsToBounds = true
         
@@ -328,18 +307,18 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     // When the view appears, ensure that the Gmail API service is authorized
     // and perform API calls
-    override func viewDidAppear(animated: Bool) {
+    override func viewWillAppear(animated: Bool) {
         // If user alreay connected
         if let authorizer = service.authorizer,
             canAuth = authorizer.canAuthorize where canAuth {
             connectedStatus.text = "Connected!"
             connectGmail.setTitle(" Disconnect ", forState: .Normal)
+            
+            if let mail = authorizer.userEmail {
+                connectedStatus.text = mail.componentsSeparatedByString("@")[0]
+            }
+            
         }
-    }
-    
-    override func viewDidDisappear(animated: Bool) {
-        super.viewDidDisappear(animated)
-        ref.removeAllObservers()
     }
     
     func keyboardWillShow(notification: NSNotification) {
@@ -351,14 +330,17 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     func keyboardWillHide(notification: NSNotification) {
-//        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
-            if view.frame.origin.y != 0 {
-                self.view.frame.origin.y = 0
-            }
-//        }
+        //        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+        if view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
+        //        }
     }
     
-    
+    override func viewDidDisappear(animated: Bool) {
+        viewDidAppear(animated)
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
     
     func sendProfileToDB() {
         let databaseChildPath = "user_profiles/\(AppState.sharedInstance.UUID)"
@@ -376,7 +358,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     func queryProfileFromDB() {
         let databaseChildPath = "user_profiles/\(AppState.sharedInstance.UUID)"
         
-        _refHandle = self.ref.child(databaseChildPath).observeEventType(.Value, withBlock: { (snapshot) -> Void in
+        ref.child(databaseChildPath).observeSingleEventOfType(.Value, withBlock: { (snapshot) -> Void in
             
             if (snapshot.childrenCount != 0) {
                 print("Load profile from DB")
@@ -424,7 +406,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     func downloadFromStorage() {
-        let storageRef = FIRStorage.storage().referenceForURL("gs://asic-lookout-84de7.appspot.com")
+        let storageRef = FIRStorage.storage().referenceForURL(AppState.sharedInstance.storage)
         
         storageRef.child("profilePhotos/\(AppState.sharedInstance.UUID)").downloadURLWithCompletion({
             (URL,error) in
