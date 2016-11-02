@@ -29,7 +29,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var connectedStatus: UILabel!
     
     @IBAction func connectGmail(sender: AnyObject) {
-        if (self.connectGmail.titleLabel?.text == " Connect ") {
+        
+        if (connectGmail.titleLabel?.text == " Connect ") {
             // Connect with Gmail
             self.navigationController?.pushViewController(createAuthController(), animated: true)
         } else {
@@ -45,8 +46,11 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var editButtonStyle: UIButton!
     
     @IBAction func editButton(sender: AnyObject) {
+        
         dismissKeyboard()
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
+        
         if (inEditMode) {
             // tap to cancel
             let alert = UIAlertController(
@@ -80,6 +84,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             didTapEdit()
             changeBarButtonImage(leftButtonLink: cancelLink, rightButtonLink: saveLink)
             inEditMode = true
+            
             // Test Crashlytics
 //            Crashlytics.sharedInstance().crash()
         }

@@ -26,7 +26,7 @@ class SendAlertViewController: UIViewController, CLLocationManagerDelegate, Core
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = contactsCollectionView.dequeueReusableCellWithReuseIdentifier("contactsCollectionCell", forIndexPath: indexPath) as! contactsCollectionViewCell
+        let cell = contactsCollectionView.dequeueReusableCellWithReuseIdentifier("ContactsCollectionCell", forIndexPath: indexPath) as! ContactsCollectionViewCell
         cell.contactsButton.tag = indexPath.row
         cell.contactsButton.addTarget(self,action: #selector(buttonTapAction),forControlEvents: .TouchUpInside)
         cell.contactsButton.setImage(UIImage(named:"add-contact-circle" ), forState: .Normal)

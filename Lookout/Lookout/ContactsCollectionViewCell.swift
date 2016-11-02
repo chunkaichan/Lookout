@@ -8,7 +8,7 @@
 
 import UIKit
 
-class contactsCollectionViewCell: UICollectionViewCell {
+class ContactsCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var contactsButton: UIButton!
 }

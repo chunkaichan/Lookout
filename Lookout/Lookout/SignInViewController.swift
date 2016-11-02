@@ -39,7 +39,6 @@ extension SignInViewController: AKFViewControllerDelegate{
                 self.signUpAccount(email: account, password: accountKey)
                 self.signInAccount(email: account, password: accountKey)
             }
-            
         }
     }
     
@@ -56,14 +55,14 @@ extension SignInViewController: AKFViewControllerDelegate{
 class SignInViewController: UIViewController {
 
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+    @IBOutlet weak var loginButtonStyle: UIButton!
+    @IBOutlet weak var loginMailButtonStyle: UIButton!
+    @IBOutlet weak var loginLabelStyle: UILabel!
+    
     
     var accountKit: AKFAccountKit!
     let defaults = NSUserDefaults.standardUserDefaults()
     var didLoginAccountkit = false
-    
-    @IBOutlet weak var loginButtonStyle: UIButton!
-    @IBOutlet weak var loginMailButtonStyle: UIButton!
-    @IBOutlet weak var loginLabelStyle: UILabel!
     
     @IBAction func loginWithEmail(sender: UIButton) {
         FIRAnalytics.logEventWithName(kFIREventSelectContent, parameters: [
@@ -98,9 +97,6 @@ class SignInViewController: UIViewController {
             presentViewController(accountKitPhoneLoginVC as! UIViewController, animated: true, completion: nil)
             
         }
-        
-        
-        
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -110,14 +106,15 @@ class SignInViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         if didLoginAccountkit {
             loginButtonStyle.layer.hidden = true
-            loginMailButtonStyle.layer.hidden = true
             loginLabelStyle.layer.hidden = true
+            loginMailButtonStyle.layer.hidden = true
+            
             activityIndicatorView.layer.hidden = false
             activityIndicatorView.startAnimating()
         } else {
             loginButtonStyle.layer.hidden = false
-            loginMailButtonStyle.layer.hidden = false
             loginLabelStyle.layer.hidden = false
+            loginMailButtonStyle.layer.hidden = false
             activityIndicatorView.layer.hidden = true
             activityIndicatorView.stopAnimating()
         }
@@ -160,6 +157,7 @@ class SignInViewController: UIViewController {
     }
     
     func signUpAccount(email email: String, password: String) {
+        
         FIRAuth.auth()?.createUserWithEmail(email, password: password) { (user, error) in
             
             if let error = error {

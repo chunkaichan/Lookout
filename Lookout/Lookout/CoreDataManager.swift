@@ -25,10 +25,6 @@ class CoreDataManager {
     
     static let shared = CoreDataManager()
     
-    private init() {
-        
-    }
-    
     private let entityName = "Contacts"
     
     private var moc = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
