@@ -10,5 +10,6 @@ import UIKit
 
 class ContactsCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var contactName: UILabel!
     @IBOutlet weak var contactsButton: UIButton!
 }

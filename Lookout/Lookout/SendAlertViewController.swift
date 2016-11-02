@@ -30,10 +30,12 @@ class SendAlertViewController: UIViewController, CLLocationManagerDelegate, Core
         cell.contactsButton.tag = indexPath.row
         cell.contactsButton.addTarget(self,action: #selector(buttonTapAction),forControlEvents: .TouchUpInside)
         cell.contactsButton.setImage(UIImage(named:"add-contact-circle" ), forState: .Normal)
+        cell.contactName.text = ""
         cell.contactsButton.imageView?.contentMode = .ScaleAspectFill
         if (indexPath.row < contacts.count) {
             if let contactPhoto = contacts[indexPath.row].photo {
                 cell.contactsButton.setImage(UIImage(data: contactPhoto), forState: .Normal)
+                cell.contactName.text = contacts[indexPath.row].name
                 cell.contactsButton.layer.cornerRadius = cell.contactsButton.layer.frame.width/2
                 cell.contactsButton.clipsToBounds = true
                 cell.contactsButton.layer.borderWidth = 2

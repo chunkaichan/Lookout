@@ -96,7 +96,6 @@ class SignInViewController: UIViewController {
         UIApplication.sharedApplication().keyWindow?.rootViewController = self
         loginButtonStyle.translatesAutoresizingMaskIntoConstraints = true
         
-        
     }
     
     
@@ -121,15 +120,32 @@ class SignInViewController: UIViewController {
     }
     
     func loginAccount(withType type: LoginAccountType) {
+        let theme: AKFTheme = AKFTheme.defaultTheme()
+        theme.backgroundColor = UIColor.blackColor()
+//        theme.buttonBackgroundColor
+//        theme.buttonBorderColor
+//        theme.buttonTextColor
+//        theme.headerBackgroundColor
+//        theme.headerTextColor
+//        theme.iconColor
+//        theme.inputBackgroundColor
+//        theme.inputBorderColor
+//        theme.inputTextColor
+//        theme.statusBarStyle
+//        theme.textColor
+//        theme.titleColor
+        
         switch type {
         case .phoneNumber:
             if let accountKitPhoneLoginVC: AKFViewController = accountKit.viewControllerForPhoneLoginWithPhoneNumber(nil, state: nil) as? AKFViewController {
+                accountKitPhoneLoginVC.theme = theme
                 accountKitPhoneLoginVC.enableSendToFacebook = true
                 accountKitPhoneLoginVC.delegate = self
                 presentViewController(accountKitPhoneLoginVC as! UIViewController, animated: true, completion: nil)
             }
         case .email:
             if let accountKitEmailLoginVC: AKFViewController = accountKit.viewControllerForEmailLoginWithEmail(nil, state: nil) as? AKFViewController {
+                accountKitEmailLoginVC.theme = theme
                 accountKitEmailLoginVC.enableSendToFacebook = true
                 accountKitEmailLoginVC.delegate = self
                 presentViewController(accountKitEmailLoginVC as! UIViewController, animated: true, completion: nil)
