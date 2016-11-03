@@ -205,7 +205,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         inEditMode = false
     }
     
-    var textFieldColor = UIColor.clearColor().CGColor
+    var textFieldBackgroundColor = UIColor.clearColor().CGColor
+    var textFieldColor = UIColor.clearColor()
     
     // TODO: combine the functions below as
     // setTextFieldStatus(backgroundColor backgroundColor: CGColor,
@@ -219,23 +220,30 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         phoneTextField.userInteractionEnabled = isEditable
         
         dispatch_async(dispatch_get_main_queue(), {
-            UIView.animateWithDuration(0.25, delay: 0, options: .TransitionCrossDissolve, animations: {() -> Void in
+            UIView.animateWithDuration(0.4, delay: 0, options: .TransitionCrossDissolve, animations: {() -> Void in
                 
                 if isEditable {
-                    self.textFieldColor = UIColor.grayColor().CGColor
+                    self.textFieldBackgroundColor = UIColor.grayColor().CGColor
+                    self.textFieldColor = UIColor.whiteColor()
                 } else {
-                    self.textFieldColor = UIColor.clearColor().CGColor
+                    self.textFieldBackgroundColor = UIColor.clearColor().CGColor
+                    self.textFieldColor = UIColor(red: 112/255, green: 110/255, blue: 95/255, alpha: 1.0)
                 }
                 self.nameTextField.layer.cornerRadius = 5
                 self.birthTextField.layer.cornerRadius = 5
                 self.addressTextField.layer.cornerRadius = 5
                 self.bloodTextField.layer.cornerRadius = 5
-                self.nameTextField.layer.backgroundColor = self.textFieldColor
-                self.birthTextField.layer.backgroundColor = self.textFieldColor
-                self.addressTextField.layer.backgroundColor = self.textFieldColor
-                self.bloodTextField.layer.backgroundColor = self.textFieldColor
-                self.phoneTextField.layer.backgroundColor = self.textFieldColor
                 self.phoneTextField.layer.cornerRadius = 5
+                self.nameTextField.layer.backgroundColor = self.textFieldBackgroundColor
+                self.birthTextField.layer.backgroundColor = self.textFieldBackgroundColor
+                self.addressTextField.layer.backgroundColor = self.textFieldBackgroundColor
+                self.bloodTextField.layer.backgroundColor = self.textFieldBackgroundColor
+                self.phoneTextField.layer.backgroundColor = self.textFieldBackgroundColor
+                self.nameTextField.textColor = self.textFieldColor
+                self.birthTextField.textColor = self.textFieldColor
+                self.addressTextField.textColor = self.textFieldColor
+                self.bloodTextField.textColor = self.textFieldColor
+                self.phoneTextField.textColor = self.textFieldColor
                 
                 
                 }, completion: nil)
@@ -292,9 +300,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         downloadFromStorage()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
-        
         loadDataIndicator.layer.hidden = false
         loadDataIndicator.startAnimating()
         UIApplication.sharedApplication().beginIgnoringInteractionEvents()
@@ -319,12 +324,21 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             }
             
         }
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillShow), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide), name: UIKeyboardWillHideNotification, object: nil)
     }
     
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
-            if view.frame.origin.y == 0 {
-                self.view.frame.origin.y -= (keyboardSize.height - 85)
+            if view.frame.origin.y == 0 && view.frame.height <= 568 {
+                
+                var originY: CGFloat = 0.0
+                if (phoneTextField.isFirstResponder() ||
+                    addressTextField.isFirstResponder()) {
+                    originY = (phoneTextField.superview?.superview?.frame.origin.y)!
+                    view.frame.origin.y -= (view.frame.height - keyboardSize.height - originY - 70)
+                }
             }
         }
     }
