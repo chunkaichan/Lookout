@@ -270,7 +270,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     // and initialize the Gmail API service
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        phoneTextField.keyboardType = .PhonePad
         if let phone = defaults.stringForKey("userPhoneNumber") {
             phoneTextField.text = phone
         }

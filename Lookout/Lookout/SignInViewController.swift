@@ -29,7 +29,7 @@ extension SignInViewController: AKFViewControllerDelegate{
                 if (phoneNumber != "") {
                     self.signUpAccount(email: "\(phoneNumber)@lookout.com", password: phoneNumber)
                     self.signInAccount(email: "\(phoneNumber)@lookout.com", password: phoneNumber)
-                    self.defaults.setObject(phoneNumber, forKey: "userPhoneNumber")
+                    self.defaults.setObject(phoneNumber.componentsSeparatedByString("+")[1], forKey: "userPhoneNumber")
                 }
             }
             if let emailAddress = account?.emailAddress {
@@ -65,6 +65,10 @@ class SignInViewController: UIViewController {
     enum LoginAccountType {
         case phoneNumber
         case email
+    }
+    
+    override func viewDidLoad() {
+        
     }
     
     override func viewWillAppear(animated: Bool) {

@@ -28,9 +28,9 @@ class NewContactViewController: UIViewController, UIImagePickerControllerDelegat
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
         
-        self.navigationController?.navigationBar.tintColor = UIColor(red: 65/255, green: 188/255, blue: 165/255, alpha: 1)
+        self.navigationController?.navigationBar.tintColor = UIColor(red: 232/255, green: 193/255, blue: 35/255, alpha: 1)
         
-        
+        newNumber.keyboardType = .PhonePad
         saveNewContact.layer.cornerRadius = 8
         
         let tapToAdd = UITapGestureRecognizer(target: self, action: #selector(addNewPhoto))
@@ -50,6 +50,8 @@ class NewContactViewController: UIViewController, UIImagePickerControllerDelegat
             CoreDataManager.shared.delegate = self
             CoreDataManager.shared.fetchCoreData()
         }
+        
+        
     }
     
     func keyboardWillShow(notification: NSNotification) {

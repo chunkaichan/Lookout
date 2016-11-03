@@ -30,7 +30,7 @@ class SendAlertViewController: UIViewController, CLLocationManagerDelegate, Core
         cell.contactsButton.tag = indexPath.row
         cell.contactsButton.addTarget(self,action: #selector(buttonTapAction),forControlEvents: .TouchUpInside)
         cell.contactsButton.setImage(UIImage(named:"add-contact-circle" ), forState: .Normal)
-        cell.contactName.text = ""
+        cell.contactName.text = "Tap to add"
         cell.contactsButton.imageView?.contentMode = .ScaleAspectFill
         if (indexPath.row < contacts.count) {
             if let contactPhoto = contacts[indexPath.row].photo {
@@ -369,10 +369,10 @@ class SendAlertViewController: UIViewController, CLLocationManagerDelegate, Core
         let alert = UIAlertController(title: "\n\n\n\n\n", message: nil, preferredStyle: .ActionSheet)
         let alertViewWidth = alert.view.bounds.size.width
         let buttonRadius: CGFloat = 40
-        let photoRadios: CGFloat = 100
+        let photoRadios: CGFloat = 80
         let space: CGFloat = (alertViewWidth - 10 - photoRadios - 3*buttonRadius)/5
         
-        let contactPhoto = UIImageView(frame: CGRectMake(10, 10, photoRadios, photoRadios))
+        let contactPhoto = UIImageView(frame: CGRectMake(15, 25, photoRadios, photoRadios))
         contactPhoto.image = UIImage(data: photoData)
         contactPhoto.contentMode = .ScaleAspectFill
         contactPhoto.clipsToBounds = true
