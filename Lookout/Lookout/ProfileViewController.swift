@@ -13,7 +13,7 @@ import Firebase
 import Crashlytics
 import MessageUI
 
-class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, MFMessageComposeViewControllerDelegate {
+class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, MFMessageComposeViewControllerDelegate, UITextViewDelegate {
     
     let imagePicker = UIImagePickerController()
     
@@ -25,6 +25,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var bloodTextField: UITextField!
     @IBOutlet weak var trackID: UILabel!
+    @IBOutlet weak var healthInfoTextView: UITextView!
     
     @IBOutlet weak var connectGmail: UIButton!
     @IBOutlet weak var connectedStatus: UILabel!
@@ -34,13 +35,13 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     @IBAction func connectGmail(sender: AnyObject) {
         
-        if (connectGmail.titleLabel?.text == " Connect ") {
+        if (connectGmail.titleLabel?.text == " Login ") {
             // Connect with Gmail
             self.navigationController?.pushViewController(createAuthController(), animated: true)
         } else {
             // Disconnect
             GTMOAuth2ViewControllerTouch.removeAuthFromKeychainForName("Gmail API")
-            self.connectGmail.setTitle(" Connect ", forState: .Normal)
+            self.connectGmail.setTitle(" Login ", forState: .Normal)
             self.connectedStatus.text = "Not connected"
         }
     }
@@ -60,7 +61,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                                             birth: birthTextField.text ?? "Empty" ,
                                             address: addressTextField.text ?? "Empty" ,
                                             phone: phoneTextField.text ?? "Empty" ,
-                                            blood: bloodTextField.text ?? "Empty")
+                                            blood: bloodTextField.text ?? "Empty",healthInfo: healthInfoTextView.text ?? "Empty")
             didTapEdit()
             changeBarButtonImage(leftButtonLink: cancelLink, rightButtonLink: saveLink)
             
@@ -69,20 +70,102 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
     }
     
+    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         view.endEditing(true)
         return true
     }
     
-    @IBAction func sendTrackIDWithSMS(sender: UIButton) {
-        
-        if MFMessageComposeViewController.canSendText() {
-            let messageVC = MFMessageComposeViewController()
-            
-            messageVC.body = "This is my tracking number:\n\(AppState.sharedInstance.UUID)"
-            messageVC.messageComposeDelegate = self
-            self.presentViewController(messageVC, animated: false, completion: nil)
+    func textViewDidEndEditing(textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = "Health information here..."
+            textView.textColor = UIColor.groupTableViewBackgroundColor()
         }
+    }
+    
+    func textViewShouldBeginEditing(textView: UITextView) -> Bool {
+        print(textView.text)
+        if textView.text == "Health information here..." {
+            textView.text = ""
+        }
+        return true
+    }
+    
+    func sendEmail(toMail toMail: String, messageBody: String) {
+        let gtlMessage = GTLRGmail_Message()
+        gtlMessage.raw = generateRawString(toMail: toMail, body: messageBody)
+        let query = GTLRGmailQuery_UsersMessagesSend.queryWithObject(gtlMessage, userId: "me", uploadParameters: nil)
+        self.service.executeQuery(query, completionHandler: {(ticket, response, error) -> Void in
+            print("ticket \(ticket)")
+            print("response \(response)")
+            print("error \(error)")
+            if error != nil {
+                self.showAlert(message: "Failed to send your message.", actionTitle: "Close")
+            } else {
+                self.showAlert(message: "Tracking number is successfully sent.", actionTitle: "Close")
+            }
+        })
+    }
+    
+    func showAlert(message message: String, actionTitle: String) {
+        let alert = UIAlertController(title: nil, message: message, preferredStyle: .Alert)
+        if (alert.actions.count == 0) {
+            let alertAction = UIAlertAction(title: actionTitle, style: .Default, handler: nil)
+            alert.addAction(alertAction)
+        }
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func generateRawString(toMail toMail: String, body: String) -> String {
+        
+        let builder = MCOMessageBuilder()
+        builder.header.to = [MCOAddress(displayName: "Lookout: Tracking Number", mailbox: toMail)]
+        //        builder.header.from = MCOAddress(displayName: "From Lookout: Emergency Notification", mailbox: "kyle791121@hotmail.com")
+        builder.header.subject = "From Lookout"
+        builder.htmlBody = "Tracking number:<br>\(body)"
+        
+        builder.header.date = NSDate()
+        
+        let rfc822Data = builder.data()
+        
+        return GTLREncodeWebSafeBase64(rfc822Data)!
+    }
+
+    
+    @IBAction func sendTrackingNumber(sender: UIButton) {
+        let confirmDelete = UIAlertController(title: "Send tracking number via" , message: nil, preferredStyle: .ActionSheet)
+        confirmDelete.addAction(UIAlertAction(title: "Email", style: .Default, handler: { _ in
+            if let authorizer = self.service.authorizer,
+                canAuth = authorizer.canAuthorize where canAuth {
+                let alert = UIAlertController(title: "Send to mail:", message: nil, preferredStyle: .Alert)
+                alert.addTextFieldWithConfigurationHandler({ _ in })
+                if (alert.actions.count == 0) {
+                    alert.addAction(UIAlertAction(title: "Send", style: .Default, handler: { _ in
+                        self.sendEmail(toMail: alert.textFields![0].text!, messageBody: AppState.sharedInstance.UUID)
+                    }))
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+                }
+                self.presentViewController(alert, animated: true, completion: nil)
+                
+            } else {
+                self.showAlert(message: "Please verify your email.", actionTitle: "OK")
+            }
+            
+        }))
+        
+        confirmDelete.addAction(UIAlertAction(title: "Message", style: .Default, handler: { _ in
+            if MFMessageComposeViewController.canSendText() {
+                let messageVC = MFMessageComposeViewController()
+                
+                messageVC.body = "\(AppState.sharedInstance.UUID)"
+                messageVC.messageComposeDelegate = self
+                self.presentViewController(messageVC, animated: false, completion: nil)
+            }
+        }))
+        
+        confirmDelete.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        
+        presentViewController(confirmDelete, animated: true, completion: nil)
     }
     
     func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult) {
@@ -136,6 +219,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         var address: String
         var phone: String
         var blood: String
+        var healthInfo: String
     }
     
     var userProfileBeforeEdit: Profile?
@@ -195,6 +279,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         addressTextField.text = userProfileBeforeEdit?.address
         phoneTextField.text = userProfileBeforeEdit?.phone
         bloodTextField.text = userProfileBeforeEdit?.blood
+        healthInfoTextView.text = userProfileBeforeEdit?.healthInfo
         setTextField(isEditable: false)
         inEditMode = false
     }
@@ -218,6 +303,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         addressTextField.userInteractionEnabled = isEditable
         bloodTextField.userInteractionEnabled = isEditable
         phoneTextField.userInteractionEnabled = isEditable
+        healthInfoTextView.userInteractionEnabled = isEditable
         
         dispatch_async(dispatch_get_main_queue(), {
             UIView.animateWithDuration(0.4, delay: 0, options: .TransitionCrossDissolve, animations: {() -> Void in
@@ -239,12 +325,13 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 self.addressTextField.layer.backgroundColor = self.textFieldBackgroundColor
                 self.bloodTextField.layer.backgroundColor = self.textFieldBackgroundColor
                 self.phoneTextField.layer.backgroundColor = self.textFieldBackgroundColor
+                self.healthInfoTextView.layer.backgroundColor = self.textFieldBackgroundColor
                 self.nameTextField.textColor = self.textFieldColor
                 self.birthTextField.textColor = self.textFieldColor
                 self.addressTextField.textColor = self.textFieldColor
                 self.bloodTextField.textColor = self.textFieldColor
                 self.phoneTextField.textColor = self.textFieldColor
-                
+                self.healthInfoTextView.textColor = self.textFieldColor
                 
                 }, completion: nil)
             
@@ -270,6 +357,11 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     // and initialize the Gmail API service
     override func viewDidLoad() {
         super.viewDidLoad()
+        if healthInfoTextView.text.isEmpty {
+            healthInfoTextView.text = "Health information here..."
+            healthInfoTextView.textColor = UIColor.groupTableViewBackgroundColor()
+        }
+        healthInfoTextView.layer.backgroundColor = UIColor.clearColor().CGColor
         phoneTextField.keyboardType = .PhonePad
         if let phone = defaults.stringForKey("userPhoneNumber") {
             phoneTextField.text = phone
@@ -316,11 +408,10 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         // If user alreay connected
         if let authorizer = service.authorizer,
             canAuth = authorizer.canAuthorize where canAuth {
-            connectedStatus.text = "Connected!"
-            connectGmail.setTitle(" Disconnect ", forState: .Normal)
+            connectGmail.setTitle(" Logout ", forState: .Normal)
             
             if let mail = authorizer.userEmail {
-                connectedStatus.text = mail.componentsSeparatedByString("@")[0]
+                connectedStatus.text = mail
             }
             
         }
@@ -332,12 +423,14 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
             if view.frame.origin.y == 0 && view.frame.height <= 568 {
-                
                 var originY: CGFloat = 0.0
                 if (phoneTextField.isFirstResponder() ||
                     addressTextField.isFirstResponder()) {
                     originY = (phoneTextField.superview?.superview?.frame.origin.y)!
-                    view.frame.origin.y -= (view.frame.height - keyboardSize.height - originY - 70)
+                    view.frame.origin.y -= (view.frame.height - keyboardSize.height - originY - 40)
+                } else if (healthInfoTextView.isFirstResponder()) {
+                    originY = (healthInfoTextView.frame.origin.y)
+                    view.frame.origin.y -= (view.frame.height - originY)
                 }
             }
         }
@@ -363,6 +456,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         data[Constants.Profile.address] = addressTextField.text!
         data[Constants.Profile.blood] = bloodTextField.text!
         data[Constants.Profile.phone] = phoneTextField.text!
+        data[Constants.Profile.healthInfo] = healthInfoTextView.text!
         self.ref.child(databaseChildPath).setValue(data)
         print("Profile sent to DB")
     }
@@ -382,6 +476,11 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                     self.addressTextField.text = profile[Constants.Profile.address]
                     self.bloodTextField.text = profile[Constants.Profile.blood]
                     self.phoneTextField.text = profile[Constants.Profile.phone]
+                    self.healthInfoTextView.text = profile[Constants.Profile.healthInfo]
+                    if self.healthInfoTextView.text.isEmpty {
+                        self.healthInfoTextView.text = "Health information here..."
+                        self.healthInfoTextView.textColor = UIColor.groupTableViewBackgroundColor()
+                    }
                 }
             }
             

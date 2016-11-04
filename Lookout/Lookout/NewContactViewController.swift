@@ -37,7 +37,7 @@ class NewContactViewController: UIViewController, UIImagePickerControllerDelegat
         addPhoto.addGestureRecognizer(tapToAdd)
         addPhoto.userInteractionEnabled = true
         addPhoto.image = addPhoto.image!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        addPhoto.tintColor = UIColor.whiteColor()
+        addPhoto.tintColor = UIColor.grayColor()
         
         imagePicker.delegate = self
         

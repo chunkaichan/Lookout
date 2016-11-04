@@ -31,11 +31,13 @@ class SendAlertViewController: UIViewController, CLLocationManagerDelegate, Core
         cell.contactsButton.addTarget(self,action: #selector(buttonTapAction),forControlEvents: .TouchUpInside)
         cell.contactsButton.setImage(UIImage(named:"add-contact-circle" ), forState: .Normal)
         cell.contactName.text = "Tap to add"
+        cell.contactName.textColor = UIColor.lightGrayColor()
         cell.contactsButton.imageView?.contentMode = .ScaleAspectFill
         if (indexPath.row < contacts.count) {
             if let contactPhoto = contacts[indexPath.row].photo {
                 cell.contactsButton.setImage(UIImage(data: contactPhoto), forState: .Normal)
                 cell.contactName.text = contacts[indexPath.row].name
+                cell.contactName.textColor = UIColor.darkGrayColor()
                 cell.contactsButton.layer.cornerRadius = cell.contactsButton.layer.frame.width/2
                 cell.contactsButton.clipsToBounds = true
                 cell.contactsButton.layer.borderWidth = 2
@@ -73,7 +75,15 @@ class SendAlertViewController: UIViewController, CLLocationManagerDelegate, Core
     let coreDataManager = CoreDataManager.shared
     let coreMotionManager = CoreMotionManager.shared
     
+    @IBOutlet weak var sendAllAlertButtonHeight: NSLayoutConstraint!
+    @IBOutlet weak var sendAllAlertButtonWidth: NSLayoutConstraint!
     override func viewDidLoad() {
+        if view.frame.height > 568 {
+            sendAllAlertButtonStyle.removeConstraint(sendAllAlertButtonWidth)
+            sendAllAlertButtonStyle.removeConstraint(sendAllAlertButtonHeight)
+            sendAllAlertButtonStyle.addConstraint(NSLayoutConstraint(item: sendAllAlertButtonStyle, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 200))
+            NSLayoutConstraint(item: sendAllAlertButtonStyle, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 200).active = true
+        }
         ref = FIRDatabase.database().reference()
         setLocationManager()
         contactsCollectionView.backgroundColor = UIColor.clearColor()
@@ -86,6 +96,8 @@ class SendAlertViewController: UIViewController, CLLocationManagerDelegate, Core
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent
     }
+    
+    @IBOutlet weak var sendAllAlertButtonStyle: UIButton!
     
     @IBAction func sendAllAlert(sender: UIButton) {
         sendAlertToContacts()
@@ -171,7 +183,7 @@ class SendAlertViewController: UIViewController, CLLocationManagerDelegate, Core
                             if let phone = defaults.stringForKey("userPhoneNumber") {
                                 self.pushNotificationToContact(token: token, message: "Sent from \(phone)")
                             } else {
-                                self.showAlert(message: "Please add phone number and verify email in profile.", actionTitle: "OK")
+                                self.showAlert(message: "Please add phone number and verify email in profile page.", actionTitle: "OK")
                                 return
                             }
                         }
@@ -424,7 +436,6 @@ class SendAlertViewController: UIViewController, CLLocationManagerDelegate, Core
     }
     
     func callContact(sender: UIButton) {
-        print(sender.tag)
         if let phoneCallURL:NSURL = NSURL(string: "tel://\(contacts[sender.tag].phoneNumber)") {
             let application:UIApplication = UIApplication.sharedApplication()
             if (application.canOpenURL(phoneCallURL)) {
@@ -510,6 +521,25 @@ class SendAlertViewController: UIViewController, CLLocationManagerDelegate, Core
             handler: {(alert: UIAlertAction!) in
                 let gtlMessage = GTLRGmail_Message()
                 for contact in self.contacts {
+                    
+                    self._refHandle = self.ref.child("user_token/\(contact.trackID)").observeEventType(.Value, withBlock: { (snapshot) -> Void in
+                        
+                        
+                        if let contactsToken = snapshot.value as? [String:String] {
+                            
+                            if let token = contactsToken["token"] {
+                                print(token)
+                                let defaults = NSUserDefaults.standardUserDefaults()
+                                if let phone = defaults.stringForKey("userPhoneNumber") {
+                                    self.pushNotificationToContact(token: token, message: "\(phone): I am safe now.")
+                                } else {
+                                    self.showAlert(message: "Error while sending push notification", actionTitle: "OK")
+                                    return
+                                }
+                            }
+                        }
+                    })
+                    
                     print(contact.email)
                     gtlMessage.raw = self.generateRawString(toMail: contact.email, body: "I am safe right now!")
                     

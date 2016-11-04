@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4C5BF48C5B9A12D22FE10AB6 /* Pods_Lookout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9203B3DC0F7852FEE61941CB /* Pods_Lookout.framework */; };
+		B50467FA1DCB0A0A00548E54 /* HospitalMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50467F91DCB0A0A00548E54 /* HospitalMapViewController.swift */; };
 		B51BDBB21DB8A11600069289 /* CoreMotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51BDBB11DB8A11600069289 /* CoreMotionManager.swift */; };
 		B51BDBB41DB8C05D00069289 /* SuperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B51BDBB31DB8C05D00069289 /* SuperViewController.swift */; };
 		B52C04181DA232E900A5CC06 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52C04171DA232E900A5CC06 /* ProfileViewController.swift */; };
@@ -43,6 +44,7 @@
 		6D0D8A8FB8E79E681346CB3A /* Pods-Lookout.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lookout.release.xcconfig"; path = "Pods/Target Support Files/Pods-Lookout/Pods-Lookout.release.xcconfig"; sourceTree = "<group>"; };
 		8B78175BA6B2CC03E1FB14C1 /* Pods-Lookout.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Lookout.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Lookout/Pods-Lookout.debug.xcconfig"; sourceTree = "<group>"; };
 		9203B3DC0F7852FEE61941CB /* Pods_Lookout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Lookout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B50467F91DCB0A0A00548E54 /* HospitalMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HospitalMapViewController.swift; sourceTree = "<group>"; };
 		B51BDBB11DB8A11600069289 /* CoreMotionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreMotionManager.swift; sourceTree = "<group>"; };
 		B51BDBB31DB8C05D00069289 /* SuperViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperViewController.swift; sourceTree = "<group>"; };
 		B52C04171DA232E900A5CC06 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				B50467F51DC9BC4A00548E54 /* User */,
 				B50467F61DC9BCDD00548E54 /* Contact */,
 				B5BFA9021D95222600496D13 /* SendAlertViewController.swift */,
+				B50467F91DCB0A0A00548E54 /* HospitalMapViewController.swift */,
 				B5C826501D9A746F000E9514 /* Constants.swift */,
 				B5C8264E1D9A7415000E9514 /* AppState.swift */,
 				B5F916561D98F01200CD01EB /* Person.swift */,
@@ -364,6 +367,7 @@
 				B578DF601D9E4630002E5439 /* Contact+CoreDataProperties.swift in Sources */,
 				B5F313AC1DB388CB007284D4 /* Event.swift in Sources */,
 				B5C8264F1D9A7415000E9514 /* AppState.swift in Sources */,
+				B50467FA1DCB0A0A00548E54 /* HospitalMapViewController.swift in Sources */,
 				B53D9B9C1DBB4F9200606817 /* AppDelegate.swift in Sources */,
 				B5BFA9031D95222600496D13 /* SendAlertViewController.swift in Sources */,
 				B5F313A91DB382B7007284D4 /* Events+CoreDataProperties.swift in Sources */,

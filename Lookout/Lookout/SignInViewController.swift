@@ -125,19 +125,20 @@ class SignInViewController: UIViewController {
     
     func loginAccount(withType type: LoginAccountType) {
         let theme: AKFTheme = AKFTheme.defaultTheme()
-        theme.backgroundColor = UIColor.blackColor()
-//        theme.buttonBackgroundColor
-//        theme.buttonBorderColor
-//        theme.buttonTextColor
-//        theme.headerBackgroundColor
-//        theme.headerTextColor
-//        theme.iconColor
-//        theme.inputBackgroundColor
-//        theme.inputBorderColor
-//        theme.inputTextColor
-//        theme.statusBarStyle
-//        theme.textColor
-//        theme.titleColor
+        theme.backgroundColor = Constants.Color.backgroundYellow
+        theme.buttonBackgroundColor = Constants.Color.barItemYellow
+        theme.buttonBorderColor = Constants.Color.barItemYellow
+        theme.buttonTextColor = UIColor.whiteColor()
+        theme.headerBackgroundColor = Constants.Color.barGray
+        theme.headerTextColor = UIColor.whiteColor()
+        theme.iconColor = Constants.Color.barItemYellow
+        theme.inputBackgroundColor = UIColor.whiteColor()
+        theme.inputBorderColor = UIColor.darkGrayColor()
+        theme.inputTextColor = UIColor.darkGrayColor()
+        theme.statusBarStyle = .LightContent
+        theme.textColor = UIColor.darkGrayColor()
+        theme.titleColor = UIColor.darkGrayColor()
+        theme.buttonHighlightedBackgroundColor = UIColor.brownColor()
         
         switch type {
         case .phoneNumber:

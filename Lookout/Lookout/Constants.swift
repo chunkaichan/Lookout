@@ -29,6 +29,13 @@ struct Constants {
         static let birth = "birth"
         static let phone = "phone"
         static let blood = "blood"
+        static let healthInfo = "healthInfo"
+    }
+    
+    struct Color {
+        static let barGray = UIColor(red: 114/255, green: 108/255, blue: 96/255, alpha: 1)
+        static let barItemYellow = UIColor(red: 232/255, green: 193/255, blue: 35/255, alpha: 1)
+        static let backgroundYellow = UIColor(red: 249/255, green: 251/255, blue: 231/255, alpha: 1)
     }
     
     enum LeftMenuKeys: String {
