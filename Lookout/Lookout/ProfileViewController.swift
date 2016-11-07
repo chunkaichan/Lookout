@@ -13,7 +13,7 @@ import Firebase
 import Crashlytics
 import MessageUI
 
-class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, MFMessageComposeViewControllerDelegate, UITextViewDelegate {
+class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, MFMessageComposeViewControllerDelegate, UITextViewDelegate, DatabaseManagerDelegate {
     
     let imagePicker = UIImagePickerController()
     
@@ -189,7 +189,8 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
                 handler: {(alert: UIAlertAction!) in
                     self.didSaveEdit()
                     self.changeBarButtonImage(leftButtonLink: self.editLink, rightButtonLink: self.logOutLink)
-                    self.sendProfileToDB()})
+                    self.sendProfileToDB()
+            })
             
             let cancel = UIAlertAction(
                 title: "Cancel",
@@ -268,77 +269,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         }
     }
     
-    func didTapEdit() {
-        setTextField(isEditable: true)
-        inEditMode = true
-    }
-    
-    func didCancelEdit() {
-        nameTextField.text = userProfileBeforeEdit?.name
-        birthTextField.text = userProfileBeforeEdit?.birth
-        addressTextField.text = userProfileBeforeEdit?.address
-        phoneTextField.text = userProfileBeforeEdit?.phone
-        bloodTextField.text = userProfileBeforeEdit?.blood
-        healthInfoTextView.text = userProfileBeforeEdit?.healthInfo
-        setTextField(isEditable: false)
-        inEditMode = false
-    }
-    
-    func didSaveEdit() {
-        defaults.setObject(phoneTextField.text, forKey: "userPhoneNumber")
-        setTextField(isEditable: false)
-        inEditMode = false
-    }
-    
-    var textFieldBackgroundColor = UIColor.clearColor().CGColor
-    var textFieldColor = UIColor.clearColor()
-    
-    // TODO: combine the functions below as
-    // setTextFieldStatus(backgroundColor backgroundColor: CGColor,
-    // isEditable: Bool)
-    func setTextField(isEditable isEditable: Bool) {
-        
-        nameTextField.userInteractionEnabled = isEditable
-        birthTextField.userInteractionEnabled = isEditable
-        addressTextField.userInteractionEnabled = isEditable
-        bloodTextField.userInteractionEnabled = isEditable
-        phoneTextField.userInteractionEnabled = isEditable
-        healthInfoTextView.userInteractionEnabled = isEditable
-        
-        dispatch_async(dispatch_get_main_queue(), {
-            UIView.animateWithDuration(0.4, delay: 0, options: .TransitionCrossDissolve, animations: {() -> Void in
-                
-                if isEditable {
-                    self.textFieldBackgroundColor = UIColor.grayColor().CGColor
-                    self.textFieldColor = UIColor.whiteColor()
-                } else {
-                    self.textFieldBackgroundColor = UIColor.clearColor().CGColor
-                    self.textFieldColor = UIColor(red: 112/255, green: 110/255, blue: 95/255, alpha: 1.0)
-                }
-                self.nameTextField.layer.cornerRadius = 5
-                self.birthTextField.layer.cornerRadius = 5
-                self.addressTextField.layer.cornerRadius = 5
-                self.bloodTextField.layer.cornerRadius = 5
-                self.phoneTextField.layer.cornerRadius = 5
-                self.nameTextField.layer.backgroundColor = self.textFieldBackgroundColor
-                self.birthTextField.layer.backgroundColor = self.textFieldBackgroundColor
-                self.addressTextField.layer.backgroundColor = self.textFieldBackgroundColor
-                self.bloodTextField.layer.backgroundColor = self.textFieldBackgroundColor
-                self.phoneTextField.layer.backgroundColor = self.textFieldBackgroundColor
-                self.healthInfoTextView.layer.backgroundColor = self.textFieldBackgroundColor
-                self.nameTextField.textColor = self.textFieldColor
-                self.birthTextField.textColor = self.textFieldColor
-                self.addressTextField.textColor = self.textFieldColor
-                self.bloodTextField.textColor = self.textFieldColor
-                self.phoneTextField.textColor = self.textFieldColor
-                self.healthInfoTextView.textColor = self.textFieldColor
-                
-                }, completion: nil)
-            
-        })
-        
-    }
-    
     private let kKeychainItemName = "Gmail API"
     private let kClientID = "556205392726-s6pohtn44l7eqpgmf0qtjq8mp0crt1nd.apps.googleusercontent.com"
     
@@ -351,26 +281,17 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     // Firebase
     var ref: FIRDatabaseReference!
     private var _refHandle: FIRDatabaseHandle!
+    let databaseManager = DatabaseManager()
     
     let defaults = NSUserDefaults.standardUserDefaults()
+    
+    
     // When the view loads, create necessary subviews
     // and initialize the Gmail API service
     override func viewDidLoad() {
         super.viewDidLoad()
-        if healthInfoTextView.text.isEmpty {
-            healthInfoTextView.text = "Health information here..."
-            healthInfoTextView.textColor = UIColor.groupTableViewBackgroundColor()
-        }
-        healthInfoTextView.layer.backgroundColor = UIColor.clearColor().CGColor
-        phoneTextField.keyboardType = .PhonePad
-        if let phone = defaults.stringForKey("userPhoneNumber") {
-            phoneTextField.text = phone
-        }
-        setTextField(isEditable: false)
-        trackID.text = AppState.sharedInstance.UUID
-        trackID.userInteractionEnabled = true
-        profilePhoto.layer.cornerRadius = profilePhoto.layer.frame.width/2
-        profilePhoto.clipsToBounds = true
+        
+        setUserInterfaceDetail()
         
         if let auth = GTMOAuth2ViewControllerTouch.authForGoogleFromKeychainForName(
             kKeychainItemName,
@@ -379,7 +300,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
             service.authorizer = auth
         }
         
-        connectGmail.layer.cornerRadius = 5
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
@@ -388,9 +308,61 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         setPhotoPicker()
         
-        queryProfileFromDB()
-        
         downloadFromStorage()
+        
+        databaseManager.delegate = self
+        databaseManager.readDataFromDatabase(destinationPath: "user_profiles/\(AppState.sharedInstance.UUID)", observeType: .Single)
+        
+    }
+    
+    func didReadData(manager: DatabaseManager, didReadData: FIRDataSnapshot) {
+        if (didReadData.childrenCount != 0) {
+            print("Load profile from DB")
+            if let profile = didReadData.value as? [String:String] {
+                nameTextField.text = profile[Constants.Profile.name]
+                birthTextField.text = profile[Constants.Profile.birth]
+                addressTextField.text = profile[Constants.Profile.address]
+                bloodTextField.text = profile[Constants.Profile.blood]
+                phoneTextField.text = profile[Constants.Profile.phone]
+                healthInfoTextView.text = profile[Constants.Profile.healthInfo]
+                if healthInfoTextView.text.isEmpty {
+                    healthInfoTextView.text = "Health information here..."
+                    healthInfoTextView.textColor = UIColor.groupTableViewBackgroundColor()
+                }
+            }
+        }
+        
+        if loadIsDone {
+            loadDataIndicator.layer.hidden = true
+            loadDataIndicator.stopAnimating()
+            UIApplication.sharedApplication().endIgnoringInteractionEvents()
+        } else {
+            loadIsDone = true
+        }
+    }
+    
+    func setUserInterfaceDetail() {
+        
+        if let phone = defaults.stringForKey("userPhoneNumber") {
+            phoneTextField.text = phone
+        }
+        
+        setTextField(isEditable: false)
+        
+        healthInfoTextView.layer.backgroundColor = UIColor.clearColor().CGColor
+        if healthInfoTextView.text.isEmpty {
+            healthInfoTextView.text = "Health information here..."
+            healthInfoTextView.textColor = UIColor.groupTableViewBackgroundColor()
+        }
+        
+        phoneTextField.keyboardType = .PhonePad
+        
+        trackID.text = AppState.sharedInstance.UUID
+        
+        profilePhoto.layer.cornerRadius = profilePhoto.layer.frame.width/2
+        profilePhoto.clipsToBounds = true
+        
+        connectGmail.layer.cornerRadius = 5
         
         loadDataIndicator.layer.hidden = false
         loadDataIndicator.startAnimating()
@@ -459,42 +431,13 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         data[Constants.Profile.blood] = bloodTextField.text!
         data[Constants.Profile.phone] = phoneTextField.text!
         data[Constants.Profile.healthInfo] = healthInfoTextView.text!
-        self.ref.child(databaseChildPath).setValue(data)
+        ref.child(databaseChildPath).setValue(data)
         print("Profile sent to DB")
+        
+        databaseManager.sendDataToDatabase(destinationPath: databaseChildPath, dataType: .Profile, data: data)
     }
     
     var loadIsDone = false
-    
-    func queryProfileFromDB() {
-        let databaseChildPath = "user_profiles/\(AppState.sharedInstance.UUID)"
-        
-        ref.child(databaseChildPath).observeSingleEventOfType(.Value, withBlock: { (snapshot) -> Void in
-            
-            if (snapshot.childrenCount != 0) {
-                print("Load profile from DB")
-                if let profile = snapshot.value as? [String:String] {
-                    self.nameTextField.text = profile[Constants.Profile.name]
-                    self.birthTextField.text = profile[Constants.Profile.birth]
-                    self.addressTextField.text = profile[Constants.Profile.address]
-                    self.bloodTextField.text = profile[Constants.Profile.blood]
-                    self.phoneTextField.text = profile[Constants.Profile.phone]
-                    self.healthInfoTextView.text = profile[Constants.Profile.healthInfo]
-                    if self.healthInfoTextView.text.isEmpty {
-                        self.healthInfoTextView.text = "Health information here..."
-                        self.healthInfoTextView.textColor = UIColor.groupTableViewBackgroundColor()
-                    }
-                }
-            }
-            
-            if self.loadIsDone {
-                self.loadDataIndicator.layer.hidden = true
-                self.loadDataIndicator.stopAnimating()
-                UIApplication.sharedApplication().endIgnoringInteractionEvents()
-            } else {
-                self.loadIsDone = true
-            }
-        })
-    }
     
     func saveToStorage() {
         // Points to the root reference
@@ -587,5 +530,75 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
+    }
+    
+    
+    func didTapEdit() {
+        setTextField(isEditable: true)
+        inEditMode = true
+    }
+    
+    func didCancelEdit() {
+        nameTextField.text = userProfileBeforeEdit?.name
+        birthTextField.text = userProfileBeforeEdit?.birth
+        addressTextField.text = userProfileBeforeEdit?.address
+        phoneTextField.text = userProfileBeforeEdit?.phone
+        bloodTextField.text = userProfileBeforeEdit?.blood
+        healthInfoTextView.text = userProfileBeforeEdit?.healthInfo
+        setTextField(isEditable: false)
+        inEditMode = false
+    }
+    
+    func didSaveEdit() {
+        defaults.setObject(phoneTextField.text, forKey: "userPhoneNumber")
+        setTextField(isEditable: false)
+        inEditMode = false
+    }
+    
+    var textFieldBackgroundColor = UIColor.clearColor().CGColor
+    var textFieldColor = UIColor.clearColor()
+    
+    
+    func setTextField(isEditable isEditable: Bool) {
+        
+        nameTextField.userInteractionEnabled = isEditable
+        birthTextField.userInteractionEnabled = isEditable
+        addressTextField.userInteractionEnabled = isEditable
+        bloodTextField.userInteractionEnabled = isEditable
+        phoneTextField.userInteractionEnabled = isEditable
+        healthInfoTextView.userInteractionEnabled = isEditable
+        
+        dispatch_async(dispatch_get_main_queue(), {
+            UIView.animateWithDuration(0.4, delay: 0, options: .TransitionCrossDissolve, animations: {() -> Void in
+                
+                if isEditable {
+                    self.textFieldBackgroundColor = UIColor.grayColor().CGColor
+                    self.textFieldColor = UIColor.whiteColor()
+                } else {
+                    self.textFieldBackgroundColor = UIColor.clearColor().CGColor
+                    self.textFieldColor = UIColor(red: 112/255, green: 110/255, blue: 95/255, alpha: 1.0)
+                }
+                self.nameTextField.layer.cornerRadius = 5
+                self.birthTextField.layer.cornerRadius = 5
+                self.addressTextField.layer.cornerRadius = 5
+                self.bloodTextField.layer.cornerRadius = 5
+                self.phoneTextField.layer.cornerRadius = 5
+                self.nameTextField.layer.backgroundColor = self.textFieldBackgroundColor
+                self.birthTextField.layer.backgroundColor = self.textFieldBackgroundColor
+                self.addressTextField.layer.backgroundColor = self.textFieldBackgroundColor
+                self.bloodTextField.layer.backgroundColor = self.textFieldBackgroundColor
+                self.phoneTextField.layer.backgroundColor = self.textFieldBackgroundColor
+                self.healthInfoTextView.layer.backgroundColor = self.textFieldBackgroundColor
+                self.nameTextField.textColor = self.textFieldColor
+                self.birthTextField.textColor = self.textFieldColor
+                self.addressTextField.textColor = self.textFieldColor
+                self.bloodTextField.textColor = self.textFieldColor
+                self.phoneTextField.textColor = self.textFieldColor
+                self.healthInfoTextView.textColor = self.textFieldColor
+                
+                }, completion: nil)
+            
+        })
+        
     }
 }

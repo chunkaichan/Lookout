@@ -21,6 +21,7 @@
 		B578DF611D9E4630002E5439 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = B578DF5F1D9E4630002E5439 /* Contact.swift */; };
 		B57BC9611DD0359C0034ABF3 /* ChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57BC9601DD0359C0034ABF3 /* ChartViewModel.swift */; };
 		B5BFA9031D95222600496D13 /* SendAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BFA9021D95222600496D13 /* SendAlertViewController.swift */; };
+		B5C5502A1DD0651F006931F3 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C550291DD0651F006931F3 /* DatabaseManager.swift */; };
 		B5C8264D1D9A7241000E9514 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8264C1D9A7241000E9514 /* SignInViewController.swift */; };
 		B5C8264F1D9A7415000E9514 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C8264E1D9A7415000E9514 /* AppState.swift */; };
 		B5C826511D9A746F000E9514 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C826501D9A746F000E9514 /* Constants.swift */; };
@@ -57,6 +58,7 @@
 		B578DF5F1D9E4630002E5439 /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Contact.swift; path = ../Contact.swift; sourceTree = "<group>"; };
 		B57BC9601DD0359C0034ABF3 /* ChartViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
 		B5BFA9021D95222600496D13 /* SendAlertViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendAlertViewController.swift; sourceTree = "<group>"; };
+		B5C550291DD0651F006931F3 /* DatabaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		B5C8264C1D9A7241000E9514 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		B5C8264E1D9A7415000E9514 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		B5C826501D9A746F000E9514 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 		B57BC95D1DD033A40034ABF3 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				B5C550291DD0651F006931F3 /* DatabaseManager.swift */,
 				B5BFA9021D95222600496D13 /* SendAlertViewController.swift */,
 				B50467F91DCB0A0A00548E54 /* HospitalMapViewController.swift */,
 				B542D1951DC1AF6300F09B61 /* ContactsCollectionViewCell.swift */,
@@ -369,6 +372,7 @@
 			files = (
 				B5C8264D1D9A7241000E9514 /* SignInViewController.swift in Sources */,
 				B51BDBB41DB8C05D00069289 /* SuperViewController.swift in Sources */,
+				B5C5502A1DD0651F006931F3 /* DatabaseManager.swift in Sources */,
 				B52C04181DA232E900A5CC06 /* ProfileViewController.swift in Sources */,
 				B578DF611D9E4630002E5439 /* Contact.swift in Sources */,
 				B51BDBB21DB8A11600069289 /* CoreMotionManager.swift in Sources */,
