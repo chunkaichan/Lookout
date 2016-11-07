@@ -10,13 +10,18 @@ import UIKit
 import CoreMotion
 import Charts
 
+// MARK: CoreMotionViewController is used for designer to monitor
+//       acceleromter in real time.
+
 class CoreMotionViewController: UIViewController, EventCoreDataManagerDelegate, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var eventsUITableView: UITableView!
     
     @IBAction func saveEventButton(sender: AnyObject) {
+        
         let time = NSDate()
         let event = Event(time: time, data: yAxis, latitude: AppState.sharedInstance.userLatitude, longitude: AppState.sharedInstance.userLongitude, isAccident: nil)
+        
         eventCoreDataManager.saveCoreData(eventToSave: event)
         eventCoreDataManager.fetchCoreData()
     }
@@ -118,7 +123,9 @@ class CoreMotionViewController: UIViewController, EventCoreDataManagerDelegate, 
                     let Gx = acceleration.x - cos(thetaX)
                     let Gy = acceleration.y - cos(thetaY)
                     let Gz = acceleration.z - cos(thetaZ)
-                    let overallAccelerationWithoutG = sqrt(Gx*Gx+Gy*Gy+Gz*Gz)
+                    
+                    // Overall acceleration without gravity
+                    let _ = sqrt(Gx*Gx+Gy*Gy+Gz*Gz)
 //                    print("D-G x: \(Gx), Gy: \(Gy), Gz: \(Gz), ")
 //                    print("Acc x: \(acceleration.x), y: \(acceleration.y), z: \(acceleration.z), ")
 //                    print("theta x: \(thetaX*180/M_PI), y: \(thetaY*180/M_PI), z: \(thetaZ*180/M_PI), ")
@@ -148,14 +155,22 @@ class CoreMotionViewController: UIViewController, EventCoreDataManagerDelegate, 
         events = []
         print("Fetch events from core data.")
         guard let results = didFetchEventData as? [Events] else {fatalError()}
+        
         if (results.count>0) {
+            
             for result in results {
-                events.append(Event(time: result.time!, data: result.data! as! [Double], latitude: result.latitude! as Double, longitude: result.longitude! as Double, isAccident: result.isAccident as? Bool))
+        
+                events.append(Event(time: result.time!,
+                                    data: result.data! as! [Double],
+                                    latitude: result.latitude! as Double,
+                                    longitude: result.longitude! as Double,
+                                    isAccident: result.isAccident as? Bool))
                 
             }
+            
             dispatch_async(dispatch_get_main_queue(), {
-                UIView.transitionWithView(self.eventsUITableView, duration: 0.35, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
-                    () -> Void in
+            
+                UIView.transitionWithView(self.eventsUITableView, duration: 0.35, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { _ in
                     self.eventsUITableView.reloadData()
                     }, completion: nil)
             })

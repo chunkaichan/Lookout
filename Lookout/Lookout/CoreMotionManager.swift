@@ -11,12 +11,10 @@ import CoreMotion
 
 protocol CoreMotionManagerDelegate: class {
     func manager(manager: CoreMotionManager, didGetMotion: Double)
-//    func manager(manager: CoreMotionManager, didGetMotionForChart: Double)
 }
 
 extension CoreDataManagerDelegate {
     func manager(manager: CoreMotionManager, didGetMotion: Double) {}
-//    func manager(manager: CoreMotionManager, didGetMotionForChart: Double) {}
 }
 
 class CoreMotionManager {

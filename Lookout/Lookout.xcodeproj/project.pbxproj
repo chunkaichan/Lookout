@@ -160,6 +160,16 @@
 			name = Contact;
 			sourceTree = "<group>";
 		};
+		B57BC95D1DD033A40034ABF3 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				B5BFA9021D95222600496D13 /* SendAlertViewController.swift */,
+				B50467F91DCB0A0A00548E54 /* HospitalMapViewController.swift */,
+				B542D1951DC1AF6300F09B61 /* ContactsCollectionViewCell.swift */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
 		B5C8744C1D93D73C00D192D9 = {
 			isa = PBXGroup;
 			children = (
@@ -185,13 +195,11 @@
 				B50467F31DC9BB5B00548E54 /* Detection View */,
 				B50467F51DC9BC4A00548E54 /* User */,
 				B50467F61DC9BCDD00548E54 /* Contact */,
-				B5BFA9021D95222600496D13 /* SendAlertViewController.swift */,
-				B50467F91DCB0A0A00548E54 /* HospitalMapViewController.swift */,
+				B57BC95D1DD033A40034ABF3 /* Main */,
 				B5C826501D9A746F000E9514 /* Constants.swift */,
 				B5C8264E1D9A7415000E9514 /* AppState.swift */,
 				B5F916561D98F01200CD01EB /* Person.swift */,
 				B5F313AB1DB388CB007284D4 /* Event.swift */,
-				B542D1951DC1AF6300F09B61 /* ContactsCollectionViewCell.swift */,
 				B51BDBB11DB8A11600069289 /* CoreMotionManager.swift */,
 				B5C8745F1D93D73C00D192D9 /* Lookout.xcdatamodeld */,
 				B50467F41DC9BBD700548E54 /* Core Data */,

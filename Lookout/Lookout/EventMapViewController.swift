@@ -21,8 +21,6 @@ class EventMapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController!.navigationBar.tintColor = UIColor(red: 65/255, green: 188/255, blue: 165/255, alpha: 1)
-        
         setChart(xdata, values: (event?.data)!)
         setAnnotation(latitudeDegree: (event?.latitude)!, longitudeDegree: (event?.longitude)!, timestamp: (event?.time)!)
     }

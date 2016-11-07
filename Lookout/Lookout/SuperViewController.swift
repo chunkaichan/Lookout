@@ -42,7 +42,7 @@ class SuperViewController: UITabBarController, CoreMotionManagerDelegate {
         
         yAxis.removeAtIndex(0)
         yAxis.append(didGetMotion)
-        
+        // TODO: revise the criteria
         if (didGetMotion > 6.0) {
             myDelegate?.accidentDeteced(self)
 //            let time = NSDate()
