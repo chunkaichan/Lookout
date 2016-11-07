@@ -437,16 +437,18 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     }
     
     func keyboardWillHide(notification: NSNotification) {
-        //        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+
         if view.frame.origin.y != 0 {
             self.view.frame.origin.y = 0
         }
-        //        }
+
     }
     
     override func viewDidDisappear(animated: Bool) {
+        
         viewDidAppear(animated)
         NSNotificationCenter.defaultCenter().removeObserver(self)
+        
     }
     
     func sendProfileToDB() {

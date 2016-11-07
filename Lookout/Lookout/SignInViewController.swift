@@ -67,10 +67,6 @@ class SignInViewController: UIViewController {
         case email
     }
     
-    override func viewDidLoad() {
-        
-    }
-    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         // After log in with AccountKit, the view will appear again.
@@ -163,21 +159,15 @@ class SignInViewController: UIViewController {
         return .LightContent
     }
     
-    
-    
-    
     func signInIndicator(isLoading isLoading: Bool) {
+        loginButtonStyle.layer.hidden = isLoading
+        loginLabelStyle.layer.hidden = isLoading
+        loginMailButtonStyle.layer.hidden = isLoading
+        activityIndicatorView.layer.hidden = !isLoading
+        
         if isLoading {
-            loginButtonStyle.layer.hidden = true
-            loginLabelStyle.layer.hidden = true
-            loginMailButtonStyle.layer.hidden = true
-            activityIndicatorView.layer.hidden = false
             activityIndicatorView.startAnimating()
         } else {
-            loginButtonStyle.layer.hidden = false
-            loginLabelStyle.layer.hidden = false
-            loginMailButtonStyle.layer.hidden = false
-            activityIndicatorView.layer.hidden = true
             activityIndicatorView.stopAnimating()
         }
     }
