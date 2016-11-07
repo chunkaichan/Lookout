@@ -1,5 +1,5 @@
 # Lookout iOS
-> An app designed for elderly safety care. Falls can be serious to the elderly and the rescue time should be as short as possible. While detecting a fall, Lookout immediately sends push notifications and emails to the user’s emergency contacts. <br>
+> An app designed for elderly safety care. Falls can be serious to the elderly and the rescue time should be as short as possible. While detecting a fall, Lookout immediately sends push notifications and emails to the user’s emergency contacts. <br><br>
 > App Store: https://itunes.apple.com/tw/app/lookout/id1170769217?mt=8
 
 ## Feature
