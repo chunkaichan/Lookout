@@ -48,7 +48,7 @@ class CoreMotionViewController: UIViewController, EventCoreDataManagerDelegate, 
         }
         
         eventCoreDataManager.delegate = self
-        
+        chartView.setChartFormat(lineChartView: xLineChartView)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -65,48 +65,8 @@ class CoreMotionViewController: UIViewController, EventCoreDataManagerDelegate, 
         }
     }
     
-    func setChart(dataPoints: [String], values: [Double]) {
-        var dataEntries: [ChartDataEntry] = []
-        
-        for i in 0..<dataPoints.count {
-            let dataEntry = ChartDataEntry(value: values[i], xIndex: i)
-            dataEntries.append(dataEntry)
-        }
-        
-        let color = UIColor.blackColor()
-        
-        let lineChartDataSet = LineChartDataSet(yVals: dataEntries, label: nil)
-        let lineChartData = LineChartData(xVals: dataPoints, dataSet: lineChartDataSet)
-        
-        lineChartDataSet.colors = [color]
-        lineChartDataSet.drawCirclesEnabled = false
-        
-        xLineChartView.data = lineChartData
-        
-        xLineChartView.xAxis.labelPosition = .Bottom
-        
-        //remove xAxis line
-        xLineChartView.xAxis.drawGridLinesEnabled = false
-        xLineChartView.xAxis.drawAxisLineEnabled = false
-        xLineChartView.xAxis.drawLabelsEnabled = false
-        
-        //remove description
-        xLineChartView.descriptionText = ""
-        xLineChartView.rightAxis.removeAllLimitLines()
-        xLineChartView.rightAxis.drawZeroLineEnabled = false
-        xLineChartView.rightAxis.drawTopYLabelEntryEnabled = false
-        xLineChartView.rightAxis.drawAxisLineEnabled = false
-        xLineChartView.rightAxis.drawGridLinesEnabled = false
-        xLineChartView.rightAxis.drawLabelsEnabled = false
-        xLineChartView.rightAxis.drawLimitLinesBehindDataEnabled = false
-        
-        xLineChartView.leftAxis.axisMaxValue = 8
-        xLineChartView.leftAxis.axisMinValue = 0
-        
-        xLineChartView.legend.enabled = false
-    }
-    
     var sum = 0.0
+    let chartView = ChartViewModel()
     
     func getAccelerationMotion() {
         if manager.accelerometerAvailable {
@@ -139,7 +99,7 @@ class CoreMotionViewController: UIViewController, EventCoreDataManagerDelegate, 
                     
                     if (UIApplication.sharedApplication().applicationState == .Active) {
                         dispatch_async(dispatch_get_main_queue(), {
-                            self!.setChart(self!.xAxis, values: self!.yAxis)
+                            self!.chartView.setChartData(lineChartView: self!.xLineChartView, dataPoints: self!.xAxis, values: self!.yAxis)
                         })
                     }
                 }

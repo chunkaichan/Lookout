@@ -15,7 +15,6 @@ class Event {
     let latitude: Double
     let longitude: Double
     let isAccident: Bool?
-    //    let photo: NSdata
     
     init(time: NSDate, data: [Double], latitude: Double, longitude: Double, isAccident: Bool?) {
         

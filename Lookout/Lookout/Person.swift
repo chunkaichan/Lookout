@@ -15,7 +15,6 @@ class Person {
     var trackID: String
     var email: String
     var photo: NSData?
-//    let photo: NSdata
     
     init(name: String, phoneNumber: String, trackID: String, email: String, photo: NSData) {
         
